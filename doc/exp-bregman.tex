@@ -1,0 +1,199 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\R}{\ensuremath{\mathcal{R}}}
+\newcommand{\mP}{\ensuremath{\mathcal{P}}}
+\newcommand{\mM}{\ensuremath{\mathcal{M}}}
+\newcommand{\ip}[2]{\ensuremath{\langle #1, #2 \rangle}}
+\newcommand{\grad}{\nabla}
+\newcommand{\one}{\ensuremath{\mathbf{1}}}
+\newcommand{\co}{\mbox{co}}
+
+\title{MLE Voting Rules via Bregman Divergence}
+
+\begin{document}
+\maketitle
+
+%%%
+%%%
+%%%
+
+\section{Exponential Families}
+
+To begin we have
+%
+\begin{itemize}
+\item $\X$ is the set of outcomes (in general, can be discrete or continuous).
+\item $\nu$ is a base measure over the outcomes (usually counting or Lebesgue).
+\item $\phi : \X \rightarrow \R^k$ is a ``sufficient statistic''---a vector-valued random variable.
+\end{itemize}
+%
+An \emph{exponential family} is a collection of probability densities over $\X$, with respect to $\nu$, that take the form
+%
+\begin{equation} \label{exp-dis}
+ p(x ; \theta) = \exp \{ \ip{\theta}{\phi(x)} - A(\theta) \}.
+\end{equation}
+%
+Here $\theta \in \R^k$ is the \emph{natural parameter}. The \emph{cumulant} function is a normalizer:
+%
+\begin{equation} \label{log-partition}
+A(\theta) = \log \int_{\X} \exp\{ \ip{\theta}{\phi(x)} \} \, d\nu(x).
+\end{equation}
+%
+The domain of $A$ is $\Theta = \{\theta \in \R^k : A(\theta) < +\infty\}$. Both $A$ and its domain $\Theta$ are convex. It is well-known that exponential families correspond to maximum entropy distributions. The entropy of a density is
+%
+\begin{equation} \label{entropy}
+H(p) = \int_{\X} p(x) \log p(x) \, d\nu(x)
+\end{equation}
+%
+Now suppose we maximize entropy subject to the constraint that the average sufficient statistic is $\mu \in \R^k$:
+%
+\begin{equation} \label{mean-cons}
+\int_{\X} \phi(x) \, p(x) d\nu(x) = \mu.
+\end{equation}
+%
+Then letting $\theta \in \R^k$ be the Lagrange multiplier vector for constraint~(\ref{mean-cons}), the solution takes the form~(\ref{exp-dis}). This shows that an exponential family has two parametrizations: the \emph{natural} parametrization in terms of $\theta$, and the \emph{mean} parametrization in terms of $\mu$.
+
+%%%
+%%%
+%%%
+
+\section{Bregman Divergence}
+
+Associated with the convex function $A$ is its \emph{convex conjugate}
+%
+\begin{equation} \label{conjugate}
+A^*(\mu) = \sup_{\theta' \in \Theta} \{ \ip{\theta'}{\mu} - A(\theta') \},
+\end{equation}
+%
+which is also a convex function. The \emph{Bregman divergence} associated with a differentiable convex function $f$ is $D(y,z) = f(y) - f(z) - \ip{\grad f(z)}{y-z}$. Note that this distance function is convex in its first argument (but not necessarily its second), non-negative, and is zero only if $y=z$ when $f$ is strictly convex. It is not necessarily symmetric, but it does satisfy some generalized version of the triangle inequality.
+
+Now suppose $\theta$ and $\mu$ and the natural and mean parameters for a density from an exponential family. Assuming some unrestrictive conditions on $\phi$ (that it is a \emph{minimal} statistic), it turns out we have $\mu = \grad A(\theta)$ and $\theta = \grad A^*(\mu)$. In particular the maximum in~(\ref{conjugate}) is achieved at $\theta' = \theta$. Therefore, we have
+%
+\begin{eqnarray*}
+\log p(x ; \theta) & = & \ip{\theta}{\phi(x)} - A(\theta) \\
+& = & \ip{\theta}{\phi(x) - \mu} + \ip{\theta}{\mu} - A(\theta) \\
+& = & \ip{\grad A^*(\mu)}{\phi(x) - \mu} + A^*(\mu) \\
+& = & -D_{A^*}(\phi(x), \mu) + A^*(\phi(x))
+\end{eqnarray*}
+%
+Therefore, the mean parametrization of the density takes the form
+%
+\begin{equation} \label{exp-mean}
+p(x ; \mu) = \exp\{ -D_{A^*}(\phi(x), \mu) + A^*(\phi(x)). \}
+\end{equation}
+%
+A voting rule according to this kind of parametrized distribution would proceed by first finding the MLE of $\mu$ (or $\theta$) given the agents' reported rankings, and then computing the mode of the associated distribution.
+
+
+
+
+
+%%%
+%%%
+%%%
+
+\section{MLE Voting}
+
+Recall the Mallows model for the distribution over permutations given a mode permutation $\pi_0$ and scalar parameter $\theta$.
+%
+\begin{equation} \label{mallows}
+P(\pi ; \theta, \pi_0) = \exp\{ -\theta d(\pi,\pi_0) \} / \psi(\theta, \pi_0).
+\end{equation}
+%
+Here $d$ is a distance function, which should satisfy $d(\pi, \sigma) \geq 0$ with equality if and only if $\pi = \sigma$. The remaining properties assumed of $d$ vary in the literature. Sometimes it satisfies symmetry and the triangle inequality (so that it becomes a metric), but not always. Given this distribution, votes from agents are treated as sample points and the associated voting rule selects the $pi_0$ that is an MLE with respect to the sample.
+
+There are many similarities in comparing~(\ref{mallows}) with~(\ref{exp-dis}) and~(\ref{exp-mean}) but also important differences. In~(\ref{mallows}) $\theta$ is a scalar parameter that affects the ``dispersion'' of the distribution, and it should not be confused with the vector natural parameter $\theta$ in~(\ref{exp-dis}). (It is possible to generalize exponential families by adding a dispersion parameter, but I'm not sure it's worth looking into because there is already a lot of flexibility with just the natural/mean parameter.) The functions $\psi(\theta, \pi_0)$ and $A(\theta)$ both serve as normalizers and are basically equivalent up to a log transformation.
+
+A key difference is that~(\ref{mallows}) has a finite, discrete parameter set (the set of permutations) while~(\ref{exp-dis}) and~(\ref{exp-mean}) have convex parameter sets. This is crucial because for an exponential family, the MLE of the $\mu$ parameter given a set of samples $x_1,\ldots,x_n$ is just $\hat{\mu} = \sum_{i=1}^n \phi(x_i)$. Deriving the natural parameter from the mean parameter is a nontrivial computational problem. However, the natural parametrization is convenient for then computing the mode, because this reduces to the linear programming problem of maximizing $\ip{\theta}{y}$ where $y \in \mM = \co\{ \phi(x) : x \in X \}$, where here $X$ is the set of permutations of the candidates. There is a very large amount of work in the machine learning literature on graphical models on methods to efficiently compute the natural parametrization from the mean parametrization, and vice-versa, which we could draw on the implement our version of MLE voting with exponential families and Bregman divergences (i.e., compute MLE and then them mode).
+
+Another important differences is that~(\ref{exp-dis}) and~(\ref{exp-mean}) are both defined with respect to a certain representation $\phi(x)$ of rankings in Euclidean space $\R^k$, while~(\ref{mallows}) is defined directly on rankings. The exponential family approach opens the door to associating properties of the voting rule with the structure of $\phi$.
+
+%%%
+%%%
+%%%
+
+\section{Research Questions}
+
+\begin{enumerate}
+\item Distance functions between rankings usually satisfy the natural property of right-invariance. What kind of Bregman divergences satisfy right-invariance? How does the property restrict the structure of $\phi$?
+\item How does the IIA condition restrict the structure of $\phi$? Does it imply $\phi$ can only provide pairwise sufficient statistics?
+\item If we can characterize the structure of the $\phi$ given IIA, can we get a simple proof of Arrow's theorem for our more restricted class of voting rules?
+\item A positional voting rule induces a natural $\phi$ mapping into $R^k$, where $k$ is the number of candidates. Does our MLE voting rule approach result in the associated positional voting rule this way?
+\end{enumerate}
+
+%%%
+%%%
+%%%
+
+\pagebreak
+\appendix
+
+\section{Generalized Entropy}
+
+The concepts above were specifically linked to the entropy function~(\ref{entropy}), but they can be generalized to any convex function over the set of probability densities, which is then construed as a generalized (negative) entropy function.
+
+Let $\mP$ denote the set of probability densities over $\X$ (with respect to base measure $\nu$). Let $H$ be a strictly convex function over the convex domain $\mP$. To this convex function we can associate a \emph{scoring rule} (not to be confused with position scores in a voting context) defined over $\X \times \mP$:
+%
+\[
+S(x, p) = H(p) + \ip{\grad H(p)}{\one_x - p},
+\]
+%
+where $\one_x$ is the probability density that puts mass 1 on outcome $x$. It can be shown that if an agent is compensated with $S(x,q)$ when it reports $q \in \mP$ and $x \in \X$ occurs, then its optimal strategy is to report its actual belief (i.e., the actual probability density it has in mind). Hence the term ``scoring rule''. For instance, if $H$ is negative entropy then $S(x,p) = \log p(x)$.
+
+To formulate the generalized exponential family, we then take the family of densities that satisfy
+%
+\begin{equation} \label{p-natural}
+S(x,p) = \alpha + \ip{\theta}{\phi(x)}.
+\end{equation}
+%
+Namely, there are $\alpha \in \R$ and $\theta \in \R^k$ so that the score $S(x,p)$ is a linear function of $\phi(x)$ as above. This gives the ``natural'' parametrization of $p$. Taking $H$ as negative entropy, this condition becomes $\log p(x) = \alpha + \ip{\theta}{\phi(x)}$, so that $p$ takes the form of an exponential family.
+
+The density $p$ has an alternate characterization as the distribution that minimizes $H(p)$, subject to the constraint that the expectation of $\phi(x)$ under $p$ is $\mu$. This is the ``mean'' parametrization. More explicitly, let $p_\mu$ be the density with mean $\mu$ that minimizes $H(p)$, and define the convex function $F(\mu) = H(p_{\mu})$ over $\mM = \co\{\phi(x) : x \in \X\}$, where $\co$ denotes the convex hull. We take the family of densities that satisfy
+%
+\begin{equation} \label{p-mean}
+S(x,p) = -D_F(\phi(x), \mu) + F(\phi(x)).
+\end{equation}
+%
+{\bf Note: still need to prove that~(\ref{p-natural}) and~(\ref{p-mean}) are equivalent characterizations. But I'm not sure that's true for any convex $H$.}
+
+%%%
+%%%
+%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
