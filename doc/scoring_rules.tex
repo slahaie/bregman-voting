@@ -1,0 +1,147 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\scr}{{\text{SC}}}
+\newcommand{\mm}{\text{MM}}
+
+\newcommand{\rank}{{\calL(A)}}
+\newcommand{\uni}{{\rank^n}}
+\newcommand{\sca}{{\scr^{\alpha}}}
+\newcommand{\sort}{\text{SORT}}
+\newcommand{\phia}{\phi^{\alpha}}
+\newcommand{\mmphia}{\mm^{\phia}}
+
+\newcommand{\muhat}{\hat{\mu}}
+\newcommand{\that}{\hat{\theta}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\grad}{\nabla}
+\newcommand{\eps}{\epsilon}
+
+\title{MLE Voting Rules via Bregman Divergence}
+
+\begin{document}
+\maketitle
+
+%%%
+%%%
+%%%
+
+\section{Results I: Positional Scoring Rules}
+
+\subsection{Additional Notation}
+
+\begin{itemize}
+\item Let $A=\{1,\ldots,m\}$ denote the set of alternatives. Let $\rank$ denote the set of all linear orders over $A$ (votes). We view a ranking $\sigma \in \rank$ as $\sigma: A \rightarrow \{1,\ldots,m\}$. Thus, $|\rank| = m!$. Finally, we use $\pi \in \uni$ to denote a profile of $n$ votes. 
+\item Let $\alpha \in \mathbb{R}_{\ge 0}^m$ denote a score vector, where $\alpha_i \ge \alpha_{i+1}$ for $i \ge 1$. We assume that $\alpha_i > \alpha_{i+1}$ for some $i$, otherwise the rule is meaningless.
+\item Given score vector $\alpha$, there is a natural positional scoring rule which gives appropriate scores to alternatives and ranks them according to their total score. We denote it by $\sca$. 
+\item For any score vector $\alpha$, let $\phia$ be the representation such that for any $\sigma \in \rank$, $\phia_i(\sigma) = \alpha_{\sigma(i)}$ for all $i$.
+\item Given a representation $\phi: \rank \rightarrow \mathbb{R}^k$, let $\mm^{\phi}$ denote MLE-MODE method with representation $\phi$, i.e., the voting rule that first finds the MLE parameter of exponential family over rankings with representation $\phi$, and then returns the mode ranking of the exponential distribution given by the MLE parameter. 
+\item Finally, let $\sort : \mathbb{R}^m \rightarrow \rank$ denote the function that takes an $m$-dimensional vector, and returns the sorted order of indices. That is, for any $v \in \mathbb{R}^m$, alternative $i$ is mapped to position $j$ in $\sort(v)$ if there are $j-1$ coordinates that have value greater than value of coordinate $i$. We break ties arbitrarily, as they do not matter for our results. %It is easy to check that for any score vector $\alpha$ and any ranking $\sigma$, $\sort(\phia(\sigma)) = \sigma$ (with appropriate tie-breaking). 
+\end{itemize}
+
+Let $\muhat$ and $\that$ denote the MLE mean and natural parameters respectively. 
+
+\newpage
+\subsection{Recovering Positional Scoring Rules}
+
+\begin{theorem}
+For any score vector $\alpha$, the MM method with representation $\phia$ reduces to the scoring rule $\sca$, irrespective of the selection of MLE parameter.
+\label{thm:recover-scoring}
+\end{theorem}
+\begin{proof}
+Fix arbitrary score vector $\alpha$. Consider any profile $\pi = (\sigma_1,\ldots,\sigma_n)$. We want to show that $\mmphia(\pi) = \sca(\pi)$. First, using the famous result on exponential families, we have that the MLE mean parameter $\muhat = 1/n \cdot \sum_{i=1}^n \phia(\sigma_i)$. Further, note that $\muhat$ is the vector of average scores of candidates in profile $\pi$ according to score vector $\alpha$. Hence, it is clear that $\sca(\pi) = \sort(\muhat)$.
+
+On the other hand, if $\that$ denotes the MLE natural parameter, then the mode ranking is given by $\argmax_{\sigma} \langle \that, \phia(\sigma) \rangle$. Note that since $\phi(\sigma)$ is just a re-ordering of the terms of $\alpha$, by Chebyshev's inequality, the dot product is maximized when both vectors have value sorted in the same order. That is, the dot product is maximized by $\sigma = \sort(\that)$. Hence, $\mmphia(\pi) = \sort(\that)$. 
+
+Since $\sca(\pi) = \sort(\muhat)$ and $\mmphia(\pi) = \sort(\that)$, we just need to show that $\sort(\muhat) = \sort(\that)$. From a well-known result in exponential family, we know that $\that =  (\grad_{\theta} A)^{-1} (\muhat)$. First, we need to show that the inverse exists. For this, it is important to note (and it is easy to check) that $\sum_i \muhat_i = \sum_i \alpha_i$. Second, there may be multiple (and in fact for scoring rules there are infinitely many) $\that$ for each $\muhat$. Thus, we prove the following two results.
+
+\begin{lemma}
+If $\sum_i \mu_i = \sum_i \alpha_i$, then there exists a $\theta$ such that $\grad_{\theta} A (\theta) = \mu$. 
+\label{lem:scoring-existence}
+\end{lemma}
+\begin{proof}
+{\bf TODO}~\qedhere~(Proof of Lemma~\ref{lem:scoring-existence})
+\end{proof}
+
+\begin{lemma}
+Let $\muhat$ denote the MLE mean parameter. Let $\that$ be \emph{any} MLE natural parameter that maps to $\muhat$. Then, $\sort(\that) = \sort(\muhat)$.
+\label{lem:muhat-that}
+\end{lemma}
+\begin{proof}
+We know that $\grad_{\theta} A(\that) = \muhat$. Note that 
+$$
+A(\theta) = \log \sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace.
+$$
+
+Hence, 
+$$
+\muhat_i = (\grad_{\theta} A)_i(\that) = \frac{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace \cdot \phia_i(\sigma)}{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace}.
+$$
+
+To prove that $\sort(\that) = \sort(\muhat)$, it is enough to show that for any $i,j$, $\that_i > \that_j$ implies $\muhat_i > \muhat_j$. Assume for some $i$ and $j$, we have $\that_i > \that_j$. We want to show that $\muhat_i > \muhat_j$, i.e., $\muhat_i - \muhat_j > 0$. Now, 
+\begin{equation}
+\muhat_i-\muhat_j = \frac{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace \cdot (\phia_i(\sigma)-\phia_j(\sigma))}{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace}.
+\label{eqn:diff}
+\end{equation}
+
+Thus, $\muhat_i - \muhat_j > 0$ if and only if the numerator in Equation~\eqref{eqn:diff} is positive. For any ranking $\sigma$, let $\sigma_{i \leftrightarrow j}$ denote the ranking which is obtained by swapping alternatives $i$ and $j$ in $\sigma$. Similarly, for any natural parameter $\theta$, let $\theta_{i \leftrightarrow j}$ denote the vector obtained by swapping the $i^{th}$ and $j^{th}$ coordinates of $\theta$. Now,
+\begin{align*}
+&\sum_{\sigma \in \rank} e^{\langle \theta, \phia(\sigma) \rangle} \cdot (\phia_i(\sigma)-\phia_j(\sigma)) \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} \left(e^{\langle \theta, \phia(\sigma) \rangle} \cdot (\alpha_l-\alpha_k) +  e^{\langle \theta, \phia(\sigma_{i \leftrightarrow j}) \rangle} \cdot (\alpha_k-\alpha_l) \right)  \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} \left(e^{\langle \theta, \phia(\sigma) \rangle} - e^{\langle \theta, \phia(\sigma_{i \leftrightarrow j}) \rangle}\right) \cdot (\alpha_l-\alpha_k) \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} \left(e^{\langle \theta, \phia(\sigma) \rangle} - e^{\langle \theta_{i \leftrightarrow j}, \phia(\sigma) \rangle}\right) \cdot (\alpha_l-\alpha_k) \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} e^{\langle \theta_{-\{i,j\}}, \phia_{-\{i,j\}}(\sigma) \rangle} \cdot \left(e^{\theta_i \cdot \alpha_l + \theta_j \cdot \alpha_k} - e^{\theta_i \cdot \alpha_k + \theta_j \cdot \alpha_l}\right) \cdot (\alpha_l-\alpha_k) \\
+& > 0.
+\end{align*}
+Here, the first transition follows by conditioning on the positions of alternatives $i$ and $j$. The third transition follows since swapping alternatives $i$ and $j$ swaps the $i^{th}$ and $j^{th}$ coordinates in $\phia(\sigma)$, which is further equivalent to swapping the $i^{th}$ and $j^{th}$ coordinates in $\theta$ (this retains the dot product intact). The fourth transition follows by taking all terms of the dot product except those from coordinates $i$ and $j$ out in common. Finally, the last transition follows since we have the following three conditions. 
+\begin{enumerate}
+\item $\that_i > \that_j$.
+\item $\alpha_l \ge \alpha_k$ for all $l <k$. 
+\item $\alpha_l > \alpha_k$ for some $l <k$. 
+\end{enumerate}
+
+Note that the first two conditions imply that $\theta_i \cdot \alpha_l + \theta_j \cdot \alpha_k \ge \theta_i \cdot \alpha_k + \theta_j \cdot \alpha_l$ for all $l < k$, and the first and the third conditions together imply that $\theta_i \cdot \alpha_l + \theta_j \cdot \alpha_k > \theta_i \cdot \alpha_k + \theta_j \cdot \alpha_l$ for some $l < k$. 
+
+Thus, we have $\sort(\that) = \sort(\muhat)$, as required.~\qedhere~(Proof of Lemma~\ref{lem:muhat-that})
+\end{proof}
+
+With Lemma~\ref{lem:muhat-that}, we conclude that $\mmphia(\pi) = \sca(\pi)$. Since this holds for all profiles $\pi$, we have that $\mmphia = \sca$.~\qedhere~(Proof of Theorem~\ref{thm:recover-scoring})
+\end{proof}
+
+%%%
+%%%
+%%%
+\newpage
+
+\section{Questions}
+
+\begin{enumerate}
+\item First, it is easy to see that all positional scoring rules as well as the Kemeny rule has the form $\argmax_{\sigma} \langle \sum_{i=1}^n \phi(\sigma_i), \phi(\sigma) \rangle$, with very natural $\phi$. 
+\begin{enumerate}
+\item What other rules can be represented in this form?
+\item This is highly reminiscent of GSRs. In fact, all rules of this form are GSR with $f = \phi$ and $g = \argmax_{\sigma} \langle \cdot , f(\sigma) \rangle$. Thus, they satisfy the properties that GSRs satisfy - anonymity and finite local consistency. Is there anything else that this intuitive family shares?
+\end{enumerate}
+
+\item Why can't we represent Mallows' with varying dispersion parameter by completely incorporating that inside $\theta$? Essentially, if we take $\theta = \lambda \cdot \phi(\sigma^*)$, with $\phi$ being the pairwise comparison representation, then we recover Mallows' with ground truth $\sigma^*$ and dispersion parameter $\lambda$. Now we can learn them together.
+
+\item Note that both pairwise comparison representation and scoring rules representation has overcomplete representation. In fact, specifically, they have the property that $\sum_i \phi_i(\sigma)$ is constant. Is this something inherent to voting? Do the representations for other rules satisfy this? In this particular case, is there a way of converting it to minimal representation?
+
+\item It does not seem easy to do so with positional scoring rules, when you don't know which score vector is to be applied. That is, there does not seem to be any easy way of incorporating the scores inside $\theta$ as well. But can we still do something more general than a specific scoring rule? One way is simple: go to $m^2$ dimensional representation where there is a binary coordinate for each alternative in each positiion. This is highly overcomplete representation.
+
+\item When does $\argmax_{\sigma} \langle \that, \phi(\sigma) \rangle = \argmax_{\sigma} \langle \muhat, \phi(\sigma) \rangle$? This is particularly more important if $\argmax_{\sigma} \langle \that, \phi(\sigma) \rangle = \sort(\that)$ since in that case we can just show $\that_i > \that_j$ implies $\muhat_i > \muhat_j$ as we did for positional scoring rules.
+\end{enumerate}
+
+\end{document}
