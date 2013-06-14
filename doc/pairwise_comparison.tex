@@ -1,0 +1,61 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\mm}{\text{MM}}
+
+\newcommand{\rank}{{\calL(A)}}
+\newcommand{\uni}{{\rank^n}}
+\newcommand{\phipc}{\phi^{\text{PC}}}
+\newcommand{\mmphipc}{\mm^{\phipc}}
+
+\newcommand{\muhat}{\hat{\mu}}
+\newcommand{\that}{\hat{\theta}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\grad}{\nabla}
+\newcommand{\eps}{\epsilon}
+
+\title{MLE Voting Rules via Bregman Divergence}
+
+\begin{document}
+\maketitle
+
+%%%
+%%%
+%%%
+
+\section{Results II: Pairwise Comparison Representation}
+
+\subsection{Additional Notation}
+
+The pairwise comparison representation $\phipc$ is given as follows. For any ranking $\sigma$ and for $i$ and $j$ in $[1,n]$ with $i \neq j$, we have
+$$
+\phipc_{ij}(\sigma) = 
+\begin{cases}
+1 & \text{if } \sigma(i) < \sigma(j),\\
+0 & \text{otherwise.}
+\end{cases}
+$$
+
+\subsection{The MM method with PC representation}
+
+\begin{observation}
+If tie-breaking rule used to select $\that$ is arbitrary, then $\mmphipc$ does not coincide with the Kemeny rule. 
+\end{observation}
+\begin{proof}
+
+\end{proof}
+
+\end{document}

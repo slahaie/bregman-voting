@@ -1,8 +1,6 @@
 \documentclass[10pt,letterpaper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
 
 \newcommand{\X}{\ensuremath{\mathcal{X}}}
 \newcommand{\R}{\ensuremath{\mathcal{R}}}
@@ -12,6 +10,31 @@
 \newcommand{\grad}{\nabla}
 \newcommand{\one}{\ensuremath{\mathbf{1}}}
 \newcommand{\co}{\mbox{co}}
+
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\scr}{{\text{SC}}}
+\newcommand{\mm}{\text{MM}}
+
+\newcommand{\rank}{{\calL(C)}}
+\newcommand{\uni}{{\rank^n}}
+\newcommand{\sca}{{\scr^{\alpha}}}
+\newcommand{\sort}{\text{SORT}}
+\newcommand{\phia}{\phi^{\alpha}}
+\newcommand{\mmphia}{\mm^{\phia}}
+
+\newcommand{\muhat}{\hat{\mu}}
+\newcommand{\that}{\hat{\theta}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\eps}{\epsilon}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
 
 \title{MLE Voting Rules via Bregman Divergence}
 
@@ -97,33 +120,210 @@ A voting rule according to this kind of parametrized distribution would proceed 
 %%%
 %%%
 
-\section{MLE Voting}
+\section{MLE-MODE Voting}
 
 Recall the Mallows model for the distribution over permutations given a mode permutation $\pi_0$ and scalar parameter $\theta$.
 %
 \begin{equation} \label{mallows}
-P(\pi ; \theta, \pi_0) = \exp\{ -\theta d(\pi,\pi_0) \} / \psi(\theta, \pi_0).
+P(\sigma ; \lambda, \sigma^*) = \exp\{ -\lambda d(\sigma,\sigma^*) \} / \psi(\lambda, \sigma^*).
 \end{equation}
 %
 Here $d$ is a distance function, which should satisfy $d(\pi, \sigma) \geq 0$ with equality if and only if $\pi = \sigma$. The remaining properties assumed of $d$ vary in the literature. Sometimes it satisfies symmetry and the triangle inequality (so that it becomes a metric), but not always. Given this distribution, votes from agents are treated as sample points and the associated voting rule selects the $pi_0$ that is an MLE with respect to the sample.
 
-There are many similarities in comparing~(\ref{mallows}) with~(\ref{exp-dis}) and~(\ref{exp-mean}) but also important differences. In~(\ref{mallows}) $\theta$ is a scalar parameter that affects the ``dispersion'' of the distribution, and it should not be confused with the vector natural parameter $\theta$ in~(\ref{exp-dis}). (It is possible to generalize exponential families by adding a dispersion parameter, but I'm not sure it's worth looking into because there is already a lot of flexibility with just the natural/mean parameter.) The functions $\psi(\theta, \pi_0)$ and $A(\theta)$ both serve as normalizers and are basically equivalent up to a log transformation.
+There are many similarities in comparing~(\ref{mallows}) with~(\ref{exp-dis}) and~(\ref{exp-mean}) but also important differences. In~(\ref{mallows}) $\lambda$ (a scalar ``dispersion'' parameter) and $\sigma^*$ (the true ranking ranking) are the underlying parameteres, while the natural underlying parameter $\theta$ in~(\ref{exp-dis}) is a vector parameter. Although Mallows' model can be recovered (if the distance function can be represented as a dot product) by incorporating both $\lambda$ and $\sigma^*$ inside $\theta$, this only covers a sub-space of the distributions given by~(\ref{exp-dis}). Note that the functions $\psi(\lambda, \sigma^*)$ and $A(\theta)$ both serve as normalizers and are basically equivalent up to a log transformation.
 
-A key difference is that~(\ref{mallows}) has a finite, discrete parameter set (the set of permutations) while~(\ref{exp-dis}) and~(\ref{exp-mean}) have convex parameter sets. This is crucial because for an exponential family, the MLE of the $\mu$ parameter given a set of samples $x_1,\ldots,x_n$ is just $\hat{\mu} = \sum_{i=1}^n \phi(x_i)$. Deriving the natural parameter from the mean parameter is a nontrivial computational problem. However, the natural parametrization is convenient for then computing the mode, because this reduces to the linear programming problem of maximizing $\ip{\theta}{y}$ where $y \in \mM = \co\{ \phi(x) : x \in X \}$, where here $X$ is the set of permutations of the candidates. There is a very large amount of work in the machine learning literature on graphical models on methods to efficiently compute the natural parametrization from the mean parametrization, and vice-versa, which we could draw on the implement our version of MLE voting with exponential families and Bregman divergences (i.e., compute MLE and then them mode).
+A key difference, as pointed out above, is that the Mallows model~(\ref{mallows}) has discrete parameter space for its parameter $\sigma^*$ while~(\ref{exp-dis}) and~(\ref{exp-mean}) have convex parameter sets. This is crucial because for an exponential family, the MLE of the $\mu$ parameter given a set of samples $x_1,\ldots,x_n$ is just $\hat{\mu} = \sum_{i=1}^n \phi(x_i)$. Deriving the natural parameter from the mean parameter is a nontrivial computational problem. However, the natural parametrization is convenient for then computing the mode, because this reduces to the linear programming problem of maximizing $\ip{\theta}{y}$ where $y \in \mM = \co\{ \phi(x) : x \in X \}$, where here $X$ is the set of permutations of the candidates. There is a very large amount of work in the machine learning literature on graphical models on methods to efficiently compute the natural parametrization from the mean parametrization, and vice-versa, which we could draw on to implement our version of voting with exponential families and Bregman divergences. This method involves first computing the MLE natural parameter and then the mode ranking of the distribution given by the MLE natural parameter; we refer to this as the MLE-MODE method.
 
-Another important differences is that~(\ref{exp-dis}) and~(\ref{exp-mean}) are both defined with respect to a certain representation $\phi(x)$ of rankings in Euclidean space $\R^k$, while~(\ref{mallows}) is defined directly on rankings. The exponential family approach opens the door to associating properties of the voting rule with the structure of $\phi$.
+Another important difference is that~(\ref{exp-dis}) and~(\ref{exp-mean}) are both defined with respect to a certain representation $\phi(x)$ of rankings in Euclidean space $\R^k$, while~(\ref{mallows}) is defined directly on rankings. The exponential family approach opens the door to associating properties of the voting rule with the structure of $\phi$.
+
 
 %%%
 %%%
 %%%
 
-\section{Research Questions}
+\section{Notation}
+\label{sec:prelim}
+
+\begin{itemize}
+\item Let $C = \{1,\ldots,m\}$ denote the set of alternatives and $\rank$ denote the set of all linear orders over $C$ (votes). Thus, $|\rank| = m!$. 
+\item We view a ranking $\sigma \in \rank$ as $\sigma: C \rightarrow \{1,\ldots,m\}$. We use $\pi \in \uni$ to denote a profile of $n$ votes. 
+\item Given a representation $\phi: \rank \rightarrow \mathbb{R}^k$, let $\mm^{\phi}$ denote MLE-MODE method with representation $\phi$, i.e., the voting rule that first finds the MLE parameter of exponential family over rankings with representation $\phi$, and then returns the mode ranking of the exponential distribution given by the MLE parameter. 
+\item Unless mentioned otherwise, the performance of the rules would not depend on the tie-breaking for the choice of the MLE parameter, or for the choice of the mode ranking.
+\item Let $\muhat$ and $\that$ denote the MLE mean and natural parameters respectively. 
+\end{itemize}
+
+%%%
+%%%
+%%%
+
+\section{Scoring Representation}
+\label{sec:scoring}
+
+For working with scoring rules, we introduce some additional notation.
+
+\begin{itemize}
+\item Let $\alpha \in \mathbb{R}_{\ge 0}^m$ denote a score vector, where $\alpha_i \ge \alpha_{i+1}$ for $i \ge 1$. We assume that $\alpha_1 > \alpha_m$, otherwise the rule is meaningless.
+\item We denote the scoring rule associated with score vector $\alpha$ by $\sca$. 
+\item For any score vector $\alpha$, let $\phia: \rank \rightarrow \mathbb{R}^m$ be the representation such that $\phia_i(\sigma) = \alpha_{\sigma(i)}$ for all $\sigma$ and $i$.
+\item Finally, let $\sort : \mathbb{R}^m \rightarrow \rank$ denote the function that takes an $m$-dimensional vector, and returns the sorted order of indices. That is, alternative $i$ is mapped to position $j$ in $\sort(v)$ if $|\{k | v_k > v_i\}| = j-1$. We break ties arbitrarily, as they do not matter for our results. %It is easy to check that for any score vector $\alpha$ and any ranking $\sigma$, $\sort(\phia(\sigma)) = \sigma$ (with appropriate tie-breaking). 
+\end{itemize}
+
+\subsection{Recovering Positional Scoring Rules}
+
+\begin{theorem}
+For any score vector $\alpha$, the MM method with representation $\phia$ reduces to the scoring rule $\sca$, irrespective of the selection of the MLE parameter and the tie-breaking for the mode ranking.
+\label{thm:recover-scoring}
+\end{theorem}
+\begin{proof}
+Fix arbitrary score vector $\alpha$ and any profile $\pi = (\sigma_1,\ldots,\sigma_n)$. We want to show that $\mmphia(\pi) = \sca(\pi)$. First, we have that the MLE mean parameter $\muhat = (1/n) \cdot \sum_{i=1}^n \phia(\sigma_i)$. Further, note that $\muhat$ is the vector of average scores of candidates in profile $\pi$ according to the score vector $\alpha$. Hence, we clearly have $\sca(\pi) = \sort(\muhat)$.
+
+On the other hand, if $\that$ denotes some MLE natural parameter, then its mode ranking is given by $\argmax_{\sigma} \langle \that, \phia(\sigma) \rangle$. Note that since $\phi(\sigma)$ is just a re-ordering of the coordinates of $\alpha$, by Chebyshev's inequality, the dot product is maximized when both vectors have value sorted in the same order. That is, the dot product is maximized by $\sigma = \sort(\that)$. Hence, $\mmphia(\pi) = \sort(\that)$. 
+
+Since $\sca(\pi) = \sort(\muhat)$ and $\mmphia(\pi) = \sort(\that)$, we just need to show that $\sort(\muhat) = \sort(\that)$. Our proof in fact shows that $\muhat_i = \muhat_j$ if and only if $\that_i = \that_j$, which takes care of the tie-breaking issues in $\sort$. 
+
+Now, we know that $\that =  (\grad_{\theta} A)^{-1} (\muhat)$. First, we need to show that the inverse exists. For this, it is important to note (and it is easy to check) that $\sum_i \muhat_i = \sum_i \alpha_i$. Second, there may be multiple (and in fact for scoring rules there are infinitely many) $\that$ for each $\muhat$. Thus, we prove the following two results.
+
+\begin{lemma}
+There exists a $\that$ such that $\grad_{\theta} A (\that) = \muhat$. 
+\label{lem:scoring-existence}
+
+\begin{lemma}
+Let $\that$ be \emph{any} MLE natural parameter corresponding to $\muhat$. Then, $\sort(\that) = \sort(\muhat)$.
+\label{lem:muhat-that}
+\end{lemma}
+
+\end{lemma}
+\begin{proof}[Proof of Lemma~\ref{lem:scoring-existence}]
+{\bf TODO}~\qedhere~(Proof of Lemma~\ref{lem:scoring-existence})
+\end{proof}
+
+
+\begin{proof}[Proof of Lemma~\ref{lem:muhat-that}]
+We know that $\grad_{\theta} A(\that) = \muhat$. Note that 
+$$
+A(\theta) = \log \sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace.
+$$
+
+Hence, 
+$$
+\muhat_i = (\grad_{\theta} A)_i(\that) = \frac{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace \cdot \phia_i(\sigma)}{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace}.
+$$
+
+To prove that $\sort(\that) = \sort(\muhat)$, it is enough to show that for any $i,j$, $\that_i > \that_j$ implies $\muhat_i > \muhat_j$. By symmetry, this implies $\that_i > \that_j$ if and only if $\muhat_i > \muhat_j$, which also implies that $\that_i = \that_j$ if and only if $\muhat_i = \muhat_j$. While the former is useful for the result to be independent of MLE natural parameter selection, the latter is useful for the result to be independent of the tie-breaking in mode selection. 
+
+Assume for some $i$ and $j$, we have $\that_i > \that_j$. We want to show that $\muhat_i > \muhat_j$, i.e., $\muhat_i - \muhat_j > 0$. Now, 
+\begin{equation}
+\muhat_i-\muhat_j = \frac{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace \cdot (\phia_i(\sigma)-\phia_j(\sigma))}{\sum_{\sigma \in \rank} \text{exp}\lbrace \langle \theta, \phia(\sigma) \rangle \rbrace}.
+\label{eqn:diff}
+\end{equation}
+
+Thus, $\muhat_i - \muhat_j > 0$ if and only if the numerator in Equation~\eqref{eqn:diff} is positive. For any ranking $\sigma$, let $\sigma_{i \leftrightarrow j}$ denote the ranking which is obtained by swapping alternatives $i$ and $j$ in $\sigma$. Similarly, for any natural parameter $\theta$, let $\theta_{i \leftrightarrow j}$ denote the vector obtained by swapping the values of the $i^{th}$ and $j^{th}$ coordinates of $\theta$. Now,
+\begin{align*}
+&\sum_{\sigma \in \rank} e^{\langle \theta, \phia(\sigma) \rangle} \cdot (\phia_i(\sigma)-\phia_j(\sigma)) \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} \left(e^{\langle \theta, \phia(\sigma) \rangle} \cdot (\alpha_l-\alpha_k) +  e^{\langle \theta, \phia(\sigma_{i \leftrightarrow j}) \rangle} \cdot (\alpha_k-\alpha_l) \right)  \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} \left(e^{\langle \theta, \phia(\sigma) \rangle} - e^{\langle \theta, \phia(\sigma_{i \leftrightarrow j}) \rangle}\right) \cdot (\alpha_l-\alpha_k) \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} \left(e^{\langle \theta, \phia(\sigma) \rangle} - e^{\langle \theta_{i \leftrightarrow j}, \phia(\sigma) \rangle}\right) \cdot (\alpha_l-\alpha_k) \\
+&= \sum_{1 \le l < k \le m} \sum_{\substack{\sigma \in \rank \text{ s.t.}\\\sigma(i) = l,\\ \sigma(j) = k}} e^{\langle \theta_{-\{i,j\}}, \phia_{-\{i,j\}}(\sigma) \rangle} \cdot \left(e^{\theta_i \cdot \alpha_l + \theta_j \cdot \alpha_k} - e^{\theta_i \cdot \alpha_k + \theta_j \cdot \alpha_l}\right) \cdot (\alpha_l-\alpha_k) \\
+& > 0.
+\end{align*}
+Here, the first transition follows by conditioning on the positions of alternatives $i$ and $j$. The third transition follows since swapping alternatives $i$ and $j$ swaps the $i^{th}$ and $j^{th}$ coordinates in $\phia(\sigma)$, which is further equivalent to swapping the $i^{th}$ and $j^{th}$ coordinates in $\theta$ (this retains the dot product intact). The fourth transition follows by taking all terms of the dot product except those from coordinates $i$ and $j$ out in common. For the final transition, note that we have $\that_i > \that_j$. Now, for a weak inequality note that for all $l < k$, we have $\alpha_l \ge \alpha_k$. Thus, $\theta_i \cdot \alpha_l + \theta_j \cdot \alpha_k \ge \theta_i \cdot \alpha_k + \theta_j \cdot \alpha_l$. This equality becomes strict for $l=1$ and $k=m$ since $\alpha_1 > \alpha_m$, proving the final transition. 
+
+Thus, we have $\sort(\that) = \sort(\muhat)$, as required.~\qedhere~(Proof of Lemma~\ref{lem:muhat-that})
+\end{proof}
+
+{\bf TODO:} To be completely formal, $\sort(x)$ needs to be the set of all tied rankings, and then we should show set equality. I will change this later.
+
+With Lemma~\ref{lem:muhat-that}, we conclude that $\mmphia(\pi) = \sca(\pi)$. Since this holds for all profiles $\pi$, we have that $\mmphia = \sca$.~\qedhere~(Proof of Theorem~\ref{thm:recover-scoring})
+\end{proof}
+
+%%%
+%%%
+%%%
+
+\section{Pairwise Comparison Representation}
+\label{sec:pc}
+
+exists a ranking that is not Kemeny. 
+
+Exists a tie-breaking that violates Majority $\rightarrow$ thus Condorcet consistent, also monotonicity
+
+Violates IIA irrespective of tie-breaking
+
+Probably PM-c $\rightarrow$ Need to prove comparison lemma as above
+
+Definitely anonymous, neutral
+
+consistency? 
+
+Kemeny in MM+PC?
+
+%%%
+%%%
+%%%
+
+\section{Properties of MM rules}
+\label{sec:properties}
+
+Consistency? Monotonicity? PM-c? 
+
+Condorcet consistency? Majority? $\rightarrow$ Although these two are not appropriate for SWF.
+
+\subsection{Neutrality and Linear Representations}
+
+Linear representation $\rightarrow$ Left invariance of Bregman divergence $\rightarrow$ Neutrality of distribution $\rightarrow$ Neutrality of MM method
+
+%%%
+%%%
+%%%
+
+\section{Distance Function in Euclidean Embeddings}
+\label{sec:dist}
+
+$d(\sigma_1,\sigma_2) = C-\langle \phi(\sigma_1),\phi(\sigma_2) \rangle$, where $C = \langle \phi(\sigma),\phi(\sigma) \rangle$ is a constant for all $\sigma$. If $\phi$ satisfies this, then it forms a distance metric. Essentially, we have $d(\sigma_1,\sigma_2) = (1/2) \cdot ||\phi(x)-\phi(y)||$. Also, if $\phi$ is a linear representation, then $d$ is left-invariant too. 
+
+%%%
+%%%
+%%%
+
+\section{Questions}
 
 \begin{enumerate}
-\item Distance functions between rankings usually satisfy the natural property of right-invariance. What kind of Bregman divergences satisfy right-invariance? How does the property restrict the structure of $\phi$?
-\item How does the IIA condition restrict the structure of $\phi$? Does it imply $\phi$ can only provide pairwise sufficient statistics?
-\item If we can characterize the structure of the $\phi$ given IIA, can we get a simple proof of Arrow's theorem for our more restricted class of voting rules?
-\item A positional voting rule induces a natural $\phi$ mapping into $R^k$, where $k$ is the number of candidates. Does our MLE voting rule approach result in the associated positional voting rule this way?
+
+\item Consistency, monotonicity, and PM-c of MM method?
+
+\item What about Condorcet consistency and Majority? Although, they are not suited for SWFs.
+
+\item Kemeny $\in$ MM+PC? Also, show comparison lemma for MM+PC to prove that it is PM-c.
+
+\item Investigate MM+PC counter example to Kemeny and why only the comaprison between $a$ and $c$ matters. 
+
+\item Investigate the distribution of MLE natural parameter as a randomized voting rule. That is, the distribution we get right before taking mode. 
+
+\item Find motivation for exponential family. Subjective preference aggregation -> must have nice properties. Ground truth discovery -> must model properly what the ground truth is, and how our method is finding it. Even showing that given infinite samples, our method would find the ground truth is enough. 
+\begin{enumerate}
+\item Can we show something like the following? "If the votes are drawn from any distribution out of a family $\mathcal{F}$ of distributions, then fitting Mallows' model and finding MLE ground truth will find the actual ground truth with probability $1$ given infinite samples."
+\item What about exponential family?
+\end{enumerate}
+
+\item Mean affine voting rules and connection to the exponential distribution with distance function given in Section~\ref{sec:dist}. 
+\begin{enumerate}
+\item Also, their connection to GSRs. Taking $f = \phi$ and $g = \argmax_{\sigma} \langle \cdot , f(\sigma) \rangle$ recovers a mean affine voting rule. But $g$ doesn't always depend on pairwise comparisons in this case. 
+\item Notice that GSRs nicely combine scoring and comparing. 
+\end{enumerate}
+
+\item Including a family of voting rules
+\begin{enumerate}
+\item All Mallows': Pairwise comparison representation and $\theta = \lambda \cdot \phi(\sigma^*)$. 
+\item Scoring rules: Need to move to $m^2$-dimensional representation where there is a binary coordinate for each alternative in each positiion. In this case, the $\that = [\alpha; \alpha ; \ldots ;\alpha]$ for the score vector $\alpha$. This set is convex. Can we use exponential family literature to learn the scoring rule?
+\end{enumerate}
+
+\item What conditions on $\phi$ ensure $\argmax_{\sigma} \langle \that, \phi(\sigma) \rangle = \argmax_{\sigma} \langle \muhat, \phi(\sigma) \rangle$? 
+\begin{enumerate}
+\item In particular, it would be nice if $\argmax_{\sigma} \langle \that, \phi(\sigma) \rangle = \sort(\that)$ (and same for $\muhat$) since in that case we can show comparison lemma as we did for scoring rules. 
+\end{enumerate}
+
+\item Structure of $\phi$ to get IIA, and alternate proof of Arrow's theorem for this restricted class of voting rules. 
+
 \end{enumerate}
 
 %%%
