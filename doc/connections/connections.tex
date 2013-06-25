@@ -1,0 +1,116 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\R}{\ensuremath{\mathcal{R}}}
+\newcommand{\mP}{\ensuremath{\mathcal{P}}}
+\newcommand{\mM}{\ensuremath{\mathcal{M}}}
+\newcommand{\ip}[2]{\ensuremath{\langle #1, #2 \rangle}}
+\newcommand{\grad}{\nabla}
+\newcommand{\one}{\ensuremath{\mathbf{1}}}
+\newcommand{\co}{\mbox{co}}
+
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\scr}{{\text{SC}}}
+\newcommand{\mm}{\text{MM}}
+
+\newcommand{\rank}{{\calL(C)}}
+\newcommand{\uni}{{\rank^n}}
+\newcommand{\sca}{{\scr^{\alpha}}}
+\newcommand{\sort}{\text{SORT}}
+\newcommand{\phia}{\phi^{\alpha}}
+\newcommand{\mmphia}{\mm^{\phia}}
+
+\newcommand{\muhat}{\hat{\mu}}
+\newcommand{\that}{\hat{\theta}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\eps}{\epsilon}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+
+
+\title{Euclidean Voting}
+
+\begin{document}
+\maketitle
+
+%%%
+%%%
+%%%
+
+\section{Simple Ranking Scoring Functions / Generalized Scoring Rules and Mean Proximity Rules}
+
+These are defined by both Conitzer et. al. and Zwicker. 
+\begin{itemize}
+\item SRSF: $\argmax_{\sigma} \sum_{i=1}^n s(\sigma,\sigma_i)$
+\item GSR: $\argmax_{o} \sum_{i=1}^n s(o,\sigma_i)$ where $o \in \mathcal{O}$ can be from any outcome space. Restricting outcome space to rankings and alternatives recover SRSF and SCSF, respectively.
+\item Mean Proximity: Embedding $\phi$ of votes, another embedding $\psi$ of outcomes, select the outcome whose $\psi$ is close to the mean $\phi$ of input votes. Restricting outcomes to rankings still leaves open possibility of using $\psi \neq \phi$. 
+\item THM: Mean Proximity $\Leftrightarrow$ GSR. So, Mean proximity for rankings $\Leftrightarrow$ SRSF (GSR for rankings)
+\item {\bf OUR THM:} Mean proximity for rankings with $\psi = \phi$ $\Leftrightarrow$ SRSF with symmetric $s$. 
+	\begin{itemize}
+	\item Have a coordinate for every pair of rankings rather than each ranking. The coordinate for $\sigma,\sigma'$ in embedding of $\sigma$ has value $\sqrt{s(\sigma,\sigma')}$. Coordinates for all other $\sigma',\sigma''$ are $0$. 
+	\end{itemize}
+\end{itemize}
+
+Properties:
+\begin{itemize}
+\item Neutral iff $s = $ neutral. 
+\item Neutral $\Rightarrow$ SRSF iff MLE
+\item Consistent $+$ continuous (which characterize all \emph{anonymous mean neat voting rules})
+\item Conjecture (Conitzer et. al.): Consistent $+$ continuous $+$ neutral $\Leftrightarrow$ Neutral SRSF
+\item Capture PSR + KEM. But cannot capture Bucklin, Copeland, Maximin, Ranked Pairs (not consistent). STV is also not SRSF. 
+\end{itemize}
+
+\section{Linear Mean Proximity Rules}
+
+Our work: Achieving neutrality by not-so-restricting linear representations.
+\begin{itemize}
+\item Definition
+\item Motivation: While SRSF capture many nice voting rules, they capture bad ones too. Don't have $s(\sigma,\sigma')$ maximized by $\sigma' = \sigma$ then will not even satisfy strong unanimity. Linearity is unrestrictive, structural, and easy to work with. 
+\item Can now define distance function, with nice properties (left invariance). Can observe that KT distance = Euclidean distance square. So Kemeny is a mean rule. So are all positional scoring rules. 
+	\begin{itemize}
+	\item {\bf Question:} Distance (and hence distance square) = MC/PC $\Rightarrow$ implications on the properties of the rule?
+	\item For other, we need to check if embedding of symmetric SRSF that is in addition neutral is linear. 
+	\end{itemize}
+\item Still capture PSR+KEM. Of course cannot capture rules that are not SRSF. 
+\item {\bf Question:} Captures all ``pairwise comparison scoring rules''?
+\item We know: symmetric SRSF iff mean proximity (with same embedding). {\bf Our Conjecture:} Neutral SRSF iff linear mean proximity (with same embedding)?
+	\begin{itemize}
+	\item Neutrality $\Rightarrow$ symmetric. Hence, one direction is clear.
+	\item For other, we need to check if embedding of symmetric SRSF that is in addition neutral is linear. 
+	\end{itemize}
+\end{itemize}
+
+\section{Connections to other approaches}
+\subsection{Axiomatic}
+Consistency, continuity, anonymity, neutrality already described above. 
+
+{\bf Question:} When is it PM-c, monotonic, majority for rankings?
+
+\subsection{DR}
+Consensus = Strong unanimity. Distance = Square of Euclidean distance. Votewise DR rules. 
+
+Square is not always a distance metric $\rightarrow$ Bad. More meaningfully, define votewise DR rules by sum of squares of distances rather than sum of distances. . 
+
+\subsection{MLE}
+Take $\Pr[\sigma | \sigma^*] \propto e^{\|\phi(\sigma)-\phi(\sigma*)\|^2}$. Not always Mallows since square is not always a metric. But actually better $\rightarrow$ Gaussian. 
+
+Neutrality $\Rightarrow$ Normalization independent of the true ranking $\Rightarrow$ Linear mean proximity rule is the MLE for this model. 
+
+{\bf Question:} Efficient sampling?
+
+{\bf Question:} Anything interesting for the Gaussian distributions that connect to PSR?
+
+\section{Other Directions}
+
+What are the equivalence classes of $\phi$ that lead to the same voting rule?
+
+What about notions of consensus in Euclidean spaces other than mean $\rightarrow$ e.g., minimize maximum distance (equally let go)?
+\end{document}
