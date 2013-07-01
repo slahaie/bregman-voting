@@ -1,0 +1,1 @@
+Proximity models - candidates in euclidean space, voters' utilities defined on that
