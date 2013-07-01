@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{CRX09}
+V.~Conitzer, M.~Rognlie, and L.~Xia.
+\newblock Preference functions that score rankings and maximum likelihood
+  estimation.
+\newblock In {\em Proc.~of 21st IJCAI}, pages 109--115, 2009.
+
+\bibitem{Crisman}
+KARL-DIETER CRISMAN.
+\newblock The borda count, the kemeny rule, and the permutahedron.
+
+\bibitem{Zwicker08b}
+William~S Zwicker.
+\newblock A characterization of the rational mean neat voting rules.
+\newblock {\em Mathematical and Computer Modelling}, 48(9):1374--1384, 2008.
+
+\bibitem{Zwicker08a}
+William~S Zwicker.
+\newblock Consistency without neutrality in voting rules: When is a vote an
+  average?
+\newblock {\em Mathematical and Computer Modelling}, 48(9):1357--1373, 2008.
+
+\end{thebibliography}
