@@ -5,6 +5,10 @@
 \usepackage[demo]{graphicx}
 \usepackage{subfigure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\X}{\ensuremath{\mathcal{X}}}
 \newcommand{\R}{\ensuremath{\mathcal{R}}}
 \newcommand{\mP}{\ensuremath{\mathcal{P}}}
@@ -17,6 +21,7 @@
 \newcommand{\calL}{{\mathcal{L}}}
 \newcommand{\rank}{{\calL(A)}}
 \newcommand{\calO}{{\mathcal{O}}}
+\newcommand{\calP}{{\mathcal{P}}}
 
 \newcommand{\uni}{{\rank^n}}
 \newcommand{\sca}{{\scr^{\alpha}}}
@@ -36,7 +41,7 @@
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{claim}{Claim}
 \newtheorem{proposition}{Proposition}
-
+\newtheorem{corollary}{Corollary}
 
 \newenvironment{definition}[1][Definition]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
@@ -45,71 +50,147 @@
 \newenvironment{remark}[1][Remark]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Euclidean Voting}
 
 \begin{document}
 \maketitle
 
-%%%
-%%%
-%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Properties of Voting Rules}
+\section{Preliminaries}
 
-Neutrality, Consistency, Connectedness
+Let $A$ denote the set of $m$ alternatives, and $\rank$ and $\calO$ denote the space of rankings of alternatives and outcomes, respectively. Thus, $|\rank| = m!$, and let $k = |\calO|$. A profile $\pi \in \rank^n$ is a collection of votes (rankings). For any profile $\pi$, let $n(\pi,\sigma)$ denote the number of times $\sigma$ appears in $\pi$. Let $\sigma_1,\ldots,\sigma_{m!}$ denote a fixed reference order of the rankings in $\rank$. 
 
-\section{Generalized Scoring Rules and Mean Proximity Rules}
-Let $\rank$ and $\calO$ denote the space of rankings and outcomes, respectively. Given any profile $\pi$, let $n(\pi,\sigma)$ denote the number of times $\sigma$ appears in $\pi$. Let $\sigma_1,\ldots,\sigma_{m!}$ denote a fixed reference order of the rankings in $\rank$. 
+For any two profiles $\pi_1$ and $\pi_2$, let $\pi_1+\pi_2$ be the union profile such that $n(\pi_1+\pi_2,\sigma) = n(\pi_1,\sigma)+n(\pi_2,\sigma)$ for every $\sigma \in \rank$. Similarly, for any profile $\pi$, let $c \pi$ be the profile such that $n(c \pi,\sigma) = c \cdot n(\pi,\sigma)$ for every $\sigma \in \rank$. 
 
-\begin{definition}[Generalized Scoring Rules (Zwicker~\cite{Zwicker08a})]
-A voting rule is called a generalized scoring rule if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that given any profile $\pi$, the rule returns the outcome $\argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o)$. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Voting Rule]
+A voting rule (more technically, a social welfare function - SWF) $r : \rank^n \rightarrow \calP(\rank)$ is a function that maps every profile of votes to a set of tied rankings. 
 \end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Anonymity]
+A voting rule $r$ is called \emph{anonymous} if it only depends on the number of times each ranking appears in the profile: for every profiles $\pi_1$ and $\pi_2$ such that $n(\pi_1,\sigma) = n(\pi_2,\sigma)$ for every $\sigma \in \rank$, $r(\pi_1) = r(\pi_2)$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Neutrality]
+Given any profile $\pi = (\sigma_1,\ldots,\sigma_n)$, let $\tau \pi = (\tau \sigma_1,\ldots,\tau \sigma_n)$ be the profile where each vote is permuted according to $\tau$. Similarly, given any set of rankings $S$, let $\tau S = \{\tau \sigma | \sigma \in S\}$. A voting rule $r$ is called \emph{neutral} if for every profile $\pi$ and permutation $\tau$, we have $r(\tau \pi) = \tau r(\pi)$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Consistency] %and Weak Consistency]
+A social welfare function $r$ is called \emph{consistent} (for rankings) if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) \cap r(\pi_2) \neq \emptyset$, $r(\pi_1+\pi_2) = r(\pi_1) \cap r(\pi_2)$. %A social welfare function $r$ is called weakly consistent (for rankings) if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) = r(\pi_2)$, we have $r(\pi_1+\pi_2) = r(\pi_1) = r(\pi_2)$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Connectedness]
+A voting rule $r$ is called \emph{connected} if for any two profiles $\pi_1$ and $\pi_2$ with $r(\pi_1) \cap r(\pi_2) \neq \emptyset$, there exist non-negative integers $c$ and $d$ such that $r(\pi_1) \cap r(c \pi_1 + d \pi_2) \neq \emptyset$ and $r(\pi_1) \neq r(c \pi_1 + d \pi_2)$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Continuity]
+Two profiles $\pi_1$ and $\pi_2$ satisfy $\pi_1 \approx \pi_2$ if they differ by one vote: for some $\sigma$ and $\sigma'$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)-1$, $n(\pi_1,\sigma') = n(\pi_2,\sigma')+1$, and for every $\sigma \in \rank\setminus\{\sigma,\sigma'\}$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)$. A voting rule $r$ is called \emph{continuous} if for every profile $\pi$ and ranking $\sigma$, $\sigma \notin r(\pi)$ implies that there exists integer $k$ such that for every profile $\pi' \approx k \pi$, $\sigma \notin r(\pi')$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Background on Mean Proximity Rules and Generalized Scoring Rules}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{definition}[Mean Proximity Rules (Zwicker~\cite{Zwicker08a})]
-A voting rule is called a mean proximity rule if there exists an input embedding $\phi : \rank \rightarrow \mathbb{R}^k$ and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ such that given any profile $\pi$ with $n$ votes, the rule returns the outcome $\argmin_{o \in \calO} \|\psi(o) - mean(\pi) \|$, where $mean(\pi) = \sum_{\sigma \in \rank} (n(\pi,\sigma)/n) \cdot \phi(\sigma)$ is the mean of the input embeddings of the votes in $\pi$ (together with their multiplicity). 
+A voting rule is called a mean proximity rule if there exists an input embedding $\phi : \rank \rightarrow \mathbb{R}^k$ and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ such that for any profile $\pi$ with $n$ votes, $r(\pi) = \argmin_{o \in \calO} \|\psi(o) - mean(\pi) \|$, where $mean(\pi) = \sum_{\sigma \in \rank} (n(\pi,\sigma)/n) \cdot \phi(\sigma)$ is the mean of the input embeddings of the votes in $\pi$ (along with multiplicity). 
 \end{definition}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Generalized Scoring Rules (Zwicker~\cite{Zwicker08a})]
+A voting rule is called a generalized scoring rule if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that for any profile $\pi$, $r(\pi) = \argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o)$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For these two classes of voting rules, we have the following elegant equivalence theorem by Zwicker~\cite{Zwicker08a}. We reconstruct the proof since it is the foundation of several of our results.
 \begin{proposition}[Theorem 4.2.1, Zwicker~\cite{Zwicker08a}]
-A voting rule is a generalized scoring rule if and only if it is a mean proximity rule.
+A voting rule is a mean proximity rule if and only if it is a generalized scoring rule.
 \label{prop:equiv}
 \end{proposition}
+\begin{proof}[Proof (reconstructed)]
+Take any mean proximity rule $r$. Let $\phi$ and $\psi$ be any input and output embeddings that generate $r$. Now, for any profile $\pi$,
+\begin{align}
+r(\pi)  &= \argmin_{o \in \calO} \|\psi(o)-mean(\pi)\| \nonumber\\
+&= \argmin_{o \in \calO} \|\psi(o)-mean(\pi)\|^2 \nonumber\\
+&= \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \|\psi(o)-\phi(\sigma)\|^2 \label{eqn:discrete-mean}\\
+&= \argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \left( -\|\psi(o)-\phi(\sigma)\|^2 \right), \nonumber
+\end{align}
+where Equation~\eqref{eqn:discrete-mean} follows by the well-known fact that the discrete mean, the member of a finite set that minimizes the sum of squares of Euclidean distances from given points, is the point in the finite set that is closest to the Euclidean mean (coordinate wise average) of the given points.  This is given as Corollary 4.2.3 in~\cite{Zwicker08a}. Now, we can see that $r$ is a generalized scoring rule by taking the score function $s(\sigma,o) = -\|\psi(o)-\phi(\sigma)\|^2$. 
 
-Further, Zwicker~\cite{Zwicker08b} shows that the set of voting rules that are \emph{consistent} and \emph{connected} is identical to the set of mean neat voting rules, which is a generalization of mean proximity rules. As a simple corollary, we have the following.
+For the other direction, take any generalized scoring rule $r$ and let $s$ be any score function that generates $r$. Then, let $\phi(\sigma) = (s(\sigma,o_1),\ldots,s(\sigma,o_k))$ where $\{o_1,\ldots,o_k\}$ is some fixed enumeration of $\calO$. Further, let $\psi(o_i) = e_i \in \mathbb{R}^k$ where the $i^{th}$ coordinate is $1$ and the rest are $0$. Then, for any profile $\pi$, we have
+\begin{align*}
+o_i \in r(\pi) &\Leftrightarrow \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o_i) \ge \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o), \forall o \in \calO\\
+&\Leftrightarrow \langle mean(\pi), e_i \rangle \ge \langle mean(\pi), e_j \rangle, \forall 1 \le j \le k \\
+&\Leftrightarrow \|mean(\pi) - e_i\| \ge \|mean(\pi) - e_j\|, \forall 1 \le j \le k\\
+&\Leftrightarrow \|mean(\pi) - \psi(o_i)\|^2 \ge \|mean(\pi) - \psi(o_j)\|^2, \forall 1 \le j \le k,\\
+&\Leftrightarrow \|mean(\pi) - \psi(o_i)\| \ge \|mean(\pi) - \psi(o_j)\|, \forall 1 \le j \le k,
+\end{align*}
+where the third transition follows since $\|e_j\| = 1$ for all $j$ (and thus, $\|mean(\pi) - \psi(o_j)\|^2 - \langle mean(\pi), e_j \rangle$ is constant for all $j$). Thus, $r$ is a mean proximity rule.
+\end{proof}
+
+Further, Zwicker~\cite{Zwicker08b} shows that the set of voting rules that are \emph{consistent} and \emph{connected} is identical to the set of mean neat voting rules, which is a generalization of mean proximity rules. As a simple corollary, we have: 
 
 \begin{proposition}
-Any mean proximity rule (by Proposition~\ref{prop:equiv}, equivalently, any generalized scoring rule) is consistent and connected.
+Any mean proximity rule (equivalently by Proposition~\ref{prop:equiv}, any generalized scoring rule) is consistent and connected.
 \end{proposition}
 
 This implies that any voting rule that is not consistent (in the SWF sense) is not a mean proximity rule. In fact, we have the following.
 
-\begin{lemma}[Conitzer et. al.~\cite{CRX09}]
-All positional scoring rules and the Kemeny rule are generalized scoring rules (i.e., mean proximity rules). However, Bucklin's rule, Copeland's rule, the maximin rule, and the ranked pairs method are not generalized scoring rules since they do not satisfy consistency. While STV does satisfy consistency, it is also not a generalized scoring rule. 
+\begin{lemma}[Proposition 1,2,5 and Theorem 3 of Conitzer et. al.~\cite{CRX09}]
+All positional scoring rules and the Kemeny rule are generalized scoring rules (i.e., mean proximity rules). However, Bucklin's rule, Copeland's rule, the maximin rule, the ranked pairs method, and STV are not generalized scoring rules since they do not satisfy consistency (under any tie-breaking scheme). 
 \end{lemma}
 
-We are interested in social welfare functions (SWFs) that return a ranking, so $\calO = \rank$. In this case, the scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes the \emph{similarity} between two rankings. This special case was rediscovered by Conitzer et. al.~\cite{CRX09} and named \emph{simple ranking scoring functions} (SRSFs). 
+\section{Symmetric Mean Proximity Rules}
 
-Note that in this case, the rule can be encoded by a score matrix $S$ such that $S_{ij} = s(\sigma_i,\sigma_j)$. Recall that $\sigma_1,\ldots,\sigma_{m!}$ is any fixed reference order of the rankings. Now, given any profile $\pi$, we can create a vector $y_{\pi} = [n(\pi,\sigma_1) \ldots n(\pi,\sigma_{m!})]^T$. Then, it is easy to verify that the output of the rule would be $\sigma_k$ such that $k = \argmax_i (S*y_{\pi})_i$, that is, the ranking such that its associated coordinate in $S*y_{\pi}$ is maximum. From here onwards, unless mentioned otherwise, we will consider only social welfare functions. 
+In this paper, we are interested in social welfare functions (SWFs) that return a ranking, so $\calO = \rank$. From here onwards, unless mentioned otherwise, any voting rule we mention will be a social welfare function. In this case, the scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes the \emph{similarity} between two rankings. This special case was also defined by Conitzer et. al.~\cite{CRX09}, and was named \emph{simple ranking scoring functions} (SRSFs). 
 
-\subsection{Symmetric Mean Proximity Rules}
-In the case of social welfare functions, since the outcome space is identical to the input space, it makes sense to have the input embedding identical to the output embedding, i.e., $\phi = \psi$. Indeed, the well known mean proximity rules such as all positional scoring rules (when interpreted as SWFs) and the Kemeny rule can be achieved with $\phi = \psi$. We call such rules symmetric mean proximity rules.
+\begin{definition}[Score Matrix]
+For any SWF $r$ that is a generalized scoring rule (and hence SRSF), let $s$ be any score function that generates $r$. Let $\sigma_1,\ldots,\sigma_{m!}$ be any fixed enumeration of $\rank$. Then, the \emph{score matrix} of $r$ corresponding to the score function $s$, denoted $S$, is given by $S_{ij} = s(\sigma_i,\sigma_j)$, for $1 \le i \le m!$, $1 \le j \le m!$. 
+\end{definition}
+
+We use $r_i$ to denote the $i^{th}$ row of the score matrix $S$. Now, given any profile $\pi$ of $n$ votes, we create the vector $y_{\pi} = [n(\pi,\sigma_1)/n,\ldots,n(\pi,\sigma_{m!})/n]^T$. It is easy to verify that the output of the rule would be $\sigma_k$ such that $k = \argmax_i (S\cdot y_{\pi})_i = \argmax_i r_i \cdot y_{\pi}$. 
+
+Since for SWFs the outcome space is identical to the input space, it is tempting to take the output embedding identical to the input embedding, i.e., $\psi = \phi$. Indeed, the well known mean proximity rules such as all positional scoring rules (when interpreted as SWFs) and the Kemeny rule can be achieved with $\psi = \phi$. We call such rules symmetric mean proximity rules.
 
 \begin{definition}[Symmetric Mean Proximity Rules]
-A voting rule is called symmetric mean proximity rule if there exists a mean proximity representation of the rule where the input embedding $\phi$ and the output embedding $\psi$ satisfy $\phi = \psi$. 
+A voting rule is called symmetric mean proximity rule if there exists a mean proximity representation of the rule where the input and the output embeddings are identical, i.e., $\psi = \phi$. 
 \end{definition} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%       POLISHED TILL HERE        %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We now show a characterization of symmetric mean proximity rules along the lines of Proposition~\ref{prop:equiv}. 
 \begin{theorem}
-A voting rule is a symmetric mean proximity rule if and only if it is a generalized scoring rule whose score matrix is positive semidefinite (PSD).\footnote{From the proof of Theorem~\ref{thm:symm}, it is clear that some score matrix representing a generalized scoring rule is PSD if and only if every score matrix representing the rule is PSD.}
+A voting rule is a symmetric mean proximity rule if and only if it is a generalized scoring rule for which there exists a corresponding score matrix that is a negative of a Euclidean distance matrix. 
 \label{thm:symm}
 \end{theorem}
 \begin{proof}
-First, 
+This follows simply by observing that the bijection between mean proximity rules and generalized scoring rules used by Zwicker~\cite{Zwicker08a} takes negation of square of the Euclidean distance between the embeddings of two rankings as the score between the two rankings. 
 \end{proof}
-
-\begin{conjecture}
-Let $S$ and $S'$ be two score matrices with rows $\{r_i\}$ and $\{r'_i\}$. Then, $S$ and $S'$ correspond to the same generalized scoring rule if and only if there exist $a \in \mathbb{R}$ and $b \in \mathbb{R}^{m!}$ such that for every $i$, $r'_i = a \cdot r_i + b$. 
-\end{conjecture}
 
 \section{Neutrality in Symmetric Mean Proximity Rules and Linear Embeddings}
 
@@ -118,6 +199,45 @@ Conitzer et. al.~\cite{CRX09} showed that neutrality of a GSR is equivalent to n
 A generalized scoring rule is neutral if and only if it corresponds to a neutral scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ where $s(\tau \circ \sigma,\tau \circ \sigma') = s(\sigma,\sigma')$ for every $\tau, \sigma, \sigma' \in \rank$ and $\circ$ is the composition when rankings are seen as bijective functions, or equivalently the product operator of the symmetric group. 
 \end{proposition}
 
+Further, it is easy to show the following.
+\begin{lemma}
+Any neutral voting rule has all $m!$ rankings tied on the profile where each ranking appears once.
+\label{lem:average-profile}
+\end{lemma}
+\begin{proof}
+To see this, observe that this profile does not change by applying any (but the same) permutation to all of its ranking. If the set of rankings returned by the neutral rule is non-empty and not the set of all rankings, then it would be easy to find a permutation which changes this output set.
+\end{proof}
+
+Now, let $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$ denote the average of all the embeddings. Then, Lemma~\ref{lem:average-profile} indicates that $\|\phi(\sigma)-\phi_{avg}\|$ must be independent of $\sigma$. Further, note that translating and scaling all embeddings in the Euclidean space does not change the voting rule. We can first apply the translation which brings $\phi_{avg}$ to the origin. This makes $\|\phi(\sigma)\|$ constant for all $\sigma$. Next, we can scale the embeddings such that $\|\phi(\sigma)\| = 1$ for all $\sigma$. Thus, we have the following.
+
+\begin{lemma}
+For any neutral symmetric mean proximity rule, there exists a corresponding embedding $\phi$ such that $\|\phi(\sigma)\| = 1$ for every $\sigma \in \rank$, and $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma) = 0$.
+\label{lem:equal-norm}
+\end{lemma}
+
+This shows that embeddings that map rankings to the unit sphere are sufficient to generate almost all mean proximity rules of interest. For this specific condition, we have the following.
+\begin{lemma}
+If $\|\phi(\sigma)\| = 1$ for all $\sigma \in \rank$, then 
+$$
+\argmin_{\sigma \in \rank} \|\phi(\sigma) - mean(\pi)\| = \argmax_{\sigma} \langle \phi(\sigma), mean(\pi) \rangle.
+$$ 
+\end{lemma}
+
+Using this, we give a refinement of Theorem~\ref{thm:symm}.
+\begin{lemma}
+A voting rule is a symmetric mean proximity rule for which some corresponding embedding $\phi$ maps all rankings to points on the unit sphere if and only if the rule is a generalized scoring rule for which there exists a corresponding positive semidefinite score matrix. 
+\label{lem:char-psd}
+\end{lemma}
+\begin{proof}
+Gramian matrix if and only if positive semidefinite.
+\end{proof}
+
+Using Lemma~\ref{lem:equal-norm} and Lemma~\ref{lem:char-psd}, we obtain the following.
+\begin{corollary}
+Any neutral mean proximity rule is a generalized scoring rule for which there exists a positive semidefinite score matrix.
+\end{corollary}
+
+\section{Linear Embeddings and Neutrality}
 \begin{definition}[Linear Embeddings]
 $\phi(\tau \circ \sigma) = R_{\tau} \cdot \phi(\sigma)$. 
 \end{definition}
@@ -138,6 +258,10 @@ A symmetric mean proximity rule is neutral if and only if there exists a represe
 \section{Euclidean Embeddings and Dimensions}
 
 In this section, we analyze the following general question. \emph{Given a symmetric mean proximity rule $r$, what is the minimum dimension of any embedding that represents $r$?}. 
+
+\begin{conjecture}
+Let $S$ and $S'$ be two score matrices with rows $\{r_i\}$ and $\{r'_i\}$. Then, $S$ and $S'$ correspond to the same generalized scoring rule if and only if there exist $a \in \mathbb{R}$ and $b \in \mathbb{R}^{m!}$ such that for every $i$, $r'_i = a \cdot r_i + b$. 
+\end{conjecture}
 
 \begin{theorem}
 The minimum dimension required for any positional scoring rule is $m-1$. 
@@ -185,7 +309,7 @@ Consensus = Strong unanimity. Distance = Square of Euclidean distance. Votewise 
 Square is not always a distance metric $\rightarrow$ Bad. More meaningfully, define votewise DR rules by sum of squares of distances rather than sum of distances. . 
 
 \subsection{MLE}
-Take $\Pr[\sigma | \sigma^*] \propto e^{\|\phi(\sigma)-\phi(\sigma*)\|^2}$. Not always Mallows since square is not always a metric. But actually better $\rightarrow$ Gaussian. 
+Take $\Pr[\sigma | \sigma^*] \propto e^{\|\phi(\sigma)-\phi(\sigma^*)\|^2}$. Not always Mallows since square is not always a metric. But actually better $\rightarrow$ Gaussian. 
 
 Neutrality $\Rightarrow$ Normalization independent of the true ranking $\Rightarrow$ Linear mean proximity rule is the MLE for this model. 
 
