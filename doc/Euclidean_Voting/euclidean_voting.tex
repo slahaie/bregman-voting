@@ -1,5 +1,9 @@
 \documentclass[10pt,letterpaper]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{environ}
+\usepackage{color}
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
 \usepackage{verbatim}
 \usepackage[demo]{graphicx}
@@ -50,12 +54,20 @@
 \newenvironment{remark}[1][Remark]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
+
+\newcount\Comments
+\Comments=1
+\newcommand{\kibitz}[2]{\ifnum\Comments=1\textcolor{#1}{#2}\fi}
+\newcommand{\csl}[1]{\kibitz{blue} {[SL: #1]}}
+\newcommand{\cns}[1]{\kibitz{red} {[NS: #1]}}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Euclidean Voting}
-
+\author{S\'{e}bastien Lahaie\\Microsoft Research New York, USA\\slahaie@microsoft.com \and Nisarg Shah\\Carnegie Mellon University, USA\\nkshah@cs.cmu.edu}
 \begin{document}
 \maketitle
 
@@ -72,7 +84,7 @@ For any two profiles $\pi_1$ and $\pi_2$, let $\pi_1+\pi_2$ be the union profile
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{definition}[Voting Rule]
-A voting rule (more technically, a social welfare function - SWF) $r : \rank^n \rightarrow \calP(\rank)\setminus\{\emptyset\}$ is a function that maps every profile of votes to a set of tied rankings. 
+A \emph{voting rule} (more technically, a social welfare function - SWF) $r : \rank^n \rightarrow \calP(\rank)\setminus\{\emptyset\}$ is a function that maps every profile of votes to a set of tied rankings. 
 \end{definition}
 
 Note that a voting rule can never output an empty set.
@@ -116,6 +128,7 @@ A voting rule $r$ is called \emph{connected} if for any two profiles $\pi_1$ and
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\cns{Check if this is equivalent/related to continuity defined by Conitzer et. al.~\cite{CRX09}. Then we can add that to Proposition~\ref{prop:properties}.}
 \begin{definition}[Continuity]
 Two profiles $\pi_1$ and $\pi_2$ satisfy $\pi_1 \approx \pi_2$ if they differ by one vote: for some $\sigma$ and $\sigma'$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)-1$, $n(\pi_1,\sigma') = n(\pi_2,\sigma')+1$, and for every $\sigma \in \rank\setminus\{\sigma,\sigma'\}$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)$. A voting rule $r$ is called \emph{continuous} if for every profile $\pi$ and ranking $\sigma$, $\sigma \notin r(\pi)$ implies that there exists integer $k$ such that for every profile $\pi' \approx k \pi$, $\sigma \notin r(\pi')$. 
 \end{definition}
@@ -129,7 +142,7 @@ Two profiles $\pi_1$ and $\pi_2$ satisfy $\pi_1 \approx \pi_2$ if they differ by
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{definition}[Mean Proximity Rules (Zwicker~\cite{Zwicker08a})]
-A voting rule is called a mean proximity rule if there exists an input embedding $\phi : \rank \rightarrow \mathbb{R}^k$ and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ such that for any profile $\pi$ with $n$ votes, $r(\pi) = \argmin_{o \in \calO} \|\psi(o) - mean(\pi) \|$, where $mean(\pi) = \sum_{\sigma \in \rank} (n(\pi,\sigma)/n) \cdot \phi(\sigma)$ is the mean of the input embeddings of the votes in $\pi$ (along with multiplicity). 
+A voting rule is called a \emph{mean proximity rule} if there exists an input embedding $\phi : \rank \rightarrow \mathbb{R}^k$ and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ such that for any profile $\pi$ with $n$ votes, $r(\pi) = \argmin_{o \in \calO} \|\psi(o) - mean(\pi) \|$, where $mean(\pi) = \sum_{\sigma \in \rank} (n(\pi,\sigma)/n) \cdot \phi(\sigma)$ is the mean of the input embeddings of the votes in $\pi$ (along with multiplicity). 
 \end{definition}
 
 Note that a mean proximity rule is rank-distinguishing if and only if no embedding of the rule maps any two rankings to the same point in the Euclidean space. 
@@ -137,7 +150,7 @@ Note that a mean proximity rule is rank-distinguishing if and only if no embeddi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{definition}[Generalized Scoring Rules (Zwicker~\cite{Zwicker08a})]
-A voting rule is called a generalized scoring rule if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that for any profile $\pi$, $r(\pi) = \argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o)$. 
+A voting rule is called a \emph{generalized scoring rule} if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that for any profile $\pi$, $r(\pi) = \argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o)$. 
 \end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,8 +194,9 @@ where the third transition follows since $\|e_j\| = 1$ for all $j$ (and thus, $\
 
 Since mean proximity rules are equivalent to generalized scoring rules, here onwards we will use the term mean proximity rules out of the two. Further, Zwicker~\cite{Zwicker08b} shows that the set of voting rules that are \emph{consistent} and \emph{connected} is identical to the set of mean neat voting rules, which is a generalization of mean proximity rules. As a simple corollary, we have: 
 
-\begin{proposition}
-Any mean proximity rule is consistent and connected.
+\begin{proposition}[\cite{Zwicker08b}]
+Any mean proximity rule is consistent, connected, and anonymous.
+\label{prop:properties}
 \end{proposition}
 
 This implies that any voting rule that is not consistent (in the SWF sense) is not a mean proximity rule. In fact, we have the following.
@@ -203,7 +217,7 @@ In this paper, we are interested in social welfare functions (SWFs) that return 
 For any SWF $r$ that is a generalized scoring rule (and hence SRSF), let $s$ be any score function that generates $r$. Let $\sigma_1,\ldots,\sigma_{m!}$ be any fixed enumeration of $\rank$. Then, the \emph{score matrix} of $r$ corresponding to the score function $s$, denoted $S$, is given by $S_{ij} = s(\sigma_i,\sigma_j)$, for $1 \le i \le m!$, $1 \le j \le m!$. 
 \end{definition}
 
-Now, given any profile $\pi$ of $n$ votes, we create the vector $y_{\pi} = [n(\pi,\sigma_1)/n,\ldots,n(\pi,\sigma_{m!})/n]^T$. It is easy to verify that the output of the rule would be $\sigma_k$ such that $k = \argmax_i (S\cdot y_{\pi})_i$. Using Proposition~\ref{prop:equiv}, we will now denote a mean proximity SWF by three equivalent representations: an embedding $\phi$, a scoring function $s$, and a score matrix $S$. Note that none of the three representations is unique. We will further say that the rule has embedding $\phi$, score function $s$, or score matrix $S$ to denote that it is one possible representation of the rule.
+Given any profile $\pi$ of $n$ votes, create $y_{\pi} = [n(\pi,\sigma_1)/n,\ldots,n(\pi,\sigma_{m!})/n]^T$. It is easy to verify that the output of the rule would be $\sigma_k$ such that $k = \argmax_i (S\cdot y_{\pi})_i$. Using Proposition~\ref{prop:equiv}, we will now denote a mean proximity SWF by three equivalent representations: an embedding $\phi$, a scoring function $s$, and a score matrix $S$. Note that none of the three representations is unique. We will further say that the rule has embedding $\phi$, score function $s$, or score matrix $S$ to denote that it is one possible representation of the rule.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -212,7 +226,7 @@ Now, given any profile $\pi$ of $n$ votes, we create the vector $y_{\pi} = [n(\p
 While mean proximity rules capture several well-known SWFs, they capture many particularly bad voting rules as well. For example, we can imagine a mean proximity rule that has score function $s$ satisfying $s(\sigma,\sigma') > s(\sigma,\sigma)$ for some $\sigma,\sigma' \in \rank$. In this case, the rule would not output $\sigma$ even on the profile where all votes are $\sigma$, thus violating unanimity. To solve this problem, we propose a simple fix. We take the output embedding to be identical to the input embedding, i.e., $\psi = \phi$. Since the outcome space for SWFs is identical to the input space, this is a natural restriction. We call such rules symmetric mean proximity rules.
 
 \begin{definition}[Symmetric Mean Proximity Rules]
-A voting rule is called symmetric mean proximity rule if there exists a mean proximity representation of the rule where the input and the output embeddings are identical, i.e., $\psi = \phi$. 
+A voting rule is called \emph{symmetric mean proximity rule} if there exists a mean proximity representation of the rule where the input and the output embeddings are identical, i.e., $\psi = \phi$. 
 \end{definition} 
 
 It is easy to verify that this solves the problem of unanimity violation. It is immediate that for any profile $\pi$ consisting of copies of a single ranking $\sigma$, the ranking $\sigma$ is definitely in the output. Rank-distinguishability implies that no other ranking is in the output.
@@ -227,6 +241,7 @@ Moreover, symmetric mean proximity rules are not too restrictive, as they still 
 
 \begin{lemma}
 All positional scoring rules and the Kemeny rule are symmetric mean proximity rules.
+\label{lem:symmetric-captures}
 \end{lemma}
 
 To see this, observe that the constructions used in~\cite{Zwicker08a} to show that positional scoring rules and the Kemeny rule are mean proximity rules actually use identical input and output embeddings. Recall that mean proximity rules are identical to generalized scoring rules (Proposition~\ref{prop:equiv}). It is obvious to ask: \emph{What subclass of generalized scoring rules corresponds to symmetric mean proximity rules?} The answer turns out to be simple, yet interesting. Before that, we need the following definition.
@@ -259,7 +274,7 @@ We showed that the class of symmetric mean proximity rules is slightly better th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Neutrality in Symmetric Mean Proximity Rules and Linear Embeddings}
+\section{Neutral Symmetric Mean Proximity Rules}
 
 Conitzer et. al.~\cite{CRX09} showed that neutrality of a generalized scoring rule (i.e., a mean proximity rule) is equivalent to neutrality of its scoring function.
 \begin{proposition}[Lemma 2, Conitzer et. al.~\cite{CRX09}]
@@ -286,7 +301,7 @@ For any neutral symmetric mean proximity rule $r$, there exists an embedding $\p
 
 We call such an embedding a normalized embedding of the rule. Using this, a result for neutral symmetric mean proximity rules that further adds to Theorem~\ref{thm:symm}. 
 \begin{definition}[Gramian Matrix]
-An $n \times n$ matrix $A = (a_{ij})$ is called Gramian if there exist vectors $v_1,\ldots,v_n \in \mathbb{R}^k$ such that $a_{ij} = \langle v_i,v_j \rangle$ for all $i,j$. 
+An $n \times n$ matrix $A = (a_{ij})$ is called a \emph{Gramian matrix} if there exist vectors $v_1,\ldots,v_n \in \mathbb{R}^k$ such that $a_{ij} = \langle v_i,v_j \rangle$ for all $i,j$. 
 \end{definition}
 
 %Note that if matrix $B$ consists of $v_1,\ldots,v_n$ as its rows, then $A = B B^T$. It is well-known that $rank(A) = rank(B)$ in this case. 
@@ -324,6 +339,7 @@ Any neutral symmetric mean proximity rule $r$ has a score matrix $S$ that satisf
 \item $S_{ii} > S_{ij}$ for all $i,j$, i.e., the largest element in any row is its diagonal element.
 \item $\sum_j S_{ij}$ is independent of $i$, i.e., the sum of elements in each row is the same.
 \end{enumerate}
+\label{lem:neutral-mean-proximity-properties}
 \end{lemma}
 Note that the third condition follows from unanimity of symmetric mean proximity rules, and the last condition follows from Lemma~\ref{lem:average-profile}. In the next section, we introduce a general class of embeddings that all achieve neutrality, and use the structure established here to show that they in fact generate all neutral symmetric mean proximity rules.
 
@@ -331,92 +347,178 @@ Note that the third condition follows from unanimity of symmetric mean proximity
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%       POLISHED TILL HERE        %%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Linear Embeddings and Neutrality}
 
+\cns{cite group theorey literature showing importance of linear representations and corresponding embeddings}
+
 \begin{definition}[Linear Embeddings]
-$\phi(\tau \sigma) = R_{\tau} \cdot \phi(\sigma)$. 
+An embedding $\phi:\rank \rightarrow \mathbb{R}^k$ is called a \emph{linear embedding} if there exists a function $R : \rank \rightarrow \mathbb{R}^{k \times k}$ mapping each permutation to a $k \times k$ matrix such that i) $\phi(\tau \sigma) = R(\tau) \phi(\sigma)$ for every $\tau,\sigma \in \rank$, and ii) $R(\tau^{-1}) = R(\tau)^{-1} = R(\tau)^T$ for every $\tau \in \rank$. 
 \end{definition}
 
-Motivation: While mean proximity rules / generalized scoring rules capture many nice voting rules, they capture bad ones too. In particular, if we have $s(\sigma,\sigma') > s(\sigma,\sigma)$ for any $\sigma$ and $\sigma'$, then the rule will not return $\sigma$ on the profile where all votes are $\sigma$, thus violating strong unanimity. While linear embeddings solve this problem and achieve many other desirable properties, they are quite unrestrictive - they still capture all positional scoring rules and the Kemeny rule.
+Here, $\tau \sigma$ denotes the ranking obtained by permuting candidates in $\sigma$ according to $\tau$. In future, we will use $R_{\tau}$ in place of $R(\tau)$ for notational convenience. Note that linear embeddings are quite structured: embedding of $\sigma$ is obtained from embedding of $\sigma'$ by the linear transformation corresponding to the permutation that converts $\sigma'$ to $\sigma$. Correspondingly, we define linear symmetric mean proximity rules.
 
+\begin{definition}[Linear Symmetric Mean Proximity Rule]
+A voting rule is called a \emph{linear symmetric mean proximity rule} if there exists it has a symmetric mean proximity representation with a linear embedding. 
+\end{definition}
+
+First, we show that linearity is not a restrictive condition for symmetric mean proximity rules.
+
+\begin{lemma}
+All positional scoring rules and the Kemeny rule are linear symmetric mean proximity rules.
+\label{lem:linear-captures}
+\end{lemma}
+\begin{proof}
+\cns{To be written}
+\end{proof}
+
+Next, we prove one of the main results of this paper that shows the importance of linear mean proximity rules. 
 \begin{theorem}
-Any mean proximity rule that has a representation using a linear embedding satisfies strong unanimity and neutrality. 
+A mean proximity rule is neutral if and only if it is a linear mean proximity rule. 
+\label{thm:linear-neutral}
 \end{theorem}
+\begin{proof}
+\cns{One direction to be written, another to be proved}
+\end{proof}
 
-In addition, we can now define a distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$. It is easy to show that this, in addition to being a distance metric, is also left-invariant. Additionally, if we take the linear embedding that generates the Kemeny rule, then the corresponding distance function becomes the squaure root of the KT distance. This demonstrates that the KT distance is actually the square of a more natural Euclidean distance metric. In this sense, the Kemeny rule is a mean rule, rather than a median rule, and so are all positional scoring rules. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{theorem}
-A symmetric mean proximity rule is neutral if and only if there exists a representation $\phi$ of the rule that is linear. 
-\label{thm:neutrality-linear-embedding}
-\end{theorem}
-
-\section{Euclidean Embeddings and Dimensions}
-
-In this section, we analyze the following general question. \emph{Given a symmetric mean proximity rule $r$, what is the minimum dimension of any embedding that represents $r$?}. 
-
-\begin{conjecture}
-Let $S$ and $S'$ be two score matrices with rows $\{r_i\}$ and $\{r'_i\}$. Then, $S$ and $S'$ correspond to the same generalized scoring rule if and only if there exist $a \in \mathbb{R}$ and $b \in \mathbb{R}^{m!}$ such that for every $i$, $r'_i = a \cdot r_i + b$. 
-\end{conjecture}
-
-\begin{theorem}
-The minimum dimension required for any positional scoring rule is $m-1$. 
-\end{theorem}
-
-\subsection{Borda Rule}
-In this section, we analyze the $m-1$ dimension embeddings of the Borda rule. 
-
-{\bf $\mathbf{3}$ alternatives:} Zwicker~\cite{Zwicker08a} informally demonstrated that for $3$ alternatives, any embedding that represents the Borda rule embeds the $6$ possible rankings at the corners of a regular hexagon as shown in Figure~\ref{fig:borda-3alt}. In fact, it is exactly the \emph{permutahedron} of the symmetric group $S_3$ where each ranking is connected to two rankings that are obtained by two possible adjacent swaps. Thus, neighbouring rankings have \emph{Kendall Tau} distance $1$ from each other. Note that there are hexagons that connect rankings at KT distance greater than $1$, but those do not correspond to the Borda rule.
-
-\begin{figure}
-\centering
-\begin{subfigure}[$3$ alternatives]
-  %\includegraphics[width=.4\linewidth]{Borda3}
-  {\rule{3cm}{3cm}}
-  \label{fig:borda-3alt}
-\end{subfigure}%
-\begin{subfigure}[$4$ alternatives]
-  %\includegraphics[width=.4\linewidth]{Borda4}
-  {\rule{3cm}{3cm}}
-  \label{fig:borda-4alt}
-\end{subfigure}%
-\caption{Embeddings for the Borda Rule}
-\label{fig:borda}
-\end{figure}
-
-{\bf $\mathbf{4}$ alternatives:} Interestingly, the observation that the Borda rule embeds rankings to the vertices of the regular polytope of the permutahedron carries over to the case of $4$ alternatives. Thus, each ranking is connected to $3$ rankings that are obtained by performing one of the three possible adjacent swaps. The polytope of the permutahedron of $S_4$, shown in Figure~\ref{fig:borda-4alt}, consists of $8$ hexagons and $6$ squares. Each hexagon contains the $6$ rankings that are obtained by either keeping the first alternative constant or the last alternative constant. Note that we can forget the alternative that is constant, and the hexagon exactly matches the embeddings of the rankings over the remaining $3$ alternatives. The $6$ squares each contain $4$ rankings that are obtained by swapping the first two or the last two alternatives. Thus, each square has the following form: 
-$$
-a \succ b \succ c \succ d \;\longrightarrow\; a \succ b \succ d \succ c \;\longrightarrow\; b \succ a \succ d \succ c \;\longrightarrow\; b \succ a \succ c \succ d.
-$$
-{\bf Replace this by a figure of a square, similarly draw a hexagon}
-
-For better understanding of permutahedrons, refer to Crisman~\cite{Crisman}. 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%      UNPOLISHED SECTION       %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Connections to other approaches}
-\subsection{Axiomatic}
-Consistency, continuity, anonymity, neutrality already described above. 
+Voting rules have been analyzed from three viewpoints in the literature \cns{cite}: axiomatic view, distance rationalizability (DR) view, and MLE view. We connect linear mean proximity rules with all three viewpoints.
 
-{\bf Question:} When is it PM-c (related to the Euclidean distance being MC?), monotonic, majority for rankings?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{DR}
-Consensus = Strong unanimity. Distance = Square of Euclidean distance. Votewise DR rules. 
+\subsection{Axiomatic View}
+Proposition~\ref{prop:properties} shows that all mean proximity rules are consistent and connected. Theorem~\ref{thm:linear-neutral} shows that linear mean proximity rules are also neutral. This raises a few questions.
 
-Square is not always a distance metric $\rightarrow$ Bad. More meaningfully, define votewise DR rules by sum of squares of distances rather than sum of distances. . 
+\begin{enumerate}
+\item What restrictions on the embedding $\phi$ correspond to monotonicity of the mean proximity rule?
+\item Caragiannis et. al.~\cite{CPS13} introduced pairwise majority consistency (PM-c) as the natural generalization of Condorcet consistency for social welfare functions. What restrictions on $\phi$ ensures that the mean proximity rule is PM-c? Is that related to the distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$ being majority concentric~\cite{CPS13}?
+\end{enumerate}
 
-\subsection{MLE}
-Take $\Pr[\sigma | \sigma^*] \propto e^{\|\phi(\sigma)-\phi(\sigma^*)\|^2}$. Not always Mallows since square is not always a metric. But actually better $\rightarrow$ Gaussian. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Neutrality $\Rightarrow$ Normalization independent of the true ranking $\Rightarrow$ Linear mean proximity rule is the MLE for this model. 
+\subsection{Distance Rationalizability View}
+Meskanen and Nurmi~\cite{MN08} introduced the distance rationalizability framework where given a consensus class of profiles where the output is already defined and a distance function between profiles, the corresponding distance rationalizable rule, given any profile, finds the closest profile in the consensus class and returns the output defined on that. Edith et. al.~\cite{EFS10} study additively votewise distances, where the distance between two profiles is (vaguely) the sum of distances between their rankings. We note that the additively votewise distance rationalizable rules with (strong) unanimity consensus class and the distance between two rankings being square of the Euclidean distance ($\ell_2$ norm) between their embeddings are exactly symmetric mean proximity. 
 
-{\bf Question:} Efficient sampling?
+Note that while the Euclidean distance defines a distance metric (satisfying triangle inequality), its square may not be a distance metric. However, it turns out that for the pairwise comparison embedding that generates the Kemeny rule, the square of Euclidean distance is the Kendall Tau distance (up to a multiplicative constant), which is a distance metric. This has two important implications. First, it shows that under the more natural Euclidean distance function, Kemeny is indeed a \emph{mean} rule rather than a \emph{median} rule. This explains why the Kemeny rule has desirable properties, as the importance of mean consensus has been emphasized significantly in the literature. Second, it indicates that the distance metrics whose square are also distance metrics might be of independent interest, and might be connected to rules satisfying desirable properties. Another example of a distance metric whose square is also a distance metric is square root of the Hamming distance.
 
-{\bf Question:} Anything interesting for the Gaussian distributions that connect to PSR?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Research Questions}
+\subsection{MLE View}
+Given an embedding $\phi$, consider the noise model where 
+$$
+\Pr[\sigma | \sigma^*] = \frac{e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}}{\sum_{\sigma' \in \rank} e^{-\|\phi(\sigma')-\phi(\sigma^*)\|^2}} \propto e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}.
+$$
+
+This is a family of Gaussian noise models. Note that Mallows' model is a special case with $\phi$ being the pairwise comparison embedding. This indicates that Mallows' model is actually member of a Gaussian family. Further, define a distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$. When $d$ is neutral, i.e., $d(\tau \sigma,\tau \sigma') = d(\sigma,\sigma')$, the normalization is independent of $\sigma^*$. Note that this is indeed the case with linear embeddings. 
+
+There are two interesting questions in this domain.
+\begin{enumerate}
+\item Mallows' model with the Kendall Tau distance admits an efficient sampling procedure. Is that the case with the family of Gaussian models introduced above when the embedding is linear? 
+\item When we take the embedding for a positional scoring rule, we get a distribution where the probability of a ranking decreases exponentially as its discrepancy from the true ranking increases, and the discrepancy is measured by positions of alternatives rather than pairwise comparisons. Is there anything interesting about this distribution like Mallows' model?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dimension of the Embeddings}
+
+In this section, we analyze the following general question. \emph{Given a neutral symmetric mean proximity rule $r$, what is the minimum dimension (of the Euclidean space) required by any embedding representing $r$?}. For our main result of this section (Theorem~\ref{thm:dimension}), we need the following conjecture.
+
+\begin{conjecture}
+Let $r$ be any neutral symmetric mean proximity rule. Then, score matrices $S$ and $S'$ both represent $r$ if and only if there exist $a \in \mathbb{R}_{+}$ and $b \in \mathbb{R}^{m!}$ such that $S' = aS+B$, where $B = [b;\ldots;b]$ is the matrix where every row is $b$. 
+\label{conj:equivalent-score-matrix}
+\end{conjecture}
+Note that all $aS+B$ transformations do preserve the underlying voting rule, because $(aS+B)y = a(Sy)+By$. Hence, $\argmax_{\sigma_i \in \rank} ((aS+B)y)_i = \argmax_{\sigma_i \in \rank} a(Sy)_i + by = \argmax_{\sigma_i \in \rank} (Sy)_i$. The other direction is still open.
+
+\begin{theorem}
+Let $S$ be any score matrix of a neutral symmetric mean proximity rule $r$. Let $c$ be the sum of elements of any row of $S$. Let $S'$ be the matrix such that $S'_{ij} = S_{ij}-c/{m!}$. Then, the minimum dimension required by any embedding representing $r$ is $rank(S')$. 
+\label{thm:dimension}
+\end{theorem}
+\begin{proof}
+\cns{Proved, to be written}
+\end{proof}
+%\begin{proof}
+%Let $d$ be the minimum dimension achieved by any embedding representing $r$, and let $\phi$ be any such embedding. Let $B$ be the matrix whose rows are the $m!$ embeddings given by $\phi$. Then, by Equation~\eqref{eqn:equiv-dist-inner-product} in the proof of Theorem~\ref{thm:psd}, we know that $S' = B B^T$ is a score matrix of $r$. Also, $d \ge rank(B) = rank(B B^T = S')$. We first show that this inequality must in fact be an equality. This can be seen from the eigendecomposition of $S'$. Let $S' = U D U^T$. Then, $D$ is the diagonal matrix containing the eigenvalues. Only first $rank(S')$ diagonal entries are non-zero. Taking $B = U \sqrt{D}$ yeids an embedding of $r$, since $B B^T = U \sqrt{D} \sqrt{D} U^T = S'$. Further, last $m!-rank(S')$ columns of $B$ are zero. Hence, we can drop them to obtain an embedding with dimension $rank(S') \le d$. Since $d$ is the minimum dimension of any embedding representing $r$, we have that $d = rank(S')$.
+%
+%Now it is sufficient to show that for any score matrix $S$ of $r$, $rank(S') = rank([S;1])-1$. By Conjecture~\ref{conj:equivalent-score-matrix}, there exist $a \in \mathbb{R}_{+}$ and $b \in \mathbb{R}^{m!}$ such that $S' = aS+B$, where $B = [b;\ldots;b]$ is the matrix where every row is $b$. 
+%
+%
+%Then, by fundamental properties of the rank of a matrix, we have $rank(S') \le rank([S;1])$. To see this, let $c_1,\ldots,c_{m!}$ represent the columns of $S$. Let $b = [b_1,\ldots,b_{m!}]$. Then, the columns of $S'$ are $a\cdot c_1+ b_1\cdot 1, \ldots, a\cdot c_{m!}+b_{m!}\cdot 1$. It is now easy to see the $column-space(S') \subseteq column-space([S;1])$, thus $rank(S') \le rank([S;1])$. 
+%
+%However, by Lemma~\ref{lem:neutral-mean-proximity-properties}, we have that the sum of all elements of every row of $S$ is the same, i.e., the sum of columns of $S$ is a multiple of the column vector $1$. Hence, $column-space(S) = column-space([S;1])$, i.e., $rank(S) = rank([S;1])$. Thus, we have $rank(S') \le rank(S)$. By symmetry, we can also achieve $rank(S) \le rank(S')$. Hence, we have that $rank(S) = rank(S')$. 
+%
+%Now, let $d$ be the score of (all) score matrices of $r$. Let $\phi$ be any embedding representing $r$ and let $d'$ be its dimension.
+%\end{proof}
+
+\begin{corollary}
+The minimum dimension required by any embedding of a positional scoring rule over $m$ alternatives is $m-1$.
+\end{corollary}
+\begin{proof}
+\cns{Shouldn't be too hard to show}
+\end{proof}
+%\begin{proof}
+%Consider any positional scoring rule $r$ with arbitrary score vector $\alpha = [\alpha_1,\ldots,\alpha_m]$. Let $a_1,\ldots,a_m$ be any fixed enumeration of $A$. For any ranking $\sigma$ and $a \in A$, let $\sigma(a)$ denote the rank of $a$ in $\sigma$. Consider the positional embedding $\phi$ such that $\phi(\sigma) = [\alpha_{\sigma(a_1)},\ldots,\alpha_{\sigma(a_m)}]$ for all $\sigma \in \rank$. We already saw in Lemma~\ref{lem:symmetric-captures} that this corresponds to the positional scoring rule $r$. Let $B$ denote the matrix whose rows are embeddings of rankings according to $\phi$. Due to neutrality of positional scoring rules, $B B^T$ is a score matrix of $r$. Hence, the minimum dimension for this scoring rule is $rank(B B^T) = rank(B)$. 
+%
+%Now, note that $B$ has $m$ columns, and further by Lemma~\ref{lem:neutral-mean-proximity-properties}, the sum of all the columms is 
+%\end{proof}
+
+\begin{corollary}
+The minimum dimension required by any embedding of the Kemeny rule over $m$ alternatives is $m\cdot(m-1)/2$.
+\end{corollary}
+\begin{proof}
+\cns{Should be feasible}
+\end{proof}
+
+Zwicker~\cite{Zwicker08a} shows that the $m-1$ dimensional embedding for the Borda rule corresponds to a regular hexagon for $3$ alternatives. In fact, it is not too hard to observe (\cns{Already shown somewhere?}) that for $m$ alternatives, it is the regular polytope representing the permutahedron of the symmetric group $S_m$. It is also known (\cns{where?}) that the convex hull of the permutahedron is formed by connecting every ranking with all $m-1$ rankings at Kendall Tau distance $1$ from it (i.e., those obtained by a single adjacent swap). \emph{What interesting shapes do we get by replacing the Kendall Tau distance by other distances over rankings? What are the rules for such embeddings?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Embeddings of the Borda Rule}
+%In this section, we analyze the $m-1$ dimension embeddings of the Borda rule. 
+%
+%{\bf $\mathbf{3}$ alternatives:} Zwicker~\cite{Zwicker08a} informally demonstrated that for $3$ alternatives, any embedding that represents the Borda rule embeds the $6$ possible rankings at the corners of a regular hexagon as shown in Figure~\ref{fig:borda-3alt}. In fact, it is exactly the \emph{permutahedron} of the symmetric group $S_3$ where each ranking is connected to two rankings that are obtained by two possible adjacent swaps. Thus, neighbouring rankings have \emph{Kendall Tau} distance $1$ from each other. Note that there are hexagons that connect rankings at KT distance greater than $1$, but those do not correspond to the Borda rule.
+%
+%\begin{figure}
+%\centering
+%\begin{subfigure}[$3$ alternatives]
+%  %\includegraphics[width=.4\linewidth]{Borda3}
+%  {\rule{3cm}{3cm}}
+%  \label{fig:borda-3alt}
+%\end{subfigure}%
+%\begin{subfigure}[$4$ alternatives]
+%  %\includegraphics[width=.4\linewidth]{Borda4}
+%  {\rule{3cm}{3cm}}
+%  \label{fig:borda-4alt}
+%\end{subfigure}%
+%\caption{Embeddings for the Borda Rule}
+%\label{fig:borda}
+%\end{figure}
+%
+%{\bf $\mathbf{4}$ alternatives:} Interestingly, the observation that the Borda rule embeds rankings to the vertices of the regular polytope of the permutahedron carries over to the case of $4$ alternatives. Thus, each ranking is connected to $3$ rankings that are obtained by performing one of the three possible adjacent swaps. The polytope of the permutahedron of $S_4$, shown in Figure~\ref{fig:borda-4alt}, consists of $8$ hexagons and $6$ squares. Each hexagon contains the $6$ rankings that are obtained by either keeping the first alternative constant or the last alternative constant. Note that we can forget the alternative that is constant, and the hexagon exactly matches the embeddings of the rankings over the remaining $3$ alternatives. The $6$ squares each contain $4$ rankings that are obtained by swapping the first two or the last two alternatives. Thus, each square has the following form: 
+%$$
+%a \succ b \succ c \succ d \;\longrightarrow\; a \succ b \succ d \succ c \;\longrightarrow\; b \succ a \succ d \succ c \;\longrightarrow\; b \succ a \succ c \succ d.
+%$$
+%{\bf Replace this by a figure of a square, similarly draw a hexagon}
+%
+%For better understanding of permutahedrons, refer to Crisman~\cite{Crisman}. 
+%
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Other Research Questions}
 \begin{enumerate}
 \item What shape, and what corresponding voting rule do we get if we replace the KT distance by some other distance in the permutahedron?
 \item Proving a lower bound on the dimensions for the Kemeny rule
@@ -426,10 +528,18 @@ Neutrality $\Rightarrow$ Normalization independent of the true ranking $\Rightar
 \end{enumerate}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{comment}
 Mean proximity rule / generalized scoring rule / SRSF - Neutral $\Rightarrow$ SRSF iff MLE
 {\bf Question:} (Linear) Mean Proximity Rules - Captures all ``pairwise comparison scoring rules''?
 \end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{plain}
 \bibliography{abbshort,ultimate}

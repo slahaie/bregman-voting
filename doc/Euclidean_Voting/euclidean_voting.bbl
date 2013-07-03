@@ -1,14 +1,27 @@
 \begin{thebibliography}{1}
 
+\bibitem{CPS13}
+Ioannis Caragiannis, Ariel~D Procaccia, and Nisarg Shah.
+\newblock When do noisy votes reveal the truth?
+\newblock In {\em Proceedings of the fourteenth ACM conference on Electronic
+  commerce}, pages 143--160. ACM, 2013.
+
 \bibitem{CRX09}
 V.~Conitzer, M.~Rognlie, and L.~Xia.
 \newblock Preference functions that score rankings and maximum likelihood
   estimation.
 \newblock In {\em Proc.~of 21st IJCAI}, pages 109--115, 2009.
 
-\bibitem{Crisman}
-KARL-DIETER CRISMAN.
-\newblock The borda count, the kemeny rule, and the permutahedron.
+\bibitem{EFS10}
+E.~Elkind, P.~Faliszewski, and A.~Slinko.
+\newblock On the role of distances in defining voting rules.
+\newblock In {\em Proc.~of 9th AAMAS}, pages 375--382, 2010.
+
+\bibitem{MN08}
+T.~Meskanen and H.~Nurmi.
+\newblock Closeness counts in social choice.
+\newblock In M.~Braham and F.~Steffen, editors, {\em Power, Freedom, and
+  Voting}. Springer-Verlag, 2008.
 
 \bibitem{Zwicker08b}
 William~S Zwicker.
