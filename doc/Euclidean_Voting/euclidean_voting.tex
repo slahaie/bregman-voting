@@ -361,7 +361,7 @@ r(\pi) = \argmax_{\sigma_i \in \rank} \sum_{\sigma_j \in \rank} n(\pi,\sigma_j) 
 This shows that $r$ is a symmetric mean proximity rule with embedding $\phi$. Note that $r$ is already neutral by assumption. 
 \end{proof}
 
-\cns{Ideal Goal: Find a score matrix satisfying both 1) and 2). Note that the score matrix of a linear embedding satisfies both. Improve 3) to be the corresponding neutral + normalized embedding.}
+\cns{Ideal Goal: Find a score matrix satisfying both 1) and 2). Note that the score matrix of a linear embedding satisfies both. Improve 3) to be the corresponding neutral + normalized embedding. This can be achieved if we just prove that for every neutral mean proximity rule, there exists a neutral embedding satisfying $\langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle = \langle \phi(\sigma), \phi(\sigma') \rangle$. If that is true, it is easy to show that normalizing the embedding preserves neutrality, and then the corresponding score matrix of the neutral normalized embedding will have all the required properties.}
 
 We now prove several properties of representations of a neutral symmetric mean proximity rule. 
 \begin{lemma}
