@@ -155,29 +155,40 @@ A voting rule is called a \emph{generalized scoring rule} if there exists a scor
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For these two classes of voting rules, we have the following elegant equivalence theorem by Zwicker~\cite{Zwicker08a}. We reconstruct the proof since it is the foundation of several of our results.
+%\begin{proposition}[Corollary~4.2.3, Zwicker~\cite{Zwicker08a}]
+%Let $A = \{u_1,\ldots,u_l\}$ be a set of $l$ vectors in $\mathbb{R}^k$. Let $B = \{v_1,\ldots,v_p\}$ be a set of $p$ vectors in $\mathbb{R}^k$. Then, the discrete mean in $A$ of vectors in $B$ is the vector in $A$ that is closest to the Euclidean mean of vectors in $B$. That is,
+%$$
+%\argmin_{u_i \in A} \sum_{v_j \in B} \|u_i - v_j\|^2 = \argmin_{u_i \in A} \|u_i - (1/p) \cdot \sum_{v_j \in B} v_j\|.
+%$$
+%\label{prop:discrete-mean}
+%\end{proposition}
 
-\begin{proposition}[Corollary~4.2.3, Zwicker~\cite{Zwicker08a}]
-Let $A = \{u_1,\ldots,u_l\}$ be a set of $l$ vectors in $\mathbb{R}^k$. Let $B = \{v_1,\ldots,v_p\}$ be a set of $p$ vectors in $\mathbb{R}^k$. Then, the discrete mean in $A$ of vectors in $B$ is the vector in $A$ that is closest to the Euclidean mean of vectors in $B$. That is,
+For these two classes of voting rules, we have an elegant equivalence theorem by Zwicker~\cite{Zwicker08a}. The theorem uses an important result shown below.
+
+\begin{proposition}[Zwicker~\cite{Zwicker08a}]
+For any embeddings $\phi,\psi : \rank \rightarrow \mathbb{R}^k$ and any profile $\pi$,
 $$
-\argmin_{u_i \in A} \sum_{v_j \in B} \|u_i - v_j\|^2 = \argmin_{u_i \in A} \|u_i - (1/p) \cdot \sum_{v_j \in B} v_j\|.
-$$
-\label{prop:discrete-mean}
+\argmin_{o \in \calO} \|\psi(o)-mean(\pi)\| = \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \|\psi(o)-\phi(\sigma)\|^2.
+$$ 
+\label{prop:MPR-GSR-conversion}
 \end{proposition}
+\begin{proof}[Proof (reconstructed)]
+\begin{align*}
+r(\pi)  &= \argmin_{o \in \calO} \|\psi(o)-mean(\pi)\| \\
+&= \argmin_{o \in \calO} \|\psi(o)-mean(\pi)\|^2 \\
+&= \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \|\psi(o)-\phi(\sigma)\|^2 \\
+&= \argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \left( -\|\psi(o)-\phi(\sigma)\|^2 \right), 
+\end{align*}
+where the third transition follows by Corollary~4.2.3 of~\cite{Zwicker08a}.%Proposition~\ref{prop:discrete-mean}. 
+\end{proof}
 
+We now give the equivalence theorem, and reconstruct its proof since it serves as a foundation of several of our results.
 \begin{proposition}[Theorem 4.2.1, Zwicker~\cite{Zwicker08a}]
 A voting rule is a mean proximity rule if and only if it is a generalized scoring rule.
 \label{prop:equiv}
 \end{proposition}
 \begin{proof}[Proof (reconstructed)]
-Take any mean proximity rule $r$. Let $\phi$ and $\psi$ be any input and output embeddings that generate $r$. Now, for any profile $\pi$,
-\begin{align}
-r(\pi)  &= \argmin_{o \in \calO} \|\psi(o)-mean(\pi)\| \nonumber\\
-&= \argmin_{o \in \calO} \|\psi(o)-mean(\pi)\|^2 \nonumber\\
-&= \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \|\psi(o)-\phi(\sigma)\|^2 \label{eqn:discrete-mean}\\
-&= \argmax_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \left( -\|\psi(o)-\phi(\sigma)\|^2 \right), \label{eqn:equiv-main}
-\end{align}
-where Equation~\eqref{eqn:discrete-mean} follows by the well-known fact that the discrete mean, the member of a finite set that minimizes the sum of squares of Euclidean distances from given points, is the point in the finite set that is closest to the Euclidean mean (coordinate wise average) of the given points.  This is given as Corollary 4.2.3 in~\cite{Zwicker08a}. Now, we can see that $r$ is a generalized scoring rule by taking the score function $s(\sigma,o) = -\|\psi(o)-\phi(\sigma)\|^2$. 
+Take any mean proximity rule $r$. Let $\phi$ and $\psi$ be any input and output embeddings that generate $r$. Using Proposition~\ref{prop:MPR-GSR-conversion}, we can see that $r$ is a generalized scoring rule with the score function $s(\sigma,o) = -\|\psi(o)-\phi(\sigma)\|^2$. 
 
 For the other direction, take any generalized scoring rule $r$ and let $s$ be any score function that generates $r$. Then, let $\phi(\sigma) = (s(\sigma,o_1),\ldots,s(\sigma,o_k))$ where $\{o_1,\ldots,o_k\}$ is some fixed enumeration of $\calO$. Further, let $\psi(o_i) = e_i \in \mathbb{R}^k$ where the $i^{th}$ coordinate is $1$ and the rest are $0$. Then, for any profile $\pi$, we have
 \begin{align*}
@@ -194,8 +205,9 @@ where the third transition follows since $\|e_j\| = 1$ for all $j$ (and thus, $\
 
 Since mean proximity rules are equivalent to generalized scoring rules, here onwards we will use the term mean proximity rules out of the two. Further, Zwicker~\cite{Zwicker08b} shows that the set of voting rules that are \emph{consistent} and \emph{connected} is identical to the set of mean neat voting rules, which is a generalization of mean proximity rules. As a simple corollary, we have: 
 
+\cns{Check if continuity in~\cite{CRX09} is same as continuity in~\cite{Zwicker08a}. If so, take the definition from~\cite{Zwicker08a}, else from~\cite{CRX09}.}
 \begin{proposition}[\cite{Zwicker08b}]
-Any mean proximity rule is consistent, connected, and anonymous.
+Any mean proximity rule is consistent, connected, continuous, and anonymous.
 \label{prop:properties}
 \end{proposition}
 
@@ -209,27 +221,29 @@ All positional scoring rules and the Kemeny rule are mean proximity rules. Howev
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Mean Proximity SWFs and Symmetric Mean Proximity Rules}
+\section{Symmetric Mean Proximity Rules}
 
 In this paper, we are interested in social welfare functions (SWFs) that return a ranking, so $\calO = \rank$. From here onwards, unless mentioned otherwise, any voting rule we mention will be a social welfare function. In this case, the scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes the \emph{similarity} between two rankings. This special case was also defined and studied by Conitzer et. al.~\cite{CRX09} under the name \emph{simple ranking scoring functions} (SRSFs). 
 
 \begin{definition}[Score Matrix]
-For any SWF $r$ that is a generalized scoring rule (and hence SRSF), let $s$ be any score function that generates $r$. Let $\sigma_1,\ldots,\sigma_{m!}$ be any fixed enumeration of $\rank$. Then, the \emph{score matrix} of $r$ corresponding to the score function $s$, denoted $S$, is given by $S_{ij} = s(\sigma_i,\sigma_j)$, for $1 \le i \le m!$, $1 \le j \le m!$. 
+For any SWF $r$ that is a generalized scoring rule (hence, an SRSF), let $s$ be any score function that generates $r$. Let $\sigma_1,\ldots,\sigma_{m!}$ be any fixed enumeration of $\rank$. Then, the \emph{score matrix} of $r$ corresponding to the score function $s$, denoted $S$, is given by $S_{ij} = s(\sigma_i,\sigma_j)$, for $1 \le i \le m!$, $1 \le j \le m!$. 
 \end{definition}
 
-Given any profile $\pi$ of $n$ votes, create $y_{\pi} = [n(\pi,\sigma_1)/n,\ldots,n(\pi,\sigma_{m!})/n]^T$. It is easy to verify that the output of the rule would be $\sigma_k$ such that $k = \argmax_i (S\cdot y_{\pi})_i$. Using Proposition~\ref{prop:equiv}, we will now denote a mean proximity SWF by three equivalent representations: an embedding $\phi$, a scoring function $s$, and a score matrix $S$. Note that none of the three representations is unique. We will further say that the rule has embedding $\phi$, score function $s$, or score matrix $S$ to denote that it is one possible representation of the rule.
+Given any profile $\pi$ of $n$ votes, create $y_{\pi} = [n(\pi,\sigma_1)/n,\ldots,n(\pi,\sigma_{m!})/n]^T$. It is easy to verify that the output of the rule would be $\sigma_k$ such that $k = \argmax_i (S\cdot y_{\pi})_i$. 
+
+Using Proposition~\ref{prop:equiv}, we can denote a mean proximity SWF by three equivalent representations: i) an embedding $\phi$, ii) a scoring function $s$, and iii) a score matrix $S$. Note that none of the three representations is unique. %We will further say that the rule has embedding $\phi$, score function $s$, or score matrix $S$ to denote that it is one possible representation of the rule.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Symmetric Mean Proximity Rules}
 
-While mean proximity rules capture several well-known SWFs, they capture many particularly bad voting rules as well. For example, we can imagine a mean proximity rule that has score function $s$ satisfying $s(\sigma,\sigma') > s(\sigma,\sigma)$ for some $\sigma,\sigma' \in \rank$. In this case, the rule would not output $\sigma$ even on the profile where all votes are $\sigma$, thus violating unanimity. To solve this problem, we propose a simple fix. We take the output embedding to be identical to the input embedding, i.e., $\psi = \phi$. Since the outcome space for SWFs is identical to the input space, this is a natural restriction. We call such rules symmetric mean proximity rules.
+While mean proximity rules capture several well-known SWFs, they capture bad voting rules as well. For example, we can imagine a mean proximity rule that has score function $s$ satisfying $s(\sigma,\sigma') > s(\sigma,\sigma)$ for some $\sigma,\sigma' \in \rank$. In this case, the rule would not output $\sigma$ even on the profile where all votes are $\sigma$, thus violating unanimity. To solve this problem, we propose a simple fix. We take the output embedding to be identical to the input embedding, i.e., $\psi = \phi$. Since the outcome space for SWFs is identical to the input space, this is a natural restriction. We call such rules symmetric mean proximity rules.
 
 \begin{definition}[Symmetric Mean Proximity Rules]
 A voting rule is called \emph{symmetric mean proximity rule} if there exists a mean proximity representation of the rule where the input and the output embeddings are identical, i.e., $\psi = \phi$. 
 \end{definition} 
 
-It is easy to verify that this solves the problem of unanimity violation. It is immediate that for any profile $\pi$ consisting of copies of a single ranking $\sigma$, the ranking $\sigma$ is definitely in the output. Rank-distinguishability implies that no other ranking is in the output.
+It is easy to verify that this solves the problem of unanimity violation. It is immediate that for any profile $\pi$ consisting of copies of a single ranking $\sigma$, the ranking $\sigma$ is definitely in the output. Rank-distinguishability implies that no two rankings are embedded to the same point, hence no other ranking is in the output.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -244,7 +258,7 @@ All positional scoring rules and the Kemeny rule are symmetric mean proximity ru
 \label{lem:symmetric-captures}
 \end{lemma}
 
-To see this, observe that the constructions used in~\cite{Zwicker08a} to show that positional scoring rules and the Kemeny rule are mean proximity rules actually use identical input and output embeddings. Recall that mean proximity rules are identical to generalized scoring rules (Proposition~\ref{prop:equiv}). It is obvious to ask: \emph{What subclass of generalized scoring rules corresponds to symmetric mean proximity rules?} The answer turns out to be simple, yet interesting. Before that, we need the following definition.
+To see this, observe that the constructions in~\cite{Zwicker08a} for positional scoring rules and the Kemeny rule actually use identical input and output embeddings. Recall that mean proximity rules are identical to generalized scoring rules (Proposition~\ref{prop:equiv}). It is obvious to ask: \emph{What subclass of generalized scoring rules corresponds to symmetric mean proximity rules?} The answer turns out to be simple, yet interesting. Before that, we need the following definition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -257,18 +271,18 @@ A voting rule is a symmetric mean proximity rule if and only if it is a generali
 \label{thm:symm}
 \end{theorem}
 \begin{proof}
-The ``if'' direction is simple. Given any generalized scoring rule $r$ and its score matrix $S$ such that $-S$ is a Euclidean distance matrix, we can find vectors $v_1,\ldots,v_{m!} \in \mathbb{R}^k$ such that $S_{ij} = -\|v_i-v_j\|^2$. Take $\phi(\sigma_i) = v_i$ for all $i$. Now, by Equation~\eqref{eqn:equiv-main} in the proof of Proposition~\ref{prop:equiv}, we have that 
+The ``if'' direction is simple. Given any generalized scoring rule $r$ and its score matrix $S$ such that $-S$ is a Euclidean distance matrix, we can find vectors $v_1,\ldots,v_{m!} \in \mathbb{R}^k$ such that $S_{ij} = -\|v_i-v_j\|^2$. Take $\phi(\sigma_i) = v_i$ for all $i$. Now, by Proposition~\ref{prop:MPR-GSR-conversion}, 
 $$
 \argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot s(\sigma,\sigma') = \argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\|,
 $$
 that is, the rule is a symmetric mean proximity rule. 
 
-For the ``only if'' direction, observe that given any symmetric mean proximity rule, the score matrix constructed in Equation~\eqref{eqn:equiv-main} in the proof of Proposition~\ref{prop:equiv} is indeed negation of a Euclidean distance matrix.
+For the ``only if'' direction, observe that given any symmetric mean proximity rule, the score matrix constructed in the proof of Proposition~\ref{prop:equiv} is indeed negation of a Euclidean distance matrix.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We showed that the class of symmetric mean proximity rules is slightly better than the class of all mean proximity rules. First, taking identical input and output embeddings is inherently more natural. Second, all symmetric mean proximity rules achieve unanimity, which is not the case for all mean proximity rules. Third, the restriction of a mean proximity rule being symmetric is not very restrictive, since the well-known mean proximity rules are symmetric anyway. In the next section, we analyze symmetric mean proximity rules that satisfy another very desired property -- neutrality. While neutrality is not very restrictive either (all voting rules of interest are neutral), we show that it adds significant structure to symmetric mean proximity rules. 
+We showed that the class of symmetric mean proximity rules is slightly better than the class of all mean proximity rules. First, taking identical input and output embeddings is inherently natural. Second, all symmetric mean proximity rules achieve unanimity. Third, the restriction of a mean proximity rule being symmetric is mild; all well-known mean proximity rules are symmetric. In the next section, we analyze symmetric mean proximity rules that satisfy another highly desired property -- neutrality. While neutrality is also mild (all voting rules of interest are neutral), we show that it adds significant structure to symmetric mean proximity rules. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,13 +290,13 @@ We showed that the class of symmetric mean proximity rules is slightly better th
 
 \section{Neutral Symmetric Mean Proximity Rules}
 
-Conitzer et. al.~\cite{CRX09} showed that neutrality of a generalized scoring rule (i.e., a mean proximity rule) is equivalent to neutrality of its scoring function.
+Conitzer et. al.~\cite{CRX09} showed that neutrality of a generalized scoring rule (i.e., a mean proximity rule) can be translated to neutrality of its scoring function.
 \begin{proposition}[Lemma 2, Conitzer et. al.~\cite{CRX09}]
-A mean proximity rule is neutral if and only if all its scoring functions are neutral. A scoring function $s$ is neutral if it satisfies $s(\tau \sigma,\tau \sigma') = s(\sigma,\sigma')$ for all $\tau, \sigma, \sigma' \in \rank$.
+A mean proximity rule is neutral if and only if it has a neutral scoring function. A scoring function $s$ is neutral if it satisfies $s(\tau \sigma,\tau \sigma') = s(\sigma,\sigma')$ for all $\tau, \sigma, \sigma' \in \rank$.
 \label{prop:gsr-neutral}
 \end{proposition}
 
-We are interested in symmetric mean proximity rules that satisfy neutrality. While Proposition~\ref{prop:gsr-neutral} exactly identifies the effect of neutrality on scoring functions, its effect on the embeddings representing the rule is not clear. Next, we investigate the structure imposed on these embeddings, ultimately leading to a full characterization.
+We are interested in symmetric mean proximity rules that satisfy neutrality. In Theorem~\ref{thm:symm}, we identified the subclass of generalized scoring rules that corresponds to symmetric mean proximity rules. An immediate question is: \emph{What subclass of generalized scoring rules corresponds to neutral symmetric mean proximity rules?.} To answer this, we first need the following result.
 
 \begin{lemma}
 Let $r$ be any neutral voting rule. Let $\pi_{symm}$ be the profile containing each ranking exactly once, i.e., $n(\pi_{symm},\sigma) = 1$ for all $\sigma \in \rank$. Then, $r(\pi_{symm}) = \rank$. 
@@ -292,56 +306,85 @@ Let $r$ be any neutral voting rule. Let $\pi_{symm}$ be the profile containing e
 Let $r(\pi_{symm}) = T \subseteq \rank$. Suppose $T \neq \rank$, so there exists a $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there exists a $\sigma \in T$. Now, take $\tau = \sigma' \sigma^{-1}$, where $\sigma^{-1}$ is the inverse of $\sigma$ in the symmetric group $S_m$. It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. However, $\sigma' = \sigma' \sigma^{-1} \sigma = \tau \sigma \in \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$. This implies that $r$ violates neutrality, a contradiction. 
 \end{proof}
 
-Take any neutral rule $r$ and let $\phi$ be its embedding. Inspired from Lemma~\ref{lem:average-profile}, define $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$ to be the average of all embeddings, i.e., $mean(\pi_{symm})$. Then, Lemma~\ref{lem:average-profile} indicates that $\|\phi(\sigma)-\phi_{avg}\|$ must be independent of $\sigma$ (since all rankings need to be tied). Further, note that translating and scaling all embeddings in the Euclidean space does not change the voting rule. Thus, we can take the new embedding $\phi'(\sigma) = (\phi(\sigma)-\phi_{avg})/\|\phi(\sigma)-\phi_{avg}\|$ that would also represent the same rule (note that crucially, all embeddings are being scaled by the same constant). Also, $\phi'$ satisfies that all embeddings have unit length and their average is the origin. Thus, we have the following.
+Take any neutral symmetric mean proximity rule $r$, and let $\phi$ be its embedding. Inspired from Lemma~\ref{lem:average-profile}, define $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma) = mean(\pi_{symm})$ to be the average of all embeddings. Then, Lemma~\ref{lem:average-profile} indicates that $\|\phi(\sigma)-\phi_{avg}\|$ must be independent of $\sigma$ (since all rankings need to be tied). Further, note that translating and scaling all embeddings in the Euclidean space does not change a symmetric mean proximity rule. Thus, the embedding $\phi'(\sigma) = (\phi(\sigma)-\phi_{avg})/\|\phi(\sigma)-\phi_{avg}\|$ represents the same mean proximity rule.\footnote{Crucially, all embeddings are scaled by the same constant.} Also, under $\phi'$, all embeddings have unit length and their average is the origin. 
 
 \begin{lemma}
 For any neutral symmetric mean proximity rule $r$, there exists an embedding $\phi$ such that $\|\phi(\sigma)\| = 1$ for every $\sigma \in \rank$, and $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma) = 0$.
 \label{lem:normalized-embedding}
 \end{lemma}
 
-We call such an embedding a normalized embedding of the rule. Using this, a result for neutral symmetric mean proximity rules that further adds to Theorem~\ref{thm:symm}. 
+We call such an embedding a \emph{normalized embedding}. We can now identify the subclass of generalized scoring rules that corresponds to neutral symmetric mean proximity rules. 
 \begin{definition}[Gramian Matrix]
 An $n \times n$ matrix $A = (a_{ij})$ is called a \emph{Gramian matrix} if there exist vectors $v_1,\ldots,v_n \in \mathbb{R}^k$ such that $a_{ij} = \langle v_i,v_j \rangle$ for all $i,j$. 
 \end{definition}
 
-%Note that if matrix $B$ consists of $v_1,\ldots,v_n$ as its rows, then $A = B B^T$. It is well-known that $rank(A) = rank(B)$ in this case. 
-Further, Gramian matrices satisfy the following elegant characterization.
 \begin{proposition}
 A matrix is Gramian if and only if it is positive semidefinite.
 \label{prop:gramian}
 \end{proposition}
 
+\begin{proposition}
+Let $\phi : \rank \rightarrow \mathbb{R}^k$ be an embedding such that $\langle \phi(\sigma),\phi(\sigma) \rangle$ is independent of $\sigma$ (i.e., a constant). Then,
+$$
+\argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\| = \argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \langle \phi(\sigma),\phi(\sigma') \rangle.
+$$
+\label{prop:equiv-dist-inner-product}
+\end{proposition}
+\begin{proof}
+Let $\langle \phi(\sigma),\phi(\sigma) \rangle = c$ for all $\sigma \in \rank$. We have
+\begin{align*}
+&\argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\| \\
+&= \argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\|^2 \\
+&= \argmin_{\sigma \in \rank} \|\phi(\sigma)\|^2 + \|mean(\pi)\|^2 - 2 \cdot \langle \phi(\sigma),mean(\pi) \rangle  \\
+&= \argmin_{\sigma \in \rank} c+\|mean(\pi)\|^2 - 2 \cdot \langle \phi(\sigma), mean(\pi) \rangle \\
+&= \argmax_{\sigma \in \rank} \left\langle \phi(\sigma), \frac{1}{n} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \phi(\sigma') \right\rangle \\
+&= \argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \langle \phi(\sigma),\phi(\sigma') \rangle. 
+\end{align*}
+\end{proof}
+
 \begin{theorem}
-A voting rule is a neutral symmetric mean proximity rule if and only if it is a neutral generalized scoring rule for which there exists a positive semidefinite score matrix. 
+A voting rule is a neutral symmetric mean proximity rule if and only if it is a neutral generalized scoring rule for which there exists a positive semidefinite score matrix with equal diagonal entries. 
 \label{thm:psd}
 \end{theorem}
 \begin{proof}
-Let $r$ be any neutral symmetric mean proximity rule. Then, by Lemma~\ref{lem:normalized-embedding}, it has a normalized embedding $\phi$. For any profile $\pi$ with $n$ votes,
-\begin{align}
-r(\pi) &= \argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\| \nonumber\\
-&= \argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\|^2 \nonumber\\
-&= \argmin_{\sigma \in \rank} \|\phi(\sigma)\|^2 + \|mean(\pi)\|^2 - 2 \cdot \langle \phi(\sigma),mean(\pi) \rangle  \nonumber\\
-&= \argmin_{\sigma \in \rank} 1+\|mean(\pi)\|^2 - 2 \cdot \langle \phi(\sigma), mean(\pi) \rangle \nonumber\\
-&= \argmax_{\sigma \in \rank} \langle \phi(\sigma), (1/n) \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \phi(\sigma') \rangle \nonumber\\
-&= \argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \langle \phi(\sigma),\phi(\sigma') \rangle. \label{eqn:equiv-dist-inner-product}
-\end{align}
-From the above formulation, it is evident that the scoring function $s(\sigma,\sigma') = \langle \phi(\sigma),\phi(\sigma') \rangle$ represents rule $r$. This corresponds to a Gramian score matrix, which is therefore positive semidefinite (Proposition~\ref{prop:gramian}).
+Let $r$ be any neutral symmetric mean proximity rule. Then, by Lemma~\ref{lem:normalized-embedding}, it has a normalized embedding $\phi$. Recall that normalized embeddings satisfy $\langle \phi(\sigma),\phi(\sigma) \rangle = 1$ for all $\sigma \in \rank$. Thus, by Proposition~\ref{prop:equiv-dist-inner-product}, for any profile $\pi$,
+$$
+r(\pi) = \argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\| = \argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \langle \phi(\sigma),\phi(\sigma') \rangle.
+$$
+It is now evident that the scoring function $s(\sigma,\sigma') = \langle \phi(\sigma),\phi(\sigma') \rangle$ represents rule $r$. Further, it corresponds to a Gramian score matrix, which is positive semidefinite (Proposition~\ref{prop:gramian}). Finally, the diagonal entries $\langle \phi(\sigma),\phi(\sigma) \rangle$ are equal to $1$ since $\phi$ is a normalized embedding.
 
-On the contrary, take any neutral generalized scoring rule $r$ with a positive semidefinite (and hence Gramian) score matrix $S$. Thus, there exist vectors $v_1,\ldots,v_{m!} \in \mathbb{R}^k$ such that $S_{ij} = \langle v_i,v_j \rangle$. Take $\phi(\sigma_i) = v_i$ for all $i$. Using Equation~\eqref{eqn:equiv-dist-inner-product}, it is clear that $r$ is also the symmetric mean proximity rule with embedding $\phi$. Further, $r$ is neutral by assumption. 
+On the contrary, take any neutral generalized scoring rule $r$ with a positive semidefinite (and hence Gramian) score matrix $S$ and equal diagonal entries. Thus, there exist vectors $v_1,\ldots,v_{m!} \in \mathbb{R}^k$ such that $S_{ij} = \langle v_i,v_j \rangle$. Take $\phi(\sigma_i) = v_i$ for all $i$. Since the diagonal entries are equal, we have that $\langle \phi(\sigma),\phi(\sigma) \rangle$ is independent of $\sigma$. Thus, Proposition~\ref{prop:equiv-dist-inner-product} implies that on any profile $\pi$, the rule returns 
+\begin{align*}
+r(\pi) = \argmax_{\sigma_i \in \rank} \sum_{\sigma_j \in \rank} n(\pi,\sigma_j) \cdot S_{ij} &= \argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \langle \phi(\sigma),\phi(\sigma') \rangle \\
+&= \argmin_{\sigma \in \rank} \|\phi(\sigma)-mean(\pi)\|.
+\end{align*}
+This shows that $r$ is a symmetric mean proximity rule with embedding $\phi$. Note that $r$ is already neutral by assumption. 
 \end{proof}
 
-We can easily check that by taking a normalized embedding, we can achieve a score matrix with further restrictions.
+We now prove several properties of representations of a neutral symmetric mean proximity rule. 
 \begin{lemma}
-Any neutral symmetric mean proximity rule $r$ has a score matrix $S$ that satisfies the following.
+Any neutral symmetric mean proximity rule $r$ has the following special representations. 
 \begin{enumerate}
-\item $S$ is positive semidefinite.
-\item $S_{ii} = S_{jj}$ for all $i,j$, i.e., all diagonal entries are equal.
+\item A score matrix $S$ satisfying the following.
+\begin{enumerate}
+\item $S$ is positive semidefinite (hence, symmetric).
+\item $S_{ii} = S_{jj}$ for all $i,j$, i.e., all diagonal entries of $S$ are equal.
 \item $S_{ii} > S_{ij}$ for all $i,j$, i.e., the largest element in any row is its diagonal element.
 \item $\sum_j S_{ij}$ is independent of $i$, i.e., the sum of elements in each row is the same.
 \end{enumerate}
+\item A score matrix $S$ generated by a neutral scoring function $s$, i.e., $S_{ij} = s(\sigma_i,\sigma_j)$ for all $i,j$ and $s(\tau \sigma,\tau \sigma') = s(\sigma,\sigma')$ for all $\tau,\sigma,\sigma' \in \rank$.
+\item A normalized embedding $\phi$ that satisfies $\|\phi(sigma)\| = 1$ for all $\sigma \in \rank$, and $\sum_{\sigma \in \rank} \phi(\sigma) = 0$.
+\end{enumerate}
 \label{lem:neutral-mean-proximity-properties}
 \end{lemma}
-Note that the third condition follows from unanimity of symmetric mean proximity rules, and the last condition follows from Lemma~\ref{lem:average-profile}. In the next section, we introduce a general class of embeddings that all achieve neutrality, and use the structure established here to show that they in fact generate all neutral symmetric mean proximity rules.
+\begin{proof}
+For the first representation, take the score matrix $S$ of a normalized embedding as in the proof of Theorem~\ref{thm:psd}. We already know that $S$ is positive semi-definite with equal diagonal entries. Condition (c) follows by unanimity of symmetric mean proximity rules (note that $S$ is symmetric, so $S_{ij} = S_{ji}$). Condition (d) follows by Lemma~\ref{lem:average-profile}. 
+
+The second representation follows by Proposition~\ref{prop:gsr-neutral}, and the third representation follows by Lemma~\ref{lem:normalized-embedding}. 
+\end{proof}
+
+
+In the next section, we introduce a general class of embeddings such that all of them satisfy neutrality, and use Lemma~\ref{lem:neutral-mean-proximity-properties} to show that they generate all neutral symmetric mean proximity rules.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
