@@ -68,6 +68,7 @@
 
 \title{Euclidean Voting}
 \author{S\'{e}bastien Lahaie\\Microsoft Research New York, USA\\slahaie@microsoft.com \and Nisarg Shah\\Carnegie Mellon University, USA\\nkshah@cs.cmu.edu}
+\date{}
 \begin{document}
 \maketitle
 
@@ -476,11 +477,6 @@ There are two interesting questions in this domain.
 \section{Dimension of the Embeddings}
 
 In this section, we analyze the following general question. \emph{Given a neutral symmetric mean proximity rule $r$, what is the minimum dimension (of the Euclidean space) required by any embedding representing $r$?}. For our main result of this section (Theorem~\ref{thm:dimension}), we need the following conjecture.
-
-\begin{conjecture}
-
-\end{conjecture}
-
 \begin{conjecture}
 Let $r$ be any neutral symmetric mean proximity rule. Then, score matrices $S$ and $S'$ both represent $r$ if and only if there exist $a \in \mathbb{R}_{+}$ and $b \in \mathbb{R}^{m!}$ such that $S' = aS+B$, where $B = [b;\ldots;b]$ is the matrix where every row is $b$. 
 \label{conj:equivalent-score-matrix}
@@ -507,13 +503,31 @@ Let $S$ be any score matrix of a neutral symmetric mean proximity rule $r$. Let 
 %Now, let $d$ be the score of (all) score matrices of $r$. Let $\phi$ be any embedding representing $r$ and let $d'$ be its dimension.
 %\end{proof}
 
+We investigate another connection. Let $\phi$ be any embedding of a neutral symmetric mean proximity rule $r$. Consider the embedding $\phi'(\sigma) = \phi(\sigma)-\phi_{avg}$, where $\phi_{avg} = (1/m!) \cdot \sum_{\sigma' \in \rank} \phi(\sigma')$. Then, the Gramian matrix of $\phi'$ (which is also a score matrix of $r$ since $\phi'$ embeds all rankings to points of unit norm) can be obtained from the score matrix of $\phi$ (the negation of the Euclidean distance matrix according to $\phi$) by the transformation described in Conjecture~\ref{conj:equivalent-score-matrix} in the unique way described in Theorem~\ref{thm:dimension}. 
+
+For this, note that if $S$ and $S'$ are the negative Euclidean distance matrix and the Gramian matrix of $\phi$ and $\phi'$ respectively, then 
+\begin{align*}
+S_{ij} - 2 \cdot S'_{ij} &= -\|\phi(\sigma_i)-\phi(\sigma_j)\|^2 - 2 \cdot \langle \phi(\sigma_i)-\phi_{avg}, \phi(\sigma_j)-\phi_{avg}\rangle \\
+&= -\|\phi(\sigma_i)\|^2 -\|\phi(\sigma_j)\|^2 + 2 \cdot \langle \phi(\sigma_i),\phi(\sigma_j) \rangle - 2 \cdot \langle \phi(\sigma_i),\phi(\sigma_j) \rangle \\
+&\quad\quad + 2 \cdot \langle \phi(\sigma_i),\phi_{avg} \rangle + 2 \cdot \langle \phi(\sigma_j),\phi_{avg} \rangle - 2 \cdot \|\phi_{avg}\|^2 \\
+&= -\left(\|\phi(\sigma_i)\|^2 - 2 \langle \phi(\sigma_i),\phi_{avg} + \|\phi_{avg}\|^2  \right)  \\
+&\quad\quad - \left(\|\phi(\sigma_j)\|^2 - 2 \langle \phi(\sigma_j),\phi_{avg} + \|\phi_{avg}\|^2  \right) \\
+&= - \|\phi(\sigma_i)-\phi_{avg}\|^2 - \|\phi(\sigma_j)-\phi_{avg}\|^2 = -2\cdot \lambda^2,
+\end{align*}
+where $\lambda = \|\phi(\sigma)-\phi_{avg}\|$ which is independent of $\sigma$ due to Lemma~\ref{lem:average-profile}. Thus, $S'_{ij} = (1/2) \cdot S_{ij} + \lambda^2$ for all $i,j$. Note that in the resulting matrix $S'$, the sum of any row $i$ is $\langle \phi'(\sigma_i),\phi'_{avg} \rangle$. However, $\phi'_{avg} = \phi_{avg}-\phi_{avg} = 0$. Hence, the sum of each row (and each column) is zero. Note that there is a unique way of obtaining a matrix with zero row and column sums via subtracting the same value from each element of the matrix, which is the transformation of Theorem~\ref{thm:dimension}. 
+
+We just showed that the transformation of Theorem~\ref{thm:dimension}, when applied on a negative Euclidean distance matrix, is equivalent to the following three step transformation: i) take the embedding generating the matrix, ii) subtracting its average embedding from every embedding, iii) note that the final embedding has equal norm vectors, and take its Gramian matrix. Thus, we have the following alternative to Theorem~\ref{thm:dimension}: The minimum dimension required by any embedding representing a neutral symmetric mean proximity rule $r$ is equal to the rank of the Gramian matrix of any normalized embedding of $r$. 
+
+Formally, let $r$ be any neutral symmetric mean proximity rule and $\phi$ be any embedding representing $r$. Let $\phi'$ be obtained by normalizing $\phi$. Then, the minimum dimension required by any embedding of $r$ is $rank(M)$, where $M_{ij} = \langle \phi'(\sigma_i), \phi'(\sigma_j) \rangle$ for any fixed enumeration $\sigma_1,\ldots,\sigma_{m!}$ of $\rank$. 
+
+
 \cns{Interesting to consider: What are all possible normalized embeddings of a rule? It's not just rotations. Take two points on the circle within +/- 30 degree angle. Mapping them to any two points on that arc of the circle preserves the only neutral symmetric mean proximity rule: majority}
 
 \begin{corollary}
 The minimum dimension required by any embedding of a positional scoring rule over $m$ alternatives is $m-1$.
 \end{corollary}
 \begin{proof}
-\cns{Shouldn't be too hard to show}
+\cns{Proved, To be written.}
 \end{proof}
 %\begin{proof}
 %Consider any positional scoring rule $r$ with arbitrary score vector $\alpha = [\alpha_1,\ldots,\alpha_m]$. Let $a_1,\ldots,a_m$ be any fixed enumeration of $A$. For any ranking $\sigma$ and $a \in A$, let $\sigma(a)$ denote the rank of $a$ in $\sigma$. Consider the positional embedding $\phi$ such that $\phi(\sigma) = [\alpha_{\sigma(a_1)},\ldots,\alpha_{\sigma(a_m)}]$ for all $\sigma \in \rank$. We already saw in Lemma~\ref{lem:symmetric-captures} that this corresponds to the positional scoring rule $r$. Let $B$ denote the matrix whose rows are embeddings of rankings according to $\phi$. Due to neutrality of positional scoring rules, $B B^T$ is a score matrix of $r$. Hence, the minimum dimension for this scoring rule is $rank(B B^T) = rank(B)$. 
@@ -525,9 +539,10 @@ The minimum dimension required by any embedding of a positional scoring rule ove
 The minimum dimension required by any embedding of the Kemeny rule over $m$ alternatives is $m\cdot(m-1)/2$.
 \end{corollary}
 \begin{proof}
-\cns{Should be feasible}
+\cns{Proved, To be written.}
 \end{proof}
 
+\subsection{Representations of the Borda Rule}
 Zwicker~\cite{Zwicker08a} shows that the $m-1$ dimensional embedding for the Borda rule corresponds to a regular hexagon for $3$ alternatives. In fact, it is not too hard to observe (\cns{Already shown somewhere?}) that for $m$ alternatives, it is the regular polytope representing the permutahedron of the symmetric group $S_m$. It is also known (\cns{where?}) that the convex hull of the permutahedron is formed by connecting every ranking with all $m-1$ rankings at Kendall Tau distance $1$ from it (i.e., those obtained by a single adjacent swap). \emph{What interesting shapes do we get by replacing the Kendall Tau distance by other distances over rankings? What are the rules for such embeddings?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -572,10 +587,32 @@ Zwicker~\cite{Zwicker08a} shows that the $m-1$ dimensional embedding for the Bor
 \section{Other Research Questions}
 \begin{enumerate}
 \item What shape, and what corresponding voting rule do we get if we replace the KT distance by some other distance in the permutahedron?
-\item Proving a lower bound on the dimensions for the Kemeny rule
-\item Conjecture by Conitzer et. al.~\cite{CRX09}: Consistent $+$ continuous $+$ neutral $\Leftrightarrow$ Neutral SRSF
+\item Proving a lower bound on the dimensions for the Kemeny rule.
+\item Alternative proof of the characterization of positional scoring rules by observing that they are obtained by the representation $R$ where $R_{\tau}$ is the permutation matrix generated by $\tau$ (which permutes rankings according to the mapping $\sigma \rightarrow \tau \sigma$). (This representation and all possible initial embedding $\phi$). 
+\item Conjecture by Conitzer et. al.~\cite{CRX09}: Consistent $+$ continuous $+$ neutral $\Leftrightarrow$ Neutral SRSF.
 \item What are the equivalence classes of $\phi$ that lead to the same voting rule?
 \item What about notions of consensus in Euclidean spaces other than mean $\rightarrow$ e.g., minimize maximum distance (everyone ``lets go'' equally)?
+\end{enumerate}
+
+\section{Scribbled Notes}
+These are just high level intuitions. Need further investigations.
+\begin{enumerate}
+\item If the construction of Conitzer works then,
+\begin{itemize}
+\item We don't need equal diagonal in the theorem. We can take any PSD, do the construction, and obtain equivalent matrix with equal diagonals.
+\item We can take the matrix in Lemma 6 (1) and apply that construction. If we prove that construction preserves PSD, then not only we get a matrix satisfying both (1) and (2), but also its Gramian decomposition will give us a neutral normalized embedding. 
+\end{itemize}
+\item We can approach the other way by constructing a neutral normalized embedding (enough to obtain any neutral embedding, normalization preserves it) and take its score matrix. 
+
+\item We can prove that linear normalized embeddings are also enough. Normalization preserves linearity by the same representation since $R_{\tau} \phi_{avg} = \phi_{avg}$ must hold.
+
+\item Neutral $\Rightarrow$ all rows permutations of each other $\Rightarrow$ sum = constant $\Leftrightarrow$ $[1,\ldots,1]$ is an eigenvector $\Leftrightarrow$ first coordinate of the embedding constant $\Leftrightarrow$ there is an embedding of rank-1
+
+\item What is the permutation of all rankings generated by applying $\tau$ to each of them? What are all these $m!$ permutations?
+
+\item Anything interesting about inner product maximizing rules that do not have embeddings of equal norm? Even symmetric ones may not be unanimous. 
+
+\item An illustration: (I think) the \emph{Least Frequent Ranking Rule} is not a symmetric mean proximity rule. One score matrix is negative identity matrix. Can possibly show that no score matrix is PSD. Note that no $aS+B$ transformation can help.
 \end{enumerate}
 
 
