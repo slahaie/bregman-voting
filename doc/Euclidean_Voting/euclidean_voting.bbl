@@ -1,5 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{BH12}
+Jo{\~a}o Carlos~Alves Barata and Mahir~Saleh Hussein.
+\newblock The moore--penrose pseudoinverse: A tutorial review of the theory.
+\newblock {\em Brazilian Journal of Physics}, 42(1-2):146--165, 2012.
+
+\bibitem{Burnside12}
+William Burnside.
+\newblock {\em Theory of groups of finite order}.
+\newblock Cambridge University Press, 2012.
+
 \bibitem{CPS13}
 Ioannis Caragiannis, Ariel~D Procaccia, and Nisarg Shah.
 \newblock When do noisy votes reveal the truth?
@@ -16,6 +26,12 @@ V.~Conitzer, M.~Rognlie, and L.~Xia.
 E.~Elkind, P.~Faliszewski, and A.~Slinko.
 \newblock On the role of distances in defining voting rules.
 \newblock In {\em Proc.~of 9th AAMAS}, pages 375--382, 2010.
+
+\bibitem{KT12}
+Alexander~S. Kleshchev and Pham~Huu Tiep.
+\newblock Small-dimensional projective representations of symmetric and
+  alternating groups.
+\newblock {\em Algebra and Number Theory Journal}, 6:1773–1816, 2012.
 
 \bibitem{MN08}
 T.~Meskanen and H.~Nurmi.
