@@ -8,6 +8,7 @@
 \usepackage{verbatim}
 \usepackage[demo]{graphicx}
 \usepackage{subfigure}
+\usepackage{multirow}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,6 +357,8 @@ S^{\nt}_{ij} &= s^{\nt}(\sigma_i,\sigma_j) = -\|\phi^{\nt}(\sigma_i)-\phi^{\nt}(
 Conitzer et. al.~\cite{CRX09} showed (refer, proof of Lemma~2 in their paper) that the scoring function $s^{\nt}$ constructed this way corresponds to the same voting rule $r$ and $s^{\nt}$ is neutral. Thus, $S^{\nt}$ is a score matrix of $r$ that is neutral and negation of an EDM. Finally, it is easy to check that neutrality of $s^{\nt}$ implies neutrality of the embedding $\phi^{\nt}$ that we constructed.
 \end{proof}
 
+It is worthwhile pointint out that following steps very similar to those in the proof of Theorem~\ref{thm:neutral-smpr}, one can also show that a mean proximity rule (not necessarily symmetric) is neutral if and only if it has a representation in which both input and output embeddings are neutral. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -562,6 +565,8 @@ Recall that Theorem~\ref{thm:neutral-smpr} showed that a voting rule is a neutra
 A $p \times p$ matrix $A = (a_{ij})$ is called \emph{Gramian} if there exist vectors $v_1,\ldots,v_p \in \mathbb{R}^k$ such that $a_{ij} = \langle v_i,v_j \rangle$ for all $i,j$. It is well-known that a matrix is Gramian if and only if it is positive semidefinite. 
 \end{definition}
 
+\cns{Move this result as an extra condition in Theorem~\ref{thm:neutral-smpr}.}
+
 \begin{theorem}
 A voting rule is a neutral symmetric mean proximity rule if and only if it is a generalized scoring rule that has a score matrix which is neutral, positive semidefinite, and has equal diagonal entries. 
 \label{thm:neutral-psd}
@@ -574,6 +579,23 @@ Conversely, take any generalized scoring rule $r$ with a score matrix $S$ that i
 
 We point out that more properties could be proven for the score matrix $S$ constructed in the proof of Theorem~\ref{thm:neutral-psd} for any given neutral symmetric mean proximity rule (which is the Gramian of a normalized linear embedding $\hat{\phi}$). In addition to being neutral and positive semidefinite, and having equal diagonal entries, the sum of entries along each row and column of $S$ is also zero. To see this, note that $\hat{\phi}_{avg} = 0$. Hence, the sum of entries of $S$ across row $i$ or column $i$ is $m! \cdot \langle \hat{\phi}(\sigma_i), \hat{\phi}_{avg} \rangle = 0$. Another interesting factoid is that existence of a score matrix that is both neutral and positive semidefinite with equal diagonal entries can be established alternatively by taking any score matrix that is positive semidefinite and has equal diagonal entries (Gramian of any normalized embedding), and then neutralizing it by the construction of Conitzer et. al.~\cite{CRX09} given in Equation~\eqref{eqn:s-nt}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary of Results}
+
+The following table summarizes all the characterization results provided above. 
+
+\begin{center}
+  \begin{tabular}{ | p{3cm} | p{3cm} | p{3cm} | }
+    \hline
+    A mean proximity rules is & iff there exists a score matrix $S$ such that & iff there exists a representation $(\psi,\phi)$ such that \\ \hline \hline
+    symmetric & -EDM & $\psi = \phi$ \\ \hline
+    \multirow{2}{*} {symmetric+neutral} & i) neutral, -EDM & i) $\psi = \phi = $ neutral \\ 
+	& ii) neutral, PSD, equal diagonal & ii) $\psi = \phi = $ linear \\ \hline
+  \end{tabular}
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
