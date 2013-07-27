@@ -1,0 +1,205 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      6228,        195]
+NotebookOptionsPosition[      5720,        173]
+NotebookOutlinePosition[      6063,        188]
+CellTagsIndexPosition[      6020,        185]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"t1", "+", "t2"}], "]"}], "*", 
+      RowBox[{"Tan", "[", "t1", "]"}]}], "\[Equal]", 
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"tt1", "+", "tt2"}], "]"}], "*", 
+      RowBox[{"Tan", "[", "tt1", "]"}]}]}], "&&", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"t1", "+", "t2"}], "]"}], "*", 
+      RowBox[{"Tan", "[", "t2", "]"}]}], "\[Equal]", 
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"tt1", "+", "tt2"}], "]"}], "*", 
+      RowBox[{"Tan", "[", "tt2", "]"}]}]}], "&&", 
+    RowBox[{
+     RowBox[{"t1", "+", "t2"}], "<", "\[Pi]"}], "&&", 
+    RowBox[{
+     RowBox[{"tt1", "+", "tt2"}], "<", "\[Pi]"}], "&&", 
+    RowBox[{"t1", ">", "0"}], "&&", 
+    RowBox[{"t2", ">", "0"}], "&&", 
+    RowBox[{"tt1", ">", "0"}], "&&", 
+    RowBox[{"tt2", ">", "0"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"tt1", ",", "tt2"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5839568371596804`*^9, 3.5839568402397223`*^9}, {
+  3.5839568990555973`*^9, 3.583956983955806*^9}, {3.583957016215164*^9, 
+  3.583957067775301*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "nsmet"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"This system cannot be solved with the methods available to \
+Solve. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::nsmet\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5839570794550343`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"t1", "+", "t2"}], "]"}], " ", 
+      RowBox[{"Tan", "[", "t1", "]"}]}], "\[Equal]", 
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"tt1", "+", "tt2"}], "]"}], " ", 
+      RowBox[{"Tan", "[", "tt1", "]"}]}]}], "&&", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"t1", "+", "t2"}], "]"}], " ", 
+      RowBox[{"Tan", "[", "t2", "]"}]}], "\[Equal]", 
+     RowBox[{
+      RowBox[{"Cot", "[", 
+       RowBox[{"tt1", "+", "tt2"}], "]"}], " ", 
+      RowBox[{"Tan", "[", "tt2", "]"}]}]}], "&&", 
+    RowBox[{
+     RowBox[{"t1", "+", "t2"}], "<", "\[Pi]"}], "&&", 
+    RowBox[{
+     RowBox[{"tt1", "+", "tt2"}], "<", "\[Pi]"}], "&&", 
+    RowBox[{"t1", ">", "0"}], "&&", 
+    RowBox[{"t2", ">", "0"}], "&&", 
+    RowBox[{"tt1", ">", "0"}], "&&", 
+    RowBox[{"tt2", ">", "0"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"tt1", ",", "tt2"}], "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.5839569495490274`*^9, 3.5839569863443875`*^9}, 
+   3.583957079457036*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"t1", "=", "0.02"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"t2", "=", "0.02"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"FullSimplify", "[", 
+  RowBox[{"NSolve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cot", "[", 
+        RowBox[{"t1", "+", "t2"}], "]"}], "*", 
+       RowBox[{"Tan", "[", "t1", "]"}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"Cot", "[", 
+        RowBox[{"tt1", "+", "tt2"}], "]"}], "*", 
+       RowBox[{"Tan", "[", "tt1", "]"}]}]}], "&&", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cot", "[", 
+        RowBox[{"t1", "+", "t2"}], "]"}], "*", 
+       RowBox[{"Tan", "[", "t2", "]"}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"Cot", "[", 
+        RowBox[{"tt1", "+", "tt2"}], "]"}], "*", 
+       RowBox[{"Tan", "[", "tt2", "]"}]}]}], "&&", 
+     RowBox[{
+      RowBox[{"t1", "+", "t2"}], "<", "\[Pi]"}], "&&", 
+     RowBox[{
+      RowBox[{"tt1", "+", "tt2"}], "<", "\[Pi]"}], "&&", 
+     RowBox[{"t1", ">", "0"}], "&&", 
+     RowBox[{"t2", ">", "0"}], "&&", 
+     RowBox[{"tt1", ">", "0"}], "&&", 
+     RowBox[{"tt2", ">", "0"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"tt1", ",", "tt2"}], "}"}]}], "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.583957096106057*^9, 3.583957115786178*^9}, {
+  3.583957216765033*^9, 3.5839572203163843`*^9}, {3.583957296511701*^9, 
+  3.5839573463076706`*^9}, {3.583957439306242*^9, 3.5839574394503384`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NSolve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"NSolve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/NSolve\\\", ButtonNote -> \
+\\\"NSolve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5839574017453737`*^9, 3.5839574474776525`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"tt1", "\[Rule]", "0.020000000000006773`"}], ",", 
+    RowBox[{"tt2", "\[Rule]", "0.020000000000006773`"}]}], "}"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.5839572383313117`*^9, 3.583957304230813*^9, 
+  3.583957343744973*^9, 3.583957401746375*^9, 3.583957447479653*^9}]
+}, Open  ]]
+},
+WindowSize->{707, 867},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 1187, 34, 72, "Input"],
+Cell[1769, 58, 432, 10, 21, "Message"],
+Cell[2204, 70, 1114, 33, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3355, 108, 1449, 39, 132, "Input"],
+Cell[4807, 149, 553, 11, 56, "Message"],
+Cell[5363, 162, 341, 8, 87, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
