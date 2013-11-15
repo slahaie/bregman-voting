@@ -1,0 +1,33 @@
+PO: a > b in all voters ==> a > b in output
+
+Approximate Search for Nearest Ranking
+> first few alternatives matter the most --- find them exactly, approximate rest --- define the loss function accordingly
+> See if hashing as in Fast FAST for Kemeny can be generalized to nearest neighbour search
+> Some structure on phi so that we can start from a guess, and move closer. Such as for PSR (m-dimensional space), we can intuitively do this by pushing alternatives up and down.
+> Approximate each alternative by mean of all rankings that put him first. Maybe STV like process. 
+> Multi dimensional scaling
+> Approximate phi by a function that maps vector of real-valued positions of alternatives to the Euclidean space, find the inverse mapping of the mean, and then do best possible rounding
+> http://www.n3labs.com/pdf/rank-aggregation.pdf
+> Discretize as in Majority Judgement rule (http://en.wikipedia.org/wiki/Majority_judgment)
+
+Connection to Manipulability
+> Manipulability decreases when points are well separated because harder to move the mean point? -- Connection to Borda being most separated rule.
+
+
+Approximate Voting Rules
+> Approximate versions of rules that cannot be represented
+> Best low dimensional approximation of rules that can be
+
+> Explore compatibility requirement between \psi and \phi --- \psi must put an alternative closer to where \phi puts the rankings that rank him first
+> Explore consensus other than mean --- equally letting go --- only subset of rankings with non-zero occurrences matters --- pre-calculation and hashing can help
+	> Mean might be affected much by outliers. Either downgrade them, or move to median-like consensus. 
+> What structure does approval voting have?
+> Gravity Models
+
+Justification
+1) Either via nice properties = characterization
+2) Or via semantics -- see above
+3) Or via computational advantage -- see above
+
+-- Paper by Brendan Murphy
+
