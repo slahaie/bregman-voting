@@ -6,10 +6,10 @@
 \usepackage{color}
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
 \usepackage{verbatim}
-\usepackage[demo]{graphicx}
+\usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{multirow}
-
+\usepackage[capitalise]{cleveref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -850,6 +850,79 @@ There are two interesting questions in this domain.
 
 \end{comment}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Unique Representation Theorem}
+\label{sec:unique}
+
+\begin{theorem}
+Any two embeddings of a neutral SMPR are similar, i.e., equivalent up to translation, rotation, reflection, scaling (dilation), and dimension-lifting. 
+\end{theorem}
+\begin{proof}
+Lemma~\cite{BLAH} showed that any embedding of a neutral SMPR maps all rankings to points on a sphere centered at the mean of all the points. Take any two embeddings $\phi$ and $\phi'$ of a neutral SMPR $r$. For any subset of rankings $P$, let $S_{\phi})(P) = \{\phi(\sigma)\}_{\sigma \in P}$ and $S_{\phi'}(P) = \{\phi'(\sigma)\}_{\sigma \in P}$. 
+
+With slight abuse of notation, let $S_{\phi} = S_{\phi}(\rank)$ and $S_{\phi'} = S_{\phi'}(\rank)$. Let $D_{\phi}$ and $D_{\phi'}$ denote the Delaunay tessellations of $S_{\phi}$ and $S_{\phi'}$ respectively. Note that $D_{\phi}$ and $D_{\phi'}$ are convex polyhedra since the points in $S_{\phi}$ lie on a sphere, and so do the points in $S_{\phi'}$.
+
+We use Cauchy's rigidity theorem to establish that $D_{\phi}$ and $D_{\phi'}$ are similar to each other. That means, when viewed in their respective minimum Euclidean dimension, one ``solid'' can be obtained from another by translation, rotation, reflection, and scaling. For this, we need to establish two conditions:
+\begin{enumerate}
+\item The combinatorial structures of $D_{\phi}$ and $D_{\phi'}$ are identical. That is, for a subset $P$ of rankings, $S_{\phi}(P)$ forms a Delaunay facet of $D_{\phi}$ if and only if $S_{\phi'}(P)$ forms a Delaunay facet of $D_{\phi'}$.
+\item There exists a constant $\lambda$ such that all the edge lengths of $D_{\phi}$ are $\lambda$ times their counterparts in $D_{\phi'}$. That is, for all $\sigma$ and $\sigma'$,
+$$
+\|\phi(\sigma)-\phi(\sigma')\| = \lambda \cdot \|\phi'(\sigma)-\phi'(\sigma')\|.
+$$
+\end{enumerate}
+
+The first condition is rather easy to establish. Note that $S_{\phi}(P)$ forms a Delaunay facet of $D_{\phi}$ if and only if the convex hull of $S_{\phi}(P)$ has empty intersection with the Voronoi cell of every $\sigma' \notin P$ in the Voronoi diagram of $S_{\phi}$. In other words, every convex combination of $S_{\phi}(P)$ is closer to some point in $S_{\phi}(P)$ than every point in $S_{\phi}(\rank\setminus P)$. This happens if and only if for every profile $\pi$ containing only rankings from $P$, $r(\pi) \subseteq P$.\footnote{While the profiles are only \emph{rational} convex combinations of the points, the equivalence can still be observed due to the fact that $\mathbb{Q}^k$ is dense in $\mathbb{R}^k$ for every $k$.}
+
+Note that the last condition is a property of the voting rule $r$ itself. Hence, for every $P \subseteq \rank$, $S_{\phi}(P)$ forms a Delaunay facet of $D_{\phi}$ if and only if $S_{\phi'}(P)$ forms a Delaunay facet of $D_{\phi'}$.
+
+Next, we establish the harder second condition required by Cauchy's theorem. Consider a two-dimensional facet $f$ of $D_{\phi}$ and the corresponding facet $f'$ of $D_{\phi'}$ (recall that both $D_{\phi}$ and $D_{\phi'}$ have identical combinatorial structures). Let $P \subseteq \rank$ be the set of rankings whose points form both facets. Let $|P| = k$, where $k \ge 3$. Hence, the facet must be a $k$-gon in both $D_{\phi}$ and $D_{\phi'}$. Also, note that the $k$-gon must be cyclic, otherwise it would be triangulated further in the Delaunay triangulations. 
+
+First, we show that the vertices of $P$ must be arranged in the same order in both $f$ and $f'$ (up to mirror image). Let us consider $f$. Consider two points $p_1, p_2 \in P$ as shown in Figure~\ref{fig:cyclic-polygon}. Let $p$ be the midpoint of $p_1$ and $p_2$. Let $N(p)$ denote the set of points in $P$ that are closest to $p$. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{images/cyclic-polygon.jpg}
+\label{fig:cyclic-polygon}
+\end{figure}
+
+\begin{enumerate}
+\item If $N(p) = \{p_1,p_2\}$, then no point in $P$ can lie on the arc joining $p_1$ and $p_2$ that is opposite to the center of the circle. Hence, $p_1$ and $p_2$ must be adjacent in the $k$-gon.  
+\item If $N(p) \neq \{p_1,p_2\}$, then there are two possibilities.
+\begin{enumerate}
+\item Either $p_1$ and $p_2$ are not adjacent in the $k$-gon, or
+\item The line joining $p_1$ and $p_2$ either passes through the center of the circle, or separates the rest of the polygon from the center of the circle. 
+\end{enumerate}
+In both cases, there can be at most one such pair $(p_1,p_2)$ in the polygon.
+\end{enumerate}
+
+Hence, we see that there would either be exactly $k-1$ or $k$ pairs $(p_1,p_2)$ such that $N(p) = \{p_1,p_2\}$, where $p$ is the midpoint of $p_1$ and $p_2$, and all such pairs are adjacent in the $k$-gon. Thus, they completely specify the order of the points in the $k$-gon.\footnote{In case of $k-1$ adjacent pairs, there is only one possibility left for the remaining edge.} 
+
+Further, note that whether $N(p)$ is exactly the output of the voting rule $r$ on profile that consists of one occurrence of $p_1$ and one occurrence of $p_2$. Thus, it must be the same in both $f$ and $f'$. Hence, the order of points of $P$ in both $f$ and $f'$ must be identical, up to mirror image. Without loss of generality, assume that the order of the vertices is the same. If it is not, we take reflection, which does not change edge-lengths. 
+
+Let the vertices be $\sigma_1, \sigma_2, \ldots, \sigma_k$ in order. We show that
+\begin{equation}
+\frac{\|\phi(\sigma_1)-\phi(\sigma_2)\|}{\|\phi'(\sigma_1)-\phi'(\sigma_2)\|} = \frac{\|\phi(\sigma_2)-\phi(\sigma_3)\|}{\|\phi'(\sigma_2)-\phi'(\sigma_3)\|} = \ldots = \frac{\|\phi(\sigma_k)-\phi(\sigma_1)\|}{\|\phi'(\sigma_k)-\phi'(\sigma_1)\|}
+\label{eqn:polygon-condn}
+\end{equation}
+
+Take the triangle $\sigma_1, \sigma_2, \sigma_3$. In both $\phi$ and $\phi'$, the barycentric coordinates (linear combination of the vertices) of the circumcenter of the triangle must be equal, since the profile described by the barycentric coordinates must have output $\{\sigma_1,\ldots,\sigma_k\}$, which is only possible at the circumcenter of the $k$-gon. However, for triangle of side lengths $a$, $b$, and $c$, the barycentric coordinates are proportional to 
+$$
+(a^2 (b^2+c^2-a^2), b^2 (c^2+a^2-b^2), c^2 (a^2+b^2-c^2)).
+$$
+It can be easily shown that two triangles with identical barycentric coordinates of the circumcenter must have proportional side-lengths. Hence, we get 
+$$
+\frac{\|\phi(\sigma_1)-\phi(\sigma_2)\|}{\|\phi'(\sigma_1)-\phi'(\sigma_2)\|} = \frac{\|\phi(\sigma_2)-\phi(\sigma_3)\|}{\|\phi'(\sigma_2)-\phi'(\sigma_3)\|}
+$$
+
+Applying this repeatedly to triangles formed by all triplets of consecutive vertices gives \Cref{eqn:polygon-condn}. Finally, note that all the two-dimensional facets of the Delaunay triangulations $D_{\phi}$ and $D_{\phi'}$ are connected via shared edges. Thus, joining the \Cref{eqn:polygon-condn} of all polygons via shared edges, we get that for some $\lambda > 0$,
+$$
+\|\phi(\sigma)-\phi(\sigma')\| = \lambda \cdot \|\phi'(\sigma)-\phi'(\sigma')\|,
+$$
+for all $\sigma, \sigma'$, which is the final condition required.
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
