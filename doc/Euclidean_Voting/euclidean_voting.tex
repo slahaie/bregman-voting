@@ -131,7 +131,7 @@ A voting rule $r$ is called \emph{connected} if for any two profiles $\pi_1$ and
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\cns{Check if this is equivalent/related to continuity defined by Conitzer et. al.~\cite{CRX09}. Then we can add that to Proposition~\ref{prop:properties}.}
+\cns{Check if this is equivalent/related to continuity defined by Conitzer et al.~\cite{CRX09}. Then we can add that to Proposition~\ref{prop:properties}.}
 \begin{definition}[Continuity]
 Two profiles $\pi_1$ and $\pi_2$ satisfy $\pi_1 \approx \pi_2$ if they differ by one vote: for some $\sigma$ and $\sigma'$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)-1$, $n(\pi_1,\sigma') = n(\pi_2,\sigma')+1$, and for every $\sigma \in \rank\setminus\{\sigma,\sigma'\}$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)$. A voting rule $r$ is called \emph{continuous} if for every profile $\pi$ and ranking $\sigma$, $\sigma \notin r(\pi)$ implies that there exists integer $k$ such that for every profile $\pi' \approx k \pi$, $\sigma \notin r(\pi')$. 
 \end{definition}
@@ -231,7 +231,7 @@ All positional scoring rules and the Kemeny rule are mean proximity rules. Howev
 \section{Symmetric Mean Proximity Rules}
 
 In this paper, we are interested in social welfare functions (SWFs) that return a ranking (more formally, a set of tied rankings), so $\calO = \rank$. %From here onwards, unless mentioned otherwise, any voting rule we mention will be a social welfare function. 
-Here, the scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes the \emph{similarity} between two rankings. This special case was also defined and studied by Conitzer et. al.~\cite{CRX09} as \emph{simple ranking scoring functions} (SRSFs). Under any fixed enumeration $\sigma_1,\ldots,\sigma_{m!}$, we can create an $m! \times m!$ matrix $S$ such that $S_{ij} = s(\sigma_i,\sigma_j)$. This is called a \emph{score matrix} of the generalized scoring rule (equivalently, mean proximity rule) corresponding to the scoring function $s$. 
+Here, the scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes the \emph{similarity} between two rankings. This special case was also defined and studied by Conitzer et al.~\cite{CRX09} as \emph{simple ranking scoring functions} (SRSFs). Under any fixed enumeration $\sigma_1,\ldots,\sigma_{m!}$, we can create an $m! \times m!$ matrix $S$ such that $S_{ij} = s(\sigma_i,\sigma_j)$. This is called a \emph{score matrix} of the generalized scoring rule (equivalently, mean proximity rule) corresponding to the scoring function $s$. 
 
 %Further, given any profile $\pi$ of $n$ votes, we create the vector $y^{\pi}$ such that $y^{\pi}_i  = n(\pi,\sigma_i)/n$, for $1 \le i \le m!$. It is easy to verify that $\sigma_k$ would be in the output of the rule if the $k^{th}$ component of $S y^{\pi}$ is the maximum. 
 
@@ -307,7 +307,7 @@ We define neutral scoring functions as in~\cite{CRX09}, which are closely relate
 \begin{definition}[Neutral Scoring Function]
 A scoring function $s: \rank \times \rank \rightarrow \mathbb{R}$ is called \emph{neutral} if $s(\tau \sigma, \tau \sigma') = s(\sigma,\sigma')$ for every $\sigma,\sigma',\tau \in \rank$. We say that a score matrix is neutral if the scoring function generating it is neutral. 
 \end{definition}
-In words, neutrality of a scoring function means that the similarity between two rankings does not change if we permute them in the same way. Conitzer et. al.~\cite{CRX09} showed that any scoring function $s$ of a neutral GSR $r$ can be \emph{neutralized}, i.e., converted to an equivalent neutral scoring function.
+In words, neutrality of a scoring function means that the similarity between two rankings does not change if we permute them in the same way. Conitzer et al.~\cite{CRX09} showed that any scoring function $s$ of a neutral GSR $r$ can be \emph{neutralized}, i.e., converted to an equivalent neutral scoring function.
 
 \begin{proposition}[\cite{CRX09}] For any scoring function $s$ of a neutral GSR $r$, there is an equivalent (representing $r$ as well) neutral scoring function $s^{\nt}$ given by 
 \begin{equation}
@@ -317,8 +317,8 @@ s^{\nt}(\sigma,\sigma') = \sum_{\tau \in \rank} s(\tau \sigma, \tau \sigma').
 \label{prop:neutral-scoring-equivalent}
 \end{proposition}
 
-Using this, Conitzer et. al.~\cite{CRX09} translated neutrality of GSR (equivalently mean proximity rules) to neutrality of scoring functions.
-\begin{proposition}[Lemma 2, Conitzer et. al.~\cite{CRX09}]
+Using this, Conitzer et al.~\cite{CRX09} translated neutrality of GSR (equivalently mean proximity rules) to neutrality of scoring functions.
+\begin{proposition}[Lemma 2, Conitzer et al.~\cite{CRX09}]
 A mean proximity rule is neutral if and only if it has a neutral scoring function.
 \label{prop:gsr-neutral}
 \end{proposition}
@@ -423,12 +423,12 @@ Conversely, let $r$ be any neutral symmetric mean proximity rule and $\phi$ be i
 %S^{\nt}_{ij} &= s^{\nt}(\sigma_i,\sigma_j) = -\|\phi^{\nt}(\sigma_i)-\phi^{\nt}(\sigma_j)\|^2 \\
 %&= - \sum_{l=1}^{m!} \|\phi(\tau_l \sigma_i)-\phi(\tau_l \sigma_j)\|^2 = \sum_{\tau \in \rank} s(\tau \sigma_i, \tau \sigma_j).
 %\end{align*}
-%Conitzer et. al.~\cite{CRX09} showed (refer, proof of Lemma~2 in their paper) that the scoring function $s^{\nt}$ constructed this way corresponds to the same voting rule $r$ and $s^{\nt}$ is neutral. Thus, $S^{\nt}$ is a score matrix of $r$ that is neutral and negation of an EDM. Finally, it is easy to check that neutrality of $s^{\nt}$ implies neutrality of the embedding $\phi^{\nt}$ that we constructed.
+%Conitzer et al.~\cite{CRX09} showed (refer, proof of Lemma~2 in their paper) that the scoring function $s^{\nt}$ constructed this way corresponds to the same voting rule $r$ and $s^{\nt}$ is neutral. Thus, $S^{\nt}$ is a score matrix of $r$ that is neutral and negation of an EDM. Finally, it is easy to check that neutrality of $s^{\nt}$ implies neutrality of the embedding $\phi^{\nt}$ that we constructed.
 
 For equivalence with the fourth condition, take any neutral symmetric mean proximity rule $r$ and its arbitrary embedding $\phi$. Note that the embedding $\phi^{\nt}$ has equal norm, thus its Gramian matrix $S$ represents $r$ (Lemma~\ref{lem:inner-product}). Since $S$ is Gramian, it is also positive semidefinite. Equal norm property of $\phi^{\nt}$ implies that $S$ has equal diagonal entries, and neutrality of $\phi^{\nt}$ implies neutrality of $S$. Conversely, take any mean proximity rule $r$ with a score matrix $S$ that is neutral, positive semidefinite, and has equal diagonal entries. Then, we can find an embedding $\phi$ such that $S$ is its Gramian matrix. Neutrality and equal diagonal entries of $S$ imply neutrality and equal norm property of $\phi$. Thus, due to Lemma~\ref{lem:inner-product}, $\phi$ also represents $r$, showing that $r$ is a neutral symmetric mean proximity rule. 
 \end{proof}
 
-%We point out that more properties could be proven for the score matrix $S$ constructed in the proof of Theorem~\ref{thm:neutral-smpr} for any given neutral symmetric mean proximity rule (which is the Gramian of a normalized linear embedding $\hat{\phi}$). In addition to being neutral and positive semidefinite, and having equal diagonal entries, the sum of entries along each row and column of $S$ is also zero. To see this, note that $\hat{\phi}_{avg} = 0$. Hence, the sum of entries of $S$ across row $i$ or column $i$ is $m! \cdot \langle \hat{\phi}(\sigma_i), \hat{\phi}_{avg} \rangle = 0$. Another interesting factoid is that existence of a score matrix that is both neutral and positive semidefinite with equal diagonal entries can be established alternatively by taking any score matrix that is positive semidefinite and has equal diagonal entries (Gramian of any normalized embedding), and then neutralizing it by the construction of Conitzer et. al.~\cite{CRX09} given in Equation~\eqref{eqn:s-nt}.
+%We point out that more properties could be proven for the score matrix $S$ constructed in the proof of Theorem~\ref{thm:neutral-smpr} for any given neutral symmetric mean proximity rule (which is the Gramian of a normalized linear embedding $\hat{\phi}$). In addition to being neutral and positive semidefinite, and having equal diagonal entries, the sum of entries along each row and column of $S$ is also zero. To see this, note that $\hat{\phi}_{avg} = 0$. Hence, the sum of entries of $S$ across row $i$ or column $i$ is $m! \cdot \langle \hat{\phi}(\sigma_i), \hat{\phi}_{avg} \rangle = 0$. Another interesting factoid is that existence of a score matrix that is both neutral and positive semidefinite with equal diagonal entries can be established alternatively by taking any score matrix that is positive semidefinite and has equal diagonal entries (Gramian of any normalized embedding), and then neutralizing it by the construction of Conitzer et al.~\cite{CRX09} given in Equation~\eqref{eqn:s-nt}.
 
 %It is worthwhile pointint out that following steps very similar to those in the proof of Theorem~\ref{thm:neutral-smpr}, one can also show that a mean proximity rule (not necessarily symmetric) is neutral if and only if it has a representation in which both input and output embeddings are neutral. 
 
@@ -822,13 +822,13 @@ Proposition~\ref{prop:properties} shows that all mean proximity rules are consis
 
 \begin{enumerate}
 \item What restrictions on the embedding $\phi$ correspond to monotonicity of the mean proximity rule?
-\item Caragiannis et. al.~\cite{CPS13} introduced pairwise majority consistency (PM-c) as the natural generalization of Condorcet consistency for social welfare functions. What restrictions on $\phi$ ensures that the mean proximity rule is PM-c? Is that related to the distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$ being majority concentric~\cite{CPS13}?
+\item Caragiannis et al.~\cite{CPS13} introduced pairwise majority consistency (PM-c) as the natural generalization of Condorcet consistency for social welfare functions. What restrictions on $\phi$ ensures that the mean proximity rule is PM-c? Is that related to the distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$ being majority concentric~\cite{CPS13}?
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Distance Rationalizability View}
-Meskanen and Nurmi~\cite{MN08} introduced the distance rationalizability framework where given a consensus class of profiles where the output is already defined and a distance function between profiles, the corresponding distance rationalizable rule, given any profile, finds the closest profile in the consensus class and returns the output defined on that. Edith et. al.~\cite{EFS10} study additively votewise distances, where the distance between two profiles is (vaguely) the sum of distances between their rankings. We note that the additively votewise distance rationalizable rules with (strong) unanimity consensus class and the distance between two rankings being square of the Euclidean distance ($\ell_2$ norm) between their embeddings are exactly symmetric mean proximity. 
+Meskanen and Nurmi~\cite{MN08} introduced the distance rationalizability framework where given a consensus class of profiles where the output is already defined and a distance function between profiles, the corresponding distance rationalizable rule, given any profile, finds the closest profile in the consensus class and returns the output defined on that. Edith et al.~\cite{EFS10} study additively votewise distances, where the distance between two profiles is (vaguely) the sum of distances between their rankings. We note that the additively votewise distance rationalizable rules with (strong) unanimity consensus class and the distance between two rankings being square of the Euclidean distance ($\ell_2$ norm) between their embeddings are exactly symmetric mean proximity. 
 
 Note that while the Euclidean distance defines a distance metric (satisfying triangle inequality), its square may not be a distance metric. However, it turns out that for the pairwise comparison embedding that generates the Kemeny rule, the square of Euclidean distance is the Kendall Tau distance (up to a multiplicative constant), which is a distance metric. This has two important implications. First, it shows that under the more natural Euclidean distance function, Kemeny is indeed a \emph{mean} rule rather than a \emph{median} rule. This explains why the Kemeny rule has desirable properties, as the importance of mean consensus has been emphasized significantly in the literature. Second, it indicates that the distance metrics whose square are also distance metrics might be of independent interest, and might be connected to rules satisfying desirable properties. Another example of a distance metric whose square is also a distance metric is square root of the Hamming distance.
 
@@ -939,7 +939,7 @@ for all $\sigma, \sigma'$, which is the final condition required.
 \section{Other Research Questions}
 \begin{enumerate}
 \item Alternative proof of the characterization of positional scoring rules by observing that they are obtained by the same representation $R$ where $R_{\tau}$ is the permutation matrix generated by $\tau$ (which permutes rankings according to the mapping $\sigma \rightarrow \tau \sigma$), and different initial embeddings. 
-\item Conjecture by Conitzer et. al.~\cite{CRX09}: Consistent $+$ continuous $+$ neutral $\Leftrightarrow$ Neutral SRSF.
+\item Conjecture by Conitzer et al.~\cite{CRX09}: Consistent $+$ continuous $+$ neutral $\Leftrightarrow$ Neutral SRSF.
 \item What about notions of consensus in Euclidean spaces other than mean $\rightarrow$ e.g., minimize maximum distance (everyone ``lets go'' equally)?
 \end{enumerate}
 

@@ -1,0 +1,3 @@
+Alternative by alternative approximation --- for Kemeny, the first alternative would be the Borda winner --- very similar to applying Borda count which is a 4-approximation....maybe this is also a good approximation
+
+Also, maybe this method gives a nice approximation (if not worst case, at least in high fraction of instances) in general (beyond the Kemeny rule)
