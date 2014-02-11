@@ -6,6 +6,20 @@
 \newblock The moore--penrose pseudoinverse: A tutorial review of the theory.
 \newblock {\em Brazilian Journal of Physics\/}~{\em 42,\/}~1-2, 146--165.
 
+\bibitem[\protect\citeauthoryear{Barut and Raczka}{Barut and
+  Raczka}{1986}]{BR86}
+{\sc Barut, A.~O.} {\sc and} {\sc Raczka, R.} 1986.
+\newblock {\em Theory of group representations and applications}. Vol.~2.
+\newblock World Scientific.
+
+\bibitem[\protect\citeauthoryear{Boerner, Murphy, Werner, and
+  Mayer-Kalkschmidt}{Boerner et~al\mbox{.}}{1963}]{BMWM63}
+{\sc Boerner, H.}, {\sc Murphy, P.~G.}, {\sc Werner, J.}, {\sc and} {\sc
+  Mayer-Kalkschmidt, P.} 1963.
+\newblock {\em Representations of groups: with special consideration for the
+  needs of modern physics}.
+\newblock North-Holland.
+
 \bibitem[\protect\citeauthoryear{Burnside}{Burnside}{2012}]{Burnside12}
 {\sc Burnside, W.} 2012.
 \newblock {\em Theory of groups of finite order}.
@@ -26,12 +40,26 @@
 \newblock In {\em Proceedings of the 21st International Joint Conference on
   Artificial Intelligence (IJCAI)}. 109--115.
 
+\bibitem[\protect\citeauthoryear{Conitzer and Sandholm}{Conitzer and
+  Sandholm}{2005}]{CS05b}
+{\sc Conitzer, V.} {\sc and} {\sc Sandholm, T.} 2005.
+\newblock Common voting rules as maximum likelihood estimators.
+\newblock In {\em Proceedings of the 21st Annual Conference on Uncertainty in
+  Artificial Intelligence (UAI)}. 145--152.
+
 \bibitem[\protect\citeauthoryear{Elkind, Faliszewski, and Slinko}{Elkind
   et~al\mbox{.}}{2010}]{EFS10}
 {\sc Elkind, E.}, {\sc Faliszewski, P.}, {\sc and} {\sc Slinko, A.} 2010.
 \newblock On the role of distances in defining voting rules.
 \newblock In {\em Proceedings of the 9th International Joint Conference on
   Autonomous Agents and Multi-Agent Systems (AAMAS)}. 375--382.
+
+\bibitem[\protect\citeauthoryear{James, Kerber, Cohn, and Robinson}{James
+  et~al\mbox{.}}{1984}]{JKCR84}
+{\sc James, G.~D.}, {\sc Kerber, A.}, {\sc Cohn, P.~M.}, {\sc and} {\sc
+  Robinson, G. d.~B.} 1984.
+\newblock {\em The representation theory of the symmetric group}. Vol.~16.
+\newblock Cambridge University Press Cambridge.
 
 \bibitem[\protect\citeauthoryear{Kleshchev and Tiep}{Kleshchev and
   Tiep}{2012}]{KT12}
@@ -40,12 +68,33 @@
   alternating groups.
 \newblock {\em Algebra and Number Theory Journal\/}~{\em 6}, 1773–1816.
 
+\bibitem[\protect\citeauthoryear{Kovalev, Stokes, and Hatch}{Kovalev
+  et~al\mbox{.}}{1993}]{KHS93}
+{\sc Kovalev, O.~V.}, {\sc Stokes, H.~T.}, {\sc and} {\sc Hatch, D.~M.} 1993.
+\newblock {\em Representations of the Crystallographic Space Groups:
+  Irreducible Representations, Induced Representations, and Corepresentations}.
+\newblock Gordon and Breach Science.
+
+\bibitem[\protect\citeauthoryear{MacWilliams and Sloane}{MacWilliams and
+  Sloane}{1977}]{MS77}
+{\sc MacWilliams, F.~J.} {\sc and} {\sc Sloane, N. J.~A.} 1977.
+\newblock {\em The theory of error-correcting codes}. Vol.~16.
+\newblock Elsevier.
+
 \bibitem[\protect\citeauthoryear{Meskanen and Nurmi}{Meskanen and
   Nurmi}{2008}]{MN08}
 {\sc Meskanen, T.} {\sc and} {\sc Nurmi, H.} 2008.
 \newblock Closeness counts in social choice.
 \newblock In {\em Power, Freedom, and Voting}, {M.~Braham} {and} {F.~Steffen},
   Eds. Springer-Verlag.
+
+\bibitem[\protect\citeauthoryear{Xia and Conitzer}{Xia and
+  Conitzer}{2008}]{XC08}
+{\sc Xia, L.} {\sc and} {\sc Conitzer, V.} 2008.
+\newblock Generalized scoring rules and the frequency of coalitional
+  manipulability.
+\newblock In {\em Proceedings of the 9th ACM Conference on Electronic Commerce
+  (EC)}. 109--118.
 
 \bibitem[\protect\citeauthoryear{Zwicker}{Zwicker}{2008a}]{Zwicker08b}
 {\sc Zwicker, W.~S.} 2008a.

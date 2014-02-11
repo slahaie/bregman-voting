@@ -1,0 +1,772 @@
+\documentclass[prodmode,acmec]{ec-acmsmall}
+
+% Package to generate and customize Algorithm as per ACM style
+\usepackage[ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+% Metadata Information
+%\acmVolume{9}
+%\acmNumber{4}
+%\acmArticle{39}
+%\acmYear{2013}
+%\acmMonth{6}
+\usepackage[numbers]{natbib}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{environ}
+\usepackage{color}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{multirow}
+%\usepackage[capitalise]{cleveref}
+\usepackage{tikz}
+\usepackage{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\R}{\ensuremath{\mathcal{R}}}
+\newcommand{\mP}{\ensuremath{\mathcal{P}}}
+\newcommand{\mM}{\ensuremath{\mathcal{M}}}
+\newcommand{\ip}[2]{\ensuremath{\langle #1, #2 \rangle}}
+\newcommand{\grad}{\nabla}
+\newcommand{\one}{\ensuremath{\mathbf{1}}}
+\newcommand{\co}{\mbox{co}}
+
+\newcommand{\calL}{{\mathcal{L}}}
+\newcommand{\rank}{{\calL(A)}}
+\newcommand{\calO}{{\mathcal{O}}}
+\newcommand{\calP}{{\mathcal{P}}}
+
+\newcommand{\uni}{{\rank^n}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\eps}{\epsilon}
+
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}[theorem]{Observation}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{conjecture}{Conjecture}
+%\newtheorem{proposition}{Proposition}
+%\newtheorem{corollary}{Corollary}
+%
+%\newenvironment{definition}[1][Definition]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{example}[1][Example]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{remark}[1][Remark]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+\newcount\Comments
+\Comments=1
+\newcommand{\kibitz}[2]{\ifnum\Comments=1\textcolor{#1}{#2}\fi}
+\renewcommand{\sl}[1]{\kibitz{blue} {[SL: #1]}}
+\newcommand{\ns}[1]{\kibitz{red} {[NS: #1]}}
+
+\newcommand{\nt}{NT}
+
+% Document starts
+\begin{document}
+
+% Page heads
+\markboth{Lahaie et al.}{Neutrality and Geometry of Mean Voting}
+
+% Title portion
+\title{Neutrality and Geometry of Mean Voting}
+\author{S\'{e}bastien Lahaie
+\affil{Microsoft Research New York City, United States.}
+Nisarg Shah
+\affil{Carnegie Mellon University, United States.}
+}
+
+\begin{abstract}
+\ns{ABSTRACT WOULD GO HERE}
+\end{abstract}
+
+\category{I.2.6}{Computing Methodologies}{Artificial Intelligence}
+\category{J.4}{Computer Applications}{Social and Behavioral Sciences}[Economics]
+
+\terms{Algorithms, Economics}
+
+\keywords{Social choice, Mean proximity rules, Euclidean space, Neutrality}
+
+%\acmformat{S\'{e}bastien Lahaie, and Nisarg Shah, 2014. Voting in the Euclidean Space: Neutrality and Mean Proximity Rules.}
+
+\begin{bottomstuff}
+This work is supported by \ns{BLAH}.
+
+Author's addresses: S. Lahaie, Microsoft Research New York City, {\small\tt slahaie@microsoft.com}; N. Shah, Computer Science Department, Carnegie Mellon University, {\small\tt nkshah@cs.cmu.edu}.
+\end{bottomstuff}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+\ns{Either write Theorem and Lemma number in each citation, or not in any.}
+
+\ns{TOBEWRITTEN}
+Recently, rising interest in families of voting rules --- GSR was success for studying manipulation (original paper) and learnability of voting rules (Nika's course project). 
+
+PM-c and PD-c families for accurately predicting ground truth.
+
+These families are very general --- GSR as well as union of PM-c and PD-c capture most of the popular voting rules. However, the families are extremely general --- a justification cannot be provided for each rule in the family. 
+
+Justification approach --- DR and MLE. But these are also extremely general because they are built upon very general distance function, noise model, etc. 
+
+Another crucial aspect is simplicity. Saari (Basic Geometry of Voting) says that it is important for the process of determining the outcome to be crystal clear to the voters in order for them to be able to trust the system. He argues that positional procedures that take into account alternatives at later rank are inherently more complex than the simple (and the most-used) voting system plurality. He then makes a compelling case of using geometry to explain voting rules in order to make them understandable. This also leads to interesting explanations of counter-intuitive phenomena why different input votes result in different outcomes. Brams and Fishburn(Approval voting) also presents a similar argument for simplicity and clarity of voting rules, and promotes approval voting, where blah blah. Mean proximity rules --- exactly this. Received much less attention. (Range voting website?)
+
+Need for a simple family of justified voting rules that is not ultimately useless and whose process is crystal clear. Exactly this is done. 
+Emphasize the average aspect of voting. Mention characterization. Give figure illustration of Borda and Kemeny.
+http://omega.math.union.edu/research/2010-05-voting/
+
+\noindent \textbf{Our Contribution.} \ns{Contribution would go here}
+
+\section{Related Work}
+Especially contrast with other geometric work of Saari, Brahm 
+
+%{Generalization: http://grammatikhilfe.com/CPNSS/research/projectsCurrentlyOnHold/VPP/VPPpdf/VPPpdf_Wshop2010/Workshop%20Papers/duBaffy_Zwicker2.pdf}
+
+%{Another geometric based on similar ideas of permutahedron: http://www.math.gordon.edu/~kcrisman/KemenyBordaPermutahedron.pdf}
+
+
+\section{Preliminaries}
+\label{sec:prelim}
+Let $A$ be the set of alternatives; we denote $|A| = m$. Let $\rank$ denote the set of rankings over the alternatives in $A$. A profile $\pi \in \rank^n$ is a collection of votes (rankings). A \emph{voting rule} (more technically, a social welfare function - SWF)\footnote{Another common definition of a voting rule is a social choice function (SCF), which maps every profile to a (set of tied) winning alternative(s).} is a function that maps every profile to a ranking, or a set of tied rankings. Formally, we denote a voting rule by $r : \rank^n \rightarrow \calP(\rank)\setminus\{\emptyset\}$, where $\calP(\cdot)$ denotes the power set. Note that a voting rule must output at least one ranking. \\
+
+%For any profile $\pi$, let $n(\pi,\sigma)$ denote the number of times $\sigma$ appears in $\pi$. Let $\sigma_1,\ldots,\sigma_{m!}$ denote a fixed reference order of the rankings in $\rank$. For any two profiles $\pi_1$ and $\pi_2$, let $\pi_1+\pi_2$ be the union profile such that $n(\pi_1+\pi_2,\sigma) = n(\pi_1,\sigma)+n(\pi_2,\sigma)$ for every $\sigma \in \rank$. Similarly, for any profile $\pi$, let $c \pi$ be the profile such that $n(c \pi,\sigma) = c \cdot n(\pi,\sigma)$ for every $\sigma \in \rank$. 
+
+\noindent \textbf{Axiomatic properties of voting rules.} Voting rules are often studied (and sometimes designed) from the viewpoint of axiomatic properties. Such properties define what a voting rule should intuitively do in certain special cases. Some of the widely studied properties are defined below. 
+
+\begin{description}
+\item[Anonymity] A voting rule $r$ is called \emph{anonymous} if its output only depends on the collection of rankings in the profile (equivalently, the number of times each ranking appears), and not on the identities of the voters who voted for the different rankings. \\ %For every profiles $\pi_1$ and $\pi_2$ such that $n(\pi_1,\sigma) = n(\pi_2,\sigma)$ for every $\sigma \in \rank$, $r(\pi_1) = r(\pi_2)$. 
+
+\item[Unanimity] A voting rule $r$ is said to satisfy \emph{unanimity} if on every profile $\pi$ that consists of copies of a single ranking $\sigma$, the rule uniquely outputs that ranking, i.e., $r(\pi) = \{\sigma\}$.\\ %the singleton set uniquely outputs that ranking: for every profile $\pi$ such that $n(\pi,\sigma) > 0$ for some $\sigma \in \rank$ and $n(\pi,\sigma') = 0$ for all $\sigma' \neq \sigma$, $r(\pi) = \{\sigma\}$. 
+
+\item[Consistency] A voting rule $r$ is called \emph{consistent} if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) \cap r(\pi_2) \neq \emptyset$, we have $r(\pi_1+\pi_2) = r(\pi_1) \cap r(\pi_2)$.\footnote{Consistency for social welfare functions that output a set of tied rankings is more general than consistency for social welfare functions that output a single ranking (i.e., a singleton set). It is also significantly different from consistency of the winning alternative for social choice functions.} Here, profile $\pi_1+\pi_2$ denotes the union of the profiles $\pi_1$ and $\pi_2$. \\ %A social welfare function $r$ is called weakly consistent (for rankings) if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) = r(\pi_2)$, we have $r(\pi_1+\pi_2) = r(\pi_1) = r(\pi_2)$. 
+
+\item[Neutrality] \ns{Explain more. Define relabeling of alternatives. Define the symmetric group $S_m$. Define the exact meaning of $\tau$ operating on $\sigma$.} \ns{Say for a permutation $\tau$, the permuted ranking $\tau(\sigma)$ will be denoted by $\tau \sigma$ for notational convenience. Also take care of all $\tau \in \rank \rightarrow \tau \in S_m$.}
+Given any profile $\pi = (\sigma_1,\ldots,\sigma_n)$ and a permutation $\tau$ of the alternatives, let $\tau \pi = (\tau \sigma_1,\ldots,\tau \sigma_n)$ be the profile where each vote is permuted according to $\tau$. Similarly, given any set of rankings $S$, let $\tau S = \{\tau \sigma | \sigma \in S\}$. A voting rule $r$ is called \emph{neutral} if for every profile $\pi$ and permutation $\tau$ of the alternatives, we have $r(\tau \pi) = \tau r(\pi)$. \\
+
+\item[Rank-distinguishability] In the classical definition of social welfare functions that output a single ranking, non-imposition (also known as citizen sovereignty) of a voting rule dictates that every ranking of the alternatives should be achievable as the output of the voting rule on some profile. We define a mild generalization of non-imposition, which we call rank-distinguishability, to social welfare functions that output a set of rankings. We say that a voting rule $r$ satisfies rank-distinguishability if it can distinguish between any two rankings: for every two distinct rankings $\sigma, \sigma' \in \rank$, there must exist a profile $\pi$ such that exactly one of $\sigma$ and $\sigma'$ belongs to $r(\pi)$. The mildness of rank-distinguishability is evident from the simple observation that it follows from unanimity, which is itself considered very unrestrictive and almost always desirable. 
+\end{description}
+
+
+\noindent \textbf{Voting rules.} Next, we define two prominent voting rules that play a key role in this paper. 
+\begin{description}
+
+\item[The Kemeny rule] Given a profile $\pi$, define the weighted pairwise majority (PM) graph of a profile as the graph where the alternatives are the vertices and there is an edge from every alternative $a$ to every other alternative $b$ with weight equal to the number of voters that prefer $a$ to $b$. The Kemeny score of a ranking is the total weight of the edges of the weighted pairwise majority graph of $\pi$ in its direction. The Kemeny rule selects the ranking or the set of tied rankings with the highest Kemeny score.\\
+
+\item[Positional scoring rules] A positional scoring rule is given by a scoring vector $\alpha = (\alpha_1,\ldots,\alpha_m)$ where $\alpha_i \ge \alpha_{i+1}$ for all $i \in [m]$ and $\alpha_1 > \alpha_m$. Under this rule, for each vote $\sigma$ in $\pi$ and $i \in [m]$, $\alpha_i$ points are awarded to the $i^{th}$ most preferred alternative in $\sigma$. The alternatives are then sorted in the descending order of their total points. The set of (tied) rankings where each group of alternatives with identical total points is sorted in all possible ways is returned. Some example of positional scoring rules include plurality, Borda count, veto, and $k$-approval.
+
+\end{description}
+
+%ns - Connectedness is not used much. No need to define here. 
+%\begin{definition}[Connectedness]
+%A voting rule $r$ is called \emph{connected} if for any two profiles $\pi_1$ and $\pi_2$ with $r(\pi_1) \cap r(\pi_2) \neq \emptyset$, there exist non-negative integers $c$ and $d$ such that $r(\pi_1) \cap r(c \pi_1 + d \pi_2) \neq \emptyset$ and $r(\pi_1) \neq r(c \pi_1 + d \pi_2)$. 
+%\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\ns{Check if this is equivalent/related to continuity defined by Conitzer et al.~\cite{CRX09}. Then we can add that to Proposition~\ref{prop:properties}.}
+%\begin{definition}[Continuity]
+%Two profiles $\pi_1$ and $\pi_2$ satisfy $\pi_1 \approx \pi_2$ if they differ by one vote: for some $\sigma$ and $\sigma'$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)-1$, $n(\pi_1,\sigma') = n(\pi_2,\sigma')+1$, and for every $\sigma \in \rank\setminus\{\sigma,\sigma'\}$, $n(\pi_1,\sigma) = n(\pi_2,\sigma)$. A voting rule $r$ is called \emph{continuous} if for every profile $\pi$ and ranking $\sigma$, $\sigma \notin r(\pi)$ implies that there exists integer $k$ such that for every profile $\pi' \approx k \pi$, $\sigma \notin r(\pi')$. 
+%\end{definition}
+
+\section{Mean Proximity Rules}
+\label{sec:mpr}
+
+We begin by  presenting important background on mean proximity rules that will be relevant for the rest of the paper. First, we formally define mean proximity rules. Mean proximity rules are defined in a scope greater than the scope of voting rules considered in this paper: While voting rules map every profile to a set of tied rankings, mean proximity rules in general map every profile to a set of tied outcomes, where the outcomes are chosen from the outcome space $\calO$. In Section~\ref{sec:symm}, we will fix $\calO = \rank$ to analyze mean proximity rules in the context of voting rules. 
+
+\begin{definition}[Mean Proximity Rules (\cite{Zwicker08a})]
+A \emph{mean proximity rule} is given by an input embedding $\phi: \rank \rightarrow \mathbb{R}^k$ mapping input rankings to $k$-dimensional Euclidean space and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ mapping possible outcomes to the same Euclidean space. The outcome of the rule on a profile $\pi$ is given by $\argmin_{o \in \calO} \|\psi(o) - \mu(\pi) \|$, where $\mu(\pi) = (1/n) \cdot \sum_{\sigma \in \pi} \phi(\sigma)$ is the mean of input embeddings of the votes in $\pi$.
+\end{definition}
+
+In this paper, every summation of the form $\sum_{\sigma \in \pi}$  iterates over rankings in profile $\pi$; in particular, if a ranking appears multiple times in $\pi$, the summation contains one term for each appearance. Zwicker~\shortcite{Zwicker08a} also defined another family of rules, which he referred to as \emph{generalized scoring rules}. However, this name has since been used primarily to represent a different family of voting rules that was introduced by Xia and Conitzer~\shortcite{XC08}. We therefore refer to the family of Zwicker~\shortcite{Zwicker08a} as \emph{scoring rules}. The naming is appropriate for another reason: In Section~\ref{sec:connection}, we observe that the family of scoring rules introduced by Zwicker~\shortcite{Zwicker08a} is a subset of the family of generalized scoring rules introduced by Xia and Conitzer~\shortcite{XC08}. 
+
+\begin{definition}[Scoring Rules (\cite{Zwicker08a})]
+A voting rule is called a \emph{scoring rule} if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that for any profile $\pi$, we have $r(\pi) = \argmax_{o \in \calO} \sum_{\sigma \in \pi} s(\sigma,o)$. 
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{proposition}[Corollary~4.2.3, Zwicker~\cite{Zwicker08a}]
+%Let $A = \{u_1,\ldots,u_l\}$ be a set of $l$ vectors in $\mathbb{R}^k$. Let $B = \{v_1,\ldots,v_p\}$ be a set of $p$ vectors in $\mathbb{R}^k$. Then, the discrete mean in $A$ of vectors in $B$ is the vector in $A$ that is closest to the Euclidean mean of vectors in $B$. That is,
+%$$
+%\argmin_{u_i \in A} \sum_{v_j \in B} \|u_i - v_j\|^2 = \argmin_{u_i \in A} \|u_i - (1/p) \cdot \sum_{v_j \in B} v_j\|.
+%$$
+%\label{prop:discrete-mean}
+%\end{proposition}
+
+That is, the scoring rule assigns a score to each outcome for each input vote, and the outcome or outcomes with the highest aggregate score are chosen. Zwicker~\shortcite{Zwicker08a} also showed equivalence between mean proximity rules and scoring rules using the following technical result. %We reconstruct his proof because it is crucial to several proofs in this paper. 
+
+\begin{proposition}[\cite{Zwicker08a}]
+For embeddings $\phi : \rank \rightarrow \mathbb{R}^k$ and $\psi: \calO \to \mathbb{R}^k$, and profile $\pi$, we have
+\begin{equation}
+\argmin_{o \in \calO} \|\psi(o)-\mu(\pi)\| = \argmin_{o \in \calO} \sum_{\sigma \in \pi} \|\psi(o)-\phi(\sigma)\|^2.
+\label{eqn:discrete-mean}
+\end{equation}
+\label{prop:MPR-GSR-conversion}
+\end{proposition}
+%\begin{comment}
+%\begin{proof}[Proof (reconstructed)]
+%\begin{align*}
+%&\argmin_{o \in \calO} \|\psi(o)-\mu(\pi)\| \\
+%&\quad= \argmin_{o \in \calO} \|\psi(o)-\mu(\pi)\|^2 \\
+%&\quad= \argmin_{o \in \calO} \|\psi(o)\|^2 + \|\mu(\pi)\|^2 - 2 \cdot \langle \psi(o), (1/n) \sum_{\sigma \in \rank} n(\pi,\sigma) \phi(\sigma) \rangle\\
+%&\quad= \argmin_{o \in \calO} n \cdot \|\psi(o)\|^2 - 2 \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \langle \psi(o), \phi(\sigma) \rangle\\
+%&\quad= \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot (\|\psi(o)\|^2 - 2 \cdot \langle \psi(o), \phi(\sigma) \rangle )\\
+%&\quad= \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot (\|\psi(o)\|^2 - 2 \cdot \langle \psi(o), \phi(\sigma) \rangle + \|\phi(\sigma)\|^2)\\
+%&\quad= \argmin_{o \in \calO} \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot \|\psi(o)-\phi(\sigma)\|^2.
+%\end{align*}
+%\end{proof}
+%\end{comment}
+
+From the definition of scoring rules and Proposition~\ref{prop:MPR-GSR-conversion}, it is clear that the scoring function $s(\sigma,o) = -\|\psi(o)-\phi(\sigma)\|^2$ represents the same mean proximity rule that has the embeddings $(\psi,\phi)$. Extending this to a two-way correspondence, Zwicker~\shortcite{Zwicker08a} showed the following. 
+\begin{proposition}[{\cite[Theorem 4.2.1]{Zwicker08a}}]
+The families of mean proximity rules and scoring rules coincide. 
+\label{prop:equiv}
+\end{proposition}
+%\begin{comment}
+%\begin{proof}[Proof (reconstructed)]
+%Take any mean proximity rule $r$. Let $\phi$ and $\psi$ be any input and output embeddings that generate $r$. Using Proposition~\ref{prop:MPR-GSR-conversion}, we can see that $r$ is a scoring rule with the score function $s(\sigma,o) = -\|\psi(o)-\phi(\sigma)\|^2$. 
+%
+%For the other direction, take any scoring rule $r$ and let $s$ be any score function that generates $r$. Then, let $\phi(\sigma) = (s(\sigma,o_1),\ldots,s(\sigma,o_k))$ where $\{o_1,\ldots,o_k\}$ is some fixed enumeration of $\calO$. Further, let $\psi(o_i) = e_i \in \mathbb{R}^k$ where the $i^{th}$ coordinate is $1$ and the rest are $0$. Then, for any profile $\pi$, we have
+%\begin{align*}
+%o_i \in r(\pi) &\Leftrightarrow \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o_i) \ge \sum_{\sigma \in \rank} n(\pi,\sigma) \cdot s(\sigma,o), \forall o \in \calO\\
+%&\Leftrightarrow \langle \mu(\pi), e_i \rangle \ge \langle \mu(\pi), e_j \rangle, \forall 1 \le j \le k \\
+%&\Leftrightarrow \|\mu(\pi) - e_i\| \ge \|\mu(\pi) - e_j\|, \forall 1 \le j \le k\\
+%&\Leftrightarrow \|\mu(\pi) - \psi(o_i)\|^2 \ge \|\mu(\pi) - \psi(o_j)\|^2, \forall 1 \le j \le k,\\
+%&\Leftrightarrow \|\mu(\pi) - \psi(o_i)\| \ge \|\mu(\pi) - \psi(o_j)\|, \forall 1 \le j \le k,
+%\end{align*}
+%where the third transition follows since $\|e_j\| = 1$ for all $j$ (and thus, $\|\mu(\pi) - \psi(o_j)\|^2 - \langle \mu(\pi), e_j \rangle$ is constant for all $j$). Thus, $r$ is a mean proximity rule.
+%\end{proof}
+%\end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Due to this equivalence, a mean proximity rule has two equivalent representations: a pair of embeddings $(\psi,\phi)$, and a scoring function $s$; it might be the case that neither of the two is unique. We conclude the background on mean proximity rules by mentioning a result due to Zwicker~\shortcite{Zwicker08b}.
+
+%\ns{What about the characterization given in the related paper?}
+\begin{proposition}[\cite{Zwicker08b}]
+All positional scoring rules and the Kemeny rule\footnote{With the outcome space being the set of rankings over the alternatives.} are mean proximity rules. A mean proximity rule is consistent, connected, continuous, and anonymous.
+\label{prop:properties}
+\end{proposition}
+
+Consistency of mean proximity rules is evident from Equation~\eqref{eqn:discrete-mean} because if two profiles have the same output under a mean proximity rule, the same set of outcomes minimize the sum on the right hand side of Equation~\eqref{eqn:discrete-mean} for both profiles, and therefore in their union. Connectedness and continuity are two natural properties of voting rules defined in~\cite{Zwicker08a}. For an alternative, but related, definition of continuity, the reader may refer to~\cite{CRX09}. Conitzer and Sandholm~\shortcite{CS05b} showed that other rules such as Bucklin's rule, Copeland's method, the maximin rule, and the ranked pairs method are not consistent as social welfare functions. Hence, these rules are not mean proximity rules. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Symmetric Mean Proximity Rules}
+\label{sec:symm}
+
+We now begin our investigation of mean proximity rules in the context of social welfare functions that output rankings over alternatives. Thus, from here onwards, we fix $\calO = \rank$. This has the following effect on different equivalent representations of mean proximity rules.
+\begin{enumerate}
+\item The embeddings $\phi,\psi : \rank \to \mathbb{R}^k$ both embed rankings to a Euclidean space. 
+\item The scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes \emph{similarity} between two rankings. This special case was also defined and studied independently by Conitzer et al.~\shortcite{CRX09}, who referred to such rules as \emph{simple ranking scoring functions} (SRSFs). 
+\item Under a fixed enumeration $\sigma_1,\ldots,\sigma_{m!}$ of $\rank$, we can represent a scoring function by an $m! \times m!$ \emph{score matrix} $S$ such that $S_{ij} = s(\sigma_i,\sigma_j)$ for $i,j \in [m!] \triangleq \{1,\ldots,m!\}$. 
+\end{enumerate}
+
+Mean proximity rules, even as social welfare functions, is a broad family of voting rules that also captures rules violating very natural desiderata. For example, a mean proximity rule given by a scoring function $s$ that satisfies $s(\sigma,\sigma') > s(\sigma,\sigma)$ for distinct $\sigma,\sigma' \in \rank$ would not output $\sigma$ even on the profile where all the votes are $\sigma$. Such a rule would violate unanimity. To solve this problem, we propose a simple fix. 
+
+\begin{definition}[Symmetric Mean Proximity Rules (SMPRs)]
+We say that a voting rule is a \emph{symmetric mean proximity rule} (SMPR) if there exists a mean proximity representation of the rule with identical input and output embeddings, i.e., with $\psi = \phi$. 
+\end{definition} 
+
+Since the outcome space for SWFs is identical to the space of input votes (the set of rankings over the alternatives), $\psi = \phi$ is a natural restriction. Note that all embeddings representing an SMPR may not satisfy $\psi = \phi$. We call the embeddings that satisfy this restriction \emph{symmetric embeddings}. From here onwards, we refer to an SMPR using its symmetric embedding $\phi$. 
+
+In what follows, we assume that the SMPRs additionally satisfy rank-distinguishability. For SMPRs, rank-distinguishability is equivalent to the very intuitive restriction that $\phi$ must map all rankings to different points of the Euclidean space. To see this, note that if $\phi$ mapped all rankings to distinct points, then the rule would output $\{\sigma\}$ on a profile with a single vote $\sigma$. Thus, such a rule would achieve rank-distinguishability. Conversely, if $\phi$ mapped two distinct rankings $\sigma$ and $\sigma'$ to the same point in the Euclidean space, then it is easy to see that on every profile either both rankings would belong to the output of the rule or neither. 
+
+%\footnote{We slightly abuse the notation by referring to $\phi(\sigma)$ as the embedding of $\sigma$ under $\phi$.} 
+
+\begin{observation}
+An SMPR satisfies rank-distinguishability if and only if every symmetric embedding $\phi$ representing the rule maps all rankings to distinct points of the Euclidean space. 
+\end{observation}
+
+Under this assumption, it is easy to check that in a profile $\pi$ where all the votes are $\sigma$, we have $\mu(\pi) = \phi(\sigma)$. Thus, the output of every symmetric mean proximity rule on $\pi$ would be the singleton set $\{\sigma\}$. Hence, we remark that symmetry does not only impose intuitive structure on mean proximity rules, but also helps achieve natural desiderata. Further, this has no cost in terms of expressiveness: The embeddings constructed in~\cite{Zwicker08a} for positional scoring rules and the Kemeny rule in fact satisfy the restriction $\psi = \phi$, showing that both these well-known mean proximity rules are symmetric. 
+
+%\begin{lemma}
+%While there exist mean proximity rules violating unanimity, all symmetric mean proximity rules satisfy unanimity.
+%\end{lemma}
+%
+
+%\begin{lemma}
+%All positional scoring rules and the Kemeny rule are symmetric mean proximity rules.
+%\label{lem:symmetric-captures}
+%\end{lemma}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Characterization of symmetric mean proximity rules}
+\label{sec:smpr-char}
+
+Recall that mean proximity rules are equivalent to scoring rules (Proposition~\ref{prop:equiv}). We imposed symmetry on the embeddings of the mean proximity rules. It is natural to ask: \emph{What restriction does symmetry place on other equivalent representations of mean proximity rules?} For an embedding $\phi$, define the scoring function $s_{\phi}$ such that $s_{\phi}(\sigma,\sigma') = -\|\phi(\sigma)-\phi(\sigma')\|^2$ for all $\sigma,\sigma' \in \rank$. Then Equation~\eqref{eqn:discrete-mean} implies that $s_{\phi}$ and $\phi$ are equivalent, i.e., they both represent the same SMPR. Further, the score matrix generated by $s_{\phi}$ has a well-known structure.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Euclidean Distance Matrix (EDM)]
+A $p \times p$ matrix $A = (a_{ij})$ is called a \emph{Euclidean distance matrix (EDM)} if there exist $v_1,\ldots,v_p \in \mathbb{R}^k$ such that $a_{ij} = \|v_i-v_j\|^2$ for all $i,j \in [p]$. 
+\end{definition}
+
+Hence, the score matrix of $s_{\phi}$ is negation of an EDM, and represents the given SMPR.  Conversely, given any score matrix that is negation of an EDM, by definition we can find a symmetric embedding $\phi$ such that the score matrix is generated by the scoring function $s_{\phi}$. Hence, the rule represented by the score matrix must be an SMPR. This yields the following characterization. 
+
+\begin{theorem}
+A voting rule is a symmetric mean proximity rule if and only if it is a scoring rule that has a score matrix whose negation is a Euclidean distance matrix. 
+\label{thm:symm}
+\end{theorem}
+%\begin{proof}
+%Take any symmetric mean proximity rule $r$. Let $\phi$ be arbitrary embedding of $r$, and let $s_{\phi}$ be its equivalent scoring function. Then it is easy to observe that the score matrix of $s_{\phi}$ is, by definition, negation of an EDM. Alternatively, given any score matrix that is negation of an EDM, by definition we can find an embedding $\phi$ such that the score matrix is generated by the scoring function $s_{\phi}$. Hence, the rule is a symmetric mean proximity rule.
+%\begin{comment} % Full Proof
+%For the ``if'' direction, given any scoring rule $r$ with score matrix $S$ such that $-S$ is an EDM, we can find $v_1,\ldots,v_{m!} \in \mathbb{R}^k$ such that $S_{ij} = -\|v_i-v_j\|^2$. Take $\phi(\sigma_i) = v_i$ for all $i$. By Proposition~\ref{prop:MPR-GSR-conversion}, 
+%$$
+%\argmax_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot s(\sigma,\sigma') = \argmin_{\sigma \in \rank} \|\phi(\sigma)-\mu(\pi)\|.
+%$$
+%That is, the rule is a symmetric mean proximity rule. For the ``only if'' direction, given any symmetric mean proximity rule, note that the score matrix created in the proof of Proposition~\ref{prop:equiv} is negation of a Euclidean distance matrix.
+%\end{comment}
+%\end{proof}
+
+Theorem~\ref{thm:symm} gives an algebraic condition on the score matrix of a scoring rule (alternatively, simple ranking scoring function according to~\cite{CRX09}) that translates to the geometric interpretation of existence of a symmetric embedding. To summarize, we provided two motivations for adding symmetry to mean proximity rules: (1) taking identical input and output embeddings is very natural when the outcome space coincides with the space of input votes, and (2) symmetric mean proximity rules achieve additional desiderata of unanimity while still capturing all well-known mean proximity rules. Then, we characterized symmetric mean proximity rules in all three equivalent representations. In the next section, characterize addition of another highly desired property, \emph{neutrality}. While neutrality is also extremely mild (all voting rules of interest are neutral), we show that it adds significant structure to mean proximity rules. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Neutrality and Symmetric Mean Proximity Rules}
+\label{sec:neutrality}
+Recall that neutrality of a voting rule states that the labels of the alternatives do not matter, i.e., relabeling alternatives relabels the output in the same fashion. In this section, we study the restrictions imposed by neutrality on the different equivalent representations of \emph{symmetric} mean proximity rules. We connect neutrality of SMPRs with a notion of neutrality in the embedding, a similar notion of neutrality in the scoring function~\cite{CRX09}, and positive semidefiniteness of the score matrix. In Section~\ref{sec:linear}, we give a constructive characterization by drawing ideas from group representation theory. 
+
+We begin by defining neutrality of scoring functions as in~\cite{CRX09}. 
+
+\begin{definition}[Neutral Scoring Function~\cite{CRX09}]
+A scoring function $s: \rank \times \rank \rightarrow \mathbb{R}$ is called \emph{neutral} if $s(\tau \sigma, \tau \sigma') = s(\sigma,\sigma')$ for all rankings $\sigma,\sigma' \in \rank$ and permutations $\tau \in S_m$. We say that a score matrix is neutral if its underlying scoring function is neutral. 
+\end{definition}
+In words, a scoring function is neutral if similarity between two rankings given by the function does not change if both rankings are permuted in the same way. Conitzer et al.~\cite{CRX09} showed that any scoring function $s$ of a neutral mean proximity rule $r$ can be \emph{neutralized}, i.e., converted to an equivalent neutral scoring function.
+
+\begin{proposition}[\cite{CRX09}] Let $s$ be a scoring function representing a mean proximity rule $r$ that is neutral. Then, an equivalent neutral scoring function $s^{\nt}$ representing the same rule $r$ can be defined as follows. For all rankings $\sigma,\sigma' \in \rank$ and permutations $\tau \in S_m$, 
+\begin{equation}
+s^{\nt}(\sigma,\sigma') = \sum_{\tau \in S_m} s(\tau \sigma, \tau \sigma').
+\label{eqn:s-nt}
+\end{equation}
+\label{prop:neutral-scoring}
+\end{proposition}
+
+Additionally, it is easy to check that by definition every neutral scoring function represents a neutral mean proximity rule. It immediately follows that:
+ 
+\begin{proposition}[{\cite[Lemma~2]{CRX09}}]
+A mean proximity rule is neutral if and only if there exists a neutral scoring function representing it.
+\label{prop:gsr-neutral}
+\end{proposition}
+
+\noindent \textbf{What does this mean for us?} Proposition~\ref{prop:gsr-neutral} characterizes the condition on the scoring function (and thus on the score matrix) that neutrality imposes on mean proximity rules. However, we are interested in addition of neutrality to \emph{symmetric} mean proximity rules. Together with Theorem~\ref{thm:symm}, Proposition~\ref{prop:gsr-neutral} implies that a voting rule is a symmetric mean proximity rules if and only if it has a neutral score matrix and a score matrix that is negation of an EDM. \emph{Is there one score matrix satisfying both conditions?} \emph{What conditions does neutrality impose on the embedding of an SMPR?} To answer this, we first introduce a notion of neutrality for an embedding.
+
+\begin{definition}[Neutral Embedding]
+We say that an embedding $\phi:\rank \rightarrow \mathbb{R}^k$ is \emph{neutral} if for all rankings $\sigma,\sigma' \in \rank$ and permutations $\tau \in S_m$, we have $\|\phi(\sigma)-\phi(\sigma')\| = \|\phi(\tau \sigma)-\phi(\tau\sigma')\|$.
+\end{definition}
+
+It can be checked that if the embedding $\phi$ is neutral, then its corresponding score function $s_{\phi}$ is also neutral. Further, similarly to scoring functions, an embedding can also be neutralized. 
+
+\begin{lemma}
+Let $\phi: \rank \to \mathbb{R}^k$ be an embedding of an SMPR $r$. Then, $\phi^{\nt}$ defined in Equation~\eqref{eqn:phi-nt} below is an equivalent neutral embedding of the same SMPR $r$. 
+\begin{equation}
+\phi^{\nt}(\sigma) = [\phi(\tau_1 \sigma)^T \phi(\tau_2 \sigma)^T \ldots \phi(\tau_{m!} \sigma)^T]^T,
+\label{eqn:phi-nt}
+\end{equation}
+where $\tau_1,\ldots,\tau_{m!}$ is a fixed enumeration of the permutations in $S_m$. Further, the neutralization of $\phi$ and the neutralization of its scoring function $s_{\phi}$ are connected via the equation $s_{\phi^{\nt}} = s ^{\nt}_{\phi}$, where the neutral scoring function $s ^{\nt}_{\phi}$ defined in Equation~\eqref{eqn:s-nt} represents $r$. 
+\label{lem:neutral-embedding}
+\end{lemma}
+\begin{proof}
+First, we show that $\phi^{\nt}$ is neutral. For all rankings $\sigma,\sigma' \in \rank$ and permutations $\tau \in S_m$, 
+\begin{align*}
+\|\phi^{\nt}(\tau \sigma)-\phi^{\nt}(\tau \sigma')\|^2 &= \sum_{\tau' \in S_m} \|\phi(\tau' \tau \sigma)-\phi(\tau' \tau \sigma)\|^2 \\
+&= \sum_{\tau' \in S_m} \|\phi(\tau' \sigma)-\phi(\tau' \sigma)\|^2 = \|\phi^{\nt}(\sigma)-\phi^{\nt}(\sigma)\|^2,
+\end{align*}
+where the second equality holds because for $\tau \in S_m$, we have $\{\tau' \tau | \tau' \in S_m\} = S_m$, which is a property of any group. Hence, $\phi^{\nt}$ is neutral. Next, for all rankings $\sigma,\sigma' \in \rank$, 
+\begin{align*}
+s_{\phi^{\nt}}(\sigma,\sigma') = -\|\phi^{\nt}(\sigma)-\phi^{\nt}(\sigma')\|^2 &= - \sum_{\tau \in \rank} \|\phi(\tau \sigma)-\phi(\tau \sigma')\|^2  \\
+&= \sum_{\tau \in \rank} s_{\phi}(\tau \sigma,\tau \sigma') = s_{\phi}^{\nt}(\sigma,\sigma').
+\end{align*}
+Thus, we have $s_{\phi^{\nt}} = s_{\phi}^{\nt}$. The scoring function $s_{\phi}$ is equivalent to the embedding $\phi$, and thus also represents the rule $r$. From Proposition~\ref{prop:neutral-scoring}, the scoring function $s_{\phi}^{\nt} = s_{\phi^{\nt}}$ also represents $r$. Hence, the embedding $\phi^{\nt}$ also represents $r$. 
+\end{proof}
+
+We remark that the neutralized embedding $\phi^{\nt}$ is not very satisfactory because it maps rankings to a Euclidean space with dimension $m!$ times the dimension used by $\phi$. However, it has significant structure. For example, in addition to neutrality we also have 
+$$
+\|\phi^{\nt}(\sigma)\|^2 = \sum_{\tau \in S_m} \|\phi(\tau \sigma)\|^2 = \sum_{\sigma' \in \rank} \|\phi(\sigma')\|^2.
+$$
+Hence, $\|\phi^{\nt}(\sigma)\|$ is independent of $\sigma$. That is, $\phi^{\nt}$ is an \emph{equal norm embedding}.
+
+\begin{definition}[Equal Norm Embedding]
+We say that an embedding $\phi : \rank \rightarrow \mathbb{R}^k$ has \emph{equal norm} if $\|\phi(\sigma)\| = \|\phi(\sigma')\|$ for all rankings $\sigma,\sigma' \in \rank$.
+\end{definition}
+
+For equal norm embeddings, squares of Euclidean distances in Proposition~\ref{prop:MPR-GSR-conversion} can be replaced by inner products as follows.
+\begin{lemma}
+For an equal norm embedding $\phi$ of an SMPR $r$, the scoring function $s$ given by $s(\sigma,\sigma') = \langle \phi(\sigma),\phi(\sigma') \rangle$ for all rankings $\sigma,\sigma' \in \rank$ represents $r$. 
+\label{lem:inner-product}
+\end{lemma}
+\begin{proof}
+Let the equal norm embedding $\phi$ have $\|\phi(\sigma)\| = c$ for all $\sigma \in \rank$. From Proposition~\ref{prop:MPR-GSR-conversion}, we know that on a profile $\pi$, 
+\begin{align*}
+r(\pi) &= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \pi} \|\phi(\sigma)-\phi(\sigma')\|^2 \\
+&= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \pi} \left( c^2 + c^2 - 2 \langle \phi(\sigma), \phi(\sigma')\rangle\right) \\
+&= \argmin_{\sigma \in \rank} 2 n c^2 - 2 \sum_{\sigma' \in \pi} \langle \phi(\sigma), \phi(\sigma')\rangle = \argmax_{\sigma \in \rank} \sum_{\sigma' \in \pi} \langle \phi(\sigma), \phi(\sigma')\rangle.
+\end{align*}
+Hence, by definition $s$ is a scoring function representing $r$. 
+\end{proof}
+
+The score matrix generated by the inner product scoring function of Lemma~\ref{lem:inner-product} has a well-known structure. 
+\begin{definition}[Gramian Matrix]
+A $p \times p$ matrix $A = (a_{ij})$ is called \emph{Gramian} if there exist vectors $v_1,\ldots,v_p \in \mathbb{R}^k$ such that $a_{ij} = \langle v_i,v_j \rangle$ for all $i,j \in [k]$. It is well-known that a matrix is Gramian if and only if it is positive semidefinite. 
+\end{definition}
+
+With this machinery, we are ready to answer the questions we posed regarding conditions on various representations of an SMPR imposed by neutrality. We present the answer in the form of the following characterization.
+%\begin{theorem}
+%A voting rule is a neutral symmetric mean proximity rule if and only if it is a scoring rule that has a score matrix which is neutral, positive semidefinite, and has equal diagonal entries. 
+%\label{thm:neutral-psd}
+%\end{theorem}
+%\begin{proof}
+%Take any neutral symmetric mean proximity rule $r$. By Theorem~\ref{thm:linear-char}, it has a linear embedding $\phi$. Consider its normalization $\hat{\phi}$, which is also linear by Lemma~\ref{lem:preservation}. Next, consider the Gramian matrix (and hence positive semidefinite) $S$ of $\hat{\phi}$, which is a score matrix of $r$ due to Lemma~\ref{lem:inner-product}.  Using the fact that linear embeddings are equal norm neutral embeddings (Lemma~\ref{lem:linear-neutral}) and Lemma~\ref{lem:inner-products-preserve}, we can see that $\langle \hat{\phi}(\tau \sigma), \hat{\phi}(\tau \sigma') \rangle = \langle \hat{\phi}(\sigma), \hat{\phi}(\sigma') \rangle$ for all $\tau,\sigma,\sigma' \in \rank$. Hence, $S$ is also neutral. Further, equal norm property of $\hat{\phi}$ implies that $S$ has equal diagonal entries. 
+%
+%Conversely, take any scoring rule $r$ with a score matrix $S$ that is neutral, positive semidefinite, and has equal diagonal entries. Since $S$ is positive semidefinite, it is also Gramian. Then, we can find vectors $v_1,\ldots,v_{m!}$ such that $S_{ij} = \langle v_i,v_j \rangle$. Take $\phi(\sigma_i) = v_i$. Equal diagonal entries of $S$ imply that $\phi$ has equal norm. Hence, $\phi$ is an equal norm embedding whose Gramian matrix is a score matrix of $r$. Hence, $r$ is a symmetric mean proximity rule with embedding $\phi$. Further, it is easy to see that neutrality of $S$ and equal norm property of $\phi$ imply neutrality of $\phi$, which in turn implies neutrality of $r$. 
+%\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}
+For a mean proximity rule $r$, the following are equivalent. 
+\begin{enumerate}
+\item $r$ is neutral and symmetric.
+\item There exists a neutral symmetric embedding representing $r$.
+\item There exists a score matrix representing $r$ which is neutral and negation of an EDM. 
+\item There exists a score matrix representing $r$ which is neutral, positive semidefinite, and has equal diagonal entries.
+\end{enumerate}
+\label{thm:neutral-smpr}
+\end{theorem}
+\begin{proof}
+It is easy to show that the second and the third conditions imply the first condition. If $r$ has a score matrix which is neutral and negation of an EDM, then by Proposition~\ref{prop:gsr-neutral} and Theorem~\ref{thm:symm}, $r$ is a neutral SMPR. Similarly, if $r$ is a symmetric mean proximity rule with a neutral embedding $\phi$, then for a profile $\pi$, we have 
+\begin{align*}
+r(\tau \pi) &= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \pi} \|\phi(\sigma)-\phi(\tau \sigma')\|^2 \\
+&= \tau \; \argmin_{\sigma \in \rank} \sum_{\sigma' \in \pi} \|\phi(\tau \sigma)-\phi(\tau \sigma')\|^2 \\
+&= \tau \; \argmin_{\sigma \in \rank} \sum_{\sigma' \in \pi} \|\phi(\sigma)-\phi(\sigma')\|^2 = \tau r(\pi),
+\end{align*}
+where the first transition follows from Proposition~\ref{prop:MPR-GSR-conversion}, and the third transition follows from neutrality of $\phi$. Thus, $r$ is a neutral SMPR. 
+
+Conversely, let $r$ be a neutral SMPR and $\phi$ be its embedding. We proved in Lemma~\ref{lem:neutral-embedding} that $s_{\phi}^{\nt} = s_{\phi^{\nt}} = s$ (say). Then, $s = s_{\phi}^{\nt}$ implies that the score matrix corresponding to the scoring function $s$ is neutral. Further, $s = s_{\phi^{\nt}}$ implies that the score matrix is also negation of an EDM. Hence, the score matrix corresponding to the scoring function $s$ is both neutral and negation of an EDM, implying the third condition. Further, the equivalent embedding $\phi^{\nt}$ is neutral and represents $r$, implying the second condition. Thus, we have shown that the first three conditions are equivalent. 
+
+For equivalence with the fourth condition, take a neutral SMPR $r$ and its embedding $\phi$. We saw that the embedding $\phi^{\nt}$ has equal norm, and hence the score matrix $S$ corresponding to its scoring function $s$ given by $s(\sigma,\sigma') = \langle \phi^{\nt}(\sigma),\phi^{\nt}(\sigma')\rangle$ for all $\sigma,\sigma' \in \rank$ is a Gramian score matrix representing $r$ (Lemma~\ref{lem:inner-product}). Since $S$ is Gramian, it is also positive semidefinite. Equal norm property of $\phi^{\nt}$ implies that $S$ has equal diagonal entries. Finally, neutrality of $\phi^{\nt}$ implies neutrality of $S$. Hence, $S$ satisfies the requirements of the fourth condition. 
+
+Conversely, take a mean proximity rule $r$ with a score matrix $S$ that is neutral, positive semidefinite, and has equal diagonal entries. Then, we can find an embedding $\phi$ such that $S$ is its Gramian matrix. Neutrality and equal diagonal entries of $S$ imply neutrality and equal norm property of $\phi$. The latter implies that $\phi$ also represents $r$ (Lemma~\ref{lem:inner-product}). Hence, $r$ must be a neutral SMPR. 
+\end{proof}
+
+%TOADD: We point out that more properties could be proven for the score matrix $S$ constructed in the proof of Theorem~\ref{thm:neutral-smpr} for any given neutral symmetric mean proximity rule (which is the Gramian of a normalized linear embedding $\hat{\phi}$). In addition to being neutral and positive semidefinite, and having equal diagonal entries, the sum of entries along each row and column of $S$ is also zero. To see this, note that $\hat{\phi}_{avg} = 0$. Hence, the sum of entries of $S$ across row $i$ or column $i$ is $m! \cdot \langle \hat{\phi}(\sigma_i), \hat{\phi}_{avg} \rangle = 0$. Another interesting factoid is that existence of a score matrix that is both neutral and positive semidefinite with equal diagonal entries can be established alternatively by taking any score matrix that is positive semidefinite and has equal diagonal entries (Gramian of any normalized embedding), and then neutralizing it by the construction of Conitzer et al.~\cite{CRX09} given in Equation~\eqref{eqn:s-nt}.
+
+%It is worthwhile pointint out that following steps very similar to those in the proof of Theorem~\ref{thm:neutral-smpr}, one can also show that a mean proximity rule (not necessarily symmetric) is neutral if and only if it has a representation in which both input and output embeddings are neutral. 
+
+Theorem~\ref{thm:neutral-smpr} translates neutrality of an SMPR to neutrality of its embedding. While it is straightforward to check if a given embedding is neutral, generating neutral embeddings is a non-trivial task. This limits the constructiveness of the characterization. Next, we improve the characterization by showing that neutrality of an embedding is equivalent to a more elegant structure that gives an easy way to generate neutral embeddings. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Linear Embeddings}
+\label{sec:linear}
+
+Group representation theory has played a key role in an extremely diverse set of fields that includes but is not limited to\footnote{See \url{http://wdjoyner.com/repn_thry_appl.html} for a wider range of applications.} coding theory~\cite{MS77}, quantum mechanics~\cite{BR86}, and crystallography (in chemistry)~\cite{KHS93}. Linear representation of a group essentially maps every group element to a linear transformation of a vector space (or from a vector space to another vector space), i.e., to an element of the general linear group on the vector space. When a basis is chosen for the vector space (or vector spaces), the linear transformation can be represented via a matrix. This is known as matrix representation of a group. 
+
+In our case, we use representation theory of the symmetric group, which has gained much attention and for which many interesting structures have been discovered leveraging the extreme symmetry of the group~\cite{JKCR84}. We fix the standard Euclidean basis for simplicity. Now, we are ready to introduce \emph{linear embeddings} using ideas from linear representations of the symmetric group. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Linear Embeddings]
+We say that an embedding $\phi:\rank \rightarrow \mathbb{R}^k$ is \emph{linear} if there exists a representation function $R : S_m \rightarrow \mathbb{R}^{k \times k}$, called the representation of $\phi$, mapping each permutation to a $k \times k$ real matrix such that 
+\begin{enumerate}
+\item the identity permutation $\tau_e$ is mapped to the identity matrix, i.e., $R(\tau_e) = I_k$,
+\item $R$ respects the multiplication operator of the symmetric group; $R(\tau_1 \tau_2) = R(\tau_1) R(\tau_2)$ for all permutations $\tau_1,\tau_2 \in S_m$ (where $\tau_1 \tau_2$ represents the multiplication of $\tau_1$ and $\tau_2$ within $S_m$), 
+\item $R$ maps permutations to orthogonal matrices, i.e., $R(\tau)^T = R(\tau)^{-1}$ for all permutations $\tau \in S_m$, and
+\item permuting a ranking is equivalent to rotating---because $R$ uses orthogonal matrices---its embedding appropriately; $\phi(\tau \sigma) = R(\tau) \phi(\sigma)$ for all rankings $\sigma \in \rank$ and permutations $\tau \in S_m$.
+\end{enumerate}
+\end{definition}
+
+It can be seen very easily that the first and the second conditions together imply that $R_{\tau^{-1}} = R(\tau)^{-1}$ for all permutations $\tau \in S_m$, where $\tau^{-1}$ is the inverse of $\tau$ in $S_m$. Further, condition (3) is completely unrestrictive: A striking result from the group representation theory states that for a representation $R$ of any finite group (not just the symmetric group), there exists a matrix $P$ such that the equivalent representation $R'$ defined by $R'(g) = P R(g) P^{-1}$ for each group element $g$ uses orthogonal matrices (see, e.g.,~\cite[Theorem~6.3]{BMWM63}). That is, any representation could be converted to a representation that uses orthogonal matrices. In what follows, we use $R_{\tau}$ instead of $R(\tau)$ for notational convenience. 
+
+\ns{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}
+
+Take any embedding $\phi$ of a neutral symmetric mean proximity rule $r$, and its equivalent neutral embedding $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt}. Observe that for any $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are just permutations of each other. We use this to show the following.
+\begin{lemma}
+For any embedding $\phi$ of a neutral symmetric mean proximity rule $r$, the equivalent neutral embedding $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt} is linear.
+\label{lem:nt-linear}
+\end{lemma}
+\begin{proof}
+Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. We need to show that there exists a representation $R$ such that for any $\tau,\sigma \in \rank$, $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
+$$
+\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
+$$
+Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector will be $\phi(\tau_j \sigma)$ where $\tau_j = \tau_i \tau$, which is the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every value $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every value $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, it is easy to verify that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ since $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$
+\end{proof}
+
+Combining the proof of Theorem~\ref{thm:neutral-smpr} with Lemma~\ref{lem:nt-linear}, we know that every neutral symmetric mean proximity rule has a linear embedding. On the contrary, we show that every linear embedding represents a neutral symmetric mean proximity rule. For that, we use the following result which shows the real strength of linear embeddings.
+\begin{lemma}
+For any linear embedding $\phi$ and any $\tau,\sigma,\sigma' \in \rank$, 
+$$
+\langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle = \langle \phi(\sigma), \phi(\sigma') \rangle.
+$$
+\label{lem:inner-product-preserve}
+\end{lemma}
+\begin{proof}
+Let $\phi$ be any linear embedding and let $R$ be its representation. Then for any $\tau,\sigma,\sigma' \in \rank$,
+\begin{equation}
+\langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle = \langle R_{\tau}\phi(\sigma), R_{\tau}\phi(\sigma') \rangle = \langle \phi(\sigma), R_{\tau}^T R_{\tau}\phi(\sigma') \rangle = \langle \phi(\sigma), \phi(\sigma') \rangle.
+\label{eqn:linear-inner-product}
+\end{equation}
+Here, the last transition holds because $R_{\tau}$ is an orthogonal matrix by definition. 
+\end{proof}
+Taking $\sigma = \sigma'$, we get:
+\begin{corollary}
+Every linear embedding has equal norm.
+\label{cor:linear-equal-norm}
+\end{corollary}
+
+\begin{lemma}
+Any linear embedding is neutral, and hence represents a neutral symmetric mean proximity rule.
+\label{lem:linear-neutral}
+\end{lemma}
+\begin{proof}
+For any $\tau,\sigma,\sigma' \in \rank$,
+\begin{align*}
+\|\phi(\tau \sigma)-\phi(\tau \sigma')\|^2 &= \|\phi(\tau \sigma)\|^2 + \|\phi(\tau \sigma')\|^2 - 2\cdot \langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle \\
+&= \|\phi(\sigma)\|^2 + \|\phi(\sigma')\|^2 - 2\cdot \langle \phi(\sigma), \phi(\sigma') \rangle = \|\phi(\sigma)-\phi(\sigma')\|^2.
+\end{align*}
+Thus, $\phi$ is neutral. By Theorem~\ref{thm:neutral-smpr}, it represents a neutral symmetric mean proximity rule.
+\end{proof}
+
+Combining Lemmas~\ref{lem:nt-linear} and~\ref{lem:linear-neutral} gives the following characterization.
+\begin{theorem}
+A symmetric mean proximity rule is neutral if and only if it has a linear embedding.
+\label{thm:linear-char}
+\end{theorem}
+
+We showed that all linear embeddings are neutral, but we haven't shown that all neutral embeddings are linear as well. It turns out that this indeed holds, but requires a much deeper proof.
+
+\subsection{Connection between Neutrality and Linearity}
+
+In this section, we show that neutrality of an embedding is equivalent to linearity. For this, we first need some important results about embeddings of neutral symmetric mean proximity rules.
+
+\begin{lemma}
+Let $r$ be any neutral voting rule. Let $\pi_{symm}$ be the profile containing each ranking exactly once, i.e., $n(\pi_{symm},\sigma) = 1$ for all $\sigma \in \rank$. Then, $r(\pi_{symm}) = \rank$. 
+\label{lem:average-profile}
+\end{lemma}
+\begin{proof}
+Let $r(\pi_{symm}) = T \subseteq \rank$. Suppose $T \neq \rank$, so there exists a $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there exists a $\sigma \in T$. Now, take $\tau$ to be the permutation that sends $\sigma$ to $\sigma'$. % = \sigma' \sigma^{-1}$, where $\sigma^{-1}$ is the inverse of $\sigma$ in the symmetric group $S_m$. 
+It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$. This implies that $r$ violates neutrality, a contradiction. 
+\end{proof}
+
+Therefore, for any embedding $\phi$ of a neutral symmetric mean proximity rule, $\|\phi(\sigma)-\mu(\pi_{symm})\|$ must be a constant independent of $\sigma$ so that all rankings are tied on $\pi_{symm}$. Let $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$. Define an embedding $\hat{\phi}$  such that $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$. We call $\hat{\phi}$ the \emph{normalization} of $\phi$. We argued that it is an equal norm embedding. Note that normalization of an embedding is just a translation. Intuitively, this does not change the geometry of the points to which the rankings are embedded, and hence should represent the same symmetric mean proximity rule. We show that in addition, normalization also preserves neutrality and linearity. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lemma}
+For any embedding $\phi$ of a neutral symmetric mean proximity rule $r$, its normalization $\hat{\phi}$ is an equivalent equal norm embedding. Further, an embedding is neutral (resp. linear) if and only if its normalization is neutral (resp. linear). 
+\label{lem:preservation}
+\end{lemma}
+\begin{proof}
+Let $\phi : \rank \rightarrow \mathbb{R}^k$ be any embedding of a neutral symmetric mean proximity rule $r$. Consider its normalization $\hat{\phi}$. From Lemma~\ref{lem:average-profile}, it is clear that all $\phi(\sigma)$ must be at equal distance from $\mu(\pi_{symm}) = \phi_{avg}$. Hence, $\hat{\phi} = \phi-\phi_{avg}$ must be an equal norm embedding. Further, for any rankings $\sigma, \sigma' \in \rank$, $\|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\| = \|\phi(\sigma)-\phi_{avg}-\phi(\sigma')+\phi_{avg}\| = \|\phi(\sigma)-\phi(\sigma')\|$. Now, Proposition~\ref{prop:MPR-GSR-conversion} trivially implies that both $\phi$ and $\hat{\phi}$ represent the same rule. 
+%, for any profile $\pi$,
+%\begin{align*}
+%r(\pi) &= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi(\sigma)-\phi(\sigma')\|^2 \\
+%&= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|^2.
+%\end{align*}
+%Thus, $\hat{\phi}$ also represents $r$. 
+
+If $\phi$ is neutral, then for any $\tau,\sigma,\sigma' \in \rank$, we have $\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|$. Hence, $\hat{\phi}$ is neutral too. The proof of the converse works exactly in the opposite direction.
+
+Finally, assume $\phi$ is linear with representation $R$. First, we have that for any $\tau,\sigma \in \rank$, $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma$, we get that 
+$$
+\frac{1}{m!} \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma) = R_{\tau} \left (\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) \right).
+$$
+However, 
+$$
+\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}.
+$$
+Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in \rank$. Now, for any $\tau,\sigma \in \rank$, 
+$$
+\hat{\phi}(\tau \sigma) = \phi(\tau \sigma) - \phi_{avg} = R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg} = R_{\tau}\hat{\phi}(\sigma).
+$$
+Thus, $\hat{\phi}$ is also linear with the same representation $R$. The proof of the converse works by observing that $\phi = \hat{\phi}+\phi_{avg}$. 
+%Let $\phi'$ be arbitrary embedding generated by translating and scaling $\phi$, that is, for some $a \in \mathbb{R}\setminus\{0\}$ and $b \in \mathbb{R}^k$, $\phi'(\sigma) = a \cdot \phi(\sigma) + b$ for all $\sigma \in \rank$. For any rankings $\sigma$ and $\sigma'$, $\|\phi'(\sigma)-\phi'(\sigma')\| = \|a\phi(\sigma)+b-a\phi(\sigma')-b\| = |a| \cdot \|\phi(\sigma)-\phi(\sigma')\|$. Now by Proposition~\ref{prop:MPR-GSR-conversion}, for any profile $\pi$,
+%\begin{align*}
+%r(\pi) &= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi(\sigma)-\phi(\sigma')\|^2 \\
+%&= \argmin_{\sigma \in \rank} a^2 \cdot \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi(\sigma)-\phi(\sigma')\|^2 \\
+%&= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi'(\sigma)-\phi'(\sigma')\|^2,
+%\end{align*}
+%where the second transition follows since $a^2 > 0$. This shows that $\phi'$ also represents $r$. 
+%
+%Further, if $\phi$ is neutral, then for any $\tau,\sigma,\sigma' \in \rank$, we have $\|\phi'(\tau \sigma)-\phi'(\tau \sigma')\| = a \cdot \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = a \cdot \|\phi(\sigma)-\phi(\sigma')\| = \|\phi'(\sigma)-\phi'(\sigma')\|$. Hence, $\phi'$ is neutral as well. 
+%
+%Finally, assume $\phi$ is linear with representation $R$ and $\phi'$ is the normalization of $\phi$. First, we have that for any $\tau,\sigma \in \rank$, $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma$, we get that $(1/{m!}) \sum_{\sigma \in \rank} \phi(\tau \sigma) = (1/{m!}) \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma)$. However, $(1/{m!}) \sum_{\sigma \in \rank} \phi(\tau \sigma) = (1/{m!}) \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}$. Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in \rank$. Let $c = \|\phi(\sigma)-\phi_{avg}\|$ (equal for all $\sigma \in \rank$). Then, for any $\tau,\sigma \in \rank$, 
+%$$
+%\phi'(\tau \sigma) = (1/c) \cdot (\phi(\tau \sigma) - \phi_{avg}) = (1/c) \cdot (R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg}) = R_{\tau}\phi'(\sigma).
+%$$
+%Thus, $\phi'$ is also linear with the same representation $R$.
+\end{proof}
+
+Lemma~\ref{lem:preservation} shows that the normalization $\hat{\phi}$ of any neutral embedding $\phi$ of a neutral symmetric mean proximity is an equivalent equal norm and neutral embedding. We now show that it is also linear.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}
+An embedding is neutral if and only if its normalization is linear. 
+\label{thm:neutral-linear}
+\end{theorem}
+\begin{proof}
+First, let $\phi$ be any embedding whose normalization $\hat{\phi}$ is linear. Then, $\hat{\phi}$ is also neutral (Lemma~\ref{lem:linear-neutral}), implying that $\phi$ is neutral (Lemma~\ref{lem:preservation}).
+
+Conversely, take any neutral embedding $\phi : \rank \rightarrow \mathbb{R}^k$ and let $r$ be the rule it represents. We want to show that $\hat{\phi}$ is linear. By Lemma~\ref{lem:preservation}, we know that $\hat{\phi}$ is an equal norm and neutral (also $k$-dimensional). Construct another equivalent embedding $\phi^f$ as follows. Let $k' \le k$ be the dimension of the affine subspace of $\mathbb{R}^k$ spanned by the points $\hat{\phi}(\sigma_1),\ldots,\hat{\phi}(\sigma_{m!})$. If $k' = k$, then take $\phi^f = \hat{\phi}$. Otherwise, $k' < k$ and we can transform the points to $\mathbb{R}^{k'}$ to get $\phi^f$ that preserves all distances, and thus represents $r$ as well. 
+
+Formally, note that $\hat{\phi}_{avg} = 0$. Hence, the affine space spanned by the embeddings under $\hat{\phi}$ form a linear subspace of $\mathbb{R}^k$ of dimension $k'$. Take any orthonormal basis $v_1,\ldots,v_{k'}$ of this linear subspace, write every point as a linear combination of the $k'$ basis vectors, and let $\phi^f$ output the coefficients of the linear combination. Thus, if we construct a $k' \times k$ matrix $P$ with $v_1,\ldots,v_{k'}$ as its rows, then $\phi^f(\sigma) = P \phi(\sigma)$ for all $\sigma \in \rank$. It is now standard to show that $\phi^f$ preserves distances between any two points in the affine subspace, hence the distance between any point in $\hat{\phi}(\sigma_1),\ldots,\hat{\phi}(\sigma_{m!})$ and any point in its convex hull. Note that by definition, preserving these distances is enough to represent the same rule $r$. 
+
+Thus, the embedding $\phi^f$ is a $k'$-dimensional equal norm neutral embedding of $r$. Further, $\phi^f$ is of \emph{full dimension}, i.e., the points where the rankings are mapped span the whole of $\mathbb{R}^{k'}$. Note that this implies $k' \le m!$. Consider the matrix $A = [\phi^f(\sigma_1), \ldots, \phi^f(\sigma_{m!})]$, the $k' \times m!$ matrix whose columns are the coordinate vectors of the points. This implies that $A$ must have full rank $k'$. Fix any $\tau \in \rank$, and consider $B = [\phi^f(\tau \sigma_1), \ldots, \phi^f(\tau \sigma_{m!})]$. Then, $(B^T B)_{ij} = \langle \phi^f(\tau \sigma_i), \phi^f(\tau \sigma_j) \rangle = \langle \phi^f(\sigma_i), \phi^f(\sigma_j) \rangle = (A^T A)_{ij}$ for all $i,j$, where the second transition follows since $\hat{\phi}$ (thus, $\phi^f$) is neutral (Lemma~\ref{lem:preservation}). Thus, $A^T A = B^T B$.
+
+We now show that there exists a matrix $R_{\tau}$ such that $\phi^f(\tau \sigma) = R_{\tau} \phi^f(\sigma)$ for all $\sigma \in \rank$. Combining all the equations, it is equivalent to existence of $R_{\tau}$ such that $R_{\tau} A = B$, i.e., existence of an $X$ such that $A^T X = B^T$. It is well-known that the system of equations $Ax=b$ has a solution if and only if $AA^{+}b = b$, where $A^{+}$ is the Moore-Penrose pseudoinverse of $A$. Trivially extending this to multiple systems of linear equations, we can see that the necessary and sufficient condition for existence of the required $R_{\tau}$ is $A^T (A^T)^{+} B^T = B^T$, or equivalently, $B A^{+} A = B$. The last derivation uses the fact that $(A^T)^{+} = (A^{+})^T$. Now, 
+\begin{align*}
+B &= B B^{+} B = B \left( (B^T B)^{+} B^T \right) B = B (B^T B)^{+} \left( B^T B \right) \\
+&= B (A^T A)^{+} \left( A^T A \right) = B \left( (A^T A)^{+} A^T \right) A = B A^{+} A.
+\end{align*}
+Refer~\cite{BH12} for the identities $X = X X^{+} X$ (used in the first transition) and $X^{+} = (X^T X)^{+} X^T$ (used in the second and the fifth transitions) regarding Moore-Penrose pseudoinverses. The fourth transition follows since $A^T A = B^T B$. Hence, we have shown that for every $\tau \in \rank$, there exists a matrix $R_{\tau}$ such that $\phi^f(\tau \sigma) = R_{\tau} \phi^f(\sigma)$ for all $\sigma \in \rank$. Further, one solution of $Ax=b$ is $x = A^{+}b$. Extending this, we obtain that one solution of $A^T X = B^T$ is $X = (A^T)^{+} B^T$. Hence, $R_{\tau} = X^T = BA^{+}$. Choose this solution for every $\tau \in \rank$. 
+
+Recall that the rank of product of two matrices is at most the minimum of the rank of the two matrices, and $R_{\tau} A = B$. Also, both $A$ and $B$ are rank $k'$ matrices. Hence, $rank(R_{\tau}) \ge k'$. However, $R_{\tau}$ is a $k' \times k'$ matrix. Hence, we conclude that $R_{\tau}$ is invertible for every $\tau \in \rank$. We now show that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in \rank$. 
+
+%First, note that $R_{\tau}^T B = (A^{+})^T B^T B = (A^{+})^T A^T A = (A A^{+})^T A = I A = A$, where the second transition holds since $B^T B = A^T A$, and the fourth transition holds since $A A^{+} = I$ for any full row-rank matrix $A$ (see, e.g.,~\cite{BH12}). Thus, we have that $R_{\tau}^T B = A$. Applying $R_{\tau}$ on both sides, we get that $R_{\tau} R_{\tau}^T B = R_{\tau} A = B$. Hence, 
+%$$
+%R_{\tau} R_{\tau}^T \phi^f(\sigma) = \phi^f(\sigma), \forall \sigma \in \rank.
+%$$
+%
+%Similarly, $\phi^f(\sigma) = \phi^f(\tau^{-1} \tau \sigma) = R_{\tau^{-1}} \phi^f(\tau \sigma) = R_{\tau^{-1}} R_{\tau} \phi^f(\sigma)$ for every $\sigma \in \rank$. Hence, 
+%$$
+%R_{\tau^{-1}} R_{\tau} \phi^f(\sigma) = \phi^f(\sigma), \forall \sigma \in \rank.
+%$$
+
+Fix any $\tau_1,\tau_2 \in \rank$. For any $\sigma \in \rank$, $\phi^f(\tau_1 \tau_2 \sigma) = R_{\tau_1 \tau_2} \phi^f(\sigma)$. Also, $\phi^f(\tau_1 \tau_2 \sigma) = R_{\tau_1} \phi^f(\tau_2 \sigma) = R_{\tau_1}R_{\tau_2} \phi^f(\sigma)$. Thus, we have that $R_{\tau_1 \tau_2} \phi^f(\sigma) = R_{\tau_1} R_{\tau_2} \phi^f(\sigma)$ for all $\sigma \in \rank$. We now show that this implies $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$. Form the partial $A$ matrix, call it $A_p$, by only taking $k'$ linearly independent columns of $A$. Then, $A_p$ is an invertible square matrix. Also, $R_{\tau_1 \tau_2} A_p = R_{\tau_1} R_{\tau_2} A_p$. Multiplying by $A_p^{-1}$ on both sides, we get the desired result. Thus, $\phi^f$ is a linear embedding. We now show that $\hat{\phi}$ is also linear. 
+
+Consider the orthonormal basis $v_1,\ldots,v_{k'}$ that was used in constructing $\phi^f$ from $\hat{\phi}$ and the matrix $P$ that has $v_i's$ as its rows. Complete this to a basis $v_1,\ldots,v_k$ of $\mathbb{R}^k$, and consider the matrix $Q$ that has all the $v_i's$ as its rows. Then, $Q \hat{\phi}(\sigma) = [\phi^f(\sigma) 0 \ldots 0]^T$ where the number of zeros is $k-k'$. For any $\tau \in \rank$, construct the $k \times k$ matrix 
+$$
+R'_{\tau} = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] Q. 
+$$
+Here, $R_{\tau}$ is a $k' \times k'$ matrix and $I$ is the $(k-k') \times (k-k')$ identity matrix. Note that 
+$$
+R'_{\tau} \hat{\phi}(\sigma) = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] Q \hat{\phi}(\sigma) = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] [\phi^f(\sigma) 0 \ldots 0]^T = Q^T [\phi^f(\tau \sigma) 0 \ldots 0]^T = \hat{\phi}(\tau \sigma).
+$$
+Thus, $R'_{\tau} \hat{\phi}(\sigma) = \hat{\phi}(\tau \sigma)$ for all $\tau$ and $\sigma$. Further, 
+\begin{align*}
+R'_{\tau_1} R'_{\tau_2} &= Q^T \left[ \begin{smallmatrix} R_{\tau_1} & 0 \\ 0 & I \end{smallmatrix} \right] Q Q^T \left[ \begin{smallmatrix} R_{\tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q = Q^T \left[ \begin{smallmatrix} R_{\tau_1} & 0 \\ 0 & I \end{smallmatrix} \right] \left[ \begin{smallmatrix} R_{\tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q \\
+&= Q^T \left[ \begin{smallmatrix} R_{\tau_1} R_{\tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q = Q^T \left[ \begin{smallmatrix} R_{\tau_1 \tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q = R'_{\tau_1 \tau_2}.
+\end{align*}
+Here, the second transition follows since $Q Q^T$ is identity matrix as rows of $Q$ form an orthonormal basis. Thus, $\hat{\phi}$ is a linear embedding and $R'$ is its representation.
+\end{proof}
+
+%Theorem~\ref{thm:neutral-smpr}, Theorem~\ref{thm:neutral-linear}, and Lemma~\ref{lem:linear-neutral} give an alternative proof of Theorem~\ref{thm:linear-char}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ns{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}
+
+\noindent \textbf{Summary of the results till now.} Table~\ref{tab:summary} summarizes the characterizations presented in the paper till now. In case of multiple conditions within a table cell, each condition is equivalent to the required restriction on the mean proximity rule. A prime result that is omitted from the table is that an embedding $\phi$ is neutral if and only if its normalization $\hat{\phi} = \phi-\phi_{avg}$ is linear. 
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ | p{3.5cm} | p{4cm} | p{3.5cm} | }
+\hline
+\rule{0pt}{3ex}\textbf{A mean proximity rule is} & \textbf{iff $\boldsymbol{\exists}$ a score matrix $S$ such that} & \textbf{iff $\exists$ embeddings $(\psi,\phi)$ such that} \\[0.1cm] 
+\hline 
+\rule{0pt}{3ex}symmetric & $S$ is negation of a Euclidean distance matrix & $\psi = \phi$ \\[0.1cm]
+\hline
+\rule{0pt}{3ex}\multirow{2}{*} {symmetric and neutral} & i) $S$ is neutral and negation of a Euclidean distance matrix & i) $\psi = \phi$ is neutral\\
+& ii) $S$ is neutral, positive semidefinite, and has equal diagonal entries & ii) $\psi = \phi$ is linear \\[0.1cm]
+\hline
+\end{tabular}
+\captionsetup{width=\textwidth}
+\caption{Summary of the characterization results.}
+\label{tab:summary}
+\end{table}
+
+%ns - Can introduce results about low dimensional embeddings here. Minimum dimension stuff will go to discussion as applications of uniqueness theorem in widening our understanding of mean proximity rules.
+
+\section{Connections to other approaches}
+
+Voting rules have been analyzed from three viewpoints in the literature \ns{cite}: axiomatic view, distance rationalizability (DR) view, and MLE view. We connect linear mean proximity rules with all three viewpoints.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Axiomatic View}
+Proposition~\ref{prop:properties} shows that all mean proximity rules are consistent and connected. Theorem~\ref{thm:linear-neutral} shows that linear mean proximity rules are also neutral. This raises a few questions.
+
+\begin{enumerate}
+\item What restrictions on the embedding $\phi$ correspond to monotonicity of the mean proximity rule?
+\item Caragiannis et al.~\cite{CPS13} introduced pairwise majority consistency (PM-c) as the natural generalization of Condorcet consistency for social welfare functions. What restrictions on $\phi$ ensures that the mean proximity rule is PM-c? Is that related to the distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$ being majority concentric~\cite{CPS13}?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Distance Rationalizability View}
+Meskanen and Nurmi~\cite{MN08} introduced the distance rationalizability framework where given a consensus class of profiles where the output is already defined and a distance function between profiles, the corresponding distance rationalizable rule, given any profile, finds the closest profile in the consensus class and returns the output defined on that. Edith et al.~\cite{EFS10} study additively votewise distances, where the distance between two profiles is (vaguely) the sum of distances between their rankings. We note that the additively votewise distance rationalizable rules with (strong) unanimity consensus class and the distance between two rankings being square of the Euclidean distance ($\ell_2$ norm) between their embeddings are exactly symmetric mean proximity. 
+
+Note that while the Euclidean distance defines a distance metric (satisfying triangle inequality), its square may not be a distance metric. However, it turns out that for the pairwise comparison embedding that generates the Kemeny rule, the square of Euclidean distance is the Kendall Tau distance (up to a multiplicative constant), which is a distance metric. This has two important implications. First, it shows that under the more natural Euclidean distance function, Kemeny is indeed a \emph{mean} rule rather than a \emph{median} rule. This explains why the Kemeny rule has desirable properties, as the importance of mean consensus has been emphasized significantly in the literature. Second, it indicates that the distance metrics whose square are also distance metrics might be of independent interest, and might be connected to rules satisfying desirable properties. Another example of a distance metric whose square is also a distance metric is square root of the Hamming distance.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{MLE View}
+Given an embedding $\phi$, consider the noise model where 
+$$
+\Pr[\sigma | \sigma^*] = \frac{e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}}{\sum_{\sigma' \in \rank} e^{-\|\phi(\sigma')-\phi(\sigma^*)\|^2}} \propto e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}.
+$$
+
+This is a family of Gaussian noise models. Note that Mallows' model is a special case with $\phi$ being the pairwise comparison embedding. This indicates that Mallows' model is actually member of a Gaussian family. Further, define a distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$. When $d$ is neutral, i.e., $d(\tau \sigma,\tau \sigma') = d(\sigma,\sigma')$, the normalization is independent of $\sigma^*$. Note that this is indeed the case with linear embeddings. 
+
+There are two interesting questions in this domain.
+\begin{enumerate}
+\item Mallows' model with the Kendall Tau distance admits an efficient sampling procedure. Is that the case with the family of Gaussian models introduced above when the embedding is linear? 
+\item When we take the embedding for a positional scoring rule, we get a distribution where the probability of a ranking decreases exponentially as its discrepancy from the true ranking increases, and the discrepancy is measured by positions of alternatives rather than pairwise comparisons. Is there anything interesting about this distribution like Mallows' model?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion}
+\label{sec:disc}
+
+\ns{Discussion would go here}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{acmsmall}
+\bibliography{abb,ultimate}
+
+%\received{February 2007}{March 2009}{June 2009}
+
+%\elecappendix
+%\medskip
+%\section{BLAH}
+%BLAH
+
+\end{document}
+
+
