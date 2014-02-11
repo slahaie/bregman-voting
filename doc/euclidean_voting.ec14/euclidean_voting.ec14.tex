@@ -116,31 +116,28 @@ Author's addresses: S. Lahaie, Microsoft Research New York City, {\small\tt slah
 
 \section{Introduction}
 \label{sec:intro}
-\ns{Either write Theorem and Lemma number in each citation, or not in any.}
+\ns{TO BE WRITTEN}
 
-\ns{TOBEWRITTEN}
-Recently, rising interest in families of voting rules --- GSR was success for studying manipulation (original paper) and learnability of voting rules (Nika's course project). 
+\ns{NOTE: Either write Theorem and Lemma number in each citation, or not in any.}
 
-PM-c and PD-c families for accurately predicting ground truth.
+PART I: Recently, rising interest in families of voting rules --- GSR was success for studying manipulation (original paper) and learnability of voting rules (Nika's course project). PM-c and PD-c families for accurately predicting ground truth. These families are very general --- GSR as well as union of PM-c and PD-c capture most of the popular voting rules. However, the families are extremely general --- a justification cannot be provided for each rule in the family. 
 
-These families are very general --- GSR as well as union of PM-c and PD-c capture most of the popular voting rules. However, the families are extremely general --- a justification cannot be provided for each rule in the family. 
+PART II: Another approach justifies each rule in the family --- DR and MLE. But these are also extremely general because they are built upon very general distance function, noise model, etc. 
 
-Justification approach --- DR and MLE. But these are also extremely general because they are built upon very general distance function, noise model, etc. 
+PART III: Another desiderata is clarity. Saari (Basic Geometry of Voting) says that it is important for the process of determining the outcome to be crystal clear to the voters in order for them to be able to trust the system. He argues that positional procedures that take into account alternatives at later rank are inherently more complex than the simple (and the most-used) voting system plurality. He then makes a compelling case of using geometry to explain voting rules in order to make them understandable. This also leads to interesting explanations of counter-intuitive phenomena why different input votes result in different outcomes. Brams and Fishburn(Approval voting) also presents a similar argument for simplicity and clarity of voting rules, and promotes approval voting, where blah blah. Mean proximity rules --- exactly this. Received much less attention. (Range voting website?) (THIS PART MIGHT BE SHIFTED TO RELATED WORK)
 
-Another crucial aspect is simplicity. Saari (Basic Geometry of Voting) says that it is important for the process of determining the outcome to be crystal clear to the voters in order for them to be able to trust the system. He argues that positional procedures that take into account alternatives at later rank are inherently more complex than the simple (and the most-used) voting system plurality. He then makes a compelling case of using geometry to explain voting rules in order to make them understandable. This also leads to interesting explanations of counter-intuitive phenomena why different input votes result in different outcomes. Brams and Fishburn(Approval voting) also presents a similar argument for simplicity and clarity of voting rules, and promotes approval voting, where blah blah. Mean proximity rules --- exactly this. Received much less attention. (Range voting website?)
+PART IV: Explain mean proximity rules. Subset of GSR and DR. Also connects well with MLE. Thus more restricted, but yet geometrically intuitive, clear, received less attention. Each rule justified because it is a mean approach --- the main goal of social choice rules. Emphasize the average aspect of voting. Give Figure illustration of Borda and Kemeny. Also, \url{http://omega.math.union.edu/research/2010-05-voting/}. 
 
-Need for a simple family of justified voting rules that is not ultimately useless and whose process is crystal clear. Exactly this is done. 
-Emphasize the average aspect of voting. Mention characterization. Give figure illustration of Borda and Kemeny.
-http://omega.math.union.edu/research/2010-05-voting/
-
-\noindent \textbf{Our Contribution.} \ns{Contribution would go here}
+\noindent \textbf{Our Contribution.} \ns{Contributions would go here}
 
 \section{Related Work}
-Especially contrast with other geometric work of Saari, Brahm 
+\ns{TO BE WRITTEN}
 
-%{Generalization: http://grammatikhilfe.com/CPNSS/research/projectsCurrentlyOnHold/VPP/VPPpdf/VPPpdf_Wshop2010/Workshop%20Papers/duBaffy_Zwicker2.pdf}
+1. Connect with work built upon MPRs. Generalization: \url{http://grammatikhilfe.com/CPNSS/research/projectsCurrentlyOnHold/VPP/VPPpdf/VPPpdf_Wshop2010/Workshop%20Papers/duBaffy_Zwicker2.pdf}
 
-%{Another geometric based on similar ideas of permutahedron: http://www.math.gordon.edu/~kcrisman/KemenyBordaPermutahedron.pdf}
+
+2. Contrast with other geometric work of Saari, Brahm, and another geometric based on similar ideas of permutahedron: \url{http://www.math.gordon.edu/~kcrisman/KemenyBordaPermutahedron.pdf}
+
 
 
 \section{Preliminaries}
@@ -158,8 +155,9 @@ Let $A$ be the set of alternatives; we denote $|A| = m$. Let $\rank$ denote the 
 
 \item[Consistency] A voting rule $r$ is called \emph{consistent} if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) \cap r(\pi_2) \neq \emptyset$, we have $r(\pi_1+\pi_2) = r(\pi_1) \cap r(\pi_2)$.\footnote{Consistency for social welfare functions that output a set of tied rankings is more general than consistency for social welfare functions that output a single ranking (i.e., a singleton set). It is also significantly different from consistency of the winning alternative for social choice functions.} Here, profile $\pi_1+\pi_2$ denotes the union of the profiles $\pi_1$ and $\pi_2$. \\ %A social welfare function $r$ is called weakly consistent (for rankings) if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) = r(\pi_2)$, we have $r(\pi_1+\pi_2) = r(\pi_1) = r(\pi_2)$. 
 
-\item[Neutrality] \ns{Explain more. Define relabeling of alternatives. Define the symmetric group $S_m$. Define the exact meaning of $\tau$ operating on $\sigma$.} \ns{Say for a permutation $\tau$, the permuted ranking $\tau(\sigma)$ will be denoted by $\tau \sigma$ for notational convenience. Also take care of all $\tau \in \rank \rightarrow \tau \in S_m$.}
-Given any profile $\pi = (\sigma_1,\ldots,\sigma_n)$ and a permutation $\tau$ of the alternatives, let $\tau \pi = (\tau \sigma_1,\ldots,\tau \sigma_n)$ be the profile where each vote is permuted according to $\tau$. Similarly, given any set of rankings $S$, let $\tau S = \{\tau \sigma | \sigma \in S\}$. A voting rule $r$ is called \emph{neutral} if for every profile $\pi$ and permutation $\tau$ of the alternatives, we have $r(\tau \pi) = \tau r(\pi)$. \\
+\item[Neutrality] A voting rule is called \emph{neutral} if the labels of the alternatives do not matter, i.e., relabeling the alternatives would relabel the output of the rule (each ranking in the set returned) accordingly. Without loss of generality, let us choose the labels of the alternatives to be $1,2,\ldots,m$. Then, a relabeling of the alternative is equivalent to a permutation of $1$ through $m$, i.e., an element of the symmetric group $S_m$ of size $m!$. For a permutation $\tau \in S_m$ and a ranking $\sigma \in \rank$, the ranking $\tau\sigma$ is obtained by relabeling the alternatives according to $\tau$ in $\sigma$. 
+
+Given a profile $\pi = (\sigma_1,\ldots,\sigma_n)$ and a permutation $\tau$ of the alternatives, let $\tau \pi = (\tau \sigma_1,\ldots,\tau \sigma_n)$ be the profile where each vote is permuted according to $\tau$. Similarly, given any set of rankings $S$, let $\tau S = \{\tau \sigma | \sigma \in S\}$. Thus, formally, a voting rule $r$ is neutral if for every profile $\pi$ and permutation $\tau$ of the alternatives, we have $r(\tau \pi) = \tau r(\pi)$. \\
 
 \item[Rank-distinguishability] In the classical definition of social welfare functions that output a single ranking, non-imposition (also known as citizen sovereignty) of a voting rule dictates that every ranking of the alternatives should be achievable as the output of the voting rule on some profile. We define a mild generalization of non-imposition, which we call rank-distinguishability, to social welfare functions that output a set of rankings. We say that a voting rule $r$ satisfies rank-distinguishability if it can distinguish between any two rankings: for every two distinct rankings $\sigma, \sigma' \in \rank$, there must exist a profile $\pi$ such that exactly one of $\sigma$ and $\sigma'$ belongs to $r(\pi)$. The mildness of rank-distinguishability is evident from the simple observation that it follows from unanimity, which is itself considered very unrestrictive and almost always desirable. 
 \end{description}
@@ -503,97 +501,57 @@ We say that an embedding $\phi:\rank \rightarrow \mathbb{R}^k$ is \emph{linear} 
 
 It can be seen very easily that the first and the second conditions together imply that $R_{\tau^{-1}} = R(\tau)^{-1}$ for all permutations $\tau \in S_m$, where $\tau^{-1}$ is the inverse of $\tau$ in $S_m$. Further, condition (3) is completely unrestrictive: A striking result from the group representation theory states that for a representation $R$ of any finite group (not just the symmetric group), there exists a matrix $P$ such that the equivalent representation $R'$ defined by $R'(g) = P R(g) P^{-1}$ for each group element $g$ uses orthogonal matrices (see, e.g.,~\cite[Theorem~6.3]{BMWM63}). That is, any representation could be converted to a representation that uses orthogonal matrices. In what follows, we use $R_{\tau}$ instead of $R(\tau)$ for notational convenience. 
 
-\ns{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}
-
-Take any embedding $\phi$ of a neutral symmetric mean proximity rule $r$, and its equivalent neutral embedding $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt}. Observe that for any $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are just permutations of each other. We use this to show the following.
+Before we dive into the equivalence between neutrality and linearity, we build its pillars by presenting a few results about linear embeddings. 
 \begin{lemma}
-For any embedding $\phi$ of a neutral symmetric mean proximity rule $r$, the equivalent neutral embedding $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt} is linear.
-\label{lem:nt-linear}
-\end{lemma}
-\begin{proof}
-Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. We need to show that there exists a representation $R$ such that for any $\tau,\sigma \in \rank$, $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
-$$
-\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
-$$
-Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector will be $\phi(\tau_j \sigma)$ where $\tau_j = \tau_i \tau$, which is the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every value $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every value $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, it is easy to verify that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ since $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$
-\end{proof}
-
-Combining the proof of Theorem~\ref{thm:neutral-smpr} with Lemma~\ref{lem:nt-linear}, we know that every neutral symmetric mean proximity rule has a linear embedding. On the contrary, we show that every linear embedding represents a neutral symmetric mean proximity rule. For that, we use the following result which shows the real strength of linear embeddings.
-\begin{lemma}
-For any linear embedding $\phi$ and any $\tau,\sigma,\sigma' \in \rank$, 
+For a linear embedding $\phi$, rankings $\sigma,\sigma' \in \rank$, and permutation $\tau \in S_m$, 
 $$
 \langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle = \langle \phi(\sigma), \phi(\sigma') \rangle.
 $$
 \label{lem:inner-product-preserve}
 \end{lemma}
 \begin{proof}
-Let $\phi$ be any linear embedding and let $R$ be its representation. Then for any $\tau,\sigma,\sigma' \in \rank$,
+Let $R$ be the representation of $\phi$. Then, we have 
 \begin{equation}
-\langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle = \langle R_{\tau}\phi(\sigma), R_{\tau}\phi(\sigma') \rangle = \langle \phi(\sigma), R_{\tau}^T R_{\tau}\phi(\sigma') \rangle = \langle \phi(\sigma), \phi(\sigma') \rangle.
+\langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle = \langle R_{\tau}\phi(\sigma), R_{\tau}\phi(\sigma') \rangle = \langle \phi(\sigma), R_{\tau}^T R_{\tau}\phi(\sigma') \rangle = \langle \phi(\sigma), \phi(\sigma') \rangle,
 \label{eqn:linear-inner-product}
 \end{equation}
-Here, the last transition holds because $R_{\tau}$ is an orthogonal matrix by definition. 
+where, the last transition holds because $R_{\tau}$ is an orthogonal matrix by definition. 
 \end{proof}
-Taking $\sigma = \sigma'$, we get:
+
+Taking $\sigma = \sigma'$ in Lemma~\ref{lem:inner-product-preserve}, we get the following corollary.
 \begin{corollary}
 Every linear embedding has equal norm.
 \label{cor:linear-equal-norm}
 \end{corollary}
 
-\begin{lemma}
-Any linear embedding is neutral, and hence represents a neutral symmetric mean proximity rule.
-\label{lem:linear-neutral}
-\end{lemma}
-\begin{proof}
-For any $\tau,\sigma,\sigma' \in \rank$,
-\begin{align*}
-\|\phi(\tau \sigma)-\phi(\tau \sigma')\|^2 &= \|\phi(\tau \sigma)\|^2 + \|\phi(\tau \sigma')\|^2 - 2\cdot \langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle \\
-&= \|\phi(\sigma)\|^2 + \|\phi(\sigma')\|^2 - 2\cdot \langle \phi(\sigma), \phi(\sigma') \rangle = \|\phi(\sigma)-\phi(\sigma')\|^2.
-\end{align*}
-Thus, $\phi$ is neutral. By Theorem~\ref{thm:neutral-smpr}, it represents a neutral symmetric mean proximity rule.
-\end{proof}
-
-Combining Lemmas~\ref{lem:nt-linear} and~\ref{lem:linear-neutral} gives the following characterization.
-\begin{theorem}
-A symmetric mean proximity rule is neutral if and only if it has a linear embedding.
-\label{thm:linear-char}
-\end{theorem}
-
-We showed that all linear embeddings are neutral, but we haven't shown that all neutral embeddings are linear as well. It turns out that this indeed holds, but requires a much deeper proof.
-
-\subsection{Connection between Neutrality and Linearity}
-
-In this section, we show that neutrality of an embedding is equivalent to linearity. For this, we first need some important results about embeddings of neutral symmetric mean proximity rules.
+While every linear embedding has equal norm, every neutral embedding may not have equal norm. However, the next result shows that every neutral embedding has a similar equal distance property. 
 
 \begin{lemma}
-Let $r$ be any neutral voting rule. Let $\pi_{symm}$ be the profile containing each ranking exactly once, i.e., $n(\pi_{symm},\sigma) = 1$ for all $\sigma \in \rank$. Then, $r(\pi_{symm}) = \rank$. 
-\label{lem:average-profile}
+Let $\phi$ be a neutral embedding, and $\phi_{avg} = (1/m!) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$ denote the mean of embeddings of all rankings under $\phi$. Then, $\|\phi(\sigma)-\phi_{avg}\|$ is a constant independent of the ranking $\sigma$.
+\label{lem:average-all}
 \end{lemma}
 \begin{proof}
-Let $r(\pi_{symm}) = T \subseteq \rank$. Suppose $T \neq \rank$, so there exists a $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there exists a $\sigma \in T$. Now, take $\tau$ to be the permutation that sends $\sigma$ to $\sigma'$. % = \sigma' \sigma^{-1}$, where $\sigma^{-1}$ is the inverse of $\sigma$ in the symmetric group $S_m$. 
-It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$. This implies that $r$ violates neutrality, a contradiction. 
+Let $r$ be the mean proximity rule represented by $\phi$. By Theorem~\ref{thm:neutral-smpr}, $r$ must be neutral. Let $\pi_{symm}$ denote the profile containing each ranking from $\rank$ exactly once. Let $r(\pi_{symm}) = T \subseteq \rank$, and suppose that $T \neq \rank$. Thus, there must exist a ranking $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there must also exist a ranking $\sigma \in T$. Now, take $\tau \in S_m$ to be the permutation that converts $\sigma$ to $\sigma'$. 
+
+It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau T = \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$, which is a contradiction because $r$ is neutral. Hence, we must have $r(\pi_{symm}) = \rank$. Observing that $\mu(\pi_{symm}) = \phi_{avg}$ and $r(\pi_{symm}) = \argmin_{\sigma \in \rank} \|\phi(\sigma)-\phi_{avg}\|$ yields the required result.
 \end{proof}
 
-Therefore, for any embedding $\phi$ of a neutral symmetric mean proximity rule, $\|\phi(\sigma)-\mu(\pi_{symm})\|$ must be a constant independent of $\sigma$ so that all rankings are tied on $\pi_{symm}$. Let $\phi_{avg} = (1/{m!}) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$. Define an embedding $\hat{\phi}$  such that $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$. We call $\hat{\phi}$ the \emph{normalization} of $\phi$. We argued that it is an equal norm embedding. Note that normalization of an embedding is just a translation. Intuitively, this does not change the geometry of the points to which the rankings are embedded, and hence should represent the same symmetric mean proximity rule. We show that in addition, normalization also preserves neutrality and linearity. 
+Given Lemma~\ref{lem:average-all}, we can easily derive an equal norm embedding given a neutral embedding: Given a neutral embedding $\phi$, we say that the embedding $\hat{\phi}$ defined by $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$ is the \emph{normalization} of $\phi$. Note that $\hat{\phi}$ is simply a translation applied to $\phi$, which is distance-preserving. Hence, $\hat{\phi}$ represents the same neutral SMPR as $\phi$ does. This normalization achieves the equal norm property (Lemma~\ref{lem:average-all}), and also preserves neutrality and linearity of the original embedding. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{lemma}
-For any embedding $\phi$ of a neutral symmetric mean proximity rule $r$, its normalization $\hat{\phi}$ is an equivalent equal norm embedding. Further, an embedding is neutral (resp. linear) if and only if its normalization is neutral (resp. linear). 
+An embedding is neutral (resp. linear) if and only if its normalization is neutral (resp. linear). 
 \label{lem:preservation}
 \end{lemma}
 \begin{proof}
-Let $\phi : \rank \rightarrow \mathbb{R}^k$ be any embedding of a neutral symmetric mean proximity rule $r$. Consider its normalization $\hat{\phi}$. From Lemma~\ref{lem:average-profile}, it is clear that all $\phi(\sigma)$ must be at equal distance from $\mu(\pi_{symm}) = \phi_{avg}$. Hence, $\hat{\phi} = \phi-\phi_{avg}$ must be an equal norm embedding. Further, for any rankings $\sigma, \sigma' \in \rank$, $\|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\| = \|\phi(\sigma)-\phi_{avg}-\phi(\sigma')+\phi_{avg}\| = \|\phi(\sigma)-\phi(\sigma')\|$. Now, Proposition~\ref{prop:MPR-GSR-conversion} trivially implies that both $\phi$ and $\hat{\phi}$ represent the same rule. 
-%, for any profile $\pi$,
-%\begin{align*}
-%r(\pi) &= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi(\sigma)-\phi(\sigma')\|^2 \\
-%&= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|^2.
-%\end{align*}
-%Thus, $\hat{\phi}$ also represents $r$. 
+If $\phi$ is neutral, then for all $\sigma,\sigma' \in \rank$ and $\tau \in S_m$, we have 
+$$
+\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|.
+$$
+Hence, $\hat{\phi}$ is neutral too. The proof of the converse works in the same way by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
 
-If $\phi$ is neutral, then for any $\tau,\sigma,\sigma' \in \rank$, we have $\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|$. Hence, $\hat{\phi}$ is neutral too. The proof of the converse works exactly in the opposite direction.
-
-Finally, assume $\phi$ is linear with representation $R$. First, we have that for any $\tau,\sigma \in \rank$, $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma$, we get that 
+Similarly, if $\phi$ is linear with representation $R$, then for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma \in \rank$, we get 
 $$
 \frac{1}{m!} \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma) = R_{\tau} \left (\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) \right).
 $$
@@ -601,91 +559,115 @@ However,
 $$
 \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}.
 $$
-Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in \rank$. Now, for any $\tau,\sigma \in \rank$, 
+Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in S_m$. Now, for all $\sigma \in \rank$ and $\tau \in S_m$, 
 $$
 \hat{\phi}(\tau \sigma) = \phi(\tau \sigma) - \phi_{avg} = R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg} = R_{\tau}\hat{\phi}(\sigma).
 $$
-Thus, $\hat{\phi}$ is also linear with the same representation $R$. The proof of the converse works by observing that $\phi = \hat{\phi}+\phi_{avg}$. 
-%Let $\phi'$ be arbitrary embedding generated by translating and scaling $\phi$, that is, for some $a \in \mathbb{R}\setminus\{0\}$ and $b \in \mathbb{R}^k$, $\phi'(\sigma) = a \cdot \phi(\sigma) + b$ for all $\sigma \in \rank$. For any rankings $\sigma$ and $\sigma'$, $\|\phi'(\sigma)-\phi'(\sigma')\| = \|a\phi(\sigma)+b-a\phi(\sigma')-b\| = |a| \cdot \|\phi(\sigma)-\phi(\sigma')\|$. Now by Proposition~\ref{prop:MPR-GSR-conversion}, for any profile $\pi$,
-%\begin{align*}
-%r(\pi) &= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi(\sigma)-\phi(\sigma')\|^2 \\
-%&= \argmin_{\sigma \in \rank} a^2 \cdot \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi(\sigma)-\phi(\sigma')\|^2 \\
-%&= \argmin_{\sigma \in \rank} \sum_{\sigma' \in \rank} n(\pi,\sigma') \cdot \|\phi'(\sigma)-\phi'(\sigma')\|^2,
-%\end{align*}
-%where the second transition follows since $a^2 > 0$. This shows that $\phi'$ also represents $r$. 
-%
-%Further, if $\phi$ is neutral, then for any $\tau,\sigma,\sigma' \in \rank$, we have $\|\phi'(\tau \sigma)-\phi'(\tau \sigma')\| = a \cdot \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = a \cdot \|\phi(\sigma)-\phi(\sigma')\| = \|\phi'(\sigma)-\phi'(\sigma')\|$. Hence, $\phi'$ is neutral as well. 
-%
-%Finally, assume $\phi$ is linear with representation $R$ and $\phi'$ is the normalization of $\phi$. First, we have that for any $\tau,\sigma \in \rank$, $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma$, we get that $(1/{m!}) \sum_{\sigma \in \rank} \phi(\tau \sigma) = (1/{m!}) \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma)$. However, $(1/{m!}) \sum_{\sigma \in \rank} \phi(\tau \sigma) = (1/{m!}) \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}$. Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in \rank$. Let $c = \|\phi(\sigma)-\phi_{avg}\|$ (equal for all $\sigma \in \rank$). Then, for any $\tau,\sigma \in \rank$, 
-%$$
-%\phi'(\tau \sigma) = (1/c) \cdot (\phi(\tau \sigma) - \phi_{avg}) = (1/c) \cdot (R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg}) = R_{\tau}\phi'(\sigma).
-%$$
-%Thus, $\phi'$ is also linear with the same representation $R$.
+Thus, $\hat{\phi}$ is also linear with the same representation $R$. Again, the proof of the converse works by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
 \end{proof}
 
-Lemma~\ref{lem:preservation} shows that the normalization $\hat{\phi}$ of any neutral embedding $\phi$ of a neutral symmetric mean proximity is an equivalent equal norm and neutral embedding. We now show that it is also linear.  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Lemma~\ref{lem:preservation} shows that the normalization of a neutral embedding is also neutral, in addition to having the equal norm property. We now show that this normalization is in fact linear --- but this requires a much deeper proof. 
 
 \begin{theorem}
 An embedding is neutral if and only if its normalization is linear. 
 \label{thm:neutral-linear}
 \end{theorem}
 \begin{proof}
-First, let $\phi$ be any embedding whose normalization $\hat{\phi}$ is linear. Then, $\hat{\phi}$ is also neutral (Lemma~\ref{lem:linear-neutral}), implying that $\phi$ is neutral (Lemma~\ref{lem:preservation}).
+We first show that a linear embedding is also a neutral embedding. Let $\phi$ be a linear embedding. Then for all $\sigma,\sigma' \in \rank$ and $\tau \in S_m$, we have
+\begin{align*}
+\|\phi(\tau \sigma)-\phi(\tau \sigma')\|^2 &= \|\phi(\tau \sigma)\|^2 + \|\phi(\tau \sigma')\|^2 - 2\cdot \langle \phi(\tau \sigma), \phi(\tau \sigma') \rangle \\
+&= \|\phi(\sigma)\|^2 + \|\phi(\sigma')\|^2 - 2\cdot \langle \phi(\sigma), \phi(\sigma') \rangle = \|\phi(\sigma)-\phi(\sigma')\|^2,
+\end{align*}
+where the second transition holds due to Lemma~\ref{lem:inner-product-preserve} and its Corollary~\ref{cor:linear-equal-norm}. Thus, $\phi$ is also neutral. 
 
-Conversely, take any neutral embedding $\phi : \rank \rightarrow \mathbb{R}^k$ and let $r$ be the rule it represents. We want to show that $\hat{\phi}$ is linear. By Lemma~\ref{lem:preservation}, we know that $\hat{\phi}$ is an equal norm and neutral (also $k$-dimensional). Construct another equivalent embedding $\phi^f$ as follows. Let $k' \le k$ be the dimension of the affine subspace of $\mathbb{R}^k$ spanned by the points $\hat{\phi}(\sigma_1),\ldots,\hat{\phi}(\sigma_{m!})$. If $k' = k$, then take $\phi^f = \hat{\phi}$. Otherwise, $k' < k$ and we can transform the points to $\mathbb{R}^{k'}$ to get $\phi^f$ that preserves all distances, and thus represents $r$ as well. 
+Now, for our main result, let $\phi$ be an embedding whose normalization $\hat{\phi}$ is linear. Then, $\hat{\phi}$ is also neutral as shown above. Due to Lemma~\ref{lem:preservation}, this implies that $\phi$ is also neutral.
 
-Formally, note that $\hat{\phi}_{avg} = 0$. Hence, the affine space spanned by the embeddings under $\hat{\phi}$ form a linear subspace of $\mathbb{R}^k$ of dimension $k'$. Take any orthonormal basis $v_1,\ldots,v_{k'}$ of this linear subspace, write every point as a linear combination of the $k'$ basis vectors, and let $\phi^f$ output the coefficients of the linear combination. Thus, if we construct a $k' \times k$ matrix $P$ with $v_1,\ldots,v_{k'}$ as its rows, then $\phi^f(\sigma) = P \phi(\sigma)$ for all $\sigma \in \rank$. It is now standard to show that $\phi^f$ preserves distances between any two points in the affine subspace, hence the distance between any point in $\hat{\phi}(\sigma_1),\ldots,\hat{\phi}(\sigma_{m!})$ and any point in its convex hull. Note that by definition, preserving these distances is enough to represent the same rule $r$. 
+The converse is much trickier, therefore we provide the high-level overview of the proof. Take a neutral embedding $\phi : \rank \rightarrow \mathbb{R}^k$, and let $r$ be the rule it represents. We want to show that $\hat{\phi}$ is linear. By Corollary~\ref{cor:linear-equal-norm} and Lemma~\ref{lem:preservation}, we know that $\hat{\phi}$ is a ($k$-dimensional) equal norm neutral embedding. We first construct an equivalent embedding $\phi^f$ as follows. Let $k' \le k$ be the dimension of the affine subspace of $\mathbb{R}^k$ spanned by the points $\{\hat{\phi}(\sigma)\}_{\sigma \in \rank}$. Then, we obtain $\phi^f$ by taking a distance-preserving mapping to $\mathbb{R}^{k'}$. Next, we show that $\phi^f$ is linear by explicitly constructing its representation using Moore-Penrose pseudoinverses. Finally, we use this to construct an explicit representation for $\hat{\phi}$ itself. 
 
-Thus, the embedding $\phi^f$ is a $k'$-dimensional equal norm neutral embedding of $r$. Further, $\phi^f$ is of \emph{full dimension}, i.e., the points where the rankings are mapped span the whole of $\mathbb{R}^{k'}$. Note that this implies $k' \le m!$. Consider the matrix $A = [\phi^f(\sigma_1), \ldots, \phi^f(\sigma_{m!})]$, the $k' \times m!$ matrix whose columns are the coordinate vectors of the points. This implies that $A$ must have full rank $k'$. Fix any $\tau \in \rank$, and consider $B = [\phi^f(\tau \sigma_1), \ldots, \phi^f(\tau \sigma_{m!})]$. Then, $(B^T B)_{ij} = \langle \phi^f(\tau \sigma_i), \phi^f(\tau \sigma_j) \rangle = \langle \phi^f(\sigma_i), \phi^f(\sigma_j) \rangle = (A^T A)_{ij}$ for all $i,j$, where the second transition follows since $\hat{\phi}$ (thus, $\phi^f$) is neutral (Lemma~\ref{lem:preservation}). Thus, $A^T A = B^T B$.
+Now we provide the formal proof. First, it is easy to check that $\hat{\phi}_{avg} = 0$. Hence, the affine space spanned by the embeddings under $\hat{\phi}$ form a linear subspace of $\mathbb{R}^k$ of dimension $k'$. Take an orthonormal basis $v_1,\ldots,v_{k'}$ of this linear subspace, write $\hat{\phi}(\sigma)$ as a linear combination of the $k'$ basis vectors, and let $\phi^f(\sigma)$ encode the coefficients of the linear combination. Equivalently, if $P$ is the $k' \times k$ matrix with $v_1,\ldots,v_{k'}$ as its rows, then $\phi^f(\sigma) = P \phi(\sigma)$ for all $\sigma \in \rank$. It is now standard to show that the transformation $P$ preserves all distances. This has two implications: First, $\phi^f$ represents the same neutral SMPR $r$ as $\hat{\phi}$ and $\phi$ do. Second, $\phi^f$ is also an equal norm neutral embedding like $\hat{\phi}$. These hold because the definitions of mean proximity rules, equal norm property, and neutrality of embeddings only use distances between pairs of embeddings. 
 
-We now show that there exists a matrix $R_{\tau}$ such that $\phi^f(\tau \sigma) = R_{\tau} \phi^f(\sigma)$ for all $\sigma \in \rank$. Combining all the equations, it is equivalent to existence of $R_{\tau}$ such that $R_{\tau} A = B$, i.e., existence of an $X$ such that $A^T X = B^T$. It is well-known that the system of equations $Ax=b$ has a solution if and only if $AA^{+}b = b$, where $A^{+}$ is the Moore-Penrose pseudoinverse of $A$. Trivially extending this to multiple systems of linear equations, we can see that the necessary and sufficient condition for existence of the required $R_{\tau}$ is $A^T (A^T)^{+} B^T = B^T$, or equivalently, $B A^{+} A = B$. The last derivation uses the fact that $(A^T)^{+} = (A^{+})^T$. Now, 
+By construction, $\phi^f$ is of \emph{full dimension}, i.e., the points where the rankings are mapped span the whole of $\mathbb{R}^{k'}$.\footnote{While it is not relevant for the proof, we remark that the fact that the $m!$ points span $\mathbb{R}^{k'}$ implies $k' \le m!$.} Next, consider the matrix $A = [\phi^f(\sigma_1), \ldots, \phi^f(\sigma_{m!})]$, the $k' \times m!$ matrix whose columns are the embeddings under $\phi^f$. Here, $\sigma_1,\ldots,\sigma_{m!}$ is an enumeration of $\rank$. This implies that $A$ must have full row rank $k'$. Fix a permutation $\tau \in S_m$, and consider $B = [\phi^f(\tau \sigma_1), \ldots, \phi^f(\tau \sigma_{m!})]$. Then for all $i,j \in [m!]$, 
+$$
+(B^T B)_{ij} = \langle \phi^f(\tau \sigma_i), \phi^f(\tau \sigma_j) \rangle = \langle \phi^f(\sigma_i), \phi^f(\sigma_j) \rangle = (A^T A)_{ij}
+$$
+where the second transition follows because $\phi^f$ is neutral. Thus, $A^T A = B^T B$.
+
+We now show that there exists a matrix $R_{\tau}$ such that $\phi^f(\tau \sigma) = R_{\tau} \phi^f(\sigma)$ for all $\sigma \in \rank$. Combining the equations for all $\sigma \in \rank$, it is equivalent to show the existence of an $R_{\tau}$ such that $R_{\tau} A = B$, i.e., existence of a solution $X$ of the linear system $A^T X = B^T$. It is well-known that the system of equations $Ax=b$ has a solution if and only if $AA^{+}b = b$, where $A^{+}$ is the Moore-Penrose pseudoinverse of $A$ (see, e.g.,~\cite{BH12}). Trivially extending this to multiple systems of linear equations, we can see that the necessary and sufficient condition for existence of the required $R_{\tau}$ is $A^T (A^T)^{+} B^T = B^T$, or equivalently, $B A^{+} A = B$. The last derivation uses the fact that $(A^T)^{+} = (A^{+})^T$. Now, 
 \begin{align*}
 B &= B B^{+} B = B \left( (B^T B)^{+} B^T \right) B = B (B^T B)^{+} \left( B^T B \right) \\
 &= B (A^T A)^{+} \left( A^T A \right) = B \left( (A^T A)^{+} A^T \right) A = B A^{+} A.
 \end{align*}
-Refer~\cite{BH12} for the identities $X = X X^{+} X$ (used in the first transition) and $X^{+} = (X^T X)^{+} X^T$ (used in the second and the fifth transitions) regarding Moore-Penrose pseudoinverses. The fourth transition follows since $A^T A = B^T B$. Hence, we have shown that for every $\tau \in \rank$, there exists a matrix $R_{\tau}$ such that $\phi^f(\tau \sigma) = R_{\tau} \phi^f(\sigma)$ for all $\sigma \in \rank$. Further, one solution of $Ax=b$ is $x = A^{+}b$. Extending this, we obtain that one solution of $A^T X = B^T$ is $X = (A^T)^{+} B^T$. Hence, $R_{\tau} = X^T = BA^{+}$. Choose this solution for every $\tau \in \rank$. 
+Refer~\cite{BH12} for the identities $X = X X^{+} X$ (used in the first transition) and $X^{+} = (X^T X)^{+} X^T$ (used in the second and the fifth transitions) regarding Moore-Penrose pseudoinverses. The fourth transition holds because $A^T A = B^T B$. Hence, we have shown that for every permutation $\tau \in S_m$, there exists a matrix $R_{\tau}$ such that $\phi^f(\tau \sigma) = R_{\tau} \phi^f(\sigma)$ for all $\sigma \in \rank$. Further, one solution of $Ax=b$ is $x = A^{+}b$. Extending this, we can see that one solution of $A^T X = B^T$ is $X = (A^T)^{+} B^T$. Hence, $R_{\tau} = X^T = BA^{+}$. We choose this particular solution for every $\tau \in S_m$ and show that it satisfies the conditions of linearity. 
 
-Recall that the rank of product of two matrices is at most the minimum of the rank of the two matrices, and $R_{\tau} A = B$. Also, both $A$ and $B$ are rank $k'$ matrices. Hence, $rank(R_{\tau}) \ge k'$. However, $R_{\tau}$ is a $k' \times k'$ matrix. Hence, we conclude that $R_{\tau}$ is invertible for every $\tau \in \rank$. We now show that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in \rank$. 
+Recall that the rank of the product of two matrices is at most the minimum of the rank of the two matrices, and $R_{\tau} A = B$. Also, both $A$ and $B$ are rank $k'$ matrices. Hence, $rank(R_{\tau}) \ge k'$. However, $R_{\tau}$ is a $k' \times k'$ matrix. Hence, we conclude that $R_{\tau}$ is invertible for every $\tau \in S_m$. We now show that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$. 
 
-%First, note that $R_{\tau}^T B = (A^{+})^T B^T B = (A^{+})^T A^T A = (A A^{+})^T A = I A = A$, where the second transition holds since $B^T B = A^T A$, and the fourth transition holds since $A A^{+} = I$ for any full row-rank matrix $A$ (see, e.g.,~\cite{BH12}). Thus, we have that $R_{\tau}^T B = A$. Applying $R_{\tau}$ on both sides, we get that $R_{\tau} R_{\tau}^T B = R_{\tau} A = B$. Hence, 
-%$$
-%R_{\tau} R_{\tau}^T \phi^f(\sigma) = \phi^f(\sigma), \forall \sigma \in \rank.
-%$$
-%
-%Similarly, $\phi^f(\sigma) = \phi^f(\tau^{-1} \tau \sigma) = R_{\tau^{-1}} \phi^f(\tau \sigma) = R_{\tau^{-1}} R_{\tau} \phi^f(\sigma)$ for every $\sigma \in \rank$. Hence, 
-%$$
-%R_{\tau^{-1}} R_{\tau} \phi^f(\sigma) = \phi^f(\sigma), \forall \sigma \in \rank.
-%$$
+Fix $\tau_1,\tau_2 \in S_m$. For every $\sigma \in \rank$, we have $\phi^f(\tau_1 \tau_2 \sigma) = R_{\tau_1 \tau_2} \phi^f(\sigma)$. Also, $\phi^f(\tau_1 \tau_2 \sigma) = R_{\tau_1} \phi^f(\tau_2 \sigma) = R_{\tau_1}R_{\tau_2} \phi^f(\sigma)$. Thus, we have that $R_{\tau_1 \tau_2} \phi^f(\sigma) = R_{\tau_1} R_{\tau_2} \phi^f(\sigma)$ for all $\sigma \in \rank$. It is easy to show that this implies $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$. To see this, consider the submatrix of $A$---let us call it $A_p$---by taking $k'$ linearly independent columns of $A$. Then, $A_p$ is an invertible square matrix. Also, $R_{\tau_1 \tau_2} A_p = R_{\tau_1} R_{\tau_2} A_p$. Multiplying by $A_p^{-1}$ on both sides, we get the desired result. To complete the proof, we need to show that $R_{\tau}$ is an orthogonal matrix for all $\tau \in S_m$, i.e., $R_{\tau}^{-1} = R_{\tau}^T$. Note that 
+$$
+R_{\tau}^T B = (A^{+})^T B^T B = (A^{+})^T A^T A = (A A^{+})^T A = I A = A,
+$$
+where the second transition holds because $B^T B = A^T A$, and the fourth transition holds because $A A^{+} = I$ for any full row-rank matrix $A$ (see, e.g.,~\cite{BH12}). Thus, we have that $R_{\tau}^T B = A$. Applying $R_{\tau}$ on both sides, we get $R_{\tau} R_{\tau}^T B = R_{\tau} A = B$. Similarly to $A_p$, we can construct an invertible submatrix $B_p$ of $B$, and get $R_{\tau} R_{\tau}^T B_p = B_p$, which, upon right-multiplication by $B_p^{-1}$, yields the required equation $R_{\tau}^{-1} = R_{\tau}^T$. Thus, $\phi^f$ is a linear embedding. We now show that $\hat{\phi}$ is also linear. 
 
-Fix any $\tau_1,\tau_2 \in \rank$. For any $\sigma \in \rank$, $\phi^f(\tau_1 \tau_2 \sigma) = R_{\tau_1 \tau_2} \phi^f(\sigma)$. Also, $\phi^f(\tau_1 \tau_2 \sigma) = R_{\tau_1} \phi^f(\tau_2 \sigma) = R_{\tau_1}R_{\tau_2} \phi^f(\sigma)$. Thus, we have that $R_{\tau_1 \tau_2} \phi^f(\sigma) = R_{\tau_1} R_{\tau_2} \phi^f(\sigma)$ for all $\sigma \in \rank$. We now show that this implies $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$. Form the partial $A$ matrix, call it $A_p$, by only taking $k'$ linearly independent columns of $A$. Then, $A_p$ is an invertible square matrix. Also, $R_{\tau_1 \tau_2} A_p = R_{\tau_1} R_{\tau_2} A_p$. Multiplying by $A_p^{-1}$ on both sides, we get the desired result. Thus, $\phi^f$ is a linear embedding. We now show that $\hat{\phi}$ is also linear. 
-
-Consider the orthonormal basis $v_1,\ldots,v_{k'}$ that was used in constructing $\phi^f$ from $\hat{\phi}$ and the matrix $P$ that has $v_i's$ as its rows. Complete this to a basis $v_1,\ldots,v_k$ of $\mathbb{R}^k$, and consider the matrix $Q$ that has all the $v_i's$ as its rows. Then, $Q \hat{\phi}(\sigma) = [\phi^f(\sigma) 0 \ldots 0]^T$ where the number of zeros is $k-k'$. For any $\tau \in \rank$, construct the $k \times k$ matrix 
+Consider the orthonormal basis $v_1,\ldots,v_{k'}$ that was used for constructing $\phi^f$ from $\hat{\phi}$, and the corresponding matrix $P$ with $v_i$'s as its rows. Complete this to a basis $v_1,\ldots,v_k$ of $\mathbb{R}^k$, and consider the matrix $Q$ that has all the $v_i$'s as its rows. Then, $Q \hat{\phi}(\sigma) = [\phi^f(\sigma)^T, 0, \ldots, 0]^T$, where the number of zeros is $k-k'$. For a permutation $\tau \in S_m$, construct the $k \times k$ matrix 
 $$
 R'_{\tau} = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] Q. 
 $$
 Here, $R_{\tau}$ is a $k' \times k'$ matrix and $I$ is the $(k-k') \times (k-k')$ identity matrix. Note that 
 $$
-R'_{\tau} \hat{\phi}(\sigma) = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] Q \hat{\phi}(\sigma) = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] [\phi^f(\sigma) 0 \ldots 0]^T = Q^T [\phi^f(\tau \sigma) 0 \ldots 0]^T = \hat{\phi}(\tau \sigma).
+R'_{\tau} \hat{\phi}(\sigma) = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] Q \hat{\phi}(\sigma) = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right] [\phi^f(\sigma) 0 \ldots 0]^T = Q^T [\phi^f(\tau \sigma)^T, 0, \ldots, 0]^T = \hat{\phi}(\tau \sigma).
 $$
-Thus, $R'_{\tau} \hat{\phi}(\sigma) = \hat{\phi}(\tau \sigma)$ for all $\tau$ and $\sigma$. Further, 
+Thus, $R'_{\tau} \hat{\phi}(\sigma) = \hat{\phi}(\tau \sigma)$ for all $\tau \in S_m$ and $\sigma \in \rank$. Further, 
 \begin{align*}
 R'_{\tau_1} R'_{\tau_2} &= Q^T \left[ \begin{smallmatrix} R_{\tau_1} & 0 \\ 0 & I \end{smallmatrix} \right] Q Q^T \left[ \begin{smallmatrix} R_{\tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q = Q^T \left[ \begin{smallmatrix} R_{\tau_1} & 0 \\ 0 & I \end{smallmatrix} \right] \left[ \begin{smallmatrix} R_{\tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q \\
 &= Q^T \left[ \begin{smallmatrix} R_{\tau_1} R_{\tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q = Q^T \left[ \begin{smallmatrix} R_{\tau_1 \tau_2} & 0 \\ 0 & I \end{smallmatrix} \right] Q = R'_{\tau_1 \tau_2}.
 \end{align*}
-Here, the second transition follows since $Q Q^T$ is identity matrix as rows of $Q$ form an orthonormal basis. Thus, $\hat{\phi}$ is a linear embedding and $R'$ is its representation.
+Here, the second transition follows since $Q Q^T$ is identity matrix as rows of $Q$ form an orthonormal basis. Because $R'_{\tau}$ is product of three invertible matrices, $R'_{\tau}$ itself is invertible. Further, 
+$$
+(R'_{\tau})^T = Q^T \left[ \begin{smallmatrix} R_{\tau} & 0 \\ 0 & I \end{smallmatrix} \right]^T Q = Q^T \left[ \begin{smallmatrix} R_{\tau}^T & 0 \\ 0 & I \end{smallmatrix} \right] Q = Q^T \left[ \begin{smallmatrix} R_{\tau^{-1}} & 0 \\ 0 & I \end{smallmatrix} \right] Q
+ = R'_{\tau^{-1}}.
+ $$
+Thus, $R'_{\tau}$ is also an orthogonal matrix. This completes the proof that $\hat{\phi}$ is a linear embedding and $R'$ is its representation.
 \end{proof}
 
-%Theorem~\ref{thm:neutral-smpr}, Theorem~\ref{thm:neutral-linear}, and Lemma~\ref{lem:linear-neutral} give an alternative proof of Theorem~\ref{thm:linear-char}.
+Theorem~\ref{thm:neutral-smpr} showed that an SMPR is neutral if and only if it has a symmetric embedding that is neutral. The latter happens if and only if the rule also has a symmetric embedding that is normalization of a neutral embedding. Together with Theorem~\ref{thm:neutral-linear}, this provides another characterization of neutral SMPR. 
+
+\begin{theorem}
+A symmetric mean proximity rule is neutral if and only if there is a linear embedding representing it.
+\label{thm:linear-char}
+\end{theorem}
+
+Theorem~\ref{thm:linear-char} should be viewed as a fifth equivalent condition of Theorem~\ref{thm:neutral-smpr}. Next, we show that Theorem~\ref{thm:linear-char} could also be derived using a much simpler proof, but later we describe the advantages of our equivalence result between neutrality and linearity over the alternative proof. 
+
+\begin{lemma}
+For an embedding $\phi$ of a neutral SMPR $r$, its neutralization $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt} is a linear embedding.
+\label{lem:nt-linear}
+\end{lemma}
+\begin{proof}
+Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. Observe that for all $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are simply permutations of each other. First, we show that there exists a representation $R$ such that for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
+$$
+\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
+$$
+Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks ($\phi(\tau_i \tau \sigma)$ for $i \in [m!]$) of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector would be $\phi(\tau_j \sigma)$, where $\tau_j = \tau_i \tau$, the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. 
+
+Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, it is easy to see that $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, note that each $R_{\tau}$ is a permutation matrix originating from the permutation matrix $\Pi_{\tau}$ of the permutation $\tau$. Also, we have $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$. Hence, it can be verified that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$, and every $R_{\tau}$ for $\tau \in S_m$ is an orthogonal matrix.
+\end{proof}
+
+Theorem~\ref{thm:neutral-smpr} and Lemma~\ref{lem:nt-linear} together provide another proof of Theorem~\ref{thm:linear-char}. However, our original proof that showed a stronger connection (equivalence) between normalization of neutral embeddings and linear embeddings bears certain advantages described below.
+
+The proof of Theorem~\ref{thm:neutral-linear} is constructive, meaning that one can use it to explicitly find the representation of the normalization of any given neutral embedding of an SMPR. The multiplicative property $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ implies that one only needs to store the representation matrices corresponding to a generating set of $S_m$, and can generate the rest of the matrices by appropriate multiplications and inverses.\footnote{A generating set of a group is a subset of the group such that every element of the group can be expressed as the product (under the group operation) of finitely many elements of the subset and their inverses.} 
+
+It is well-known that the symmetric group $S_m$ has a generating set of size two, irrespective of the value of $m$: the set containing a cycle which shifts the labels of the alternatives in a cyclic fashion, and a transposition which exchanges the labels of two alternatives adjacent in the previous cycle. The matrices corresponding to these two elements along with the value of $\phi(\sigma)$ for a single $\sigma \in \rank$ is enough to generate $\phi(\sigma)$ for all $\sigma \in \rank$. Hence, if the dimension of $\phi$ is $k$, then the corresponding SMPR can be expressed in terms of $2 k^2 + k$ paramters, which is the \emph{first} representation to the best of our knowledge that is not direclty exponential in $m$.\footnote{It might be the case that $k$ is still exponential in $m$, but as we mention later, there exist interesting low dimensional embeddings.} 
+
+This succint representation has many advantages. First, it reduces the storage space required to encode a neutral SMPR. Second, we believe that this succint representation would also inform the design of efficient algorithms based on mean proximity rules. Finally, one of the motivations for studying families of voting rules is to be able to learn the most effective voting rule from the family, for which less number of parameters implies more efficient learning. 
+
+Further, Lemma~\ref{lem:nt-linear} gives a linear embedding that has dimension $m!$ times the dimension of the input embedding, whereas Theorem~\ref{thm:neutral-linear} produces a linear embedding of the same dimension as the input embedding. Together with the added benefits of the succint representation presented above, this provides significant additional benefit. 
+
+This discussion inspires a very interesting basic question: \emph{Which neutral SMPRs admit low dimensional embeddings?} Low dimensional embeddings are important because they provide simple intuition behind the working of the rules they represent. Turns out, the structure of linear embeddings allow us to characterize all neutral SMPRs which admit one dimensional and two dimensional embeddings. One dimensional embeddings partition the set of rankings into two --- the sets of rankings obtained by applying all odd and even permutations\footnote{} to any single ranking. The embedding then maps all rankings in one set to the same point, thus mapping all possible rankings to one of two distinct points. The set of two dimensional embeddings can be mapped to points on a circle as follows. In the matrices corresponding to the generating set of $S_m$ of size $2$, it can be shown that the matrix corresponding to the cycle must be a rotation by $4 \pi / m!$, where as the matrix corresponding to the transposition must be a reflection around a line passing through the origin at angle $\theta$, where $\theta \in [0,2\pi)$.\footnote{Orientation of the $4\pi/m!$ rotation as well as the initial embedding can be fixed without loss of generality} Further, we were able to show that for $3$ alternatives, imposing Pareto efficiency in the winner and in the loser\footnote{When all voters rank the same alternative first or the same alternative last, that alternative should be first or last respectively in the output.} to the set of two dimensional embeddings yields a characterization of positional scoring rules over $3$ alternatives. We omit these proofs due to lack of space and because they are fairly simple.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ns{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}
-
+\medskip
 \noindent \textbf{Summary of the results till now.} Table~\ref{tab:summary} summarizes the characterizations presented in the paper till now. In case of multiple conditions within a table cell, each condition is equivalent to the required restriction on the mean proximity rule. A prime result that is omitted from the table is that an embedding $\phi$ is neutral if and only if its normalization $\hat{\phi} = \phi-\phi_{avg}$ is linear. 
 
 \begin{table}[ht]
@@ -708,10 +690,21 @@ Here, the second transition follows since $Q Q^T$ is identity matrix as rows of 
 %ns - Can introduce results about low dimensional embeddings here. Minimum dimension stuff will go to discussion as applications of uniqueness theorem in widening our understanding of mean proximity rules.
 
 \section{Connections to other approaches}
+\ns{TO BE WRITTEN}
 
-Voting rules have been analyzed from three viewpoints in the literature \ns{cite}: axiomatic view, distance rationalizability (DR) view, and MLE view. We connect linear mean proximity rules with all three viewpoints.
+Voting rules have been analyzed from three viewpoints in the literature \ns{cite}.
+
+GSR --- MPRs are strict subset of GSRs. Also connected axiomatically: mean neat rules (a slight generalization) characterized by anonymity, consistency, and two technical conditions of connectedness and continuity. GSR characterized by anonymity and finite local consistency. Also, both families have both algebraic and geometric versions. 
+
+DR --- subset with a specific choice of intuitive distance function. 
+
+MLE --- again very direct connection.
+
+Aximoatic --- weak. Essentially characterization of mean neat voting, and positional scoring rules (a subset of MPR).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
 
 \subsection{Axiomatic View}
 Proposition~\ref{prop:properties} shows that all mean proximity rules are consistent and connected. Theorem~\ref{thm:linear-neutral} shows that linear mean proximity rules are also neutral. This raises a few questions.
@@ -743,7 +736,7 @@ There are two interesting questions in this domain.
 \item Mallows' model with the Kendall Tau distance admits an efficient sampling procedure. Is that the case with the family of Gaussian models introduced above when the embedding is linear? 
 \item When we take the embedding for a positional scoring rule, we get a distribution where the probability of a ranking decreases exponentially as its discrepancy from the true ranking increases, and the discrepancy is measured by positions of alternatives rather than pairwise comparisons. Is there anything interesting about this distribution like Mallows' model?
 \end{enumerate}
-
+\end{comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -751,7 +744,11 @@ There are two interesting questions in this domain.
 \section{Discussion}
 \label{sec:disc}
 
-\ns{Discussion would go here}
+\ns{TO BE WRITTEN}
+
+\ns{See the image attached}
+
+Also: after leveraging algorithmic etc insights, and deeper understanding --- also low dimensional representations (group theory citations)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
