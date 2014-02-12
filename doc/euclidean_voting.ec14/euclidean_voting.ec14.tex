@@ -79,18 +79,18 @@
 \newcommand{\nt}{NT}
 
 % Document starts
-\begin{document}
+\begin{document}\allowdisplaybreaks
 
 % Page heads
-\markboth{Shah and Lahaie}{Neutrality and Geometry of Mean Voting}
+\markboth{Lahaie and Shah}{Neutrality and Geometry of Mean Voting}
 
 % Title portion
 \title{Neutrality and Geometry of Mean Voting}
 \author{
-Nisarg Shah
-\affil{Carnegie Mellon University, Pittsburgh}
 S\'{e}bastien Lahaie
-\affil{Microsoft Research, New York City}
+\affil{Microsoft Research, New York City, United States.}
+Nisarg Shah
+\affil{Carnegie Mellon University, Pittsburgh, United States.}
 }
 
 \begin{abstract}
@@ -104,10 +104,10 @@ S\'{e}bastien Lahaie
 
 \keywords{Social choice, Mean proximity rules, Euclidean space, Neutrality}
 
-\acmformat{Nisarg Shah and S\'{e}bastien Lahaie, 2014. Neutrality and Geometry of Mean Voting.}
+\acmformat{S\'{e}bastien Lahaie and Nisarg Shah, 2014. Neutrality and Geometry of Mean Voting.}
 
 \begin{bottomstuff}
-Author's addresses:  N. Shah, Computer Science Department, Carnegie Mellon, {\small\tt nkshah@cs.cmu.edu}; S. Lahaie, Microsoft Research New York City, {\small\tt slahaie@microsoft.com}.
+Author's addresses:  S. Lahaie, Microsoft Research New York City, {\small\tt slahaie@microsoft.com}; N. Shah, Computer Science Department, Carnegie Mellon, {\small\tt nkshah@cs.cmu.edu}.
 \end{bottomstuff}
 
 \maketitle
@@ -115,9 +115,9 @@ Author's addresses:  N. Shah, Computer Science Department, Carnegie Mellon, {\sm
 \section{Introduction}
 \label{sec:intro}
 
-Modern social choice literature has seen rising interest in studying families of voting rules for aspects like manipulability~\cite{XC08a,Xia13} and learnability~\cite{PZR08,PZPR09}. Particularly, the framework of \emph{generalied scoring rules} (GSRs)~\cite{XC08a} has been a great success in this direction. More recently, Caragiannis et al.~\shortcite{CPS13} introduced the families of PM-c and PD-c rules as generalization of Condorcet consistenct rules and positional scoring rules, respectively. Their goal was to design rules that perform well in predicting an underlying ground truth from noisy data. These families of voting rules are extremely general, e.g., GSRs as well as the union of PM-c and PD-c rules capture almost all popular voting rules. However, this is a problem because not each rule in the family admits a theoretical justification, and some rules are arguably bad. 
+Modern social choice literature has seen rising interest in studying families of voting rules for aspects like manipulability~\cite{XC08,Xia13} and learnability~\cite{PZR08,PZPR09}. Particularly, the framework of \emph{generalized scoring rules} (GSRs)~\cite{XC08} has been a great success in this direction. More recently, Caragiannis et al.~\shortcite{CPS13} introduced the families of PM-c and PD-c rules as generalization of Condorcet consistenct rules and positional scoring rules, respectively. Their goal was to design rules that perform well in predicting an underlying ground truth from noisy data. These families of voting rules are extremely general, e.g., GSRs as well as the union of PM-c and PD-c rules capture almost all popular voting rules. However, this is a problem because not each rule in the family admits a theoretical justification, and some rules are arguably bad. 
 
-Another approach to social choice attempts to define families of voting rules where each rule in the family is justified. Two popular approaches are \emph{distance rationalizability}~\cite{EFS09,elkind2010good} and \emph{maximum likelihood approach}~\cite{CS05b,CRX09}. However, these approaches have been rather unfruitful because the definition of these families depend on the choices of a distance metric over permutations and a noise model for generating noisy estimates of a ground truth, respectively; these choices can be extremely general, thus both families end up capturing \emph{almost all} voting rules.
+Another approach to social choice attempts to define families of voting rules where each rule in the family is justified. Two such popular approaches are \emph{distance rationalizability}~\cite{EFS09,elkind2010good} and \emph{maximum likelihood approach}~\cite{CS05b,CRX09}. However, these approaches have been rather unfruitful because the definition of these families depend on the choices of a distance metric over permutations and a noise model for generating noisy estimates of a ground truth, respectively; these choices can be extremely general, thus both families end up suffering from the aforementioned problem of containing \emph{almost all} voting rules.
 
 The above discussion suggests the need for a family of voting rules that is not extremely general, and in which each rule has theoretical justification. The family of \emph{mean proximity rules} introduced by Zwicker~\shortcite{Zwicker08a} is such a family; it is more restrictive than generalized scoring rules, distance rationalizable rules, and maximum likelihood estimators because it is a strict subset of all three of them (see Section~\ref{sec:connection}). Additionally, each rule in the family has an intuitive theoretical justification: The goal of voting rules is to aggregate the input votes into an aggregate consensus. A plethora of voting rules have emerged due to the fact that there is no natural notion of \emph{mean} of a set of rankings. Mean proximity rules embed rankings into a Euclidean space, and use the mean of the embeddings of the input votes to guide the consensus. When the mean does not represent embedding of any ranking, the ranking whose embedding is closest to the mean is chosen as the consensus. Different ways to embed the rankings into the Euclidean space gives rise to different mean proximity rules. In this sense, mean proximity rules use Euclidean spaces to achieve the mean representative of the input votes, which provides a theoretical justification for every mean proximity rule. Examples of mean proximity rules include the Kemeny rule and all positional scoring rules. 
 
@@ -129,22 +129,22 @@ The above discussion suggests the need for a family of voting rules that is not 
 \label{fig:geometric}
 \end{figure}
 
-Mean proximity rules provide another important benefit --- they are extremely easy to understand and sometimes even visualize. Consider, for example, the embedding given in Figure~\ref{fig:borda} that generates the Borda count for $3$ alternatives. Each of the $6$ rankings is embedded into a vertex of a regular hexagon. Each voter adds a unit weight to the vertex corresponding to his vote, and the ranking whose region contains the mean of all the votes is chosen as the output. For a simulation of this process using rubber bands, see \url{http://omega.math.union.edu/research/2010-05-voting/}. Similarly, Figure~\ref{fig:kemeny} shows the embedding generating the Kemeny rule for $3$ alternatives. While the Kemeny rule is considered a black-box algebraic problem, this geometric visualization makes it extremely easy for a voter to understand how his vote affects the outcome of the rule. Saari~\cite{saari1995basic} argues that a clear understanding of voting rules is crucial for the rule to be accepted in the real-world, even more so for positional rules\footnote{By positional rules, we mean rules that pay attention to alternatives in later positions in the input votes as well, unlike plurality.} that are arguably more complex than simple rules such as plurality or $k$-approval. He then makes a compelling case of using geometry in order to clarify and visualize voting rules. However, the geometry intuitions behind mean proximity rules are fundamentally different from those in Saari's work. 
+Mean proximity rules provide another important benefit --- they are extremely easy to understand and in some cases visualize too. Consider, for example, the embedding given in Figure~\ref{fig:borda}\footnote{Credit:~\cite{ovchinnikov2005hyperplane}} that generates the Borda count for $3$ alternatives. Each of the $6$ rankings is embedded into a vertex of a regular hexagon. Each voter adds a unit weight to the vertex corresponding to his vote, and the ranking whose region contains the mean of all the votes is chosen as the output. For a simulation of this process using rubber bands, see \url{http://omega.math.union.edu/research/2010-05-voting/}. Similarly, Figure~\ref{fig:kemeny} shows the embedding generating the Kemeny rule for $3$ alternatives. While the Kemeny rule is considered a black-box algebraic problem, this geometric visualization makes it extremely easy for a voter to understand how his vote affects the outcome of the rule. Saari~\cite{saari1995basic} argues that a clear understanding of voting rules is crucial for the rule to be accepted in the real-world, even more so for positional rules\footnote{By positional rules, we mean rules that pay attention to alternatives in later positions in the input votes as well, unlike plurality.} that are arguably more complex than simple rules such as plurality or $k$-approval. He then makes a compelling case of using geometry in order to clarify and visualize voting rules. However, the geometry intuitions behind mean proximity rules are fundamentally different from those in Saari's work. 
 
 Despite the attractive outlook, mean proximity rules have received less attention in the literature. We tap the potential and uncover significant structures in mean proximity rules. 
 
-\noindent \textbf{Our contributions.} Mean proximity rules have two alternative representations, a geometric and an algebraic. We study mean proximity rules in a slightly limited context of social welfare functions, and characterize the constraints the limited context imposes on both representations (Theorem~\ref{thm:symm}). Next, we study the important axiom of neutrality in the framework of mean proximity rules. When introducing mean proximity rules, Zwicker~\shortcite{Zwicker08a} titled his paper "Consistency without neutrality in voting rules: When is a vote an average?". In this sense, our work fills the prime gap in the framework. We first give a characterization of constraints imposed by neutrality on both representations of mean proximity rules (Theorem~\ref{thm:neutral-smpr}). An important concept we introduce in this context is that of neutral embeddings. 
+\noindent \textbf{Our contributions.} Mean proximity rules have two alternative representations, one geometric and one algebraic. We study mean proximity rules in a slightly limited context of social welfare functions, and characterize the constraints the limited context imposes on both representations (Theorem~\ref{thm:symm}). Next, we study the important axiom of neutrality in the framework of mean proximity rules. When introducing mean proximity rules, Zwicker~\shortcite{Zwicker08a} raised an important question of incorporating neutrality in mean proximity rules; our paper fills this gap. We first give a characterization of constraints imposed by neutrality on both representations of mean proximity rules (Theorem~\ref{thm:neutral-smpr}). An important concept we introduce in this context is that of neutral embeddings. 
 
-Then, by drawing ideas from the representation theory of finite groups, we introduce \emph{linear embeddings}, which are constructive in nature and therefore provide additional benefits over neutral embeddings. However, using a complicated algebraic proof, in Theorem~\ref{thm:neutral-linear} we establish that (almost) every neutral embedding is also a linear embedding, and therefore has the group theoretic structure that we can leverage. This leads to a constructive characterization of neutral mean proximity rules that has further implications such as characterization of mean proximity rules that admit low dimensional embeddings. We conclude by drawing connections between mean proximity rules and various lines of research in social choice literature, showing that mean proximity rules connect well with each line of research. 
+By drawing ideas from the representation theory of finite groups, we introduce \emph{linear embeddings}, which are constructive in nature and therefore provide additional benefits over neutral embeddings. However, using a fairly technical proof, in Theorem~\ref{thm:neutral-linear} we establish that (almost) every neutral embedding is also a linear embedding, and therefore has the group theoretic structure that we can leverage. This leads to a constructive characterization of neutral mean proximity rules that has further implications such as characterization of mean proximity rules that admit low dimensional embeddings. We conclude by drawing connections between mean proximity rules and various lines of research in social choice literature, showing that mean proximity rules connect well with each line of research. 
 
 \section{Related Work}
 \label{sec:related}
 
 We build upon the work of Zwicker~\shortcite{Zwicker08a,Zwicker08b} who introduced and studied mean proximity rules and their generalization called mean neat rules, and gave an axiomatic characterization of (rational) mean neat voting rules. The work of Cervone et al.~\shortcite{CDGL+12} builds upon mean proximity rules and utilizes another notion of geometric consensus known as mediancenter or the Fermat-Weber point. They use the intuition of a rubber band and each voter exerting force to bring the consensus close to himself which is similar to the intuition behind mean proximity rules. 
 
-The work of Saari~\shortcite{saari1995basic} uses a different geometric visualization where a profile is viewed in the space of $m!$ dimensions, each dimension encoding the number of times a particular ranking appears in a given profile. Daugherty et al.~\shortcite{daugherty2009voting} extend his work by using intricate results from group representation theory. Related lines of research include the work of Brams and Fishburn~\shortcite{brams2007approval} that argue in favor of approval voting for its simplicity and clarity, and the work of Crisman~\shortcite{permuta} who connects the Borda count and the Kemeny rule using the geometry of permutahedron, the mean proximity embedding of the Borda count similar to Figure~\ref{fig:borda} but for $4$ alternatives. 
+The work of Saari~\shortcite{saari1995basic} uses a different geometric visualization where a profile is viewed in the space of $m!$ dimensions, each dimension encoding the number of times a particular ranking appears in a given profile. Daugherty et al.~\shortcite{daugherty2009voting} extend his work by using intricate results from group representation theory. Related lines of research include the work of Brams and Fishburn~\shortcite{brams2007approval} that argue in favor of approval voting for its simplicity and clarity, and the work of Crisman~\shortcite{permuta} who connects the Borda count and the Kemeny rule using the geometry of permutahedron, the mean proximity embedding of the Borda count similar to Figure~\ref{fig:borda} but for $4$ alternatives. Note that in these lines of research, the Euclidean space is merely as a tool to understand the voting rules, and does not bear any intrinsic meaning.
 
-These lines of research must be separated from the models~\cite{} where the alternatives are embedded into a Euclidean space, and voters preferences are expressed as points in the same Euclidean space; the Euclidean space used in these models and the embeddings of the alternatives have specific meaning whereas the former lines of research use the Euclidean space merely as a tool to understand the voting rules.
+%These lines of research must be separated from the models~\cite{} where the alternatives are embedded into a Euclidean space, and voters preferences are expressed as points in the same Euclidean space; the Euclidean space used in these models and the embeddings of the alternatives have specific meaning whereas the former lines of research use the Euclidean space merely as a tool to understand the voting rules.
 
 \section{Preliminaries}
 \label{sec:prelim}
@@ -408,10 +408,7 @@ s_{\phi^{\nt}}(\sigma,\sigma') = -\|\phi^{\nt}(\sigma)-\phi^{\nt}(\sigma')\|^2 &
 Thus, we have $s_{\phi^{\nt}} = s_{\phi}^{\nt}$. The scoring function $s_{\phi}$ is equivalent to the embedding $\phi$, and thus also represents the rule $r$. From Proposition~\ref{prop:neutral-scoring}, the scoring function $s_{\phi}^{\nt} = s_{\phi^{\nt}}$ also represents $r$. Hence, the embedding $\phi^{\nt}$ also represents $r$. 
 \end{proof}
 
-We remark that the neutralized embedding $\phi^{\nt}$ is not very satisfactory because it maps rankings to a Euclidean space with dimension $m!$ times the dimension used by $\phi$. However, it has significant structure. For example, in addition to neutrality we also have 
-$$
-\|\phi^{\nt}(\sigma)\|^2 = \sum_{\tau \in S_m} \|\phi(\tau \sigma)\|^2 = \sum_{\sigma' \in \rank} \|\phi(\sigma')\|^2.
-$$
+We remark that the neutralized embedding $\phi^{\nt}$ is not very satisfactory because it maps rankings to a Euclidean space with dimension $m!$ times the dimension used by $\phi$. However, it has significant structure. For example, in addition to neutrality we also have $\|\phi^{\nt}(\sigma)\|^2 = \sum_{\tau \in S_m} \|\phi(\tau \sigma)\|^2 = \sum_{\sigma' \in \rank} \|\phi(\sigma')\|^2$. 
 Hence, $\|\phi^{\nt}(\sigma)\|$ is independent of $\sigma$. That is, $\phi^{\nt}$ is an \emph{equal norm embedding}.
 
 \begin{definition}[Equal Norm Embedding]
@@ -530,19 +527,14 @@ Every linear embedding has equal norm.
 \label{cor:linear-equal-norm}
 \end{corollary}
 
-While every linear embedding has equal norm, every neutral embedding may not have equal norm. However, the next result shows that every neutral embedding has a similar equal distance property. 
+While every linear embedding has equal norm, every neutral embedding may not have equal norm. However, the next result shows that every neutral embedding has a similar equal distance property. The proof considers a profile where each ranking appears exactly once; a detailed proof is given in the appendix.
 
 \begin{lemma}
 Let $\phi$ be a neutral embedding, and $\phi_{avg} = (1/m!) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$ denote the mean of embeddings of all rankings under $\phi$. Then, $\|\phi(\sigma)-\phi_{avg}\|$ is a constant independent of the ranking $\sigma$.
 \label{lem:average-all}
 \end{lemma}
-\begin{proof}
-Let $r$ be the mean proximity rule represented by $\phi$. By Theorem~\ref{thm:neutral-smpr}, $r$ must be neutral. Let $\pi_{symm}$ denote the profile containing each ranking from $\rank$ exactly once. Let $r(\pi_{symm}) = T \subseteq \rank$, and suppose that $T \neq \rank$. Thus, there must exist a ranking $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there must also exist a ranking $\sigma \in T$. Now, take $\tau \in S_m$ to be the permutation that converts $\sigma$ to $\sigma'$. 
 
-It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau T = \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$, which is a contradiction because $r$ is neutral. Hence, we must have $r(\pi_{symm}) = \rank$. Observing that $\mu(\pi_{symm}) = \phi_{avg}$ and $r(\pi_{symm}) = \argmin_{\sigma \in \rank} \|\phi(\sigma)-\phi_{avg}\|$ yields the required result.
-\end{proof}
-
-Given Lemma~\ref{lem:average-all}, we can easily derive an equal norm embedding given a neutral embedding: Given a neutral embedding $\phi$, we say that the embedding $\hat{\phi}$ defined by $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$ is the \emph{normalization} of $\phi$. Note that $\hat{\phi}$ is simply a translation applied to $\phi$, which is distance-preserving. Hence, $\hat{\phi}$ represents the same neutral SMPR as $\phi$ does. This normalization achieves the equal norm property (Lemma~\ref{lem:average-all}), and also preserves neutrality and linearity of the original embedding. 
+Given Lemma~\ref{lem:average-all}, we can easily derive an equal norm embedding given a neutral embedding: Given a neutral embedding $\phi$, we say that the embedding $\hat{\phi}$ defined by $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$ is the \emph{normalization} of $\phi$. Note that $\hat{\phi}$ is simply a translation applied to $\phi$, which is distance-preserving. Hence, $\hat{\phi}$ represents the same neutral SMPR as $\phi$ does. This normalization achieves the equal norm property (Lemma~\ref{lem:average-all}), and also preserves neutrality and linearity of the original embedding. The proof is pretty straightforward and is given in the appendix.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -550,27 +542,6 @@ Given Lemma~\ref{lem:average-all}, we can easily derive an equal norm embedding 
 An embedding is neutral (resp. linear) if and only if its normalization is neutral (resp. linear). 
 \label{lem:preservation}
 \end{lemma}
-\begin{proof}
-If $\phi$ is neutral, then for all $\sigma,\sigma' \in \rank$ and $\tau \in S_m$, we have 
-$$
-\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|.
-$$
-Hence, $\hat{\phi}$ is neutral too. The proof of the converse works in the same way by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
-
-Similarly, if $\phi$ is linear with representation $R$, then for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma \in \rank$, we get 
-$$
-\frac{1}{m!} \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma) = R_{\tau} \left (\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) \right).
-$$
-However, 
-$$
-\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}.
-$$
-Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in S_m$. Now, for all $\sigma \in \rank$ and $\tau \in S_m$, 
-$$
-\hat{\phi}(\tau \sigma) = \phi(\tau \sigma) - \phi_{avg} = R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg} = R_{\tau}\hat{\phi}(\sigma).
-$$
-Thus, $\hat{\phi}$ is also linear with the same representation $R$. Again, the proof of the converse works by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
-\end{proof}
 
 Lemma~\ref{lem:preservation} shows that the normalization of a neutral embedding is also neutral, in addition to having the equal norm property. We now show that this normalization is in fact linear --- but this requires a much deeper proof. 
 
@@ -647,17 +618,8 @@ Theorem~\ref{thm:linear-char} should be viewed as a fifth equivalent condition o
 For an embedding $\phi$ of a neutral SMPR $r$, its neutralization $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt} is a linear embedding.
 \label{lem:nt-linear}
 \end{lemma}
-\begin{proof}
-Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. Observe that for all $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are simply permutations of each other. First, we show that there exists a representation $R$ such that for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
-$$
-\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
-$$
-Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks ($\phi(\tau_i \tau \sigma)$ for $i \in [m!]$) of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector would be $\phi(\tau_j \sigma)$, where $\tau_j = \tau_i \tau$, the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. 
 
-Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, it is easy to see that $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, note that each $R_{\tau}$ is a permutation matrix originating from the permutation matrix $\Pi_{\tau}$ of the permutation $\tau$. Also, we have $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$. Hence, it can be verified that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$, and every $R_{\tau}$ for $\tau \in S_m$ is an orthogonal matrix.
-\end{proof}
-
-Theorem~\ref{thm:neutral-smpr} and Lemma~\ref{lem:nt-linear} together provide another proof of Theorem~\ref{thm:linear-char}. However, our original proof that showed a stronger connection (equivalence) between normalization of neutral embeddings and linear embeddings bears certain advantages described below.
+The proof of Lemma~\ref{lem:nt-linear} appears in the appendix. Theorem~\ref{thm:neutral-smpr} and Lemma~\ref{lem:nt-linear} together provide another proof of Theorem~\ref{thm:linear-char}. However, our original proof that showed a stronger connection (equivalence) between normalization of neutral embeddings and linear embeddings bears certain advantages described below.
 
 The proof of Theorem~\ref{thm:neutral-linear} is constructive, meaning that one can use it to explicitly find the representation of the normalization of any given neutral embedding of an SMPR. The multiplicative property $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ implies that one only needs to store the representation matrices corresponding to a generating set of $S_m$, and can generate the rest of the matrices by appropriate multiplications and inverses.\footnote{A generating set of a group is a subset of the group such that every element of the group can be expressed as the product (under the group operation) of finitely many elements of the subset and their inverses.} 
 
@@ -667,14 +629,97 @@ This succint representation has many advantages. First, it reduces the storage s
 
 Further, Lemma~\ref{lem:nt-linear} gives a linear embedding that has dimension $m!$ times the dimension of the input embedding, whereas Theorem~\ref{thm:neutral-linear} produces a linear embedding of the same dimension as the input embedding. Together with the added benefits of the succint representation presented above, this provides significant additional benefit. 
 
-This discussion inspires a very interesting basic question: \emph{Which neutral SMPRs admit low dimensional embeddings?} Low dimensional embeddings are important because they provide simple intuition behind the working of the rules they represent. Turns out, the structure of linear embeddings allow us to characterize all neutral SMPRs which admit one dimensional and two dimensional embeddings. One dimensional embeddings partition the set of rankings into two --- the sets of rankings obtained by applying all odd and even permutations\footnote{The parity (oddness or evenness) of a permutation $\sigma$ is the parity of the number of inversions in $\sigma$, i.e., the number of pairs $x,y$ such that $x < y$ but $\sigma(x) > \sigma(y)$.} to any single ranking. The embedding then maps all rankings in one set to the same point, thus mapping all possible rankings to one of two distinct points. The set of two dimensional embeddings can be mapped to points on a circle as follows. In the matrices corresponding to the generating set of $S_m$ of size $2$, it can be shown that the matrix corresponding to the cycle must be a rotation by $4 \pi / m!$, where as the matrix corresponding to the transposition must be a reflection around a line passing through the origin at angle $\theta$, where $\theta \in [0,2\pi)$.\footnote{Orientation of the $4\pi/m!$ rotation as well as the initial embedding can be fixed without loss of generality} Further, we were able to show that for $3$ alternatives, imposing Pareto efficiency in the winner and in the loser\footnote{When all voters rank the same alternative first or the same alternative last, that alternative should be first or last respectively in the output.} to the set of two dimensional embeddings yields a characterization of positional scoring rules over $3$ alternatives. We omit these proofs due to lack of space and because they are fairly simple.
+This discussion inspires a very interesting basic question: \emph{Which neutral SMPRs admit low dimensional embeddings?} Low dimensional embeddings are important because they provide simple intuition behind the working of the rules they represent. Turns out, the structure of linear embeddings allow us to characterize all neutral SMPRs which admit one dimensional and two dimensional embeddings. One dimensional embeddings partition the set of rankings into two --- the sets of rankings obtained by applying all odd and even permutations\footnote{The parity (oddness or evenness) of a permutation $\sigma$ is the parity of the number of inversions in $\sigma$, i.e., the number of pairs $x,y$ such that $x < y$ but $\sigma(x) > \sigma(y)$.} to any single ranking. The embedding then maps all rankings in one set to the same point, thus mapping all possible rankings to one of two distinct points. The set of two dimensional embeddings can be mapped to points on a circle as follows. In the matrices corresponding to the generating set of $S_m$ of size $2$, it can be shown that the matrix corresponding to the cycle must be a rotation by $4 \pi / m!$, where as the matrix corresponding to the transposition must be a reflection around a line passing through the origin at angle $\theta$, where $\theta \in [0,2\pi)$.\footnote{Orientation of the $4\pi/m!$ rotation as well as the initial embedding can be fixed without loss of generality} Further, we were able to show that for $3$ alternatives, imposing Pareto efficiency in the winner and in the loser\footnote{When all voters rank the same alternative first or the same alternative last, that alternative should be first or last respectively in the output.} to the set of two dimensional embeddings yields a characterization of positional scoring rules over $3$ alternatives. We omit these proofs due to lack of space and because they are fairly simple. 
 
+The main results of the paper (except Theorem~\ref{thm:neutral-linear}) are summarized in Table~\ref{tab:summary} given in the appendix.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ns - Can introduce results about low dimensional embeddings here. Minimum dimension stuff will go to discussion as applications of uniqueness theorem in widening our understanding of mean proximity rules.
+
+\section{Connections to other approaches}
+\label{sec:connection}
+In this section, we connect mean proximity rules with various lines of research in social choice literature. 
+
+\medskip 
+\noindent \textbf{Generalized scoring rules.} Using Equation~\eqref{eqn:discrete-mean}, it can easily be shown that mean proximity rules (in our context of social welfare functions) are special cases of generalized scoring rules~\cite{XC08}. Further, similar to the geometric (embedding) and algebraic (scoring function) equivalent representations of mean proximity rules, GSRs also admit an algebraic and an equivalent geometric representation (see~\cite{MPR12b}). Finally, a generalization of mean proximity rules known as mean neat voting rules~\cite{Zwicker08b} is characterized by anonymity, consistency, and two other technical conditions (connectedness and continuity). In contrast, generalized scoring rules are characterized by anonymity and finite local consistency (a milder version of consistency). This provides an alternate proof that mean proximity rules are subset of generalized scoring rules. 
+
 \medskip
-\noindent \textbf{Summary of the results till now.} Table~\ref{tab:summary} summarizes the characterizations presented in the paper till now. In case of multiple conditions within a table cell, each condition is equivalent to the required restriction on the mean proximity rule. A prime result that is omitted from the table is that an embedding $\phi$ is neutral if and only if its normalization $\hat{\phi} = \phi-\phi_{avg}$ is linear. 
+\noindent \textbf{Distance rationalizability.} Meskanen and Nurmi~\cite{MN08} introduced the distance rationalizability framework where given a consensus class of profiles where the output is already defined and a distance function between profiles, the corresponding distance rationalizable rule finds the closest profile (to a given profile) in the consensus class and returns the consensus defined on that profile. Edith et al.~\cite{EFS10} studied additively votewise distances, where the distance between two profiles is (vaguely) the sum of distances between their rankings. We note that the additively votewise distance rationalizable rules with (strong) unanimity consensus class and the distance between two rankings being square of the Euclidean distance (the $\ell_2$ norm) between their embeddings coincide with symmetric mean proximity rules. 
+
+%Note that while the Euclidean distance defines a distance metric (satisfying triangle inequality), its square may not be a distance metric. However, it turns out that for the pairwise comparison embedding that generates the Kemeny rule, the square of Euclidean distance is the Kendall Tau distance (up to a multiplicative constant), which is a distance metric. This has two important implications. First, it shows that under the more natural Euclidean distance function, Kemeny is indeed a \emph{mean} rule rather than a \emph{median} rule. This explains why the Kemeny rule has desirable properties, as the importance of mean consensus has been emphasized significantly in the literature. Second, it indicates that the distance metrics whose square are also distance metrics might be of independent interest, and might be connected to rules satisfying desirable properties. Another example of a distance metric whose square is also a distance metric is square root of the Hamming distance.
+
+\medskip
+\noindent \textbf{Maximum likelihood approach.} Given an embedding $\phi$, consider the noise model where the probability of observing a noisy sample $\sigma$ given that the ground truth is $\sigma^*$ is given by 
+\begin{equation}
+\Pr[\sigma | \sigma^*] = \frac{e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}}{\sum_{\sigma' \in \rank} e^{-\|\phi(\sigma')-\phi(\sigma^*)\|^2}} \propto e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}.
+\label{eqn:mle}
+\end{equation}
+
+This is a family of Gaussian noise models, of which the Mallows model~\cite{Mall57} is a special case. It can be shown that in case of neutral embeddings, the normalization in the denominator is independent of the ground truth $\sigma^*$, similarly to the Mallows model. Doignon et al.~\shortcite{doignon2004repeated} showed that the Mallows model admits efficient sampling. It would be interesting to analyze what noise models arising from Equation~\eqref{eqn:mle} also admit efficient sampling. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion}
+\label{sec:disc}
+
+An important question that is not yet well understood is the relation between various representations of the same mean proximity rule. Note that a mean proximity rule essentially takes a convex combination of the embeddings of the input votes, and returns the rankings whose embeddings are closest to the convex combinationm, i.e., it returns the set of rankings in the Voronoi regions of whose embeddings the convex combination lies. We conjecture that using Cauchy's rigidity theorem (see~\cite{aigner2010cauchy}), it can be established that two embeddings represent the same (neutral) symmetric mean proximity rule if and only if they are similar, i.e., they are obtained from each other by orthogonal transformations, translations, and scaling. This \emph{unique representation conjecture}, if proven, can significantly deepen our understanding of mean voting in the Euclidean geometry. 
+
+Additionally, it can be shown that such a result would also entail our equivalence between neutrality and linearity (Theorem~\ref{thm:neutral-linear}), and calculation of the minimum dimension required by any embedding representing a given symmetric mean proximity rule (e.g., the conjecture would imply that the minimum dimension required for any positional scoring rules is $m-1$ and that for the Kemeny rule is $\binom{m}{2}$).  More importantly, strong connections with rigidity theory and geometry of Voronoi diagrams and Delaunay triangulations can then be leveraged, for example, to generalize the Euclidean distances in mean proximity rules to Bregman divergences (see~\cite{boissonnat2010bregman}). Moreover, rigidity theory and computational geometry has recently seen significant progress in tackling algorithmic and computational challenges (e.g., see~\cite{biedl2007cauchy,o1988computational}), which we believe can inform the design of efficient algorithms based on mean proximity rules. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{acmsmall}
+\bibliography{abb,ultimate}
+
+%\received{February 2007}{March 2009}{June 2009}
+
+\elecappendix
+\medskip
+
+In this appendix, we provide the missing proofs in the paper.
+
+\begin{proof}[of Lemma~\ref{lem:average-all}]
+Let $r$ be the mean proximity rule represented by $\phi$. By Theorem~\ref{thm:neutral-smpr}, $r$ must be neutral. Let $\pi_{symm}$ denote the profile containing each ranking from $\rank$ exactly once. Let $r(\pi_{symm}) = T \subseteq \rank$, and suppose that $T \neq \rank$. Thus, there must exist a ranking $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there must also exist a ranking $\sigma \in T$. Now, take $\tau \in S_m$ to be the permutation that converts $\sigma$ to $\sigma'$. 
+
+It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau T = \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$, which is a contradiction because $r$ is neutral. Hence, we must have $r(\pi_{symm}) = \rank$. Observing that $\mu(\pi_{symm}) = \phi_{avg}$ and $r(\pi_{symm}) = \argmin_{\sigma \in \rank} \|\phi(\sigma)-\phi_{avg}\|$ yields the required result.
+\end{proof}
+
+\begin{proof}[of Lemma~\ref{lem:preservation}]
+If $\phi$ is neutral, then for all $\sigma,\sigma' \in \rank$ and $\tau \in S_m$, we have 
+$$
+\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|.
+$$
+Hence, $\hat{\phi}$ is neutral too. The proof of the converse works in the same way by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
+
+Similarly, if $\phi$ is linear with representation $R$, then for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma \in \rank$, we get 
+$$
+\frac{1}{m!} \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma) = R_{\tau} \left (\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) \right).
+$$
+However, 
+$$
+\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}.
+$$
+Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in S_m$. Now, for all $\sigma \in \rank$ and $\tau \in S_m$, 
+$$
+\hat{\phi}(\tau \sigma) = \phi(\tau \sigma) - \phi_{avg} = R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg} = R_{\tau}\hat{\phi}(\sigma).
+$$
+Thus, $\hat{\phi}$ is also linear with the same representation $R$. Again, the proof of the converse works by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
+\end{proof}
+
+\begin{proof}[of Lemma~\ref{lem:nt-linear}]
+Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. Observe that for all $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are simply permutations of each other. First, we show that there exists a representation $R$ such that for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
+$$
+\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
+$$
+Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks ($\phi(\tau_i \tau \sigma)$ for $i \in [m!]$) of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector would be $\phi(\tau_j \sigma)$, where $\tau_j = \tau_i \tau$, the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. 
+
+Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, it is easy to see that $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, note that each $R_{\tau}$ is a permutation matrix originating from the permutation matrix $\Pi_{\tau}$ of the permutation $\tau$. Also, we have $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$. Hence, it can be verified that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$, and every $R_{\tau}$ for $\tau \in S_m$ is an orthogonal matrix.
+\end{proof}
+
+Table~\ref{tab:summary} summarizes the characterizations presented in the paper. In case of multiple conditions within a table cell, each condition is equivalent to the required restriction on the mean proximity rule. A prime result that is omitted from the table is that an embedding $\phi$ is neutral if and only if its normalization $\hat{\phi} = \phi-\phi_{avg}$ is linear. 
 
 \begin{table}[ht]
 \centering
@@ -693,82 +738,6 @@ This discussion inspires a very interesting basic question: \emph{Which neutral 
 \label{tab:summary}
 \end{table}
 
-%ns - Can introduce results about low dimensional embeddings here. Minimum dimension stuff will go to discussion as applications of uniqueness theorem in widening our understanding of mean proximity rules.
-
-\section{Connections to other approaches}
-\ns{TO BE WRITTEN}
-
-Voting rules have been analyzed from three viewpoints in the literature \ns{cite}.
-
-GSR --- MPRs are strict subset of GSRs. Also connected axiomatically: mean neat rules (a slight generalization) characterized by anonymity, consistency, and two technical conditions of connectedness and continuity. GSR characterized by anonymity and finite local consistency. Also, both families have both algebraic and geometric versions. 
-
-DR --- subset with a specific choice of intuitive distance function. 
-
-MLE --- again very direct connection.
-
-Aximoatic --- weak. Essentially characterization of mean neat voting, and positional scoring rules (a subset of MPR).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{comment}
-
-\subsection{Axiomatic View}
-Proposition~\ref{prop:properties} shows that all mean proximity rules are consistent and connected. Theorem~\ref{thm:linear-neutral} shows that linear mean proximity rules are also neutral. This raises a few questions.
-
-\begin{enumerate}
-\item What restrictions on the embedding $\phi$ correspond to monotonicity of the mean proximity rule?
-\item Caragiannis et al.~\cite{CPS13} introduced pairwise majority consistency (PM-c) as the natural generalization of Condorcet consistency for social welfare functions. What restrictions on $\phi$ ensures that the mean proximity rule is PM-c? Is that related to the distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$ being majority concentric~\cite{CPS13}?
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Distance Rationalizability View}
-Meskanen and Nurmi~\cite{MN08} introduced the distance rationalizability framework where given a consensus class of profiles where the output is already defined and a distance function between profiles, the corresponding distance rationalizable rule, given any profile, finds the closest profile in the consensus class and returns the output defined on that. Edith et al.~\cite{EFS10} study additively votewise distances, where the distance between two profiles is (vaguely) the sum of distances between their rankings. We note that the additively votewise distance rationalizable rules with (strong) unanimity consensus class and the distance between two rankings being square of the Euclidean distance ($\ell_2$ norm) between their embeddings are exactly symmetric mean proximity. 
-
-Note that while the Euclidean distance defines a distance metric (satisfying triangle inequality), its square may not be a distance metric. However, it turns out that for the pairwise comparison embedding that generates the Kemeny rule, the square of Euclidean distance is the Kendall Tau distance (up to a multiplicative constant), which is a distance metric. This has two important implications. First, it shows that under the more natural Euclidean distance function, Kemeny is indeed a \emph{mean} rule rather than a \emph{median} rule. This explains why the Kemeny rule has desirable properties, as the importance of mean consensus has been emphasized significantly in the literature. Second, it indicates that the distance metrics whose square are also distance metrics might be of independent interest, and might be connected to rules satisfying desirable properties. Another example of a distance metric whose square is also a distance metric is square root of the Hamming distance.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{MLE View}
-Given an embedding $\phi$, consider the noise model where 
-$$
-\Pr[\sigma | \sigma^*] = \frac{e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}}{\sum_{\sigma' \in \rank} e^{-\|\phi(\sigma')-\phi(\sigma^*)\|^2}} \propto e^{-\|\phi(\sigma)-\phi(\sigma^*)\|^2}.
-$$
-
-This is a family of Gaussian noise models. Note that Mallows' model is a special case with $\phi$ being the pairwise comparison embedding. This indicates that Mallows' model is actually member of a Gaussian family. Further, define a distance function $d(\sigma,\sigma') = \|\phi(\sigma)-\phi(\sigma')\|$. When $d$ is neutral, i.e., $d(\tau \sigma,\tau \sigma') = d(\sigma,\sigma')$, the normalization is independent of $\sigma^*$. Note that this is indeed the case with linear embeddings. 
-
-There are two interesting questions in this domain.
-\begin{enumerate}
-\item Mallows' model with the Kendall Tau distance admits an efficient sampling procedure. Is that the case with the family of Gaussian models introduced above when the embedding is linear? 
-\item When we take the embedding for a positional scoring rule, we get a distribution where the probability of a ranking decreases exponentially as its discrepancy from the true ranking increases, and the discrepancy is measured by positions of alternatives rather than pairwise comparisons. Is there anything interesting about this distribution like Mallows' model?
-\end{enumerate}
-\end{comment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Discussion}
-\label{sec:disc}
-
-\ns{TO BE WRITTEN}
-
-\ns{See the image attached}
-
-Also: after leveraging algorithmic etc insights, and deeper understanding --- also low dimensional representations (group theory citations)
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\bibliographystyle{acmsmall}
-\bibliography{abb,ultimate}
-
-%\received{February 2007}{March 2009}{June 2009}
-
-%\elecappendix
-%\medskip
-%\section{BLAH}
-%BLAH
 
 \end{document}
 
