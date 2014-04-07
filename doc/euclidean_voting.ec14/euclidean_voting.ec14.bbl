@@ -153,11 +153,6 @@
 \newblock {\em Journal of Artificial Intelligence Research\/}~{\em 48},
   923--951.
 
-\bibitem[\protect\citeauthoryear{O'Rourke}{O'Rourke}{1988}]{o1988computational}
-{\sc O'Rourke, J.} 1988.
-\newblock Computational geometry column.
-\newblock {\em ACM SIGACT News\/}~{\em 19,\/}~3-4, 21--26.
-
 \bibitem[\protect\citeauthoryear{Ovchinnikov}{Ovchinnikov}{2005}]{ovchinnikov2005hyperplane}
 {\sc Ovchinnikov, S.} 2005.
 \newblock Hyperplane arrangements in preference modeling.

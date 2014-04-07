@@ -1,13 +1,5 @@
-This is 8-bit Big BibTeX version 0.99d
-Implementation:  Microsoft(R) C/C++ for Win32
-Release version: 3.71 (31 May 2005)
-
-The 8-bit codepage and sorting file: 88591lat.csf
-The top-level auxiliary file: euclidean_voting.ec14.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: euclidean_voting.ec14.aux
 The style file: acmsmall.bst
-Reallocated glb_str_ptr (elt_size=4) to 10 items from 0.
-Reallocated global_strs (elt_size=1001) to 10 items from 0.
-Reallocated glb_str_end (elt_size=4) to 10 items from 0.
 Database file #1: abb.bib
 Database file #2: ultimate.bib
 I was expecting a `,' or a `}'---line 4653 of file ultimate.bib
@@ -15,9 +7,6 @@ I was expecting a `,' or a `}'---line 4653 of file ultimate.bib
  :   howpublished={Manuscript}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "XC08a"
-Warning--I didn't find a database entry for ""
-Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty address in aigner2010cauchy
 Warning--empty address in BR86
 Warning--empty address in biedl2007cauchy
@@ -46,12 +35,4 @@ Warning--empty address in PZR08
 Warning--empty address in saari1995basic
 Warning--empty publisher in XC08
 Warning--empty address in XC08
-
-Here's how much of BibTeX's memory you used:
- Cites:                32 out of 750
- Fields:              214 out of 5000
- Hash table:         4659 out of 5000
- Strings:            1047 out of 4000
- Free string pool:  14085 out of 65000
- Wizard functions:   3177 out of 6000
 (There was 1 error message)

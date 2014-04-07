@@ -94,7 +94,7 @@ Nisarg Shah
 }
 
 \begin{abstract}
-Mean proximity rules provide a simple geometric framework to achieve consensus among a collection of rankings (votes) over a set of alternatives. They embed all rankings into a Euclidean space, take the mean of the embeddings of the input votes, and return the ranking whose embedding is closest to the mean. Previous work on mean proximity rules left out integration of an important axiom---neutrality---into the framework. We study the conditions that neutrality imposes on mean proximity rules by drawing ideas from the representation theory of finite groups. Various connections are drawn between mean proximity rules and other prominent approaches to social choice.
+Mean proximity rules provide a simple geometric framework to achieve consensus among a collection of rankings (votes) over a set of alternatives. They embed all rankings into a Euclidean space, take the mean of the embeddings of the input votes, and return the ranking whose embedding is closest to the mean. Previous work on mean proximity rules has not integrated an important axiom---neutrality---into the framework. We study the conditions that neutrality imposes on mean proximity rules by drawing on ideas from the representation theory of finite groups. Various connections are drawn between mean proximity rules and other prominent approaches to social choice.
 \end{abstract}
 
 \category{I.2.6}{Computing Methodologies}{Artificial Intelligence}
@@ -150,34 +150,39 @@ The work of Saari~\shortcite{saari1995basic} uses a different geometric visualiz
 
 \section{Preliminaries}
 \label{sec:prelim}
-Let $A$ be the set of alternatives; we denote $|A| = m$. Let $\rank$ denote the set of rankings over the alternatives in $A$. A profile $\pi \in \rank^n$ is a collection of votes (rankings). A \emph{voting rule} (more technically, a social welfare function - SWF)\footnote{Another common definition of a voting rule is a social choice function (SCF), which maps every profile to a (set of tied) winning alternative(s).} is a function that maps every profile to a ranking, or a set of tied rankings. Formally, we denote a voting rule by $r : \rank^n \rightarrow \calP(\rank)\setminus\{\emptyset\}$, where $\calP(\cdot)$ denotes the power set. Note that a voting rule must output at least one ranking. \\
+Let $A$ be the set of alternatives, with cardinality $|A| = m$. Let $\rank$ denote the set of rankings over the alternatives in $A$. A profile $\pi \in \rank^n$ is a collection of votes (rankings). A \emph{voting rule}, or more technically a \emph{social welfare function} (SWF), is a function that maps every profile to a ranking or set of tied rankings.\footnote{Another common definition of a voting rule is a \emph{social choice function} (SCF), which maps every profile to a winning alternative or set of tied alternatives.} Formally, we denote a voting rule by $r : \rank^n \rightarrow \calP(\rank)\setminus\{\emptyset\}$, where $\calP(\cdot)$ denotes the power set. Note that a voting rule must output at least one ranking so $\emptyset$ is disallowed. \\
 
 %For any profile $\pi$, let $n(\pi,\sigma)$ denote the number of times $\sigma$ appears in $\pi$. Let $\sigma_1,\ldots,\sigma_{m!}$ denote a fixed reference order of the rankings in $\rank$. For any two profiles $\pi_1$ and $\pi_2$, let $\pi_1+\pi_2$ be the union profile such that $n(\pi_1+\pi_2,\sigma) = n(\pi_1,\sigma)+n(\pi_2,\sigma)$ for every $\sigma \in \rank$. Similarly, for any profile $\pi$, let $c \pi$ be the profile such that $n(c \pi,\sigma) = c \cdot n(\pi,\sigma)$ for every $\sigma \in \rank$. 
 
-\noindent \textbf{Axiomatic properties of voting rules.} Voting rules are often studied (and sometimes designed) from the viewpoint of axiomatic properties. Such properties define what a voting rule should intuitively do in certain special cases. Some of the widely studied properties are defined below. 
+\subsection*{Axiomatic Properties} Voting rules are often studied (and sometimes designed) from the viewpoint of axiomatic properties. Such properties prescribe the behavior of a voting rule in certain special cases. Some widely studied properties of relevance to our work are defined below. 
 
 \begin{description}
-\item[Anonymity] A voting rule $r$ is called \emph{anonymous} if its output only depends on the collection of rankings in the profile (equivalently, the number of times each ranking appears), and not on the identities of the voters who voted for the different rankings. \\ %For every profiles $\pi_1$ and $\pi_2$ such that $n(\pi_1,\sigma) = n(\pi_2,\sigma)$ for every $\sigma \in \rank$, $r(\pi_1) = r(\pi_2)$. 
-
-\item[Unanimity] A voting rule $r$ is said to satisfy \emph{unanimity} if on every profile $\pi$ that consists of copies of a single ranking $\sigma$, the rule uniquely outputs that ranking, i.e., $r(\pi) = \{\sigma\}$.\\ %the singleton set uniquely outputs that ranking: for every profile $\pi$ such that $n(\pi,\sigma) > 0$ for some $\sigma \in \rank$ and $n(\pi,\sigma') = 0$ for all $\sigma' \neq \sigma$, $r(\pi) = \{\sigma\}$. 
+\item[Anonymity] A voting rule $r$ is called \emph{anonymous} if its output only depends on the collection of rankings in the profile (equivalently, the number of times each ranking appears), and not on the identities of the voters providing the different rankings. \\ %For every profiles $\pi_1$ and $\pi_2$ such that $n(\pi_1,\sigma) = n(\pi_2,\sigma)$ for every $\sigma \in \rank$, $r(\pi_1) = r(\pi_2)$.
 
 \item[Consistency] A voting rule $r$ is called \emph{consistent} if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) \cap r(\pi_2) \neq \emptyset$, we have $r(\pi_1+\pi_2) = r(\pi_1) \cap r(\pi_2)$.\footnote{Consistency for social welfare functions that output a set of tied rankings is more general than consistency for social welfare functions that output a single ranking (i.e., a singleton set). It is also significantly different from consistency of the winning alternative for social choice functions.} Here, profile $\pi_1+\pi_2$ denotes the union of the profiles $\pi_1$ and $\pi_2$. \\ %A social welfare function $r$ is called weakly consistent (for rankings) if for every profiles $\pi_1$ and $\pi_2$ such that $r(\pi_1) = r(\pi_2)$, we have $r(\pi_1+\pi_2) = r(\pi_1) = r(\pi_2)$. 
 
-\item[Neutrality] A voting rule is called \emph{neutral} if the labels of the alternatives do not matter, i.e., relabeling the alternatives would relabel the output of the rule (each ranking in the set returned) accordingly. Without loss of generality, let us choose the labels of the alternatives to be $1,2,\ldots,m$. Then, a relabeling of the alternative is equivalent to a permutation of $1$ through $m$, i.e., an element of the symmetric group $S_m$ of size $m!$. For a permutation $\tau \in S_m$ and a ranking $\sigma \in \rank$, the ranking $\tau\sigma$ is obtained by relabeling the alternatives according to $\tau$ in $\sigma$. 
+\item[Unanimity] A voting rule $r$ is said to satisfy \emph{unanimity} if on every profile $\pi$ that consists of copies of a single ranking $\sigma$, the rule uniquely outputs that ranking, so that $r(\pi) = \{\sigma\}$.\\ %the singleton set uniquely outputs that ranking: for every profile $\pi$ such that $n(\pi,\sigma) > 0$ for some $\sigma \in \rank$ and $n(\pi,\sigma') = 0$ for all $\sigma' \neq \sigma$, $r(\pi) = \{\sigma\}$. 
 
-Given a profile $\pi = (\sigma_1,\ldots,\sigma_n)$ and a permutation $\tau$ of the alternatives, let $\tau \pi = (\tau \sigma_1,\ldots,\tau \sigma_n)$ be the profile where each vote is permuted according to $\tau$. Similarly, given any set of rankings $S$, let $\tau S = \{\tau \sigma | \sigma \in S\}$. Thus, formally, a voting rule $r$ is neutral if for every profile $\pi$ and permutation $\tau$ of the alternatives, we have $r(\tau \pi) = \tau r(\pi)$. \\
-
-\item[Rank-distinguishability] In the classical definition of social welfare functions that output a single ranking, non-imposition (also known as citizen sovereignty) of a voting rule dictates that every ranking of the alternatives should be achievable as the output of the voting rule on some profile. We define a mild generalization of non-imposition, which we call rank-distinguishability, to social welfare functions that output a set of rankings. We say that a voting rule $r$ satisfies rank-distinguishability if it can distinguish between any two rankings: for every two distinct rankings $\sigma, \sigma' \in \rank$, there must exist a profile $\pi$ such that exactly one of $\sigma$ and $\sigma'$ belongs to $r(\pi)$. The mildness of rank-distinguishability is evident from the simple observation that it follows from unanimity, which is itself considered very unrestrictive and almost always desirable. 
+\item[Rank-distinguishability] A voting rule $r$ satisfies rank-distinguishability if for every two distinct rankings $\sigma, \sigma' \in \rank$, there must exist a profile $\pi$ such that exactly one of $\sigma$ and $\sigma'$ belongs to $r(\pi)$. 
 \end{description}
 
+\noindent
+In the classical definition of social welfare functions that output a single ranking, non-imposition (also known as citizen sovereignty) of a voting rule dictates that every ranking of the alternatives should be achievable as the output of the voting rule on some profile. The rank-distinguishability axiom is a mild generalization of non-imposition to social welfare functions that output a set of rankings. It follows from unanimity which is itself considered unrestrictive and almost always desirable.
 
-\noindent \textbf{Voting rules.} Next, we define two prominent voting rules that play a key role in this paper. 
+The next axiom will be central to our study. Let us choose the labels of the alternatives to be $1,2,\ldots,m$. A relabeling of the alternatives is equivalent to a permutation of $[m]$, namely an element of the symmetric group $S_m$. For a permutation $\tau \in S_m$ and a ranking $\sigma \in \rank$, the ranking $\tau\sigma$ is obtained by relabeling the alternatives according to $\tau$ in $\sigma$. Given a profile $\pi = (\sigma_1,\ldots,\sigma_n)$ and a permutation $\tau$ of the alternatives, let $\tau \pi = (\tau \sigma_1,\ldots,\tau \sigma_n)$ be the profile where each vote is permuted according to $\tau$. Similarly, given any set of rankings $S$, let $\tau S = \{\tau \sigma : \sigma \in S\}$.
+%
 \begin{description}
+\item[Neutrality] A voting rule $r$ is \emph{neutral} if for every profile $\pi$ and permutation $\tau$ of the alternatives, we have $r(\tau \pi) = \tau r(\pi)$.
+\end{description}
+%
+In words, a voting rule is called neutral if the labels of the alternatives do not matter, i.e., relabeling the alternatives would relabel the output of the rule (each ranking in the set returned) accordingly.  
 
-\item[The Kemeny rule] Given a profile $\pi$, define the weighted pairwise majority (PM) graph of a profile as the graph where the alternatives are the vertices and there is an edge from every alternative $a$ to every other alternative $b$ with weight equal to the number of voters that prefer $a$ to $b$. The Kemeny score of a ranking is the total weight of the edges of the weighted pairwise majority graph of $\pi$ in its direction. The Kemeny rule selects the ranking or the set of tied rankings with the highest Kemeny score.\\
+\subsection*{Voting Rules} Next, we define two prominent voting rules that play a key role in this paper.
 
-\item[Positional scoring rules] A positional scoring rule is given by a scoring vector $\alpha = (\alpha_1,\ldots,\alpha_m)$ where $\alpha_i \ge \alpha_{i+1}$ for all $i \in [m]$ and $\alpha_1 > \alpha_m$. Under this rule, for each vote $\sigma$ in $\pi$ and $i \in [m]$, $\alpha_i$ points are awarded to the $i^{th}$ most preferred alternative in $\sigma$. The alternatives are then sorted in the descending order of their total points. The set of (tied) rankings where each group of alternatives with identical total points is sorted in all possible ways is returned. Some example of positional scoring rules include plurality, Borda count, veto, and $k$-approval.
+\begin{description}
+\item[Kemeny rule] Given a profile $\pi$, define the weighted pairwise majority (PM) graph of $\pi$ as the graph where the alternatives are the vertices and there is an edge from every alternative $a$ to every other alternative $b$ with weight equal to the number of voters that prefer $a$ to $b$. The Kemeny score of a ranking $\sigma$ is the total weight of the edges in the PM graph of $\pi$ whose direction agrees with $\sigma$. The Kemeny rule selects the ranking or set of tied rankings with the highest Kemeny score.\\
 
+\item[Positional scoring rules] A positional scoring rule is given by a scoring vector $\alpha = (\alpha_1,\ldots,\alpha_m) \in \mathbb{R}^m$ where $\alpha_i \ge \alpha_{i+1}$ for all $i \in [m]$ and $\alpha_1 > \alpha_m$. Under this rule, for each vote $\sigma$ in $\pi$ and $i \in [m]$, $\alpha_i$ points are awarded to the $i${th} most preferred alternative in $\sigma$. The rule returns set of all rankings where the alternatives are sorted in descending order of total points. Some examples of positional scoring rules include plurality, Borda count, veto, and $k$-approval.
 \end{description}
 
 %ns - Connectedness is not used much. No need to define here. 
@@ -195,16 +200,17 @@ Given a profile $\pi = (\sigma_1,\ldots,\sigma_n)$ and a permutation $\tau$ of t
 \section{Mean Proximity Rules}
 \label{sec:mpr}
 
-We begin by  presenting important background on mean proximity rules that will be relevant for the rest of the paper. First, we formally define mean proximity rules. Mean proximity rules are defined in a scope greater than the scope of voting rules considered in this paper: While voting rules map every profile to a set of tied rankings, mean proximity rules in general map every profile to a set of tied outcomes, where the outcomes are chosen from the outcome space $\calO$. In Section~\ref{sec:symm}, we will fix $\calO = \rank$ to analyze mean proximity rules in the context of voting rules. 
+We begin by  presenting important background on mean proximity rules that will be relevant for the rest of the paper. Mean proximity rules were originally defined in a scope greater than that of the voting rules considered in this paper: While voting rules map every profile to a set of tied rankings, mean proximity rules in general map every profile to a set of tied outcomes, where the outcomes are chosen from a generic outcome space $\calO$. In Section~\ref{sec:symm}, we will fix $\calO = \rank$ to analyze mean proximity rules in the context of voting rules. 
 
-\begin{definition}[Mean Proximity Rules (\cite{Zwicker08a})]
-A \emph{mean proximity rule} is given by an input embedding $\phi: \rank \rightarrow \mathbb{R}^k$ mapping input rankings to $k$-dimensional Euclidean space and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ mapping possible outcomes to the same Euclidean space. The outcome of the rule on a profile $\pi$ is given by $\argmin_{o \in \calO} \|\psi(o) - \mu(\pi) \|$, where $\mu(\pi) = (1/n) \cdot \sum_{\sigma \in \pi} \phi(\sigma)$ is the mean of input embeddings of the votes in $\pi$.
+\begin{definition}[Mean Proximity Rules~\cite{Zwicker08a}]
+A \emph{mean proximity rule} is given by an input embedding $\phi: \rank \rightarrow \mathbb{R}^k$ mapping input rankings to $k$-dimensional Euclidean space and an output embedding $\psi: \calO \rightarrow \mathbb{R}^k$ mapping possible outcomes to the same Euclidean space. The outcome of the rule on a profile $\pi$ is given by $\argmin_{o \in \calO} \|\psi(o) - \mu(\pi) \|$, where $\mu(\pi) = (1/n) \cdot \sum_{\sigma \in \pi} \phi(\sigma)$ is the mean of input embeddings of the votes in $\pi$.\footnote{In this paper, every summation of the form $\sum_{\sigma \in \pi}$  iterates over rankings in profile $\pi$; in particular, if a ranking appears multiple times in $\pi$, the summation contains one term for each appearance.}
 \end{definition}
 
-In this paper, every summation of the form $\sum_{\sigma \in \pi}$  iterates over rankings in profile $\pi$; in particular, if a ranking appears multiple times in $\pi$, the summation contains one term for each appearance. Zwicker~\shortcite{Zwicker08a} also defined another family of rules, which he referred to as \emph{generalized scoring rules}. However, this name has since been used primarily to represent a different family of voting rules that was introduced by Xia and Conitzer~\shortcite{XC08}. We therefore refer to the family of Zwicker~\shortcite{Zwicker08a} as \emph{scoring rules}. The naming is appropriate for another reason: In Section~\ref{sec:connection}, we observe that the family of scoring rules introduced by Zwicker~\shortcite{Zwicker08a} is a subset of the family of generalized scoring rules introduced by Xia and Conitzer~\shortcite{XC08}. 
+\noindent
+Zwicker~\shortcite{Zwicker08a} also defined another family of rules, which he referred to as \emph{generalized scoring rules}. However, this name has since been used primarily to represent a different family of voting rules that was introduced by Xia and Conitzer~\shortcite{XC08}. We therefore refer to the family of Zwicker~\shortcite{Zwicker08a} as \emph{matrix scoring rules}. In Section~\ref{sec:connection}, we observe that the family of matrix scoring rules introduced by Zwicker~\shortcite{Zwicker08a} is a subset of the family of generalized scoring rules introduced by Xia and Conitzer~\shortcite{XC08}. 
 
-\begin{definition}[Scoring Rules (\cite{Zwicker08a})]
-A voting rule is called a \emph{scoring rule} if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that for any profile $\pi$, we have $r(\pi) = \argmax_{o \in \calO} \sum_{\sigma \in \pi} s(\sigma,o)$. 
+\begin{definition}[Matrix Scoring Rules~\cite{Zwicker08a}]
+A voting rule is called a \emph{matrix scoring rule} if there exists a scoring function $s : \rank \times \calO \rightarrow \mathbb{R}$ such that for any profile $\pi$, we have $r(\pi) = \argmax_{o \in \calO} \sum_{\sigma \in \pi} s(\sigma,o)$. 
 \end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -217,7 +223,8 @@ A voting rule is called a \emph{scoring rule} if there exists a scoring function
 %\label{prop:discrete-mean}
 %\end{proposition}
 
-That is, the scoring rule assigns a score to each outcome for each input vote, and the outcome or outcomes with the highest aggregate score are chosen. Zwicker~\shortcite{Zwicker08a} also showed equivalence between mean proximity rules and scoring rules using the following technical result. %We reconstruct his proof because it is crucial to several proofs in this paper. 
+\noindent
+In words, the matrix scoring rule assigns a score to each outcome for each input vote, and the outcome or outcomes with the highest aggregate score are chosen. Our choice of terminology stems from the fact that the scoring function can be represented as a $|\calL| \times |\calO|$ matrix with real entries. Zwicker~\shortcite{Zwicker08a} also showed equivalence between mean proximity rules and matrix scoring rules using the following technical result. %We reconstruct his proof because it is crucial to several proofs in this paper. 
 
 \begin{proposition}[\cite{Zwicker08a}]
 For embeddings $\phi : \rank \rightarrow \mathbb{R}^k$ and $\psi: \calO \to \mathbb{R}^k$, and profile $\pi$, we have
@@ -240,7 +247,7 @@ For embeddings $\phi : \rank \rightarrow \mathbb{R}^k$ and $\psi: \calO \to \mat
 %\end{align*}
 %\end{proof}
 %\end{comment}
-
+%
 From the definition of scoring rules and Proposition~\ref{prop:MPR-GSR-conversion}, it is clear that the scoring function $s(\sigma,o) = -\|\psi(o)-\phi(\sigma)\|^2$ represents the same mean proximity rule that has the embeddings $(\psi,\phi)$. Extending this to a two-way correspondence, Zwicker~\shortcite{Zwicker08a} showed the following. 
 \begin{proposition}[{\cite[Theorem 4.2.1]{Zwicker08a}}]
 The families of mean proximity rules and scoring rules coincide. 
@@ -263,16 +270,16 @@ The families of mean proximity rules and scoring rules coincide.
 %\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Due to this equivalence, a mean proximity rule has two equivalent representations: a pair of embeddings $(\psi,\phi)$, and a scoring function $s$; it might be the case that neither of the two is unique. We conclude the background on mean proximity rules by mentioning a result due to Zwicker~\shortcite{Zwicker08b}.
+\noindent
+According to this result, a mean proximity rule has two equivalent representations: a pair of embeddings $(\psi,\phi)$, and a scoring function $s$; it may be the case that neither of the two is unique. We conclude the background on mean proximity rules by mentioning a result of Zwicker~\shortcite{Zwicker08b} that further motivates the study of mean proximity rules.
 
 %\ns{What about the characterization given in the related paper?}
 \begin{proposition}[\cite{Zwicker08b}]
-All positional scoring rules and the Kemeny rule\footnote{With the outcome space being the set of rankings over the alternatives.} are mean proximity rules. A mean proximity rule is consistent, connected, continuous, and anonymous.
+All positional scoring rules and the Kemeny rule are mean proximity rules, with the outcome space being the set of rankings over the alternatives. A mean proximity rule is consistent, connected, continuous, and anonymous.
 \label{prop:properties}
 \end{proposition}
-
-Consistency of mean proximity rules is evident from Equation~\eqref{eqn:discrete-mean} because if two profiles have the same output under a mean proximity rule, the same set of outcomes minimize the sum on the right hand side of Equation~\eqref{eqn:discrete-mean} for both profiles, and therefore in their union. Connectedness and continuity are two natural properties of voting rules defined in~\cite{Zwicker08a}. For an alternative, but related, definition of continuity, the reader may refer to~\cite{CRX09}. Conitzer and Sandholm~\shortcite{CS05b} showed that other rules such as Bucklin's rule, Copeland's method, the maximin rule, and the ranked pairs method are not consistent as social welfare functions. Hence, these rules are not mean proximity rules. 
+%
+Consistency of mean proximity rules is evident from Equation~\eqref{eqn:discrete-mean} because if two profiles lead to overlapping outputs according to the rule, then this overlap minimizes the sum on the right-hand side of Equation~\eqref{eqn:discrete-mean} for each profile, and therefore for their union. Connectedness and continuity are two natural properties of voting rules defined in~\cite{Zwicker08a}. For an alternative, but related, definition of continuity, the reader may refer to~\cite{CRX09}. Conitzer and Sandholm~\shortcite{CS05b} showed that other rules such as Bucklin's rule, Copeland's method, the maximin rule, and the ranked pairs method are not consistent as social welfare functions. Hence, these rules are not mean proximity rules. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -281,30 +288,30 @@ Consistency of mean proximity rules is evident from Equation~\eqref{eqn:discrete
 \subsection{Symmetric Mean Proximity Rules}
 \label{sec:symm}
 
-We now begin our investigation of mean proximity rules in the context of social welfare functions that output rankings over alternatives. Thus, from here onwards, we fix $\calO = \rank$. This has the following effect on different equivalent representations of mean proximity rules.
+We now begin our investigation of mean proximity rules in the context of social welfare functions that output rankings over alternatives. Thus, from here onwards, we fix $\calO = \rank$. This has the following effect on the various equivalent representations of mean proximity rules.
 \begin{enumerate}
-\item The embeddings $\phi,\psi : \rank \to \mathbb{R}^k$ both embed rankings to a Euclidean space. 
+\item The embeddings $\phi,\psi : \rank \to \mathbb{R}^k$ both map rankings to a Euclidean space. 
 \item The scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes \emph{similarity} between two rankings. This special case was also defined and studied independently by Conitzer et al.~\shortcite{CRX09}, who referred to such rules as \emph{simple ranking scoring functions} (SRSFs). 
-\item Under a fixed enumeration $\sigma_1,\ldots,\sigma_{m!}$ of $\rank$, we can represent a scoring function by an $m! \times m!$ \emph{score matrix} $S$ such that $S_{ij} = s(\sigma_i,\sigma_j)$ for $i,j \in [m!] \triangleq \{1,\ldots,m!\}$. 
+\item Under a fixed enumeration $\sigma_1,\ldots,\sigma_{m!}$ of $\rank$, we can represent a scoring function by an $m! \times m!$ \emph{score matrix} $S$ such that $S_{ij} = s(\sigma_i,\sigma_j)$ for $i,j \in [m!]$.
 \end{enumerate}
+%
+Mean proximity rules constitute a broad family of voting rules, some of which violate natural desiderata. For example, a mean proximity rule given by a scoring function $s$ that satisfies $s(\sigma,\sigma') > s(\sigma,\sigma)$ for distinct $\sigma,\sigma' \in \rank$ would not output $\sigma$ even on the profile where all the votes are $\sigma$, violating unanimity. To solve this problem, we propose a simple adjustment. 
 
-Mean proximity rules, even as social welfare functions, is a broad family of voting rules that also captures rules violating very natural desiderata. For example, a mean proximity rule given by a scoring function $s$ that satisfies $s(\sigma,\sigma') > s(\sigma,\sigma)$ for distinct $\sigma,\sigma' \in \rank$ would not output $\sigma$ even on the profile where all the votes are $\sigma$. Such a rule would violate unanimity. To solve this problem, we propose a simple fix. 
-
-\begin{definition}[Symmetric Mean Proximity Rules (SMPRs)]
-We say that a voting rule is a \emph{symmetric mean proximity rule} (SMPR) if there exists a mean proximity representation of the rule with identical input and output embeddings, i.e., with $\psi = \phi$. 
+\begin{definition}[Symmetric Mean Proximity Rule]
+We say that a voting rule is a \emph{symmetric mean proximity rule} (SMPR) if there exists a mean proximity representation of the rule with identical input and output embeddings: $\psi = \phi$. 
 \end{definition} 
+%
+Since the outcome space for SWFs is identical to the space of input votes (the set of rankings over the alternatives), $\psi = \phi$ is a natural restriction. Note that not all embeddings representing an SMPR satisfy $\psi = \phi$. We call the embeddings that satisfy this restriction \emph{symmetric embeddings}. From here onwards, we always represent an SMPR using a symmetric embedding $(\phi$, $\phi)$, written simply $\phi$.
 
-Since the outcome space for SWFs is identical to the space of input votes (the set of rankings over the alternatives), $\psi = \phi$ is a natural restriction. Note that all embeddings representing an SMPR may not satisfy $\psi = \phi$. We call the embeddings that satisfy this restriction \emph{symmetric embeddings}. From here onwards, we refer to an SMPR using its symmetric embedding $\phi$. 
-
-In what follows, we assume that the SMPRs additionally satisfy rank-distinguishability. For SMPRs, rank-distinguishability is equivalent to the very intuitive restriction that $\phi$ must map all rankings to different points of the Euclidean space. To see this, note that if $\phi$ mapped all rankings to distinct points, then the rule would output $\{\sigma\}$ on a profile with a single vote $\sigma$. Thus, such a rule would achieve rank-distinguishability. Conversely, if $\phi$ mapped two distinct rankings $\sigma$ and $\sigma'$ to the same point in the Euclidean space, then it is easy to see that on every profile either both rankings would belong to the output of the rule or neither. 
+In what follows, we assume that the SMPRs additionally satisfy rank-distinguishability. For SMPRs, rank-distinguishability is equivalent to the intuitive restriction that $\phi$ must map all rankings to different points of the Euclidean space. To see this, note that if $\phi$ mapped all rankings to distinct points, then the rule would output $\{\sigma\}$ on a profile with a single vote $\sigma$. Thus, such a rule would achieve rank-distinguishability. Conversely, if $\phi$ mapped two distinct rankings $\sigma$ and $\sigma'$ to the same point in the Euclidean space, then it is easy to see that on every profile either both rankings would belong to the output of the rule or neither. 
 
 %\footnote{We slightly abuse the notation by referring to $\phi(\sigma)$ as the embedding of $\sigma$ under $\phi$.} 
 
 \begin{observation}
 An SMPR satisfies rank-distinguishability if and only if every symmetric embedding $\phi$ representing the rule maps all rankings to distinct points of the Euclidean space. 
 \end{observation}
-
-Under this assumption, it is easy to check that in a profile $\pi$ where all the votes are $\sigma$, we have $\mu(\pi) = \phi(\sigma)$. Thus, the output of every symmetric mean proximity rule on $\pi$ would be the singleton set $\{\sigma\}$. Hence, we remark that symmetry does not only impose intuitive structure on mean proximity rules, but also helps achieve natural desiderata. Further, this has no cost in terms of expressiveness: The embeddings constructed in~\cite{Zwicker08a} for positional scoring rules and the Kemeny rule in fact satisfy the restriction $\psi = \phi$, showing that both these well-known mean proximity rules are symmetric. 
+%
+Under this assumption, it is easy to check that in a profile $\pi$ where all the votes are $\sigma$, we have $\mu(\pi) = \phi(\sigma)$. As a result, the output of every symmetric mean proximity rule on $\pi$ would be the singleton set $\{\sigma\}$. Therefore, not only does symmetry impose intuitive structure on mean proximity rules, it also helps achieve natural desiderata such as unanimity. Further, this has little cost in terms of expressiveness: The embeddings constructed in~\cite{Zwicker08a} for positional scoring rules and the Kemeny rule in fact satisfy the restriction $\psi = \phi$, showing that these canonical mean proximity rules are symmetric. 
 
 %\begin{lemma}
 %While there exist mean proximity rules violating unanimity, all symmetric mean proximity rules satisfy unanimity.
@@ -319,7 +326,7 @@ Under this assumption, it is easy to check that in a profile $\pi$ where all the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Characterization of symmetric mean proximity rules}
+\subsection{Algebraic Characterization of Symmetry}
 \label{sec:smpr-char}
 
 Recall that mean proximity rules are equivalent to scoring rules (Proposition~\ref{prop:equiv}). We imposed symmetry on the embeddings of the mean proximity rules. It is natural to ask: \emph{What restriction does symmetry place on other equivalent representations of mean proximity rules?} For an embedding $\phi$, define the scoring function $s_{\phi}$ such that $s_{\phi}(\sigma,\sigma') = -\|\phi(\sigma)-\phi(\sigma')\|^2$ for all $\sigma,\sigma' \in \rank$. Then Equation~\eqref{eqn:discrete-mean} implies that $s_{\phi}$ and $\phi$ are equivalent, i.e., they both represent the same SMPR. Further, the score matrix generated by $s_{\phi}$ has a well-known structure.
