@@ -1,7 +1,6 @@
-%% acmsmall.cls - version 1.4  (with ACM Reference Format)
-%% Aptara Inc., dated 9 July 2012
+%% acmsmall-ec13.cls - version 1.3 
+%% Aptara Inc./Gerry Murray (ACM), dated 18th. December 2012
 %% (c) 2011 Association for Computing Machinery (ACM)
-%% For small trim journals
 %%
 %% Based on ESUB2ACM.CLS V1.2 - November 10th. 1999
 %%
@@ -9,7 +8,7 @@
 %% please contact ACM Support helpline at: "acmtexsupport@aptaracorp.com".
 %% Users can also go through the FAQs available on the journal's submission webpage.
 %%
-%% Version 1.4 (History)
+%% Version 1.2 (History)
 %% ---------------------
 %% 1) All citation formats are also redefined after
 %%    checking the loading condition of natbib.sty 
@@ -20,10 +19,6 @@
 %% 4) Added three new transactions (Jono 14/07/2010)
 %% 5) Added four new transactions/journals (Joanne 04/11/2011)
 %% 6) Added newtheorem definition for 'conjecture'
-%% 7) Trimmed the 'double outputting' of the DOI/URL beneath ACM Reference Format (before 1. INTRODUCTION)
-%%    and also beneath the Permission Statement/copyright line. Also inserted the "http://dx.doi.org" stem. (Gerry Murray, March 2012)
-%% 8) Changed the price charged/article information from $10.00 to $15.00 (Gerry 24/05/2012)
-%% 9) Added 'TEAC' - July 9th. 2012
 %%
 %% Steps to compile: latex, bibtex, latex latex
 %%
@@ -88,32 +83,24 @@
 %% `NP' means `no parentheses' 
 %%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ec-acmsmall}[2012/03/05, fonts included on 28 June 2010]
+\ProvidesClass{acmsmall-ec13}[2012/12/18, fonts included on 28 June 2010]
 
-\def\fileversion{v1.4}            
-\def\filedate{July 09, 2012}
+\def\fileversion{v1.3}            
+\def\filedate{December 18, 2012}
 
 % Metadata Information
 \def\@acmVolume{V} %the volume
 \def\@acmNumber{N} %the number
 \def\@acmArticle{A} %article number
 \def\@articleSeq{1} %article Sequence
-\def\@acmPrice{15.00} %article price  % Changed to 15 - June 2012 - Gerry
+\def\@acmPrice{15.00} %article price
 \def\@acmYear{YYYY} %the last two digits of the year, 
 \def\@acmMonth{1}  %the month
 \def\@journalName{ACM Journal Name} %the name of the ACM journal
 \def\@journalNameShort{ACM} %the acronym of the ACM journal 
 \def\@journalCode{jn} %the code of the ACM journal 
 \def\@permissionCodeOne{0000-0000} %the permission code of the ACM journal
-\def\@doi{0000000.0000000} % These 'default' '0' values are over-ridden, during production, with 'correct' numbers entered via source .tex file - Gerry March 2012
-
-% ----------------
-% Gerry - April 2011 - To assist in the formatting of the NEW ACM Reference format - 'DOI' in tt font, and url string in default
-\usepackage{url}
-\def\UrlFont{}
-\newcommand{\BIBand}{\&}
-\def\showDOI#1{\mbox{{\tt DOI:}{#1}}} % Gerry April 2011 - forces the DOI: to 'stay' with the 'url-(string)link' (no need for space at end either)
-% ----------------
+\def\@doi{0000000.0000000}
 
 \if@compatibility\else
 \DeclareOption{letterpaper}
@@ -130,6 +117,11 @@
     \setlength\paperwidth  {\@tempdima}}
 \fi
 
+\newif\if@license
+\newif\if@permissions
+\DeclareOption{license}{\global\@licensetrue}
+\DeclareOption{permissions}{\global\@permissionstrue}
+
 \DeclareOption{oneside}{\@twosidefalse \@mparswitchfalse}
 \DeclareOption{twoside}{\@twosidetrue  \@mparswitchtrue}
 
@@ -145,7 +137,6 @@
 \DeclareOption{prodmode}{\global\prod@modetrue
 \typeout{ACM, Production Font style: 2010/06/28 by Aptara}}
 
-\newif\if@acmec
 \newif\if@acmjacm
 \newif\if@acmtissec
 \newif\if@acmtocl
@@ -182,57 +173,6 @@
 \newif\if@acmjdiq
 \newif\if@acmtaccess
 \newif\if@acmtoce
-\newif\if@acmteac
-
-
-
-
-% ACM EC Option
-\DeclareOption{acmec}{
-  \typeout{}
-  \typeout{Using ACM EC option: 2013/01/05 by David Parkes}
-  \typeout{}
-  \global\@acmectrue
-  \global\@acmjacmfalse
-  \global\@acmtissecfalse
-  \global\@acmtoclfalse
-  \global\@acmtocsfalse
-  \global\@acmtochifalse
-  \global\@acmtodaesfalse
-  \global\@acmtodsfalse
-  \global\@acmtoisfalse
-  \global\@acmtomacsfalse
-  \global\@acmtomsfalse
-  \global\@acmtoplasfalse
-  \global\@acmtosemfalse
-  \global\@acmtoitfalse
-  \global\@acmtecsfalse
-  \global\@acmtalipfalse
-  \global\@acmjericfalse
-  \global\@acmtacofalse
-  \global\@acmjeafalse
-  \global\@acmtslpfalse
-  \global\@acmciefalse
-  \global\@acmtosfalse
-  \global\@acmcsurfalse
-  \global\@acmjetcfalse
-  \global\@acmtosnfalse
-  \global\@acmtalgfalse
-  \global\@acmtaasfalse
-  \global\@acmtwebfalse
-  \global\@acmtkddfalse
-  \global\@acmtretsfalse
-  \global\@acmtmisfalse
-  \global\@acmtiisfalse
-  \global\@acmtistfalse
-  \global\@acmtoctfalse
-  \global\@acmjdiqfalse
-  \global\@acmtaccessfalse
-  \global\@acmtocefalse
-\def\@journalName{{\em EC'14}, June 8--12, 2014, Stanford University, Palo
-  Alto, CA, USA}
-}
-
 
 % Journal Options
 \DeclareOption{acmjacm}{
@@ -275,7 +215,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{Journal of the ACM}
   \def\@journalNameShort{J. ACM}        
   \def\@journalCode{jacm}        
@@ -322,7 +261,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Information and System Security}
   \def\@journalNameShort{ACM Trans. Info. Syst. Sec.}
   \def\@journalCode{tissec}
@@ -369,7 +307,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Computational Logic}
   \def\@journalNameShort{ACM Trans. Comput. Logic}
   \def\@journalCode{tocl}        
@@ -416,7 +353,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Computer Systems}
   \def\@journalNameShort{ACM Trans. Comput. Syst.}
   \def\@journalCode{tocs}        
@@ -463,7 +399,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Computer-Human Interaction}
   \def\@journalNameShort{ACM Trans. Comput.-Hum. Interact.}
   \def\@journalCode{tochi}        
@@ -510,7 +445,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Design Automation of Electronic Systems}
   \def\@journalNameShort{ACM Trans. Des. Autom. Electron. Syst.}
   \def\@journalCode{todaes}        
@@ -557,7 +491,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Database Systems}
   \def\@journalNameShort{ACM Trans. Datab. Syst.}
   \def\@journalCode{tods}        
@@ -604,7 +537,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Information Systems}
   \def\@journalNameShort{ACM Trans. Inf. Syst.}
   \def\@journalCode{tois}        
@@ -651,7 +583,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Modeling and Computer Simulation}
   \def\@journalNameShort{ACM Trans. Model. Comput. Simul.}
   \def\@journalCode{tomacs}
@@ -698,7 +629,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Mathematical Software}
   \def\@journalNameShort{ACM Trans. Math. Softw.}
   \def\@journalCode{toms}        
@@ -745,7 +675,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Programming Languages and Systems}
   \def\@journalNameShort{ACM Trans. Program. Lang. Syst.}
   \def\@journalCode{toplas}        
@@ -792,7 +721,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Software Engineering and Methodology}
   \def\@journalNameShort{ACM Trans. Softw. Eng. Methodol.}
   \def\@journalCode{tosem}        
@@ -839,7 +767,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Internet Technology}
   \def\@journalNameShort{ACM Trans. Internet Technol.}
   \def\@journalCode{toit}        
@@ -886,7 +813,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Embedded Computing Systems}
   \def\@journalNameShort{ACM Trans. Embedd. Comput. Syst.}
   \def\@journalCode{tecs}
@@ -933,7 +859,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Asian Language Information Processing}
   \def\@journalNameShort{ACM Trans. Asian Lang. Inform. Process.}
   \def\@journalCode{talip}        
@@ -980,7 +905,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Journal of Educational Resources in Computing}
   \def\@journalNameShort{ACM J. Edu. Resources in Comput.}
   \def\@journalCode{jeric}        
@@ -1027,7 +951,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Architecture and Code Optimization}
   \def\@journalNameShort{ACM Trans. Architec. Code Optim.}
   \def\@journalCode{taco}        
@@ -1074,7 +997,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Journal of Experimental Algorithmics}
   \def\@journalNameShort{ACM J. Exp. Algor.}
   \def\@journalCode{jea}        
@@ -1121,7 +1043,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Speech and Language Processing}
   \def\@journalNameShort{ACM Trans. Speech Lang. Process.}
   \def\@journalCode{tslp}        
@@ -1168,7 +1089,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Computers in Entertainment}
   \def\@journalNameShort{ACM Comput. Entertain.}
   \def\@journalCode{cie}        
@@ -1215,7 +1135,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Storage}
   \def\@journalNameShort{ACM Trans. Storage}
   \def\@journalCode{tos}        
@@ -1262,7 +1181,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Computing Surveys}
   \def\@journalNameShort{ACM Comput. Surv.}
   \def\@journalCode{csur}        
@@ -1309,7 +1227,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Journal on Emerging Technologies in Computing Systems}
   \def\@journalNameShort{ACM J. Emerg. Technol. Comput. Syst.}
   \def\@journalCode{jetc}
@@ -1356,7 +1273,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Sensor Networks}
   \def\@journalNameShort{ACM Trans. Sensor Netw.}
   \def\@journalCode{tosn}
@@ -1403,7 +1319,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Algorithms}
   \def\@journalNameShort{ACM Trans. Algor.}
   \def\@journalCode{talg}
@@ -1450,7 +1365,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Autonomous and Adaptive Systems}
   \def\@journalNameShort{ACM Trans. Autonom. Adapt. Syst.}
   \def\@journalCode{taas}
@@ -1497,7 +1411,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on the Web}
   \def\@journalNameShort{ACM Trans. Web}
   \def\@journalCode{tweb}
@@ -1544,7 +1457,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Knowledge Discovery from Data}
   \def\@journalNameShort{ACM Trans. Knowl. Discov. Data.}
   \def\@journalCode{tkdd}
@@ -1591,7 +1503,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Reconfigurable Technology and Systems}
   \def\@journalNameShort{ACM Trans. Reconfig. Technol. Syst.}
   \def\@journalCode{trets}
@@ -1638,7 +1549,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Management Information Systems}
   \def\@journalNameShort{ACM Trans. Manag. Inform. Syst.}
   \def\@journalCode{tmis}
@@ -1685,7 +1595,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Interactive Intelligent Systems}
   \def\@journalNameShort{ACM Trans. Interact. Intell. Syst.}
   \def\@journalCode{tiis}
@@ -1732,7 +1641,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Intelligent Systems and Technology}
   \def\@journalNameShort{ACM Trans. Intell. Syst. Technol.}
   \def\@journalCode{tist}
@@ -1779,7 +1687,6 @@
   \global\@acmjdiqfalse
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Computation Theory}
   \def\@journalNameShort{ACM Trans. Comput. Theory}
   \def\@journalCode{toct}
@@ -1826,7 +1733,6 @@
   \global\@acmjdiqtrue
   \global\@acmtaccessfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Journal of Data and Information quality}
   \def\@journalNameShort{ACM J. Data Inform. Quality}
   \def\@journalCode{jdiq}
@@ -1875,7 +1781,6 @@
   \global\@acmtalipfalse
   \global\@acmtiisfalse
   \global\@acmtocefalse
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Accessible Computing}
   \def\@journalNameShort{ACM Trans. Access. Comput.}
   \def\@journalCode{taccess}
@@ -1924,60 +1829,10 @@
   \global\@acmtalipfalse
   \global\@acmtiisfalse
   \global\@acmtocetrue
-  \global\@acmteacfalse
   \def\@journalName{ACM Transactions on Computing Education}
   \def\@journalNameShort{ACM Trans. Comput. Educ.}
   \def\@journalCode{toce}
   \def\@permissionCodeOne{1946-6226} 
-}
-
-\DeclareOption{acmteac}{
-  \typeout{}
-  \typeout{Using ACM, TEAC option: 2012/07/04 by Orna Agmon Ben-Yehuda}
-  \typeout{}
-  \global\@acmjacmfalse
-  \global\@acmtissecfalse
-  \global\@acmtoclfalse
-  \global\@acmtocsfalse
-  \global\@acmtochifalse
-  \global\@acmtodaesfalse
-  \global\@acmtodsfalse
-  \global\@acmtoisfalse
-  \global\@acmtomacsfalse
-  \global\@acmtomsfalse
-  \global\@acmtoplasfalse
-  \global\@acmtosemfalse
-  \global\@acmtoitfalse
-  \global\@acmtecsfalse
-  \global\@acmtalipfalse
-  \global\@acmjericfalse
-  \global\@acmtacofalse
-  \global\@acmjeafalse
-  \global\@acmtslpfalse
-  \global\@acmciefalse
-  \global\@acmtosfalse
-  \global\@acmcsurfalse
-  \global\@acmjetcfalse
-  \global\@acmtosnfalse
-  \global\@acmtalgfalse
-  \global\@acmtaasfalse
-  \global\@acmtwebfalse
-  \global\@acmtkddfalse
-  \global\@acmtretsfalse
-  \global\@acmtmisfalse
-  \global\@acmtiisfalse
-  \global\@acmtistfalse
-  \global\@acmtoctfalse
-  \global\@acmjdiqfalse
-  \global\@acmtaccessfalse
-  \global\@acmtalipfalse
-  \global\@acmtiisfalse
-  \global\@acmtocefalse
-  \global\@acmteactrue
-  \def\@journalName{ACM Transactions on Economics and Computation}
-  \def\@journalNameShort{ACM Trans. Econ. Comp.}
-  \def\@journalCode{teac}
-  \def\@permissionCodeOne{1946-6227} 
 }
 
 \ExecuteOptions{twoside,final,10pt,letterpaper}
@@ -1997,7 +1852,7 @@
 \usepackage{graphicx}
 
 
-\typeout{Document Class `acmsmall' Electronic Submissions
+\typeout{Document Class `acmsmall-ec13' Electronic Submissions
 \fileversion\space <\filedate> (ACM).}
 
 \def\acmVolume#1{\def\@acmVolume{#1}}
@@ -2146,7 +2001,7 @@
 \marginparwidth .5in
 \marginparsep .125in
 \topmargin 36pt
-\headheight 6.5\p@
+\headheight 11\p@    % Was 6.5 but the comiler seems to like 11pt. (Gerry)
 \topskip6.2pt
 \headsep 17.5pt
 \parindent10\p@
@@ -2207,7 +2062,8 @@
 
 % Copyright Information
 \def\cpyright#1{\gdef\@cpyright{#1}}
-\cpyright{ACM\ \@permissionCodeOne/\@acmYear/\monthInf{\@acmMonth}-ART\@acmArticle}
+%\cpyright{ACM\ \@permissionCodeOne/\@acmYear/\monthInf{\@acmMonth}-ART\@acmArticle}%Updated for EC'**
+\cpyright{ACM\ 978-1-4503-2565-3/12/06...}
 
 % Calculating total pages
 \newcount\@totalpg
@@ -2215,10 +2071,11 @@
 \acmPages{\@totalpg\@lastpg\global\advance\@totalpg-\@firstpg\global\advance\@totalpg\@ne\ifnum\the\@totalpg<\z@0\else\the\@totalpg\fi\ pages}
 
 % Reference Format
-\gdef\formatline{{\em{\@journalNameShort\ }}\@acmVolume, \@acmNumber, Article~\@acmArticle\ (\monthWord{\@acmMonth}\ \@acmYear), \@acmPages.\\ % Need Journal Name in italics - in 'ACM Reference Format' before 1. INTRODUCTION - Gerry - March 2012
-{\tt DOI:}http://dx.doi.org/10.1145/\@doi} % Gerry March 2012 - on first page in 'ACM Reference Format'
-\gdef\copyrightline{\copyright\ \@acmYear\ \@cpyright\ \$\@acmPrice}
-\gdef\doiline{{\tt DOI:}http://dx.doi.org/10.1145/\@doi} % Gerry - March 2012 - beneath copyright line
+\gdef\formatline{\@journalNameShort\ \@acmVolume, \@acmNumber, Article~\@acmArticle\ (\monthWord{\@acmMonth}\ \@acmYear), \@acmPages.\\
+DOI $=$ 10.1145/\@doi\ http://doi.acm.org/10.1145/\@doi}
+%\gdef\copyrightline{Copyright\ \copyright\ \@acmYear\ \@cpyright\ \$\@acmPrice}%Updated for EC'**
+\gdef\copyrightline{Copyright\ \copyright\ 2013\ \@cpyright\$\@acmPrice}    % Need to change copyright YEAR - EC'**
+\gdef\doiline{DOI\ 10.1145/\@doi\ \ http://doi.acm.org/10.1145/\@doi}
 
 % Page Style
 \mark{{}{}}
@@ -2309,7 +2166,8 @@
 % Article Title page
 \def\maketitle{%
     \newpage
-    \thispagestyle{titlepage}%
+%    \thispagestyle{titlepage}% Updated for EC'**
+    \thispagestyle{empty}% Updated for EC'**
     \global\@topnum\z@
     \begingroup
         \lineskip \z@
@@ -2435,6 +2293,28 @@
    }{%
    \par\egroup}
 %
+% ====================== TeXSupport
+\newtoks\conf
+\newtoks\confinfo
+\newtoks\copyrightetc
+\newtoks\copyrtyr
+\newtoks\acmcopyr
+
+\def\conferenceinfo#1#2{\global\conf={#1}\global\confinfo{#2}}
+\if@license%
+  \global\copyrightetc{ACM \the\acmcopyr\ ...\$15.00} % 
+\else%
+  \if@permissions%
+    \global\copyrightetc{ACM \the\acmcopyr} % 
+  \else%
+    \global\copyrightetc{Copyright \copyright\ \the\copyrtyr\ ACM \the\acmcopyr\ ...\$15.00} % 
+  \fi
+\fi%
+\def\crdata#1{\global\acmcopyr{#1}}
+\def\CopyrightYear#1{\global\copyrtyr{#1}}
+\def\doi#1{\gdef\@doi{#1}}\def\@doi{}
+\def\copyrighttext#1{\gdef\@copyrighttext{#1}}\def\@copyrighttext{}
+% ======================
 \let\@categories\@empty
 \def\bottomstuff{%
     \global\@topnum\z@
@@ -2450,24 +2330,46 @@
         \ignorespaces
 }
 \def\endbottomstuff{\par%
-Permission to make digital or hard copies  of part or all of this work 
-for personal or classroom use is
-granted without fee provided that copies are not made or distributed for profit or commercial
-advantage and that copies show this notice on the first page or initial screen of a display
-along with the full citation. Copyrights for components of this work owned by others than ACM
-must be honored. Abstracting with credit is permitted. To copy otherwise, to republish,
-to post on servers, to redistribute to lists, or to use any component of this work in other
-works requires prior specific permission and\hspace*{.5pt}/or a fee. 
-Permissions may be requested from Publications Dept., ACM, Inc., 2 Penn Plaza, Suite 701, 
-New York, NY 10121-0701 USA, fax $+$1 (212) 869-0481,
-or permissions@acm.org.\par\box\@permissionbox
-\copyrightline\par
-\doiline
+\copy\@permissionbox\vskip 3\p@% TeXSupport
+{\itshape\the\conf} \the\confinfo\hfill \the\copyrightetc.\vskip 3\p@% TeXSupport
+\if@license\@copyrighttext\vskip 3\p@\fi% TeXSupport
+\ifx\@doi\@empty\else{}http://dx.doi.org/10.1145/\@doi\fi% TeXSupport
+%\doiline
 \vskip-13pt
 \strut
 \end@float
 }
 
+% ====================== TeXSupport
+\AtBeginDocument{%
+\conferenceinfo{EC'14,}{June 8--12, 2014, Stanford, CA, USA.}
+\CopyrightYear{2014}
+\crdata{978-1-4503-2565-3/12/06}
+\copyrighttext{Copyright is held by the owner/author(s). Publication rights licensed to ACM.}
+\if@permissions
+\begin{permission}%
+Permission to make digital or hard copies of part or all of this work
+for personal or classroom use is granted without fee provided that
+copies are not made or distributed for profit or commercial
+advantage, and that copies bear this notice and the full citation on
+the first page. Copyrights for third-party components of this work
+must be honored. For all other uses, contact the owner/author(s).
+Copyright is held by the author/owner(s).      
+\end{permission}%
+\else
+\begin{permission}%
+Permission to make digital or hard copies of all or part of this work
+for personal or classroom use is granted without fee provided that
+copies are not made or distributed for profit or commercial advantage
+and that copies bear this notice and the full citation on the first
+page. Copyrights for components of this work owned by others than ACM
+must be honored. Abstracting with credit is permitted. To copy
+otherwise, or republish, to post on servers or to redistribute to
+lists, requires prior specific permission and/or a fee. Request
+permissions from permissions@acm.org.
+\end{permission}%
+\fi}
+% ======================
 % Heads
 \newcounter{part}
 \newcounter{section}
@@ -3687,7 +3589,7 @@ Online Appendix to:\par\@title\par{}}}\vskip 12\p@
   \let\glossary\@gobble
   \baselineskip\z@skip \lineskip\z@skip \lineskiplimit\z@
     \@begindvi
-    \ifelec@app\else\ifnum\c@page=1\vbox to 0pt{\hbox to \trimwidth{\hfill\tab}}\fi\fi
+%    \ifelec@app\else\ifnum\c@page=1\vbox to 0pt{\hbox to \trimwidth{\hfill\tab}}\fi\fi%% Updated for EC'**
     \vskip \topmargin
     \moveright\@themargin \vbox {%
       \setbox\@tempboxa \vbox to\headheight{%
@@ -3713,7 +3615,7 @@ Online Appendix to:\par\@title\par{}}}\vskip 12\p@
   \let\firstmark\botmark
 }
 %
-\ps@headings
+%\ps@headings% Updated for EC'**
 \pagenumbering{arabic}
 \onecolumn
 
@@ -3722,8 +3624,14 @@ Online Appendix to:\par\@title\par{}}}\vskip 12\p@
 \widowpenalty10000
 \clubpenalty10000
 
+% ----------------
+% Gerry - April 2011 - To assist in the formatting of the NEW ACM Reference format - 'DOI' in tt font, and url string in default
+\usepackage{url}
+\def\UrlFont{}
+\newcommand{\BIBand}{\&}
+\def\showDOI#1{\mbox{{\tt DOI:}{#1}}} % Gerry April 2011 - forces the DOI: to 'stay' with the 'url-(string)link' (no need for space at end either)
+% ----------------
 \endinput
 
-% End of file `acmsmall.cls' Version 1.4
-
+% End of file `acmsmall-ec13.cls' Version 1.3 
 
