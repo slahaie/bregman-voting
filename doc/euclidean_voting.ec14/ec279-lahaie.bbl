@@ -1,0 +1,404 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
+
+\bibitem[\protect\citeauthoryear{Aigner and Ziegler}{Aigner and
+  Ziegler}{2010}]%
+        {aigner2010cauchy}
+{M. Aigner} {and} {G.~M. Ziegler}. 2010.
+\newblock \showarticletitle{Cauchy’s rigidity theorem}.
+\newblock In {\em Proofs from THE BOOK}. Springer, 81--84.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Barata and Hussein}{Barata and
+  Hussein}{2012}]%
+        {BH12}
+{J.~C.~A. Barata} {and} {M.~S. Hussein}. 2012.
+\newblock \showarticletitle{The Moore--Penrose Pseudoinverse: A Tutorial Review
+  of the Theory}.
+\newblock {\em Brazilian Journal of Physics\/} {42}, 1-2 (2012), 146--165.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Barut and Raczka}{Barut and Raczka}{1986}]%
+        {BR86}
+{A.~O. Barut} {and} {R. Raczka}. 1986.
+\newblock {\em Theory of group representations and applications}. Vol.~2.
+\newblock World Scientific.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Biedl, Lubiw, and Spriggs}{Biedl
+  et~al\mbox{.}}{2007}]%
+        {biedl2007cauchy}
+{T. Biedl}, {A. Lubiw}, {and} {M. Spriggs}. 2007.
+\newblock \showarticletitle{Cauchy's theorem and edge lengths of convex
+  polyhedra}. In {\em Proceedings of the 10th International Conference on
+  Algorithms and Data Structures (WADS)}. 398--409.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Boerner, Murphy, Werner, and
+  Mayer-Kalkschmidt}{Boerner et~al\mbox{.}}{1963}]%
+        {BMWM63}
+{H. Boerner}, {P.~G. Murphy}, {J. Werner}, {and} {P. Mayer-Kalkschmidt}. 1963.
+\newblock {\em Representations of groups: with special consideration for the
+  needs of modern physics}.
+\newblock North-Holland.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Boissonnat, Nielsen, and Nock}{Boissonnat
+  et~al\mbox{.}}{2010}]%
+        {boissonnat2010bregman}
+{J.~D. Boissonnat}, {F. Nielsen}, {and} {R. Nock}. 2010.
+\newblock \showarticletitle{Bregman voronoi diagrams}.
+\newblock {\em Discrete \& Computational Geometry\/} {44}, 2 (2010), 281--307.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Brams and Fishburn}{Brams and
+  Fishburn}{2007}]%
+        {brams2007approval}
+{S.~J. Brams} {and} {P.~C. Fishburn}. 2007.
+\newblock {\em Approval voting}.
+\newblock Springer.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Caragiannis, Procaccia, and Shah}{Caragiannis
+  et~al\mbox{.}}{2013}]%
+        {CPS13}
+{I. Caragiannis}, {A.~D. Procaccia}, {and} {N. Shah}. 2013.
+\newblock \showarticletitle{When do noisy votes reveal the truth?}. In {\em
+  Proceedings of the 14th ACM Conference on Electronic Commerce (EC)}.
+  143--160.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Caragiannis, Procaccia, and Shah}{Caragiannis
+  et~al\mbox{.}}{2014}]%
+        {CPS14}
+{I. Caragiannis}, {A.~D. Procaccia}, {and} {N. Shah}. 2014.
+\newblock \showarticletitle{Modal Ranking: A Uniquely Robust Voting Rule}. In
+  {\em Proceedings of the 28th AAAI Conference on Artificial Intelligence
+  (AAAI)}.
+\newblock
+\newblock
+\shownote{Forthcoming.}
+
+
+\bibitem[\protect\citeauthoryear{Cervone, Dai, Gnoutcheff, Lanterman,
+  Mackenzie, Morse, Srivastava, and Zwicker}{Cervone et~al\mbox{.}}{2012}]%
+        {CDGL+12}
+{D.~P. Cervone}, {R. Dai}, {D. Gnoutcheff}, {G. Lanterman}, {A. Mackenzie}, {A.
+  Morse}, {N. Srivastava}, {and} {W.~S. Zwicker}. 2012.
+\newblock \showarticletitle{Voting with rubber bands, weights, and strings}.
+\newblock {\em Mathematical Social Sciences\/} {64}, 1 (2012), 11--27.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Conitzer, Rognlie, and Xia}{Conitzer
+  et~al\mbox{.}}{2009}]%
+        {CRX09}
+{V. Conitzer}, {M. Rognlie}, {and} {L. Xia}. 2009.
+\newblock \showarticletitle{Preference Functions That Score Rankings and
+  Maximum Likelihood Estimation}. In {\em Proceedings of the 21st International
+  Joint Conference on Artificial Intelligence (IJCAI)}. 109--115.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Conitzer and Sandholm}{Conitzer and
+  Sandholm}{2005}]%
+        {CS05b}
+{V. Conitzer} {and} {T. Sandholm}. 2005.
+\newblock \showarticletitle{Common Voting Rules as Maximum Likelihood
+  Estimators}. In {\em Proceedings of the 21st Annual Conference on Uncertainty
+  in Artificial Intelligence (UAI)}. 145--152.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Crisman}{Crisman}{2009}]%
+        {permuta}
+{K.~D. Crisman}. 2009.
+\newblock The Borda Count, the Kemeny Rule, and the Permutahedron.
+\newblock Manuscript.   (2009).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Daugherty, Eustis, Minton, and
+  Orrison}{Daugherty et~al\mbox{.}}{2009}]%
+        {daugherty2009voting}
+{Z. Daugherty}, {A.~K. Eustis}, {G. Minton}, {and} {M.~E. Orrison}. 2009.
+\newblock \showarticletitle{Voting, the symmetric group, and representation
+  theory}.
+\newblock {\em The American Mathematical Monthly\/} (2009), 667--687.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{de~Condorcet}{de~Condorcet}{1785}]%
+        {Con85}
+{M. de Condorcet}. 1785.
+\newblock Essai sur l'application de l'analyse \`a la probabilit\'e de
+  d\'ecisions rendues \`a la pluralit\'e de voix.
+\newblock Imprimerie Royal.   (1785).
+\newblock
+\newblock
+\shownote{Facsimile published in 1972 by Chelsea Publishing Company, New York.}
+
+
+\bibitem[\protect\citeauthoryear{Doignon, Peke{\v{c}}, and Regenwetter}{Doignon
+  et~al\mbox{.}}{2004}]%
+        {doignon2004repeated}
+{J.~P. Doignon}, {A. Peke{\v{c}}}, {and} {M. Regenwetter}. 2004.
+\newblock \showarticletitle{The repeated insertion model for rankings: Missing
+  link between two subset choice models}.
+\newblock {\em Psychometrika\/} {69}, 1 (2004), 33--54.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Elkind, Faliszewski, and Slinko}{Elkind
+  et~al\mbox{.}}{2009}]%
+        {EFS09}
+{E. Elkind}, {P. Faliszewski}, {and} {A. Slinko}. 2009.
+\newblock \showarticletitle{On Distance Rationalizability of Some Voting
+  Rules}. In {\em Proceedings of the 12th Conference on Theoretical Aspects of
+  Rationality and Knowledge (TARK)}. 108--117.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Elkind, Faliszewski, and Slinko}{Elkind
+  et~al\mbox{.}}{2010a}]%
+        {EFS10}
+{E. Elkind}, {P. Faliszewski}, {and} {A. Slinko}. 2010a.
+\newblock \showarticletitle{On the role of distances in defining voting rules}.
+  In {\em Proceedings of the 9th International Joint Conference on Autonomous
+  Agents and Multi-Agent Systems (AAMAS)}. 375--382.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Elkind, Faliszewski, and Slinko}{Elkind
+  et~al\mbox{.}}{2010b}]%
+        {elkind2010good}
+{E. Elkind}, {P. Faliszewski}, {and} {A.~M. Slinko}. 2010b.
+\newblock \showarticletitle{Good Rationalizations of Voting Rules.}. In {\em
+  Proceedings of the 24th AAAI Conference on Artificial Intelligence (AAAI)}.
+  774--779.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Gibbard}{Gibbard}{1973}]%
+        {Gib73}
+{A. Gibbard}. 1973.
+\newblock \showarticletitle{Manipulation of Voting Schemes}.
+\newblock {\em Econometrica\/}  {41} (1973), 587--602.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ikramov and Savel'eva}{Ikramov and
+  Savel'eva}{2000}]%
+        {ikramov2000conditionally}
+{K.~D. Ikramov} {and} {N.~V. Savel'eva}. 2000.
+\newblock \showarticletitle{Conditionally definite matrices}.
+\newblock {\em Journal of Mathematical Sciences\/} {98}, 1 (2000), 1--50.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{James, Kerber, Cohn, and Robinson}{James
+  et~al\mbox{.}}{1984}]%
+        {JKCR84}
+{G.~D. James}, {A. Kerber}, {P.~M. Cohn}, {and} {G.~{de}~B. Robinson}. 1984.
+\newblock {\em The representation theory of the symmetric group}. Vol.~16.
+\newblock Cambridge University Press Cambridge.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Kovalev, Stokes, and Hatch}{Kovalev
+  et~al\mbox{.}}{1993}]%
+        {KHS93}
+{O.~V. Kovalev}, {H.~T. Stokes}, {and} {D.~M. Hatch}. 1993.
+\newblock {\em Representations of the Crystallographic Space Groups:
+  Irreducible Representations, Induced Representations, and Corepresentations}.
+\newblock Gordon and Breach Science.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{MacWilliams and Sloane}{MacWilliams and
+  Sloane}{1977}]%
+        {MS77}
+{F.~J. MacWilliams} {and} {N.~J.~A. Sloane}. 1977.
+\newblock {\em The theory of error-correcting codes}. Vol.~16.
+\newblock Elsevier.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Mallows}{Mallows}{1957}]%
+        {Mall57}
+{C.~L. Mallows}. 1957.
+\newblock \showarticletitle{Non-null ranking models}.
+\newblock {\em Biometrika\/}  {44} (1957), 114--130.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Meskanen and Nurmi}{Meskanen and
+  Nurmi}{2008}]%
+        {MN08}
+{T. Meskanen} {and} {H. Nurmi}. 2008.
+\newblock \showarticletitle{Closeness counts in social choice}.
+\newblock In {\em Power, Freedom, and Voting}, {M.~Braham} {and} {F.~Steffen}
+  (Eds.). Springer-Verlag.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Mossel, Procaccia, and R{\'a}cz}{Mossel
+  et~al\mbox{.}}{2013}]%
+        {MPR12b}
+{E. Mossel}, {A.~D. Procaccia}, {and} {M.~Z. R{\'a}cz}. 2013.
+\newblock \showarticletitle{A Smooth Transition from Powerlessness to Absolute
+  Power}.
+\newblock {\em Journal of Artificial Intelligence Research\/}  {48} (2013),
+  923--951.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Myerson}{Myerson}{1995}]%
+        {Myerson95}
+{R.~B. Myerson}. 1995.
+\newblock \showarticletitle{Axiomatic derivation of scoring rules without the
+  ordering assumption}.
+\newblock {\em Social Choice and Welfare\/} {12}, 1 (1995), 59--74.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ovchinnikov}{Ovchinnikov}{2005}]%
+        {ovchinnikov2005hyperplane}
+{S. Ovchinnikov}. 2005.
+\newblock \showarticletitle{Hyperplane arrangements in preference modeling}.
+\newblock {\em Journal of Mathematical Psychology\/} {49}, 6 (2005), 481--488.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Procaccia, Zohar, Peleg, and
+  Rosenschein}{Procaccia et~al\mbox{.}}{2009}]%
+        {PZPR09}
+{A.~D. Procaccia}, {A. Zohar}, {Y. Peleg}, {and} {J.~S. Rosenschein}. 2009.
+\newblock \showarticletitle{The learnability of voting rules}.
+\newblock {\em Artificial Intelligence\/} {173}, 12--13 (2009), 1133--1149.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Procaccia, Zohar, and Rosenschein}{Procaccia
+  et~al\mbox{.}}{2008}]%
+        {PZR08}
+{A.~D. Procaccia}, {A. Zohar}, {and} {J.~S. Rosenschein}. 2008.
+\newblock \showarticletitle{Automated Design of Scoring Rules by Learning from
+  Examples}. In {\em Proceedings of the 7th International Joint Conference on
+  Autonomous Agents and Multi-Agent Systems (AAMAS)}. 951--958.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Saari}{Saari}{1995}]%
+        {saari1995basic}
+{D. Saari}. 1995.
+\newblock {\em Basic geometry of voting}. Vol.~12.
+\newblock Springer.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Satterthwaite}{Satterthwaite}{1975}]%
+        {Sat75}
+{M. Satterthwaite}. 1975.
+\newblock \showarticletitle{Strategy-Proofness and {A}rrow's Conditions:
+  Existence and Correspondence Theorems for Voting Procedures and Social
+  Welfare Functions}.
+\newblock {\em Journal of Economic Theory\/}  {10} (1975), 187--217.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Schoenberg}{Schoenberg}{1938}]%
+        {schoenberg1938metric}
+{I.~J. Schoenberg}. 1938.
+\newblock \showarticletitle{Metric spaces and positive definite functions}.
+\newblock {\it Trans. Amer. Math. Soc.}  {44} (1938), 522--536.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Xia}{Xia}{2013}]%
+        {Xia13}
+{L. Xia}. 2013.
+\newblock \showarticletitle{Generalized scoring rules: a framework that
+  reconciles {B}orda and {C}ondorcet}.
+\newblock {\em SIGecom Exchanges\/} {12}, 1 (2013), 42--48.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Xia and Conitzer}{Xia and Conitzer}{2008}]%
+        {XC08}
+{L. Xia} {and} {V. Conitzer}. 2008.
+\newblock \showarticletitle{Generalized scoring rules and the Frequency of
+  Coalitional Manipulability}. In {\em Proceedings of the 9th ACM Conference on
+  Electronic Commerce (EC)}. 109--118.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Young}{Young}{1988}]%
+        {Young88}
+{H.~P. Young}. 1988.
+\newblock \showarticletitle{Condorcet's theory of voting}.
+\newblock {\em The American Political Science Review\/} {82}, 4 (1988),
+  1231--1244.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Zwicker}{Zwicker}{2008a}]%
+        {Zwicker08b}
+{W.~S. Zwicker}. 2008a.
+\newblock \showarticletitle{A characterization of the rational mean neat voting
+  rules}.
+\newblock {\em Mathematical and Computer Modelling\/} {48}, 9 (2008),
+  1374--1384.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Zwicker}{Zwicker}{2008b}]%
+        {Zwicker08a}
+{W.~S. Zwicker}. 2008b.
+\newblock \showarticletitle{Consistency without neutrality in voting rules:
+  When is a vote an average?}
+\newblock {\em Mathematical and Computer Modelling\/} {48}, 9 (2008),
+  1357--1373.
+\newblock
+
+
+\end{thebibliography}
