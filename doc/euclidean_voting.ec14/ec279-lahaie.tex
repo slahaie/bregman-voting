@@ -302,7 +302,7 @@ Consistency of mean proximity rules is evident from Equation~\eqref{eqn:discrete
 \subsection{Symmetric Mean Proximity Rules}
 \label{sec:symm}
 
-We now begin our investigation of mean proximity rules in the context of social welfare functions, which output rankings over alternatives. Thus, from here onwards, we fix $\calO = \rank$. This has the following effect on the various equivalent representations of mean proximity rules.
+We now begin our investigation of mean proximity rules in the context of social welfare functions, which output rankings over alternatives. Thus, from here onward, we fix $\calO = \rank$. This has the following effect on the various equivalent representations of mean proximity rules.
 \begin{enumerate}
 \item The embeddings $\phi,\psi : \rank \to \mathbb{R}^k$ both map rankings to a Euclidean space. 
 \item The scoring function $s : \rank \times \rank \rightarrow \mathbb{R}$ describes \emph{similarity} between two rankings. This special case was also defined and studied independently by Conitzer et al.~\shortcite{CRX09}, who referred to such rules as \emph{simple ranking scoring functions} (SRSFs). 
@@ -315,7 +315,7 @@ Mean proximity rules constitute a broad family of voting rules, some of which vi
 We say that a voting rule is a \emph{symmetric mean proximity rule} (SMPR) if there exists a mean proximity representation of the rule with identical input and output embeddings: $\psi = \phi$. 
 \end{definition} 
 %
-Since the outcome space for SWFs is identical to the space of input votes (the set of rankings over the alternatives), $\psi = \phi$ is a natural restriction. Note that not all embeddings representing an SMPR satisfy $\psi = \phi$. We call the embeddings that satisfy this restriction \emph{symmetric embeddings}. From here onwards, we always represent an SMPR using a symmetric embedding $(\phi$, $\phi)$, written simply $\phi$.
+Since the outcome space for SWFs is identical to the space of input votes (the set of rankings over the alternatives), $\psi = \phi$ is a natural restriction. Note that not all embeddings representing an SMPR satisfy $\psi = \phi$. We call the embeddings that satisfy this restriction \emph{symmetric embeddings}. From here onward, we always represent an SMPR using a symmetric embedding $(\phi$, $\phi)$, written simply $\phi$.
 
 In what follows, we assume that the SMPRs additionally satisfy rank-distinguishability. For SMPRs, rank-distinguishability is equivalent to the intuitive restriction that $\phi$ must map all rankings to different points of the Euclidean space. To see this, note that if $\phi$ mapped all rankings to distinct points, then the rule would output $\{\sigma\}$ on a profile with a single vote $\sigma$. Thus, such a rule would achieve rank-distinguishability. Conversely, if $\phi$ mapped two distinct rankings $\sigma$ and $\sigma'$ to the same point in Euclidean space, then it is easy to see that on every profile either both rankings would belong to the output of the rule or neither. 
 
@@ -661,7 +661,9 @@ For an embedding $\phi$ of a neutral SMPR $r$, its neutralization $\phi^{\nt}$ g
 \end{lemma}
 %
 The proof of Lemma~\ref{lem:nt-linear} appears in the full version of the paper. %appendix. 
-Theorem~\ref{thm:neutral-smpr} and Lemma~\ref{lem:nt-linear} together provide another proof of Theorem~\ref{thm:linear-char}. However, our original proof that showed a stronger connection (equivalence) between normalization of neutral embeddings and linear embeddings bears certain advantages described below.
+Theorem~\ref{thm:neutral-smpr} and Lemma~\ref{lem:nt-linear} together provide another proof of Theorem~\ref{thm:linear-char}. However, our original proof that showed a stronger connection (equivalence) between normalization of neutral embeddings and linear embeddings bears certain advantages as we now discuss.
+
+\subsection{Representation Size}
 
 The proof of Theorem~\ref{thm:neutral-linear} is constructive, meaning that one can use it to explicitly find the representation of the normalization of any given neutral embedding of an SMPR. The multiplicative property $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ implies that one only needs to store the representation matrices corresponding to a generating set of $S_m$, and can generate the rest of the matrices by appropriate multiplications and inverses.\footnote{A generating set of a group is a subset of the group such that every element of the group can be expressed as the product (under the group operation) of finitely many elements of the subset and their inverses.} 
 
