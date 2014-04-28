@@ -567,16 +567,19 @@ Every linear embedding has equal norm.
 \label{cor:linear-equal-norm}
 \end{corollary}
 %
-While every linear embedding has equal norm, not every neutral embedding has equal norm. However, the next result shows that every neutral embedding has a similar equal distance property. The proof considers a profile where each ranking appears exactly once; a detailed proof is given in the full version of the paper.\footnote{Full version of the paper is available at \url{http://www.cs.cmu.edu/~nkshah/euclidean_voting.full.pdf}}
+While every linear embedding has equal norm, not every neutral embedding has equal norm. However, the next result shows that every neutral embedding has a similar equal distance property. The proof considers a profile where each ranking appears exactly once. 
 
 \begin{lemma}
 Let $\phi$ be a neutral embedding, and $\phi_{avg} = (1/m!) \cdot \sum_{\sigma \in \rank} \phi(\sigma)$ denote the mean embedding of all rankings. Then, $\|\phi(\sigma)-\phi_{avg}\|$ is independent of $\sigma$.
 \label{lem:average-all}
 \end{lemma}
+\begin{proof}
+Let $r$ be the mean proximity rule represented by $\phi$. By Theorem~\ref{thm:neutral-smpr}, $r$ must be neutral. Let $\pi_{symm}$ denote the profile containing each ranking from $\rank$ exactly once. Let $r(\pi_{symm}) = T \subseteq \rank$, and suppose that $T \neq \rank$. Thus, there must exist a ranking $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there must also exist a ranking $\sigma \in T$. Now, take $\tau \in S_m$ to be the permutation that converts $\sigma$ to $\sigma'$. 
+
+It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau T = \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$, which is a contradiction because $r$ is neutral. Hence, we must have $r(\pi_{symm}) = \rank$. Observing that $\mu(\pi_{symm}) = \phi_{avg}$ and $r(\pi_{symm}) = \argmin_{\sigma \in \rank} \|\phi(\sigma)-\phi_{avg}\|$ yields the required result.
+\end{proof}
 %
-Given an embedding $\phi$, we say that the embedding $\hat{\phi}$ defined by $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$ is the \emph{normalization} of $\phi$. Note that $\hat{\phi}$ is simply a translation applied to $\phi$, which is distance-preserving. Hence, $\hat{\phi}$ represents the same neutral SMPR as $\phi$ does. From Lemma~\ref{lem:average-all}, the normalization of a neutral embedding has equal norm. The following result %shows that normalization also preserves neutrality and linearity; the proof is straightforward and is 
-has a straightforward proof, 
-given in the full version of the paper. %appendix.
+Given an embedding $\phi$, we say that the embedding $\hat{\phi}$ defined by $\hat{\phi}(\sigma) = \phi(\sigma) - \phi_{avg}$ for all $\sigma \in \rank$ is the \emph{normalization} of $\phi$. Note that $\hat{\phi}$ is simply a translation applied to $\phi$, which is distance-preserving. Hence, $\hat{\phi}$ represents the same neutral SMPR as $\phi$ does. From Lemma~\ref{lem:average-all}, the normalization of a neutral embedding has equal norm. The following result shows that normalization preserves neutrality and linearity.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -584,6 +587,27 @@ given in the full version of the paper. %appendix.
 An embedding is neutral (resp.\ linear) if and only if its normalization is neutral (resp.\ linear). 
 \label{lem:preservation}
 \end{lemma}
+\begin{proof}
+If $\phi$ is neutral, then for all $\sigma,\sigma' \in \rank$ and $\tau \in S_m$, we have 
+$$
+\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|.
+$$
+Hence, $\hat{\phi}$ is neutral too. The proof of the converse works in the same way by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
+
+Similarly, if $\phi$ is linear with representation $R$, then for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma \in \rank$, we get 
+$$
+\frac{1}{m!} \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma) = R_{\tau} \left (\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) \right).
+$$
+However, 
+$$
+\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}.
+$$
+Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in S_m$. Now, for all $\sigma \in \rank$ and $\tau \in S_m$, 
+$$
+\hat{\phi}(\tau \sigma) = \phi(\tau \sigma) - \phi_{avg} = R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg} = R_{\tau}\hat{\phi}(\sigma).
+$$
+Thus, $\hat{\phi}$ is also linear with the same representation $R$. Again, the proof of the converse works by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
+\end{proof}
 %
 Lemma~\ref{lem:preservation} shows that the normalization of a neutral embedding is also neutral, in addition to having the equal norm property. We now show that this normalization is in fact linear---this requires a much deeper proof. 
 
@@ -660,8 +684,16 @@ Theorem~\ref{thm:linear-char} should be viewed as a fifth equivalent condition o
 For an embedding $\phi$ of a neutral SMPR $r$, its neutralization $\phi^{\nt}$ given in Equation~\eqref{eqn:phi-nt} is a linear embedding.
 \label{lem:nt-linear}
 \end{lemma}
+\begin{proof}
+Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. Observe that for all $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are simply permutations of each other. First, we show that there exists a representation $R$ such that for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
+$$
+\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
+$$
+Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks ($\phi(\tau_i \tau \sigma)$ for $i \in [m!]$) of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector would be $\phi(\tau_j \sigma)$, where $\tau_j = \tau_i \tau$, the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. 
 
-The proof of Lemma~\ref{lem:nt-linear} appears in the full version of the paper. %appendix. 
+Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, it is easy to see that $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, note that each $R_{\tau}$ is a permutation matrix originating from the permutation matrix $\Pi_{\tau}$ of the permutation $\tau$. Also, we have $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$. Hence, it can be verified that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$, and every $R_{\tau}$ for $\tau \in S_m$ is an orthogonal matrix.
+\end{proof}
+
 Theorem~\ref{thm:neutral-smpr} and Lemma~\ref{lem:nt-linear} together provide another proof of Theorem~\ref{thm:linear-char}. However, our original proof that showed a stronger connection (equivalence) between normalization of neutral embeddings and linear embeddings bears certain advantages described below.
 
 \subsection{Representation Size}
@@ -693,8 +725,6 @@ Table~\ref{tab:summary} summarizes the characterizations presented in the paper.
 \caption{Summary of the characterization results.}
 \label{tab:summary}
 \end{table}
-
-%The main results of the paper (except Theorem~\ref{thm:neutral-linear}) are summarized in Table~\ref{tab:summary} given in the appendix.
 
 %ns - Can introduce results about low dimensional embeddings here. Minimum dimension stuff will go to discussion as applications of uniqueness theorem in widening our understanding of mean proximity rules.
 
@@ -736,49 +766,6 @@ Additionally, it can be shown that such a result would also entail our equivalen
 
 \bibliographystyle{ACM-Reference-Format-Journals}
 \bibliography{abb,ultimate}
-\end{document}
 %\received{February 2007}{March 2009}{June 2009}
-
-\elecappendix
-\medskip
-
-In this appendix, we provide the missing proofs in the paper.
-
-\begin{proof}[of Lemma~\ref{lem:average-all}]
-Let $r$ be the mean proximity rule represented by $\phi$. By Theorem~\ref{thm:neutral-smpr}, $r$ must be neutral. Let $\pi_{symm}$ denote the profile containing each ranking from $\rank$ exactly once. Let $r(\pi_{symm}) = T \subseteq \rank$, and suppose that $T \neq \rank$. Thus, there must exist a ranking $\sigma' \notin T$. Further, by definition of a voting rule, $T \neq \emptyset$. Thus, there must also exist a ranking $\sigma \in T$. Now, take $\tau \in S_m$ to be the permutation that converts $\sigma$ to $\sigma'$. 
-
-It is easy to see that $\tau \pi_{symm} = \pi_{symm}$. Hence, $r(\tau \pi_{symm}) = r(\pi_{symm}) = T$. Thus, $\sigma' \notin r(\tau \pi_{symm})$. However, $\sigma' \in \tau T = \tau r(\pi_{symm})$. Thus, $\tau r(\pi_{symm}) \neq r(\tau \pi_{symm})$, which is a contradiction because $r$ is neutral. Hence, we must have $r(\pi_{symm}) = \rank$. Observing that $\mu(\pi_{symm}) = \phi_{avg}$ and $r(\pi_{symm}) = \argmin_{\sigma \in \rank} \|\phi(\sigma)-\phi_{avg}\|$ yields the required result.
-\end{proof}
-
-\begin{proof}[of Lemma~\ref{lem:preservation}]
-If $\phi$ is neutral, then for all $\sigma,\sigma' \in \rank$ and $\tau \in S_m$, we have 
-$$
-\|\hat{\phi}(\tau \sigma)-\hat{\phi}(\tau \sigma')\| = \|\phi(\tau \sigma)-\phi(\tau \sigma')\| = \|\phi(\sigma)-\phi(\sigma')\| = \|\hat{\phi}(\sigma)-\hat{\phi}(\sigma')\|.
-$$
-Hence, $\hat{\phi}$ is neutral too. The proof of the converse works in the same way by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
-
-Similarly, if $\phi$ is linear with representation $R$, then for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi(\tau \sigma) = R_{\tau}\phi(\sigma)$. Averaging over all $\sigma \in \rank$, we get 
-$$
-\frac{1}{m!} \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} R_{\tau} \phi(\sigma) = R_{\tau} \left (\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) \right).
-$$
-However, 
-$$
-\frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\tau \sigma) = \frac{1}{m!}  \sum_{\sigma \in \rank} \phi(\sigma) = \phi_{avg}.
-$$
-Hence, we have $R_{\tau}\phi_{avg} = \phi_{avg}$ for all $\tau \in S_m$. Now, for all $\sigma \in \rank$ and $\tau \in S_m$, 
-$$
-\hat{\phi}(\tau \sigma) = \phi(\tau \sigma) - \phi_{avg} = R_{\tau}\phi(\sigma) - R_{\tau}\phi_{avg} = R_{\tau}\hat{\phi}(\sigma).
-$$
-Thus, $\hat{\phi}$ is also linear with the same representation $R$. Again, the proof of the converse works by observing that $\phi(\sigma) = \hat{\phi}(\sigma)+\phi_{avg}$ for all $\sigma \in \rank$. 
-\end{proof}
-
-\begin{proof}[of Lemma~\ref{lem:nt-linear}]
-Let $\phi$ be a $k$-dimensional embedding. Hence, $\phi^{\nt}$ has dimension $m! \cdot k$. Observe that for all $\sigma,\sigma' \in \rank$, the coordinates of $\phi^{\nt}(\sigma)$ and $\phi^{\nt}(\sigma')$ are simply permutations of each other. First, we show that there exists a representation $R$ such that for all $\sigma \in \rank$ and $\tau \in S_m$, we have $\phi^{\nt}(\tau \sigma) = R_{\tau}\phi^{\nt}(\sigma)$. Note that 
-$$
-\phi^{\nt}(\tau \sigma) = [\phi(\tau_1 \tau \sigma)^T \phi(\tau_2 \tau \sigma)^T \ldots \phi(\tau_{m!} \tau \sigma)^T]^T.
-$$
-Let $\Pi_{\tau}$ be the $m! \times m!$ matrix such that $\Pi_{ij} = 1$ if and only if $\tau_j = \tau_i \tau$. It is easy to verify that $\Pi_{\tau}$ is a permutation matrix. Further, if the blocks ($\phi(\tau_i \tau \sigma)$ for $i \in [m!]$) of $\phi^{\nt}(\sigma)$ were permuted according to $\Pi_{\tau}$, then the $i^{th}$ block in the resulting vector would be $\phi(\tau_j \sigma)$, where $\tau_j = \tau_i \tau$, the $i^{th}$ block of $\phi^{\nt}(\tau \sigma)$. 
-
-Hence, applying $\Pi_{\tau}$ to the blocks of $\phi^{\nt}(\sigma)$ results in $\phi^{\nt}(\tau \sigma)$. Now construct an $(m! \cdot k) \times (m! \cdot k)$ matrix $R_{\tau}$ by replacing every $1$ in $\Pi_{\tau}$ by a $k\times k$ identity matrix, and every $0$ in $\Pi_{\tau}$ by a $k\times k$ zero matrix. Then, it is easy to see that $R_{\tau} \phi^{\nt}(\sigma) = \phi^{\nt}(\tau \sigma)$. Finally, note that each $R_{\tau}$ is a permutation matrix originating from the permutation matrix $\Pi_{\tau}$ of the permutation $\tau$. Also, we have $\Pi_{\tau_1 \tau_2} = \Pi_{\tau_1} \Pi_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$. Hence, it can be verified that $R_{\tau_1 \tau_2} = R_{\tau_1} R_{\tau_2}$ for all $\tau_1,\tau_2 \in S_m$, and every $R_{\tau}$ for $\tau \in S_m$ is an orthogonal matrix.
-\end{proof}
+\end{document}
 
