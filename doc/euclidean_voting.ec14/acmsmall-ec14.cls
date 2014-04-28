@@ -2063,7 +2063,7 @@
 % Copyright Information
 \def\cpyright#1{\gdef\@cpyright{#1}}
 %\cpyright{ACM\ \@permissionCodeOne/\@acmYear/\monthInf{\@acmMonth}-ART\@acmArticle}%Updated for EC'**
-\cpyright{ACM\ 978-1-4503-2565-3/12/06...}
+\cpyright{ACM\ 978-1-4503-2565-3/14/06...}
 
 % Calculating total pages
 \newcount\@totalpg
@@ -2344,7 +2344,7 @@ DOI $=$ 10.1145/\@doi\ http://doi.acm.org/10.1145/\@doi}
 \AtBeginDocument{%
 \conferenceinfo{EC'14,}{June 8--12, 2014, Stanford, CA, USA.}
 \CopyrightYear{2014}
-\crdata{978-1-4503-2565-3/12/06}
+\crdata{978-1-4503-2565-3/14/06}
 \copyrighttext{Copyright is held by the owner/author(s). Publication rights licensed to ACM.}
 \if@permissions
 \begin{permission}%
